@@ -103,3 +103,20 @@
           width: 25px
           bottom: 4px
           transform: rotate(-45deg)
+
+  &.is-menu-white
+    .header
+      &__menu
+      &__menu-name
+        color: white
+      &__menu-hamburger
+        &::before, &::after
+          background-color: white
+      &:hover
+        color: rgba(white, .7)
+
+  &.is-logo-white
+    .header__logo
+      color: white
+      &:hover
+        color: rgba(white, .7)

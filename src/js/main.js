@@ -17,9 +17,6 @@ $(document).ready(function(){
 
   var _window = $(window);
   var _document = $(document);
-  var lastScrollBodyLock = 0;
-  var lastScrollDir = 0;
-
   var easingSwing = [.02, .01, .47, 1]; // default jQuery easing
 
   var scroll = {
@@ -32,7 +29,8 @@ $(document).ready(function(){
 
   var header = {
     container: undefined,
-    bottomPoint: undefined
+    bottomPoint: undefined,
+    colorControlSections: undefined
   }
 
   var browser = {
@@ -60,10 +58,8 @@ $(document).ready(function(){
     callbacks: {
       beforeOpen: function() {
         startWindowScroll = _window.scrollTop();
-        // $('html').addClass('mfp-helper');
       },
       close: function() {
-        // $('html').removeClass('mfp-helper');
         _window.scrollTop(startWindowScroll);
       }
     }
@@ -80,7 +76,6 @@ $(document).ready(function(){
 
   // The new container has been loaded and injected in the wrapper.
   function pageReady(fromPjax){
-    getHeaderParams();
     closeMobileMenu();
 
     initPopups();
@@ -94,6 +89,7 @@ $(document).ready(function(){
 
   // The transition has just finished and the old Container has been removed from the DOM.
   function pageCompleated(fromPjax){
+    getHeaderParams();
     initLazyLoad();
     if ( fromPjax ){
       AOS.refreshHard();
@@ -114,6 +110,7 @@ $(document).ready(function(){
   // scroll/resize listeners
   _window.on('scroll', getWindowScroll);
   _window.on('scroll', scrollHeader);
+  _window.on('scroll', controlHeaderColor);
   _window.on('resize', debounce(setBreakpoint, 200))
 
 
@@ -243,16 +240,19 @@ $(document).ready(function(){
     scroll.lastForScrollDir = wScroll <= 0 ? 0 : wScroll;
   }
 
-
+  ////////////////
   // HEADER SCROLL
+  ////////////////
   function getHeaderParams(){
     var $header = $('.header')
     var headerWrapperTranslate = 40
     var headerHeight = $header.outerHeight() + headerWrapperTranslate
+    var $colorControlSections = $('[js-header-color]');
 
     header = {
       container: $header,
-      bottomPoint: headerHeight
+      bottomPoint: headerHeight,
+      colorControlSections: $colorControlSections
     }
   }
 
@@ -284,6 +284,38 @@ $(document).ready(function(){
       }
     }
   }
+
+  function controlHeaderColor(){
+    // Collect arr of past scroll elements
+    var cur = header.colorControlSections.map(function(){
+      var elTop = $(this).offset().top - parseInt($(this).css('marginTop'))
+      if (elTop < scroll.y + (header.bottomPoint / 2)){
+        return this
+      }
+    });
+
+    // Get current element
+    cur = $(cur[cur.length-1]);
+    var headerMenuColor = cur && cur.length ? cur.data('menu-color') : ""
+    var headerLogoColor = cur && cur.length ? cur.data('logo-color') : ""
+
+    if ( !headerMenuColor ){
+      $('.header').removeClass('is-menu-white')
+    }
+    if ( !headerLogoColor ){
+      $('.header').removeClass('is-logo-white')
+    }
+
+    if ( headerMenuColor === "white" ){
+      $('.header').addClass('is-menu-white')
+    }
+
+    if ( headerLogoColor === "white" ) {
+      $('.header').addClass('is-logo-white')
+    }
+
+  }
+
 
   ////////////////////
   // HAMBURGER TOGGLER
@@ -496,9 +528,9 @@ $(document).ready(function(){
           var condition;
 
           if (conditionPosition === "<") {
-            condition = _window.width() < conditionMedia;
+            condition = getWindowWidth() < conditionMedia;
           } else if (conditionPosition === ">") {
-            condition = _window.width() > conditionMedia;
+            condition = getWindowWidth() > conditionMedia;
           }
 
           if (condition) {
@@ -691,41 +723,41 @@ $(document).ready(function(){
     /////////////////////
     // REGISTRATION FORM
     ////////////////////
-    $(".js-registration-form").validate({
-      errorPlacement: validateErrorPlacement,
-      highlight: validateHighlight,
-      unhighlight: validateUnhighlight,
-      submitHandler: validateSubmitHandler,
-      rules: {
-        last_name: "required",
-        first_name: "required",
-        email: {
-          required: true,
-          email: true
-        },
-        password: {
-          required: true,
-          minlength: 6,
-        }
-        // phone: validatePhone
-      },
-      messages: {
-        last_name: "Заполните это поле",
-        first_name: "Заполните это поле",
-        email: {
-            required: "Заполните это поле",
-            email: "Email содержит неправильный формат"
-        },
-        password: {
-            required: "Заполните это поле",
-            email: "Пароль мимимум 6 символов"
-        },
-        // phone: {
-        //     required: "Заполните это поле",
-        //     minlength: "Введите корректный телефон"
-        // }
-      }
-    });
+    // $(".js-registration-form").validate({
+    //   errorPlacement: validateErrorPlacement,
+    //   highlight: validateHighlight,
+    //   unhighlight: validateUnhighlight,
+    //   submitHandler: validateSubmitHandler,
+    //   rules: {
+    //     last_name: "required",
+    //     first_name: "required",
+    //     email: {
+    //       required: true,
+    //       email: true
+    //     },
+    //     password: {
+    //       required: true,
+    //       minlength: 6,
+    //     }
+    //     // phone: validatePhone
+    //   },
+    //   messages: {
+    //     last_name: "Заполните это поле",
+    //     first_name: "Заполните это поле",
+    //     email: {
+    //         required: "Заполните это поле",
+    //         email: "Email содержит неправильный формат"
+    //     },
+    //     password: {
+    //         required: "Заполните это поле",
+    //         email: "Пароль мимимум 6 символов"
+    //     },
+    //     // phone: {
+    //     //     required: "Заполните это поле",
+    //     //     minlength: "Введите корректный телефон"
+    //     // }
+    //   }
+    // });
 
     var subscriptionValidationObject = {
       errorPlacement: validateErrorPlacement,
@@ -944,4 +976,9 @@ function animateLazy(element){
       $scaler.addClass('is-bg-hidden');
     }, fadeTimeout)
   }
+}
+
+// get window width (not to forget about ie, win, scrollbars, etc)
+function getWindowWidth(){
+  return window.innerWidth
 }

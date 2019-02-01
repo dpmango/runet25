@@ -29,74 +29,74 @@ block content
                 +svgMono("social-vk")
               a(href='#' target="_blank" title="Twitter").social-btn.social-btn--twitter
                 +svgMono("social-twitter")
-          .hero__scrolldown(js-scroll-to data-scroll-target=".cards-grid") Листайте вниз
+          .hero__scrolldown(js-scroll-to data-scroll-target=".tile-grid") Листайте вниз
           
         
   // HOME GRID
-  .cards-grid
-    // card
-    .card.card--2-3
-      .card__grid
-        .card__col
+  .tile-grid
+    // tile
+    .tile.tile--2-3
+      .tile__grid
+        .tile__col
           h2.h2-title В 2019 году домену .RU исполнится 25 лет.
           a.p-link(href="#") Читать подробнее
-        .card__col
+        .tile__col
           p.p-main 7 апреля 1994 года Российская Федерация получила национальный домен .RU, зарегистрированный международным сетевым центром InterNIC.
           p.p-main Отрасль достигла зрелости. Интернет перестал быть замкнутой индустрией, став средой и неотъемлемой частью повседневной жизни. 
     
-    // card
-    .card.card--1-3.card--red
+    // tile
+    .tile.tile--1-3.tile--red(js-header-color data-menu-color="white")
       h2.h2-title О проекте
-      .card__links
+      .tile__links
         a(href="#") О 25 летии
         a(href="#") История проекта
         a(href="#") Этапы проведения
         a(href="#") Новости 25 летия / Пресс центр
         a(href="#") Оргкомитет
         a(href="#") Исполком / Контакты
-      a(href="#").card__cta
+      a(href="#").tile__cta
         span Читать подробнее
         i.icon.icon-arrow-white
         
-    // card
-    .card.card--1-3.card--blue
+    // tile
+    .tile.tile--1-3.tile--blue(js-header-color data-menu-color="white" data-logo-color="white")
       h2.h2-title Число 25
       p.p-small Перечень мероприятий, персон, проектов и другого, связанного с числом 25
-      a(href="#").card__cta
+      a(href="#").tile__cta
         span Читать подробнее
         i.icon.icon-arrow-white
           
-    // card
-    .card.card--1-3.card--orange
+    // tile
+    .tile.tile--1-3.tile--orange
       h2.h2-title Этапы большого пути
       p.p-small Состояние развития и влияния
-      a(href="#").card__cta
+      a(href="#").tile__cta
         span Читать подробнее
         i.icon.icon-arrow-white
           
-    // card
-    .card.card--1-3.card--purple
+    // tile
+    .tile.tile--1-3.tile--purple
       h2.h2-title Я — часть Рунета
       p.p-small Про Рунет: конкурс журналистов, образовательная программа, конкурс статей в Википедии про Рунет (люди, компании, технологии, сайты)
-      a(href="#").card__cta
+      a(href="#").tile__cta
         span Читать подробнее
         i.icon.icon-arrow-white
           
-    // card
-    .card.card--1-3.card--pink
+    // tile
+    .tile.tile--1-3.tile--pink
       h2.h2-title 25 лет .RU
       p.p-small Краткая история появления и развития отечественного домена .RU
-      a(href="#").card__cta
+      a(href="#").tile__cta
         span Читать подробнее
         i.icon.icon-arrow-white
           
-    // card
-    .card.card--2-3.card--yellow
-      .card__img-cover
+    // tile
+    .tile.tile--2-3.tile--yellow
+      .tile__img-cover
         img(js-lazy data-src="img/fruits.png" data-srcset='img/fruits@2x.png 2x')
   
-    // card
-    .card.card--2-3
+    // tile
+    .tile.tile--2-3(js-header-color data-menu-color="white")
       h2.h2-title Подписаться на дайджест юбилея
       p.p-main Будьте в курсе всех событий юбилея! Обещаем, <br/>что будем писать только по важным поводам :)
       form(action="/email-form.php" js-validate-subscription).subsc-form
@@ -113,10 +113,10 @@ block content
         a(href="#" js-close-mfp).btn.btn-primary
           span Вернуться на сайт
         
-    // card
-    .card.card--1-3.card--green
+    // tile
+    .tile.tile--1-3.tile--green
       h2.h2-title Календарь 25-летия
       p.p-small Полный список мероприятий 2019 года, приуроченных к юбилею
-      a(href="#").card__cta
+      a(href="#").tile__cta
         span Читать подробнее
         i.icon.icon-arrow-white
