@@ -11,14 +11,27 @@
     color: white
     .social-btn
       opacity: .7
-      backface-visibility: hidden
       transition: opacity .25s $ease
       &:hover
         opacity: 1
+  &--black
+    color: $fontColor
+    .social-btn
+      transition: color .25s $ease
+      &--facebook
+        &:hover
+          color: $facebook
+      &--twitter
+        &:hover
+          color: $twitter
+      &--vk
+        &:hover
+          color: $vk
 
 .social-btn
   padding: 10px
   font-size: 0
+  backface-visibility: hidden
   &--facebook
     .ico
       font-size: 23px

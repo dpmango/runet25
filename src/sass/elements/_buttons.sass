@@ -19,17 +19,30 @@ button
     display: block
     width: 100%
 
-  &-example
+  &-primary
     // please use paddings instead of line-height to control btn height
-    background: $colorPrimary
-    font-size: 20px
-    padding: 15px 30px
+    background: $colorRed
+    font-size: 15px
+    font-weight: 500
+    padding: 20px 40px
     color: white
     transition: .25s $ease
     transform-origin: center bottom
     box-shadow: none
-    will-change: box-shadow, transform
+    overflow: hidden
+    &::before
+      display: inline-block
+      content: ' '
+      position: absolute 0
+      transform: translate3d(100%,0,0)
+      background: $colorPrimary
+      will-change: transform
+      // transition: transform .5s easeOutCubic
+      transition: transform .4s cubic-bezier(0.9, 0, 0.1, 1)
+    span
+      position: relative
+      z-index: 2
+      display: inline-block
     &:hover
-      transform: scale(1.05) translateY(-5px)
-      background: rgba($colorPrimary, .9)
-      box-shadow: 0 15px 10px -15px rgba($fontColor, .4)
+      &::before
+        transform: translate3d(0,0,0)

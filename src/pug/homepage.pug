@@ -5,3 +5,35 @@ bodyClass: homepage
 extends shared/_layout
 block content
   
+  // HERO
+  .hero
+    .container
+      .hero__wrapper
+        .hero__content
+          h1.hero__title.h1-title(data-aos="fade-up") Рунету исполняется 25 лет
+          .hero__description(data-aos="fade-up")
+            p.p-main Датой рождения Российского Интернета считается 7 апреля 1994 года — в этот день международный сетевой информационный центр InterNIC официально делегировал национальный домен .RU для Российской Федерации.
+          .hero__cta(data-aos="fade-up")
+            a(href="#").btn.btn-primary
+              span Подробнее о юбилее
+        .hero__image(data-aos="fade")
+          img(js-lazy data-src="img/HeroIllustration.png" data-srcset='img/HeroIllustration@2x.png 2x')
+        
+        // actions
+        .hero__actions
+          .hero__socials
+            .socials.socials--black
+              a(href='#' target="_blank" title="Facebook").social-btn.social-btn--facebook
+                +svgMono("social-facebook")
+              a(href='#' target="_blank" title="VK").social-btn.social-btn--vk
+                +svgMono("social-vk")
+              a(href='#' target="_blank" title="Twitter").social-btn.social-btn--twitter
+                +svgMono("social-twitter")
+          .hero__scrolldown(js-scroll-to data-target=".home-grid") Листайте вниз
+          
+        
+  // HOME GRID
+  .home-grid
+    .card.card--2-3
+  
+    .card.card--1-3

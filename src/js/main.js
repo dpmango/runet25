@@ -190,13 +190,18 @@ $(document).ready(function(){
       }
     })
     // scroll to section
-    .on('click', 'a[href^="#section"]', function() { // section scroll
-      var el = $(this).attr('href');
+    .on('click', '[js-scroll-to]', function() { // section scroll
+      var target = $(this).data('scroll-target');
+      var el = $(target)
       var topTarget = $(el).offset().top
+      var offset = $(this).data("offset")
+      if ( offset ){
+        topTarget -= offset
+      }
 
       // $('body, html').animate({scrollTop: topTarget}, 1000);
       TweenLite.to(window, 1, {
-        scrollTo: {y: $(el).offset().top, autoKill:false},
+        scrollTo: {y: topTarget, autoKill:false},
         ease: easingSwing
       });
 
