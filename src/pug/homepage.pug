@@ -99,7 +99,14 @@ block content
     .card.card--2-3
       h2.h2-title Подписаться на дайджест юбилея
       p.p-main Будьте в курсе всех событий юбилея! Обещаем, <br/>что будем писать только по важным поводам :)
-      
+      form(action="/email-form.php" js-validate-subscription).subsc-form
+        .ui-group
+          label(for="email") Эл. почта
+          input.ui-input(type="email" name="email" placeholder="ivan.petrov@address.ru")
+        .ui-group
+          button(type="submit").btn.btn-primary
+            span Подробнее о юбилее
+        
     // card
     .card.card--1-3.card--green
       h2.h2-title Календарь 25-летия

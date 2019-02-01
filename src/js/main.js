@@ -752,31 +752,29 @@ $(document).ready(function(){
       }
     });
 
-    // when multiple forms share functionality
-
-    // var subscriptionValidationObject = {
-    //   errorPlacement: validateErrorPlacement,
-    //   highlight: validateHighlight,
-    //   unhighlight: validateUnhighlight,
-    //   submitHandler: validateSubmitHandler,
-    //   rules: {
-    //     email: {
-    //       required: true,
-    //       email: true
-    //     }
-    //   },
-    //   messages: {
-    //     email: {
-    //       required: "Fill this field",
-    //       email: "Email is invalid"
-    //     }
-    //   }
-    // }
+    var subscriptionValidationObject = {
+      errorPlacement: validateErrorPlacement,
+      highlight: validateHighlight,
+      unhighlight: validateUnhighlight,
+      submitHandler: validateSubmitHandler,
+      rules: {
+        email: {
+          required: true,
+          email: true
+        }
+      },
+      messages: {
+        email: {
+          required: "Заполните это поле",
+          email: "Неверный формат email"
+        }
+      }
+    }
 
     // call/init
-    // $("[js-subscription-validation]").validate(subscriptionValidationObject);
-    // $("[js-subscription-validation-footer]").validate(subscriptionValidationObject);
-    // $("[js-subscription-validation-menu]").validate(subscriptionValidationObject);
+    $("[js-validate-subscription]").validate(subscriptionValidationObject);
+    $("[js-subscription-validation-footer]").validate(subscriptionValidationObject);
+    $("[js-subscription-validation-menu]").validate(subscriptionValidationObject);
   }
 
   //////////

@@ -3,10 +3,13 @@
 
 // WORKS KIND OF bootstrap - group have label and input
 .ui-group
+  width: 100%
   position: relative
   margin-bottom: 20px
-  label
+  label:not(.ui-input__validation)
     display: block
+    font-size: 15px
+    font-weight: 500
     margin-bottom: 10px
 
 // for input or textarea element
@@ -15,20 +18,30 @@
   display: block
   width: 100%
   background: white
-  font-family: $systemFont
-  color: $fontColor50
+  font-family: $baseFont
+  color: $fontColor
+  font-size: 15px
+  font-weight: 500
   border: 1px solid $borderColor
-  border-radius: 4px
-  padding: 12px 15px
+  border-radius: 0px
+  padding: 19px 25px 18px 25px
+  transition: .25s $ease
   &.has-error
-    color: $colorRed
+    border-color: $colorRed
     &::placeholder
       color: rgba($colorRed, .5)
+  &:focus
+    border-color: rgba(black, .5)
 
 .ui-input textarea
   resize: vertical
 
-
+.ui-input__validation
+  font-size: 12px
+  color: $colorRed
+  position: absolute
+  bottom: -18px
+  left: 0
 
 /* Checkbox
 .ui-checkbox
