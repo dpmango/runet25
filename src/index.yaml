@@ -1,7 +1,31 @@
-ProjectTitle: Project-name
+ProjectTitle: Runet 25
 
 PageList:
 - file: homepage.html
   ready: 100
-- file: page.html
+- file: number25.html
+  ready: 0
+- file: 25gdp.html
+  ready: 0
+- file: 25years.html
+  ready: 0
+- file: calendar.html
+  ready: 0
+- file: me.html
+  ready: 0
+- file: about.html
+  ready: 0
+- file: timeline.html
+  ready: 0
+- file: news.html
+  ready: 0
+- file: news-article.html
+  ready: 0
+- file: committee.html
+  ready: 0
+- file: sponsors.html
+  ready: 0
+- file: stages.html
+  ready: 0
+- file: ui.html
   ready: 0

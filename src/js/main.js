@@ -40,6 +40,7 @@ $(document).ready(function(){
     isIe: msieversion(),
     isMobile: isMobile()
   }
+  window.browser = browser
 
   var sliders = [] // collection of all sliders
 
@@ -49,7 +50,8 @@ $(document).ready(function(){
 
   // some functions should be called once only
   legacySupport();
-  // preloaderDone();
+  initaos();
+  preloaderDone();
 
   // The new container has been loaded and injected in the wrapper.
   function pageReady(fromPjax){
@@ -57,26 +59,20 @@ $(document).ready(function(){
     updateHeaderActiveClass();
     closeMobileMenu();
 
-    initSliders();
     initPopups();
+    initPerfectScrollbar();
     initMasks();
     initSelectric();
     initScrollMonitor();
     initValidations();
-
-    // AVAILABLE in _components folder
-    // copy paste in main.js and initialize here
-    // revealFooter();
-    // initPerfectScrollbar();
-    // initCountDown();
-    // initLazyLoad();
-    // initTeleport();
-    // parseSvg();
+    initTeleport();
   }
 
   // The transition has just finished and the old Container has been removed from the DOM.
   function pageCompleated(fromPjax){
+    initLazyLoad();
     if ( fromPjax ){
+      AOS.refreshHard();
       window.onLoadTrigger()
     }
   }
@@ -94,10 +90,7 @@ $(document).ready(function(){
   // scroll/resize listeners
   _window.on('scroll', getWindowScroll);
   _window.on('scroll', scrollHeader);
-  // debounce/throttle examples
-  // _window.on('resize', throttle(revealFooter, 100));
   _window.on('resize', debounce(setBreakpoint, 200))
-
 
 
   //////////
@@ -129,6 +122,19 @@ $(document).ready(function(){
     } else {
       return false
     }
+  }
+
+  function initaos() {
+    AOS.init({
+      // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+      offset: 120, // offset (in px) from the original trigger point
+      delay: 0, // values from 0 to 3000, with step 50ms
+      duration: 400, // values from 0 to 3000, with step 50ms
+      easing: 'ease-in', // default easing for AOS animations
+      once: true, // whether animation should happen only once - while scrolling down
+      mirror: false, // whether elements should animate out while scrolling past them
+      anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
+    });
   }
 
   function legacySupport(){
@@ -335,43 +341,6 @@ $(document).ready(function(){
 
 
   //////////
-  // SLIDERS
-  //////////
-  function initSliders(){
-
-    // EXAMPLE SWIPER
-    new Swiper('[js-slider]', {
-      wrapperClass: "swiper-wrapper",
-      slideClass: "example-slide",
-      direction: 'horizontal',
-      loop: false,
-      watchOverflow: true,
-      setWrapperSize: false,
-      spaceBetween: 0,
-      slidesPerView: 'auto',
-      // loop: true,
-      normalizeSlideIndex: true,
-      // centeredSlides: true,
-      freeMode: true,
-      // effect: 'fade',
-      autoplay: {
-        delay: 5000,
-      },
-      navigation: {
-        nextEl: '.example-next',
-        prevEl: '.example-prev',
-      },
-      breakpoints: {
-        // when window width is <= 992px
-        992: {
-          autoHeight: true
-        }
-      }
-    })
-
-  }
-
-  //////////
   // MODALS
   //////////
 
@@ -418,6 +387,143 @@ $(document).ready(function(){
 
   function closeMfp(){
     $.magnificPopup.close();
+  }
+
+  //////////
+  // LAZY LOAD
+  //////////
+  function initLazyLoad(){
+
+    var $lazy = _document.find('[js-lazy]');
+    if ($lazy.length === 0 ) {
+      ieFixPictures();
+      return
+    }
+
+    var fadeTimeout = 250
+
+    $lazy.Lazy({
+      threshold: 400, //Amount of pixels below the viewport, in which all images gets loaded before the user sees them.
+      enableThrottle: true,
+      throttle: 100,
+      scrollDirection: 'vertical',
+      // effect: 'fadeIn',
+      // effectTime: fadeTimeout,
+      // visibleOnly: true,
+      onError: function(element) {
+        console.log('error loading ' + element.data('src'));
+        try{
+          element.attr('src', element.data('src'))
+        } catch(e){
+          console.log('eroor appending src', e)
+        }
+
+      },
+      beforeLoad: function(element){
+        // element.attr('style', '')
+      },
+      afterLoad: function(element){
+        animateLazy(element)
+      },
+      onFinishedAll: function(){
+        ieFixPictures()
+      }
+    });
+
+  }
+
+  function ieFixPictures(){
+    if ( window.browser.isIe ){
+      // ie pollyfils
+      picturefill();
+      window.fitie.init()
+    }
+  }
+
+  window.ieFixPictures = ieFixPictures()
+
+
+
+  ////////////
+  // SCROLLBAR
+  ////////////
+  function initPerfectScrollbar(){
+    if ( $('[js-scrollbar]').length > 0 ){
+      $('[js-scrollbar]').each(function(i, scrollbar){
+        var ps;
+
+        function initPS(){
+          ps = new PerfectScrollbar(scrollbar, {
+            // wheelSpeed: 2,
+            // wheelPropagation: true,
+            minScrollbarLength: 20
+          });
+        }
+
+        initPS();
+
+        // toggle init destroy
+        function checkMedia(){
+          if ( $(scrollbar).data('disable-on') ){
+
+            if ( mediaCondition($(scrollbar).data('disable-on')) ){
+              if ( $(scrollbar).is('.ps') ){
+                ps.destroy();
+                ps = null;
+              }
+            } else {
+              if ( $(scrollbar).not('.ps') ){
+                initPS();
+              }
+            }
+          }
+        }
+
+        checkMedia();
+        _window.on('resize', debounce(checkMedia, 250));
+
+      })
+    }
+  }
+
+
+  ////////////
+  // TELEPORT PLUGIN
+  ////////////
+  function initTeleport(){
+    $('[js-teleport]').each(function (i, val) {
+      var self = $(val)
+      var objHtml = $(val).html();
+      var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
+      var conditionMedia = $(val).data('teleport-condition').substring(1);
+      var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
+
+      if (target && objHtml && conditionPosition) {
+
+        function teleport() {
+          var condition;
+
+          if (conditionPosition === "<") {
+            condition = _window.width() < conditionMedia;
+          } else if (conditionPosition === ">") {
+            condition = _window.width() > conditionMedia;
+          }
+
+          if (condition) {
+            target.html(objHtml)
+            self.html('')
+          } else {
+            self.html(objHtml)
+            target.html("")
+          }
+        }
+
+        teleport();
+        _window.on('resize', debounce(teleport, 100));
+
+
+      }
+    })
   }
 
   ////////////
@@ -476,43 +582,67 @@ $(document).ready(function(){
   }
 
   ////////////
-  // SCROLLMONITOR - WOW LIKE
+  // SCROLLMONITOR
   ////////////
-  function initScrollMonitor(){
-    $('.wow').each(function(i, el){
+  function initScrollMonitor(fromPjax){
 
-      var elWatcher = scrollMonitor.create( $(el) );
+    // REVEAL animations
+    var $reveals = $('[js-reveal]');
 
-      var delay;
-      if ( getWindowWidth() <= 767 ){
-        delay = 0
-      } else {
-        delay = $(el).data('animation-delay');
-      }
+    if ( $reveals.length > 0 ){
+      var animatedClass = "is-animated";
+      var pageTransitionTimeout = 500
 
-      var animationClass = $(el).data('animation-class') || "wowFadeUp"
+      $('[js-reveal]').each(function(i, el){
+        var type = $(el).data('type') || "enterViewport"
 
-      var animationName = $(el).data('animation-name') || "wowFade"
+        // onload type
+        if ( type === "onload" ){
+          var interval = setInterval(function(){
+            // if (!preloaderActive){
+              if ( fromPjax ){
+                // wait till transition overlay is fullyanimated
+                setTimeout(function(){
+                  $(el).addClass(animatedClass);
+                  clearInterval(interval)
+                }, pageTransitionTimeout)
+              } else {
+                $(el).addClass(animatedClass);
+                clearInterval(interval)
+              }
+            // }
+          }, 100)
+          return
+        }
 
-      elWatcher.enterViewport(throttle(function() {
-        $(el).addClass(animationClass);
-        $(el).css({
-          'animation-name': animationName,
-          'animation-delay': delay,
-          'visibility': 'visible'
-        });
-      }, 100, {
-        'leading': true
-      }));
-      // elWatcher.exitViewport(throttle(function() {
-      //   $(el).removeClass(animationClass);
-      //   $(el).css({
-      //     'animation-name': 'none',
-      //     'animation-delay': 0,
-      //     'visibility': 'hidden'
-      //   });
-      // }, 100));
-    });
+        // halfy enter
+        if ( type === "halflyEnterViewport"){
+          var scrollListener = throttle(function(){
+            var vScrollBottom = _window.scrollTop() + _window.height();
+            var elTop = $(el).offset().top
+            var triggerPoint = elTop + ( $(el).height() / 2)
+
+            if ( vScrollBottom > triggerPoint ){
+              $(el).addClass(animatedClass);
+              window.removeEventListener('scroll', scrollListener, false); // clear debounce func
+            }
+          }, 100)
+
+          window.addEventListener('scroll', scrollListener, false);
+          return
+        }
+
+        // regular (default) type
+        var elWatcher = scrollMonitor.create( $(el) );
+        elWatcher.enterViewport(throttle(function() {
+          $(el).addClass(animatedClass);
+        }, 100, {
+          'leading': true
+        }));
+
+      });
+
+    }
 
   }
 
@@ -775,4 +905,21 @@ function normalize(value, fromMin, fromMax, toMin, toMax) {
 // get window width (not to forget about ie, win, scrollbars, etc)
 function getWindowWidth(){
   return window.innerWidth
+}
+
+// animate lazy class toggler
+function animateLazy(element){
+  var fadeTimeout = 250
+  var $scaler = element.closest('.scaler')
+  $scaler.addClass('is-loaded');
+
+  if ( $scaler.length === 0 ){
+    $(element).addClass('is-loaded')
+  }
+
+  if ( $scaler.is('.no-bg-onload') ){
+    setTimeout(function(){
+      $scaler.addClass('is-bg-hidden');
+    }, fadeTimeout)
+  }
 }
