@@ -2,6 +2,22 @@
 footer.footer
   .container
     .footer__wrapper
-      
+      .footer__logo
+        +svgMono("logo")
+      ul.footer__menu
+        li
+          a(href="#") О проекте
+        li
+          a(href="#") Число 25
+        li
+          a(href="#") Я — часть Рунета
+        li
+          a(href="#") 25 лет.RU
+        li
+          a(href="#") Календарь 25-летия
+          
+      a(href='http://kto-chto-gde.ru' target="_blank").footer__credits
+        +svgMono("kgc-logo")  
+        
       
 // FOOTER :: END

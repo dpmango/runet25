@@ -2,7 +2,7 @@ ProjectTitle: Runet 25
 
 PageList:
 - file: homepage.html
-  ready: 100
+  ready: 30
 - file: number25.html
   ready: 0
 - file: 25gdp.html
