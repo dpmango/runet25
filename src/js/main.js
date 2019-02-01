@@ -756,14 +756,13 @@ $(document).ready(function(){
         $('[js-subsc-thanks-message]').find('strong').text(emailValue)
 
         // open modal
-        // var mfpThanksOptions = $.extend( defaultPopupOptions, {
-        //   items: {src: '#subsc-thanks'}
-        // }, true);
-        // $.magnificPopup.open(mfpThanksOptions);
-        //
-        // $form.removeClass('is-loading');
-        // $email.val("") // clear prev value
+        var mfpThanksOptions = $.extend( defaultPopupOptions, {
+          items: {src: '#subsc-thanks'}
+        }, true);
+        $.magnificPopup.open(mfpThanksOptions);
 
+        $form.removeClass('is-loading');
+        $email.val("") // clear prev value
       },
       rules: {
         email: {
