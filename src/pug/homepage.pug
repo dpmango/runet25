@@ -1,6 +1,5 @@
 ---
-title: Homepage title
-bodyClass: homepage
+title: Главная
 ---
 extends shared/_layout
 block content
@@ -16,7 +15,7 @@ block content
           .hero__cta(data-aos="fade-up")
             a(href="#").btn.btn-primary
               span Подробнее о юбилее
-        .hero__image(data-aos="fade")
+        .hero__image
           img(js-lazy data-src="img/HeroIllustration.png" data-srcset='img/HeroIllustration@2x.png 2x')
         
         // actions
@@ -105,8 +104,9 @@ block content
           input.ui-input(type="email" name="email" placeholder="ivan.petrov@address.ru")
         .ui-group
           button(type="submit").btn.btn-primary
-            span Подробнее о юбилее
+            span Подписаться
       
+      // modal
       .mfp-dialog.mfp-thanks.mfp-hide#subsc-thanks
         .h2-title Спасибо за подписку!
         p.p-small(js-subsc-thanks-message) Вы подписались на дайджест юбилея, используя почту <strong>svyatoslav.konstantinov@rambler.ru</strong>

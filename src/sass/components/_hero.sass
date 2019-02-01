@@ -6,6 +6,9 @@
     min-height: 100vh
     padding-bottom: 100px
     padding-top: 50px
+    overflow: hidden
+    // container offset
+    margin-right: -50px
   &__content
     position: relative
     z-index: 2
@@ -24,19 +27,25 @@
     margin-top: 45px
   &__image
     position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    right: 0
     z-index: 1
-    right: -50px
-    top: 120px
-    width: 100%
+    // 1140px
+    max-width: 87.5%
     text-align: right
+    margin-top: 35px
     img
       max-width: 100%
+      max-height: 100%
+      min-width: 1px
+      width: auto
 
   &__actions
     position: absolute
-    bottom: 45px
+    bottom: 35px
     left: 0
-    right: 0
+    right: 50px
     z-index: 2
     display: flex
     align-items: center

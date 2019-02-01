@@ -90,6 +90,7 @@ $(document).ready(function(){
   // The transition has just finished and the old Container has been removed from the DOM.
   function pageCompleated(fromPjax){
     getHeaderParams();
+    controlHeaderColor()
     initLazyLoad();
     if ( fromPjax ){
       AOS.refreshHard();
