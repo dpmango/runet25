@@ -289,7 +289,7 @@ $(document).ready(function(){
       enableScroll(isOnload)
       return
     }
-    if ($('[js-hamburger]').is('.is-active')) {
+    if ($('.header').is('.is-menu-active')) {
       disableScroll();
     } else {
       enableScroll();
@@ -297,17 +297,29 @@ $(document).ready(function(){
   };
 
   _document.on('click', '[js-hamburger]', function(){
-    $(this).toggleClass('is-active');
-    $('.mobile-navi').toggleClass('is-active');
+    $('.header').toggleClass('is-menu-active');
+    changeHamburgerText()
+    $('.main-menu').toggleClass('is-active');
 
     blockScroll();
   });
 
   function closeMobileMenu(isOnload){
-    $('[js-hamburger]').removeClass('is-active');
-    $('.mobile-navi').removeClass('is-active');
+    $('.header').removeClass('is-menu-active');
+    changeHamburgerText()
+    $('.main-menu').removeClass('is-active');
 
     blockScroll(isOnload);
+  }
+
+  function changeHamburgerText(isActive){
+    var $name = $('.header__menu-name');
+
+    if ( $('.header').is(".is-menu-active") ){
+      $name.text($name.data("activeText"))
+    } else {
+      $name.text($name.data("text"))
+    }
   }
 
 

@@ -1,0 +1,30 @@
+.socials
+  display: flex
+  align-items: center
+  flex-wrap: wrap
+  margin-left: -10px
+  margin-right: -10px
+  will-change: opacity
+  transform-style: preserve-3d
+  backface-visibility: hidden
+  &--white
+    color: white
+    .social-btn
+      opacity: .7
+      backface-visibility: hidden
+      transition: opacity .25s $ease
+      &:hover
+        opacity: 1
+
+.social-btn
+  padding: 10px
+  font-size: 0
+  &--facebook
+    .ico
+      font-size: 23px
+  &--twitter
+    .ico
+      font-size: 18px
+  &--vk
+    .ico
+      font-size: 15px

@@ -1,46 +1,72 @@
 /* HEADER
 .header
   position: fixed
-  top: 0
   right: 0
   left: 0
   z-index: 9
-  background: #f5f5f5
+  background: transparent
   will-change: transform
   backface-visibility: hidden
   transform-style: preserve-3d
   &__wrapper
     display: flex
     align-items: center
-    height: 70px
+    transform: translate3d(0,40px,0)
 
   &__logo
     flex: 0 0 auto
-    font-size: 35px
+    font-size: 0
     padding-right: 30px
+    padding: 10px
+    margin-left: -10px
+    transition: color .25s $ease, opacity .25s $ease
+    .ico
+      font-size: 39px
+    &:hover
+      color: $colorRed
 
   &__menu
-    flex: 0 1 auto
+    margin-left: auto
     display: flex
     align-items: center
-    font-size: 18px
-    margin: 0 auto
-    padding: 0
-    li
+    padding: 10px
+    margin-right: -10px
+    cursor: pointer
+    &:hover
+      .header
+        &__menu-name
+          color: $colorRed
+        &__menu-hamburger
+          &::before, &::after
+            background-color: $colorRed
+
+  &__menu-name
+    display: inline-block
+    margin-right: 12px
+    font-size: 15px
+    transition: color .25s $ease
+  &__menu-hamburger
+    font-size: 0
+    position: relative
+    min-size: 25px 10px
+    transition: transform .25s ease
+    will-change: transform
+    backface-visibility: hidden
+    &::before, &::after
       display: inline-block
-      margin-right: 30px
-    a
-      transition: color .25s $ease
-      &:hover
-        color: tomato
-
-  &__cta
-    margin-left: auto
-    padding-left: 30px
-
-  &__hamburger
-    // display: none
-    padding-left: 20px
+      content: '  '
+      position: absolute
+      left: 0
+      height: 2px
+      background: $fontColor
+      transform-style: preserve-3d
+      transition: background-color .25s $ease, transform .2s easeOutQuad, width .15s easeInCubic
+    &::before
+      top: 0
+      width: 25px
+    &::after
+      bottom: 0
+      width: 15px
 
   &.is-fixed
     // should be normalized to -100% scroll at this point
@@ -60,21 +86,20 @@
     transition: transform .25s $ease
     transform: translate3d(0,-100%,0) !important
 
-
-+r($lg)
-  .header
-    &__cta
-      display: none
-
-+r($md)
-  .header
-    &__menu
-      display: none
-    &__hamburger
-      margin-left: auto
-      display: block
-
-+r($sm)
-  .header
-    &__logo
-      font-size: 30px
+  &.is-menu-active
+    .header
+      &__logo
+        opacity: 0
+      &__menu-name
+        color: white
+      &__menu-hamburger
+        transform: rotate(180deg)
+        &::before, &::after
+          background-color: white
+        &::before
+          top: 4px
+          transform: rotate(45deg)
+        &::after
+          width: 25px
+          bottom: 4px
+          transform: rotate(-45deg)

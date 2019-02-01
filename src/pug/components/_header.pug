@@ -3,33 +3,41 @@ header.header
   .container
     .header__wrapper
       a(href="homepage.html").header__logo
-        +svgMono('email')
-      ul.header__menu
-        li
-          a(href="homepage.html") Homepage
-        li
-          a(href="page.html") Shop
-        li
-          a(href="page.html") Lorem
-      
-      .header__cta
-        .header__cart
-          +svgMono('email')
-      
-      .header__hamburger
-        .hamburger.hamburger--squeeze(js-hamburger)
-          .hamburger-box
-            .hamburger-inner
+        +svgMono('logo')
+
+      .header__menu(js-hamburger)
+        span.header__menu-name(data-text="Меню" data-active-text="Закрыть") Меню
+        .header__menu-hamburger
     
-// MOBILE NAVI
-.mobile-navi
-  .mobile-navi__wrapper
-    ul.mobile-navi__menu
-      li
-        a(href="homepage.html") Homepage
-      li
-        a(href="page.html") Shop
-      li
-        a(href="page.html") Lorem
-    .mobile-navi__cta
-      a(href="mailto:sergey@khmelevskoy.co") sergey@khmelevskoy.co
+// MAIN MENU
+.main-menu
+  .main-menu__wrapper
+    .main-menu__content
+      ul.main-menu__menu
+        li
+          a(href="about.html") О проекте
+          ul
+            li
+              a(href="timeline.html") Таймлайн ключевых этапов
+            li
+              a(href="sponsors.html") Спонсорам
+            li
+              a(href="committee.html") Оргкомитет
+            li
+              a(href="news.html") Новости 25-летия
+        li
+          a(href="25years.html") 25 лет.RU
+        li
+          a(href="me.html") Я – часть Рунета
+        li
+          a(href="number25.html") Число 25
+        li
+          a(href="calendar.html") Календарь 25-летия
+      .main-menu__socials
+        .socials.socials--white
+          a(href='#' target="_blank" title="Facebook").social-btn.social-btn--facebook
+            +svgMono("social-facebook")
+          a(href='#' target="_blank" title="VK").social-btn.social-btn--vk
+            +svgMono("social-vk")
+          a(href='#' target="_blank" title="Twitter").social-btn.social-btn--twitter
+            +svgMono("social-twitter")
