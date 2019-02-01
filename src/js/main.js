@@ -44,6 +44,31 @@ $(document).ready(function(){
 
   var sliders = [] // collection of all sliders
 
+  var startWindowScroll = 0
+  var closeMarkup = '<button title="%title%" class="mfp-close"><svg class="ico ico-mono-close"><use xlink:href="img/sprite-mono.svg#ico-mono-close"></use></svg></button>'
+  var defaultPopupOptions = {
+    type: 'inline',
+    fixedContentPos: true,
+    fixedBgPos: true,
+    overflowY: 'auto',
+    closeBtnInside: true,
+    preloader: false,
+    midClick: true,
+    removalDelay: 300,
+    mainClass: 'popup-buble',
+    closeMarkup: closeMarkup,
+    callbacks: {
+      beforeOpen: function() {
+        startWindowScroll = _window.scrollTop();
+        // $('html').addClass('mfp-helper');
+      },
+      close: function() {
+        // $('html').removeClass('mfp-helper');
+        _window.scrollTop(startWindowScroll);
+      }
+    }
+  }
+
   ////////////
   // LIST OF FUNCTIONS
   ////////////
@@ -56,7 +81,6 @@ $(document).ready(function(){
   // The new container has been loaded and injected in the wrapper.
   function pageReady(fromPjax){
     getHeaderParams();
-    updateHeaderActiveClass();
     closeMobileMenu();
 
     initPopups();
@@ -223,8 +247,8 @@ $(document).ready(function(){
   // HEADER SCROLL
   function getHeaderParams(){
     var $header = $('.header')
-    var headerOffsetTop = 0
-    var headerHeight = $header.outerHeight() + headerOffsetTop
+    var headerWrapperTranslate = 40
+    var headerHeight = $header.outerHeight() + headerWrapperTranslate
 
     header = {
       container: $header,
@@ -251,7 +275,6 @@ $(document).ready(function(){
         // emulate position absolute by giving negative transform on initial scroll
         var normalized = Math.floor(normalize(scroll.y, header.bottomPoint, 0, 0, 100))
         var reverseNormalized = (100 - normalized) * -1
-        reverseNormalized = reverseNormalized * 1.2 // a bit faster transition
 
         header.container.css({
           "transform": 'translate3d(0,'+ reverseNormalized +'%,0)',
@@ -327,21 +350,6 @@ $(document).ready(function(){
     }
   }
 
-
-  // SET ACTIVE CLASS IN HEADER
-  // * could be removed in production and server side rendering when header is inside barba-container
-  function updateHeaderActiveClass(){
-    $('.header__menu li').each(function(i,val){
-      if ( $(val).find('a').attr('href') == window.location.pathname.split('/').pop() ){
-        $(val).addClass('is-active');
-      } else {
-        $(val).removeClass('is-active')
-      }
-    });
-  }
-
-
-
   /***************
   * PAGE SPECIFIC *
   ***************/
@@ -363,48 +371,15 @@ $(document).ready(function(){
 
   function initPopups(){
     // Magnific Popup
-    var startWindowScroll = 0;
-    $('[js-popup]').magnificPopup({
-      type: 'inline',
-      fixedContentPos: true,
-      fixedBgPos: true,
-      overflowY: 'auto',
-      closeBtnInside: true,
-      preloader: false,
-      midClick: true,
-      removalDelay: 300,
-      mainClass: 'popup-buble',
-      callbacks: {
-        beforeOpen: function() {
-          startWindowScroll = _window.scrollTop();
-          // $('html').addClass('mfp-helper');
-        },
-        close: function() {
-          // $('html').removeClass('mfp-helper');
-          _window.scrollTop(startWindowScroll);
-        }
-      }
-    });
-
-    $('[js-popup-gallery]').magnificPopup({
-  		delegate: 'a',
-  		type: 'image',
-  		tLoading: 'Загрузка #%curr%...',
-  		mainClass: 'popup-buble',
-  		gallery: {
-  			enabled: true,
-  			navigateByImgClick: true,
-  			preload: [0,1]
-  		},
-  		image: {
-  			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
-  		}
-  	});
+    $('[js-popup]').magnificPopup(defaultPopupOptions);
   }
 
   function closeMfp(){
     $.magnificPopup.close();
   }
+
+  _document
+    .on('click', '[js-close-mfp]', closeMfp)
 
   //////////
   // LAZY LOAD
@@ -756,7 +731,40 @@ $(document).ready(function(){
       errorPlacement: validateErrorPlacement,
       highlight: validateHighlight,
       unhighlight: validateUnhighlight,
-      submitHandler: validateSubmitHandler,
+      submitHandler: function(form) {
+        var $form = $(form)
+        $form.addClass('is-loading');
+        var $email = $form.find('input[name="email"]')
+        var emailValue = $email.val()
+
+        // $.ajax({
+        //   type: "POST",
+        //   url: $(form).attr('action'),
+        //   data: $(form).serialize(),
+        //   success: function(response) {
+        //     $(form).removeClass('is-loading');
+        //     var data = $.parseJSON(response);
+        //     if (data.status == 'success') {
+        //       // do something I can't test
+        //     } else {
+        //         $(form).find('[data-error]').html(data.message).show();
+        //     }
+        //   }
+        // });
+
+        // append email to thank you message
+        $('[js-subsc-thanks-message]').find('strong').text(emailValue)
+
+        // open modal
+        // var mfpThanksOptions = $.extend( defaultPopupOptions, {
+        //   items: {src: '#subsc-thanks'}
+        // }, true);
+        // $.magnificPopup.open(mfpThanksOptions);
+        //
+        // $form.removeClass('is-loading');
+        // $email.val("") // clear prev value
+
+      },
       rules: {
         email: {
           required: true,
