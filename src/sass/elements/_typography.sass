@@ -3,13 +3,31 @@
   font-size: 50px
   font-weight: 900
   line-height: 1.1
-  letter-spacing: em(-1.22, 72)
 
+.h2-title
+  font-size: 30px
+  font-weight: 700
+  line-height: 1.33
 
 .p-main
   font-size: 18px
-  color: $fontColor
   line-height: 1.67
+
+.p-small
+  font-size: 15px
+  line-height: 1.67
+
+p
+  margin-top: 0
+  & + p
+    margin-top: 1em
+
+.p-link
+  color: $colorRed
+  font-size: 15px
+  transition: color .25s $ease
+  &:hover
+    color: $colorPrimary
 
 .f-500
   font-weight: 500
