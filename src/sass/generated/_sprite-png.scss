@@ -8,6 +8,15 @@ $sprite: (
 		total-height: 93px,
 		image: '../img/sprite.png'
 	),
+	footer-menu-arrow: (
+		offset-x: -43px,
+		offset-y: -80px,
+		width: 8px,
+		height: 13px,
+		total-width: 300px,
+		total-height: 93px,
+		image: '../img/sprite.png'
+	),
 	logo: (
 		offset-x: 0px,
 		offset-y: 0px,
@@ -75,6 +84,9 @@ $sprite: (
 
 	.icon-arrow-white {
 		@include sprite(arrow-white)
+	}
+	.icon-footer-menu-arrow {
+		@include sprite(footer-menu-arrow)
 	}
 	.icon-logo {
 		@include sprite(logo)

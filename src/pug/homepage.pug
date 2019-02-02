@@ -104,12 +104,12 @@ block content
         i.icon.icon-arrow-white
           
     // tile
-    .tile.tile--2-3.tile--yellow
+    .tile.tile--2-3.tile--yellow.tile--1-3-lg
       .tile__img-cover
         img(js-lazy data-src="img/fruits.png" data-srcset='img/fruits@2x.png 2x')
   
     // tile
-    .tile.tile--2-3.tile--mobile-last(js-header-color data-menu-color="white")
+    .tile.tile--2-3.tile--lg-last(js-header-color data-menu-color="white")
       h2.h2-title Подписаться на дайджест юбилея
       p.p-main Будьте в курсе всех событий юбилея! Обещаем, <br/>что будем писать только по важным поводам :)
       form(action="/email-form.php" js-validate-subscription).subsc-form

@@ -7,6 +7,7 @@
     align-items: center
     padding: 20px 0
   &__logo
+    flex: 0 0 auto
     display: inline-block
     font-size: 0
     padding: 10px
@@ -14,14 +15,17 @@
     .ico
       font-size: 39px
   &__menu
+    flex: 1 1 auto
     margin: 0
     padding: 0 60px
     display: flex
     align-items: center
+    min-width: 1px
     li
+      flex: 0 0 auto
       display: inline-block
-      font-style: 13px
-      margin-right: 30px
+      font-size: 13px
+      margin-right: 3.3%
       &:last-child
         margin-right: 0
     a
@@ -33,6 +37,7 @@
         color: rgba(white, .7)
 
   &__credits
+    flex: 0 0 auto
     display: inline-block
     font-size: 0
     padding: 10px
@@ -44,3 +49,81 @@
       font-size: 39px
     &:hover
       color: white
+
+
++r(1080)
+  .footer
+    &__menu
+      padding: 0 30px
+      // a
+      //   padding-left: 5px
+      //   padding-right: 5px
+
++r($lg)
+  .footer
+    &__wrapper
+      flex-wrap: wrap
+    &__menu
+      // flex-basis: 100%
+      // padding: 0
+      // margin-left: -10px
+      // margin-right: -10px
+      a
+        padding-left: 7px
+        padding-right: 7px
+
+    &__credits
+      flex-basis: 100%
+      margin-left: -10px
+      margin-right: 0
+      .ico
+        font-size: 34px
+
++r($md)
+  .footer
+    &__wrapper
+      padding: 20px 0 30px 0
+    &__menu
+      flex-basis: 100%
+      padding: 0
+      margin: 20px -10px
+      flex-wrap: wrap
+      li
+        flex: 1 1 100%
+        max-width: 100%
+        margin-right: 0
+        display: block
+        font-size: 16px
+        &:last-child
+          a
+            &::before
+              display: none
+      a
+        position: relative
+        display: block
+        width: 100%
+        padding: 16px 10px
+        &::before
+          display: inline-block
+          content: ' '
+          position: absolute
+          bottom: 0
+          left: 10px
+          right: 10px
+          height: 1px
+          background: rgba(white, .1)
+          transition: background .25s $ease
+        &::after
+          display: inline-block
+          content: ' '
+          position: absolute
+          top: 50%
+          right: 10px
+          transform: translate3d(0, -50%,0)
+          +sprite("footer-menu-arrow")
+          transition: transform .25s $ease
+        &:hover
+          &::before
+            background-color: rgba(white, .5)
+          &::after
+            transform: translate3d(-7px,-50%,0)
