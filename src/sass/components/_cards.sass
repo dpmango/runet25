@@ -17,17 +17,21 @@
     flex: 0 0 100%
     max-width: 100%
   &--2-3
-    flex: 0 0 66.666%
-    max-width: 66.666%
+    flex: 0 0 $col8
+    max-width: $col8
   &--1-3
-    flex: 0 0 33.333%
-    max-width: 33.333%
+    flex: 0 0 $col4
+    max-width: $col4
 
   /* elements
   &__grid
     display: flex
+    margin-left: -10px
+    margin-right: -10px
   &__col
     flex: 0 0 50%
+    padding-left: 10px
+    padding-right: 10px
     max-width: 50%
     min-width: 1px
   &__links
@@ -86,7 +90,7 @@
     background-color: #FF7400
     color: white
   &--purple
-    background-color: #F2306E
+    background-color: #7E00FF
     color: white
   &--pink
     background-color: #F2306E
@@ -101,3 +105,49 @@
   /* position modifiers
   &--jcc
     justify-content: center
+
++rmin(1920)
+  .tile
+    &--2-3
+      flex: 0 0 $col6
+      max-width: $col6
+    &--1-3
+      flex: 0 0 $col3
+      max-width: $col3
+
++r($xl)
+  .tile
+    padding: 60px 40px 35px
+    min-height: 350px
+
++r($lg)
+  .tile
+    &--2-3
+      flex: 0 0 $col12
+      max-width: $col12
+    &--1-3
+      flex: 0 0 $col6
+      max-width: $col6
+
++r($md)
+  .tile
+    padding: 40px 30px 25px
+    &__cta
+      font-size: 14px
+
++r($sm)
+  .tile
+    &--2-3
+      flex: 0 0 $col12
+      max-width: $col12
+    &--1-3
+      flex: 0 0 $col12
+      max-width: $col12
+    &--mobile-last
+      order: 99
+
+    &__grid
+      flex-wrap: wrap
+    &__col
+      flex: 0 0 100%
+      max-width: 100%

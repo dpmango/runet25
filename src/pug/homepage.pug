@@ -50,11 +50,13 @@ block content
       .tile__grid
         .tile__col
           h2.h2-title В&nbsp;2019 году домену .RU исполнится 25&nbsp;лет.
-          a.p-link(href="#") Читать подробнее
+          span(js-teleport data-teleport-condition="<576" data-teleport-to="tile_first_link")
+            a.p-link(href="#") Читать подробнее
         .tile__col
           p.p-main 7 апреля 1994 года Российская Федерация получила национальный домен .RU, зарегистрированный международным сетевым центром InterNIC.
           p.p-main Отрасль достигла зрелости. Интернет перестал быть замкнутой индустрией, став средой и неотъемлемой частью повседневной жизни. 
-    
+          span(data-teleport-target="tile_first_link")
+            
     // tile
     .tile.tile--1-3.tile--red(js-header-color data-menu-color="white")
       h2.h2-title О проекте
@@ -107,7 +109,7 @@ block content
         img(js-lazy data-src="img/fruits.png" data-srcset='img/fruits@2x.png 2x')
   
     // tile
-    .tile.tile--2-3(js-header-color data-menu-color="white")
+    .tile.tile--2-3.tile--mobile-last(js-header-color data-menu-color="white")
       h2.h2-title Подписаться на дайджест юбилея
       p.p-main Будьте в курсе всех событий юбилея! Обещаем, <br/>что будем писать только по важным поводам :)
       form(action="/email-form.php" js-validate-subscription).subsc-form

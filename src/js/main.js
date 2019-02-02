@@ -589,7 +589,7 @@ $(document).ready(function(){
           var condition;
 
           if (conditionPosition === "<") {
-            condition = getWindowWidth() < conditionMedia;
+            condition = getWindowWidth() < (conditionMedia + 1);
           } else if (conditionPosition === ">") {
             condition = getWindowWidth() > conditionMedia;
           }
