@@ -17,8 +17,11 @@
     flex: 0 0 45%
     max-width: 45%
     padding-left: 50px
+    p
+      max-width: 500px
   &__title
     margin: 0
+    max-width: 550px
   &__description
     margin-top: 1em
     .p-main
@@ -32,14 +35,23 @@
     right: 0
     z-index: 1
     // 1140px
+    width: 100%
     max-width: 87.5%
     text-align: right
     margin-top: 35px
+    font-size: 0
+    // .scaler
+    //   // limit on hd+ screens
+    //   max-width: 1140px
+    //   margin-left: auto
     img
       max-width: 100%
       max-height: 100%
       min-width: 1px
       width: auto
+      // scaler overwrites
+      // left: auto
+      // right: 0
 
   &__actions
     position: absolute
@@ -56,3 +68,58 @@
     transition: color .25s $ease
     &:hover
       color: $colorRed
+
++r($xl)
+  .hero
+    &__content
+      padding-left: 25px
+
++r($lg)
+  .hero
+    &__wrapper
+      flex-direction: column
+    &__image
+      flex: 0 0 auto
+      order: 1
+      position: static
+      transform: none
+      max-width: 100%
+      img
+        width: 100%
+    &__content
+      order: 2
+      flex-basis: 100%
+      max-width: 100%
+      padding-left: 0
+      margin-top: 50px
+      // keep container size
+      padding-right: 50px
+      p
+        max-width: 500px
+    &__cta
+      margin-top: 30px
+
++r($md)
+  .hero
+    &__wrapper
+      margin-right: -30px
+      min-height: 1px
+      padding-bottom: 0
+    &__content
+      padding-right: 30px
+      margin-top: 25px
+      p
+        max-width: 450px
+    &__cta
+      margin-top: 20px
+
+    &__image
+      margin-top: 0
+    &__actions
+      display: none
+
+
++r($sm)
+  .hero
+    &__content
+      margin-top: 15px

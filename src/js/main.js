@@ -72,13 +72,14 @@ $(document).ready(function(){
   // some functions should be called once only
   legacySupport();
   initaos();
-  preloaderDone();
+  // preloaderDone();
 
   // The new container has been loaded and injected in the wrapper.
   function pageReady(fromPjax){
     closeMobileMenu();
-
     initPopups();
+    getScalerResponsive();
+    setScalerResponsive();
     initPerfectScrollbar();
     initMasks();
     initSelectric();
@@ -91,7 +92,6 @@ $(document).ready(function(){
   function pageCompleated(fromPjax){
     getHeaderParams();
     controlHeaderColor()
-    initLazyLoad();
     if ( fromPjax ){
       AOS.refreshHard();
       window.onLoadTrigger()
@@ -100,8 +100,8 @@ $(document).ready(function(){
 
   // some plugins work best with onload triggers
   window.onLoadTrigger = function onLoad(){
-    preloaderDone();
     initLazyLoad();
+    preloaderDone();
   }
 
   // this is a master function which should have all functionality
@@ -112,6 +112,8 @@ $(document).ready(function(){
   _window.on('scroll', getWindowScroll);
   _window.on('scroll', scrollHeader);
   _window.on('scroll', controlHeaderColor);
+  _window.on('resize', debounce(getHeaderParams, 100))
+  _window.on('resize', debounce(setScalerResponsive, 100))
   _window.on('resize', debounce(setBreakpoint, 200))
 
 
@@ -468,6 +470,64 @@ $(document).ready(function(){
   window.ieFixPictures = ieFixPictures()
 
 
+  ///////////////
+  // resize scaler
+  ///////////////
+  function getScalerResponsive(){
+    var $images = $('[js-scaler-mobile]');
+    if ( $images.length > 0 ){
+      $images.each(function(i, img){
+        var $img = $(img);
+        var desktopArPx = $img.css('padding-bottom');
+        var imgWidth = $img.width()
+        var dekstopArPercent = (desktopArPx.slice(0, -2) / imgWidth) * 100 + '%';
+        // save desktop ar value in %
+        $img.attr('data-ar-desktop', dekstopArPercent)
+      });
+    }
+  }
+
+  function setScalerResponsive(){
+    var $images = $('[js-scaler-mobile]');
+
+    if ( $images.length > 0 ){
+      var wWidth = getWindowWidth();
+      $images.each(function(i, img){
+        var $img = $(img);
+        var mobileAr = $img.data('ar-768');
+        var desktopAr = $img.data('ar-desktop')
+
+        if ( mobileAr ){
+          if ( wWidth <= 768 ){
+            $img.css({'padding-bottom': setAr(mobileAr)})
+          } else {
+            $img.css({'padding-bottom': setAr(desktopAr)})
+          }
+        }
+      })
+    }
+  }
+
+  function setAr(ar){
+    // please also check _media.sass for possible values
+    if ( ar === "1:1" ){
+      return "100%"
+    } else if ( ar === "16:9" ){
+      return "56.25%"
+    } else if ( ar === "4:3" ){
+      return "75%"
+    } else if ( ar === "21:9" ){
+      return "42.85%"
+    } else {
+      var arAsWidthHeight = ar.split('/')
+      if ( arAsWidthHeight.length === 2 ){
+        return (parseInt(arAsWidthHeight[0])/parseInt(arAsWidthHeight[1]) * 100) + "%"
+      }
+    }
+
+    return ar
+  }
+
 
   ////////////
   // SCROLLBAR
@@ -813,8 +873,6 @@ $(document).ready(function(){
 
     // call/init
     $("[js-validate-subscription]").validate(subscriptionValidationObject);
-    $("[js-subscription-validation-footer]").validate(subscriptionValidationObject);
-    $("[js-subscription-validation-menu]").validate(subscriptionValidationObject);
   }
 
   //////////

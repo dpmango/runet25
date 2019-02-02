@@ -9,15 +9,27 @@ block content
     .container
       .hero__wrapper
         .hero__content
-          h1.hero__title.h1-title(data-aos="fade-up") Рунету исполняется 25 лет
+          h1.hero__title.h1-title(data-aos="fade-up") Рунету исполняется <br/>25 лет
           .hero__description(data-aos="fade-up")
-            p.p-main Датой рождения Российского Интернета считается 7 апреля 1994 года — в этот день международный сетевой информационный центр InterNIC официально делегировал национальный домен .RU для Российской Федерации.
+            p.p-main Датой рождения Российского Интернета считается 7&nbsp;апреля 1994 года&nbsp;&mdash; в&nbsp;этот день международный сетевой информационный центр InterNIC официально делегировал национальный домен .RU для Российской Федерации.
           .hero__cta(data-aos="fade-up")
             a(href="#").btn.btn-primary
               span Подробнее о юбилее
         .hero__image
-          img(js-lazy data-src="img/HeroIllustration.png" data-srcset='img/HeroIllustration@2x.png 2x')
-        
+          //- .scaler.no-bg-onload(js-scaler-mobile data-ar-768="438/580" style="padding-bottom: "+ (728/1140)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549087228/runet25/HeroIllustration.png)")
+          picture(
+            js-lazy
+            alt=""
+            data-src='img/HeroIllustration.png')
+              data-src(
+              media="(min-width: 769px)" 
+              srcset='img/HeroIllustration.png 1x, img/HeroIllustration@2x.png 2x')
+              data-src(
+              media="(min-width: 0px)" 
+              srcset='img/HeroIllustration_mobile.png 1x, img/HeroIllustration_mobile@2x.png 2x')
+              // fallback will be added with js-lazy
+              //- img(src='img/'+image+'.jpg')
+                  
         // actions
         .hero__actions
           .hero__socials
@@ -37,7 +49,7 @@ block content
     .tile.tile--2-3
       .tile__grid
         .tile__col
-          h2.h2-title В 2019 году домену .RU исполнится 25 лет.
+          h2.h2-title В&nbsp;2019 году домену .RU исполнится 25&nbsp;лет.
           a.p-link(href="#") Читать подробнее
         .tile__col
           p.p-main 7 апреля 1994 года Российская Федерация получила национальный домен .RU, зарегистрированный международным сетевым центром InterNIC.

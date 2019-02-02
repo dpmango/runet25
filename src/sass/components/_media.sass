@@ -22,9 +22,12 @@
     top: 0
     left: 0
     width: 100%
-    [js-lazy]
+    &[js-lazy]
       will-change: opacity
+      transform-style: preserve-3d
       backface-visibility: hidden
+  &.no-bg-onload
+    background-color: transparent
   &.is-bg-hidden
     &.no-bg-onload
       background-image: none !important
