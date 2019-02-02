@@ -9,8 +9,9 @@
     flex: 1 1 auto
     display: flex
     flex-direction: column
-    padding: 100px 30px 80px
+    padding: 100px 30px 0px
     background: $colorPrimary
+    overflow-y: scroll
     color: white
     transform: translate3d(100%,0%,0)
     transition: transform .3s $ease
@@ -31,6 +32,9 @@
     opacity: 0
     transition: opacity .25s .25s $ease
   &__menu
+    flex: 0 0 auto
+    min-width: 1px
+    min-height: 0px
     margin-top: auto
     padding: 20px 0
     list-style: none
@@ -65,10 +69,14 @@
       &:hover
         color: rgba(white, .7)
   &__socials
+    flex: 0 0 auto
+    min-width: 1px
+    min-height: 0px
     text-align: center
     margin-top: auto
     margin-left: auto
     margin-right: auto
+    padding-bottom: 65px
 
   &.is-active
     pointer-events: all
@@ -82,4 +90,69 @@
 
 +r($md)
   .main-menu
-    display: flex
+    &__wrapper
+      // padding-top: 100px
+    &__menu
+      margin-top: 0
+      padding: 0
+      text-align: left
+      li
+        font-size: 16px
+        margin-bottom: 0px
+        padding-bottom: 0px
+        margin-left: -10px
+        &:last-child a::after
+          display: none
+        /* second lvl menu
+        ul
+          position: relative
+          display: block
+          max-width: 100%
+          margin: 0 0 0 10px
+          padding-bottom: 18px
+          &::before, &::after
+            display: block
+            content: ' '
+            position: absolute
+            left: 0
+            right: 0
+            height: 1px
+            transition: background .25s $ease
+          &::before
+            // cover extra line for parent lvl A link
+            top: -1px
+            background-color: $colorPrimary
+          &::after
+            bottom: 0
+            background: rgba(white, .1)
+          li
+            display: block
+            font-size: 14px
+            border-bottom: none
+            margin-bottom: 0
+            padding-bottom: 0
+          a
+            &::after
+              display: none
+      a
+        position: relative
+        display: block
+        width: 100%
+        padding: 18px 10px
+        &::after
+          display: inline-block
+          content: ' '
+          position: absolute
+          bottom: 0
+          left: 10px
+          right: 10px
+          height: 1px
+          background: rgba(white, .1)
+          transition: background .25s $ease
+        &:hover
+          color: white
+          &::after
+            background-color: rgba(white, .5)
+    &__socials
+      margin-left: 0
+      padding-bottom: 30px
