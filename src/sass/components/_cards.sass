@@ -83,24 +83,39 @@
   &--red
     background-color: $colorRed
     color: white
+    &::after
+      // reveal styles
+      background-color: #FDDE50
   &--blue
     background-color: #00A5FF
     color: white
+    &::after
+      background-color: $colorRed
   &--orange
     background-color: #FF7400
     color: white
+    &::after
+      background-color: #3EED78
   &--purple
     background-color: #7E00FF
     color: white
+    &::after
+      background-color: #F2306E
   &--pink
     background-color: #F2306E
     color: white
+    &::after
+      background-color: #00A5FF
   &--yellow
     background-color: #FDDE50
     // color: white
+    &::after
+      background-color: #7E00FF
   &--green
     background-color: #3EED78
     color: white
+    &::after
+      background-color: #FF7400
 
   /* position modifiers
   &--jcc
@@ -109,10 +124,13 @@
 +rmin(1920)
   .tile
     &--2-3
-      flex: 0 0 $col6
+      flex-basis: $col6
       max-width: $col6
     &--1-3
-      flex: 0 0 $col3
+      flex-basis: $col3
+      max-width: $col3
+    &--1-3-lg
+      flex-basis: $col3
       max-width: $col3
 
 +r($xl)
@@ -123,13 +141,13 @@
 +r($lg)
   .tile
     &--2-3
-      flex: 0 0 $col12
+      flex-basis: $col12
       max-width: $col12
     &--1-3
-      flex: 0 0 $col6
+      flex-basis: $col6
       max-width: $col6
     &--1-3-lg
-      flex: 0 0 $col6
+      flex-basis: $col6
       max-width: $col6
     &--lg-last
       order: 99
@@ -144,14 +162,14 @@
   .tile
     min-height: 300px
     &--2-3
-      flex: 0 0 $col12
+      flex-basis: $col12
       max-width: $col12
     &--1-3
-      flex: 0 0 $col12
+      flex-basis: $col12
       max-width: $col12
 
     &__grid
       flex-wrap: wrap
     &__col
-      flex: 0 0 100%
+      flex-basis: 100%
       max-width: 100%

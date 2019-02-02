@@ -21,8 +21,17 @@
     padding: 10px
     margin-left: -10px
     transition: color .25s $ease, opacity .25s $ease
+    svg
+      width: 60px
+      height: auto
+      transition: .25s $ease
+      // TODO - https://stackoverflow.com/questions/20012240/using-css-to-transition-the-fill-property-of-an-svg-path-on-hover
+      // move fill values with unique selectors and color them here
+      // path, polyline, polygon
+      //   transition: .25s $ease
     .ico
-      font-size: 39px
+      // font-size: 39px
+      font-size: 80px
     &:hover
       color: $colorRed
 
@@ -118,8 +127,9 @@
   &.is-logo-white
     .header__logo
       color: white
-      &:hover
-        color: rgba(white, .7)
+      svg
+        path, polyline, polygon
+          fill: white
 
 +r($md)
   .header

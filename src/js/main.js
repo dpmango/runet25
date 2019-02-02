@@ -680,7 +680,6 @@ $(document).ready(function(){
 
       $('[js-reveal]').each(function(i, el){
         var type = $(el).data('type') || "enterViewport"
-
         // onload type
         if ( type === "onload" ){
           var interval = setInterval(function(){
@@ -705,7 +704,7 @@ $(document).ready(function(){
           var scrollListener = throttle(function(){
             var vScrollBottom = _window.scrollTop() + _window.height();
             var elTop = $(el).offset().top
-            var triggerPoint = elTop + ( $(el).height() / 2)
+            var triggerPoint = elTop + ( $(el).outerHeight() / 2)
 
             if ( vScrollBottom > triggerPoint ){
               $(el).addClass(animatedClass);

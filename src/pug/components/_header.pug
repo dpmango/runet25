@@ -3,7 +3,8 @@ header.header
   .container
     .header__wrapper
       a(href="homepage.html").header__logo
-        +svgMono('logo')
+        //- +svgColor('logo-colored')
+        include ../../icons/svg-inline/logo-colored.svg
 
       .header__menu(js-hamburger)
         span.header__menu-name(data-text="Меню" data-active-text="Закрыть") Меню

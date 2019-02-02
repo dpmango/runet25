@@ -9,8 +9,13 @@ block content
     .container
       .hero__wrapper
         .hero__content
-          h1.hero__title.h1-title(data-aos="fade-up") Рунету исполняется <br/>25 лет
-          .hero__description(data-aos="fade-up")
+          h1.hero__title.h1-title.rtxt(js-reveal data-type="onload")
+            span.rtxt__wrap
+              span.rtxt__mover Рунету исполняется 
+            br
+            span.rtxt__wrap
+              span.rtxt__mover 25 лет
+          .hero__description(data-aos="fade")
             p.p-main Датой рождения Российского Интернета считается 7&nbsp;апреля 1994 года&nbsp;&mdash; в&nbsp;этот день международный сетевой информационный центр InterNIC официально делегировал национальный домен .RU для Российской Федерации.
           .hero__cta(data-aos="fade-up")
             a(href="#").btn.btn-primary
@@ -58,7 +63,7 @@ block content
           span(data-teleport-target="tile_first_link")
             
     // tile
-    .tile.tile--1-3.tile--red(js-header-color data-menu-color="white")
+    .tile.tile--1-3.tile--red.reveal(js-reveal data-direction="ltr" data-type="halflyEnterViewport" js-header-color data-menu-color="white")
       h2.h2-title О проекте
       .tile__links
         a(href="#") О 25 летии
@@ -72,7 +77,7 @@ block content
         i.icon.icon-arrow-white
         
     // tile
-    .tile.tile--1-3.tile--blue(js-header-color data-menu-color="white" data-logo-color="white")
+    .tile.tile--1-3.tile--blue.reveal(js-reveal data-direction="rtl" data-type="halflyEnterViewport" js-header-color data-menu-color="white" data-logo-color="white")
       h2.h2-title Число 25
       p.p-small Перечень мероприятий, персон, проектов и другого, связанного с числом 25
       a(href="#").tile__cta
@@ -80,7 +85,7 @@ block content
         i.icon.icon-arrow-white
           
     // tile
-    .tile.tile--1-3.tile--orange
+    .tile.tile--1-3.tile--orange.reveal(js-reveal data-direction="ltr" data-type="halflyEnterViewport")
       h2.h2-title Этапы большого пути
       p.p-small Состояние развития и влияния
       a(href="#").tile__cta
@@ -88,7 +93,7 @@ block content
         i.icon.icon-arrow-white
           
     // tile
-    .tile.tile--1-3.tile--purple
+    .tile.tile--1-3.tile--purple.reveal(js-reveal data-direction="ltr" data-type="halflyEnterViewport")
       h2.h2-title Я — часть Рунета
       p.p-small Про Рунет: конкурс журналистов, образовательная программа, конкурс статей в Википедии про Рунет (люди, компании, технологии, сайты)
       a(href="#").tile__cta
@@ -96,7 +101,7 @@ block content
         i.icon.icon-arrow-white
           
     // tile
-    .tile.tile--1-3.tile--pink
+    .tile.tile--1-3.tile--pink.reveal(js-reveal data-direction="rtl" data-type="halflyEnterViewport")
       h2.h2-title 25 лет .RU
       p.p-small Краткая история появления и развития отечественного домена .RU
       a(href="#").tile__cta
@@ -128,7 +133,7 @@ block content
           span Вернуться на сайт
         
     // tile
-    .tile.tile--1-3.tile--green
+    .tile.tile--1-3.tile--green.reveal(js-reveal data-direction="ltr" data-type="halflyEnterViewport")
       h2.h2-title Календарь 25-летия
       p.p-small Полный список мероприятий 2019 года, приуроченных к юбилею
       a(href="#").tile__cta
