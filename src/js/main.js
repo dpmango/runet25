@@ -89,10 +89,14 @@ $(document).ready(function(){
     initTeleport();
   }
 
+  // Overlay transtion is covering the screen and starts to reveal
+  function inBetweenTransition(fromPjax){
+    getHeaderParams(fromPjax);
+    controlHeaderColor();
+  }
+
   // The transition has just finished and the old Container has been removed from the DOM.
   function pageCompleated(fromPjax){
-    getHeaderParams();
-    controlHeaderColor()
     if ( fromPjax ){
       AOS.refreshHard();
       window.onLoadTrigger()
@@ -107,6 +111,7 @@ $(document).ready(function(){
 
   // this is a master function which should have all functionality
   pageReady();
+  inBetweenTransition();
   pageCompleated();
 
   // scroll/resize listeners
@@ -248,12 +253,13 @@ $(document).ready(function(){
   ////////////////
   // HEADER SCROLL
   ////////////////
-  function getHeaderParams(){
+  function getHeaderParams(fromPjax){
     var $header = $('.header')
-    var headerWrapperTranslate = 40
+    var headerWrapperTranslate = 0
     var headerHeight = $header.outerHeight() + headerWrapperTranslate
-    var $colorControlSections = $('[js-header-color]');
-
+    var $page = $('.page');
+    if ( fromPjax ){ $page = $page.last() }
+    var $colorControlSections = $page.find('[js-header-color]');
     header = {
       container: $header,
       bottomPoint: headerHeight,
@@ -931,8 +937,9 @@ $(document).ready(function(){
           x: "100%",
           ease: Quart.easeIn,
           onComplete: function() {
-            deferred.resolve();
+            inBetweenTransition(true)
             _this.$overlayRed.remove();
+            deferred.resolve();
           }
         }
       );
