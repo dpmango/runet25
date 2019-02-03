@@ -8,8 +8,10 @@ block content
   .hero-title(js-header-color data-menu-color="white" data-logo-color="white")
     .container
       .hero-title__content
-        h1.h1-title Facebook – официальный партнер RIW 2018
-        
-    .hero-title__cover
-      img(src='img/backgrounds/heroTitle_7_multi.jpg' srcset='img/backgrounds/heroTitle_7_multi@2x.jpg 2x')
+        h1.h1-title.rtxt(js-reveal data-type="onload")
+          span.rtxt__wrap
+            span.rtxt__mover Facebook – официальный партнер RIW 2018
+            
+    .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549087228/runet25/heroTitle_7_multi.jpg)")
+      img(js-lazy data-src='img/backgrounds/heroTitle_7_multi.jpg' data-srcset='img/backgrounds/heroTitle_7_multi@2x.jpg 2x')
   

@@ -4,28 +4,28 @@ PageList:
 - file: homepage.html
   ready: 100
 - file: number25.html
-  ready: 5
+  ready: 10
 - file: 25gdp.html
   ready: 0
 - file: 25years.html
-  ready: 5
+  ready: 10
 - file: calendar.html
-  ready: 5
+  ready: 10
 - file: me.html
-  ready: 5
+  ready: 10
 - file: about.html
-  ready: 5
+  ready: 10
 - file: timeline.html
   ready: 0
 - file: news.html
-  ready: 5
+  ready: 10
 - file: news-article.html
-  ready: 5
+  ready: 10
 - file: committee.html
-  ready: 5
+  ready: 10
 - file: sponsors.html
-  ready: 5
+  ready: 10
 - file: stages.html
-  ready: 5
+  ready: 10
 - file: ui.html
   ready: 0
