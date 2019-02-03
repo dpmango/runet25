@@ -76,7 +76,7 @@ $(document).ready(function(){
 
   // The new container has been loaded and injected in the wrapper.
   function pageReady(fromPjax){
-    closeMobileMenu();
+    closeMobileMenu(fromPjax);
     setLineBreaks();
     initPopups();
     getScalerResponsive();
@@ -902,40 +902,52 @@ $(document).ready(function(){
   Barba.Pjax.Dom.containerClass = "page";
   var transitionInitElement
 
-  var FadeTransition = Barba.BaseTransition.extend({
+  var OverlayTransition = Barba.BaseTransition.extend({
     start: function() {
-      Promise
-        .all([this.newContainerLoading, this.fadeOut()])
-        .then(this.fadeIn.bind(this));
+      Promise.all([this.newContainerLoading, this.fadeOut()]).then(
+        this.fadeIn.bind(this)
+      );
     },
 
     fadeOut: function() {
-      var _this = this;
-      var $oldPage = $(this.oldContainer)
-      var $newPage = $(this.newContainer);
       var deferred = Barba.Utils.deferred();
+      var _this = this;
 
-      TweenLite.to($oldPage, .5, {
-        opacity: 0,
-        ease: Power1.easeIn,
-        onComplete: function() {
-          deferred.resolve();
+      // store overlay globally to access in fadein
+      this.$overlayBlue = $('<div class="js-transition-overlay-blue"></div>');
+      this.$overlayRed = $('<div class="js-transition-overlay-red"></div>');
+      this.$overlayBlue.insertAfter("body");
+      this.$overlayRed.insertAfter("body");
+      $("body").addClass("is-transitioning");
+
+      // red moves first to the right
+      TweenLite.fromTo(this.$overlayRed, 0.5,
+        {x: "0%"}, {x: "100%", ease: Power2.easeIn}
+      );
+
+      TweenLite.fromTo(this.$overlayBlue, 0.6,
+        {x: "0%"},
+        {
+          x: "100%",
+          ease: Quart.easeIn,
+          onComplete: function() {
+            deferred.resolve();
+            _this.$overlayRed.remove();
+          }
         }
-      });
+      );
 
-      return deferred.promise
+      return deferred.promise;
     },
 
     fadeIn: function() {
-      var _this = this;
-      var $oldPage = $(this.oldContainer)
-      var $newPage = $(this.newContainer);
+      var _this = this; // copy to acces inside animation callbacks
+      var $el = $(this.newContainer);
 
       $(this.oldContainer).hide();
 
-      $newPage.css({
-        visibility : 'visible',
-        opacity : 0
+      $el.css({
+        visibility: "visible"
       });
 
       TweenLite.to(window, .15, {
@@ -943,21 +955,84 @@ $(document).ready(function(){
         ease: easingSwing
       });
 
-      TweenLite.to($newPage, .5, {
-        opacity: 1,
-        ease: Power1.easeOut,
-        onComplete: function() {
-          triggerBody()
-          _this.done();
+      TweenLite.fromTo(
+        this.$overlayBlue,
+        1,
+        {
+          x: "100%",
+          overwrite: "all"
+        },
+        {
+          x: "200%",
+          ease: Expo.easeOut,
+          delay: 0.2,
+          onComplete: function() {
+            _this.$overlayBlue.remove();
+            triggerBody();
+            $("body").removeClass("is-transitioning");
+            _this.done();
+          }
         }
-      });
-
+      );
     }
   });
 
+  // var FadeTransition = Barba.BaseTransition.extend({
+  //   start: function() {
+  //     Promise
+  //       .all([this.newContainerLoading, this.fadeOut()])
+  //       .then(this.fadeIn.bind(this));
+  //   },
+  //
+  //   fadeOut: function() {
+  //     var _this = this;
+  //     var $oldPage = $(this.oldContainer)
+  //     var $newPage = $(this.newContainer);
+  //     var deferred = Barba.Utils.deferred();
+  //
+  //     TweenLite.to($oldPage, .5, {
+  //       opacity: 0,
+  //       ease: Power1.easeIn,
+  //       onComplete: function() {
+  //         deferred.resolve();
+  //       }
+  //     });
+  //
+  //     return deferred.promise
+  //   },
+  //
+  //   fadeIn: function() {
+  //     var _this = this;
+  //     var $oldPage = $(this.oldContainer)
+  //     var $newPage = $(this.newContainer);
+  //
+  //     $(this.oldContainer).hide();
+  //
+  //     $newPage.css({
+  //       visibility : 'visible',
+  //       opacity : 0
+  //     });
+  //
+  //     TweenLite.to(window, .15, {
+  //       scrollTo: {y: 0, autoKill: false},
+  //       ease: easingSwing
+  //     });
+  //
+  //     TweenLite.to($newPage, .5, {
+  //       opacity: 1,
+  //       ease: Power1.easeOut,
+  //       onComplete: function() {
+  //         triggerBody()
+  //         _this.done();
+  //       }
+  //     });
+  //
+  //   }
+  // });
+
   // set barba transition
   Barba.Pjax.getTransition = function() {
-    return FadeTransition;
+    return OverlayTransition;
     // if ( transitionInitElement ){
     //   if ( transitionInitElement.attr('data-transition') ){
     //     var transition = transitionInitElement.data('transition');

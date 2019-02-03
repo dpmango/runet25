@@ -30,6 +30,11 @@ body, html
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
 
+
+body.is-transitioning
+  pointer-events: none
+
+
 +r($md)
   body, html
     font-size: 14px
@@ -70,6 +75,24 @@ body, html
   .container
     padding-left: 30px
     padding-right: 30px
+
+// PAGE OVERLAY TRANSITION
+.js-transition-overlay-blue, .js-transition-overlay-red
+  position: fixed
+  top: 0
+  bottom: 0
+  width: 100vw
+  will-change: transform
+  backface-visibility: hidden
+  transform-style: preserve-3d
+.js-transition-overlay-blue
+  left: -100%
+  z-index: 999
+  background: $colorPrimary
+.js-transition-overlay-red
+  left: -100%
+  z-index: 998
+  background: $colorRed
 
 // REMOVE FOR PRODUCTION !
 .dev-bp-debug
