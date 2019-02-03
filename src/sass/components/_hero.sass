@@ -3,6 +3,7 @@
   &__wrapper
     position: relative
     display: flex
+    align-items: center
     min-height: 100vh
     padding-bottom: 100px
     padding-top: 50px
@@ -14,6 +15,8 @@
     z-index: 2
     margin: auto 0
     width: 100%
+    min-height: 1px
+    height: 100%
     flex: 0 0 45%
     max-width: 45%
     padding-left: 50px
@@ -69,6 +72,11 @@
     &:hover
       color: $colorRed
 
++rmin($lg)
+  .is-ie
+    .hero__content
+      margin-top: 20vh
+
 +r($xl)
   .hero
     &__content
@@ -78,6 +86,7 @@
   .hero
     &__wrapper
       flex-direction: column
+      min-height: 1px !important
     &__image
       flex: 0 0 auto
       order: 1
@@ -88,7 +97,7 @@
         width: 100%
     &__content
       order: 2
-      flex-basis: 100%
+      flex: 0 0 auto
       max-width: 100%
       padding-left: 0
       margin-top: 50px
@@ -103,7 +112,6 @@
   .hero
     &__wrapper
       margin-right: -30px
-      min-height: 1px
       padding-bottom: 20px
     &__content
       padding-right: 30px
