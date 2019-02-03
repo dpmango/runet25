@@ -68,6 +68,7 @@ img, picture
       &::after
         transform: translate(-100%,0)
 
+/* text reveal
 .rtxt
   &__wrap
     display: inline-block
@@ -80,8 +81,10 @@ img, picture
     backface-visibility: hidden
     transform-style: preserve-3d
     transition: transform .7s $ease
+    + .rtxt__mover
+      margin-left: .25em
 
   &.is-animated
-    > span
-      span
+    .rtxt
+      &__mover
         transform: translate3d(0,0%,0)

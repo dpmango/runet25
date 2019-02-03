@@ -15,10 +15,10 @@ block content
             br
             span.rtxt__wrap
               span.rtxt__mover 25 лет
-          .hero__description(data-aos="fade")
+          .hero__description(data-aos="fade" data-aos-delay="500")
             p.p-main Датой рождения Российского Интернета считается 7&nbsp;апреля 1994 года&nbsp;&mdash; в&nbsp;этот день международный сетевой информационный центр InterNIC официально делегировал национальный домен .RU для Российской Федерации.
-          .hero__cta(data-aos="fade-up")
-            a(href="#").btn.btn-primary
+          .hero__cta(data-aos="fade-up" data-aos-delay="700")
+            a(href="about.html").btn.btn-primary
               span Подробнее о юбилее
         .hero__image
           //- .scaler.no-bg-onload(js-scaler-mobile data-ar-768="438/580" style="padding-bottom: "+ (728/1140)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549087228/runet25/HeroIllustration.png)")
@@ -54,57 +54,67 @@ block content
     .tile.tile--2-3
       .tile__grid
         .tile__col
-          h2.h2-title В&nbsp;2019 году домену .RU исполнится 25&nbsp;лет.
-          span(js-teleport data-teleport-condition="<576" data-teleport-to="tile_first_link")
-            a.p-link(href="#") Читать подробнее
+          h2.h2-title.rtxt(js-reveal js-set-line-breaks data-delay="300") В&nbsp;2019 году домену .RU исполнится 25&nbsp;лет.
+          span(data-aos="fade" data-aos-delay="300" js-teleport data-teleport-condition="<576" data-teleport-to="tile_first_link")
+            a.p-link(href="about.html") Читать подробнее
         .tile__col
-          p.p-main 7 апреля 1994 года Российская Федерация получила национальный домен .RU, зарегистрированный международным сетевым центром InterNIC.
-          p.p-main Отрасль достигла зрелости. Интернет перестал быть замкнутой индустрией, став средой и неотъемлемой частью повседневной жизни. 
+          p.p-main(data-aos="fade" data-aos-delay="300") 7 апреля 1994 года Российская Федерация получила национальный домен .RU, зарегистрированный международным сетевым центром InterNIC.
+          p.p-main(data-aos="fade" data-aos-delay="300") Отрасль достигла зрелости. Интернет перестал быть замкнутой индустрией, став средой и неотъемлемой частью повседневной жизни. 
           span(data-teleport-target="tile_first_link")
             
     // tile
-    .tile.tile--1-3.tile--red.reveal(js-reveal data-direction="ltr" data-type="halflyEnterViewport" js-header-color data-menu-color="white")
-      h2.h2-title О проекте
-      .tile__links
+    .tile.tile--1-3.tile--red.reveal(js-link data-href="about.html" js-reveal data-direction="ltr" data-type="halflyEnterViewport" js-header-color data-menu-color="white")
+      h2.h2-title.rtxt(js-reveal data-delay="300") 
+        span.rtxt__wrap 
+          span.rtxt__mover О проекте
+      .tile__links(data-aos="fade" data-aos-delay="300")
         a(href="#") О 25 летии
         a(href="#") История проекта
-        a(href="#") Этапы проведения
-        a(href="#") Новости 25 летия / Пресс центр
-        a(href="#") Оргкомитет
+        a(href="timeline.html") Этапы проведения
+        a(href="news.html") Новости 25 летия / Пресс центр
+        a(href="committee.html") Оргкомитет
         a(href="#") Исполком / Контакты
-      a(href="#").tile__cta
+      a(href="about.html" data-aos="fade" data-aos-delay="500").tile__cta
         span Читать подробнее
         i.icon.icon-arrow-white
         
     // tile
-    .tile.tile--1-3.tile--blue.reveal(js-reveal data-direction="rtl" data-type="halflyEnterViewport" js-header-color data-menu-color="white" data-logo-color="white")
-      h2.h2-title Число 25
-      p.p-small Перечень мероприятий, персон, проектов и другого, связанного с числом 25
-      a(href="#").tile__cta
+    .tile.tile--1-3.tile--blue.reveal(js-link data-href="number25.html" js-reveal data-direction="rtl" data-type="halflyEnterViewport" js-header-color data-menu-color="white" data-logo-color="white")
+      h2.h2-title.rtxt(js-reveal data-delay="300") 
+        span.rtxt__wrap 
+          span.rtxt__mover Число 25
+      p.p-small(data-aos="fade" data-aos-delay="300") Перечень мероприятий, персон, проектов и другого, связанного с числом 25
+      a(href="number25.html" data-aos="fade" data-aos-delay="500").tile__cta
         span Читать подробнее
         i.icon.icon-arrow-white
           
     // tile
-    .tile.tile--1-3.tile--orange.reveal(js-reveal data-direction="ltr" data-type="halflyEnterViewport")
-      h2.h2-title Этапы большого пути
-      p.p-small Состояние развития и влияния
-      a(href="#").tile__cta
+    .tile.tile--1-3.tile--orange.reveal(js-link data-href="stages.html" js-reveal data-direction="ltr" data-type="halflyEnterViewport")
+      h2.h2-title.rtxt(js-reveal data-delay="300") 
+        span.rtxt__wrap 
+          span.rtxt__mover Этапы большого пути
+      p.p-small(data-aos="fade" data-aos-delay="300") Состояние развития и влияния
+      a(href="stages.html" data-aos="fade" data-aos-delay="500").tile__cta
         span Читать подробнее
         i.icon.icon-arrow-white
           
     // tile
-    .tile.tile--1-3.tile--purple.reveal(js-reveal data-direction="ltr" data-type="halflyEnterViewport")
-      h2.h2-title Я — часть Рунета
-      p.p-small Про Рунет: конкурс журналистов, образовательная программа, конкурс статей в Википедии про Рунет (люди, компании, технологии, сайты)
-      a(href="#").tile__cta
+    .tile.tile--1-3.tile--purple.reveal(js-link data-href="me.html" js-reveal data-direction="ltr" data-type="halflyEnterViewport")
+      h2.h2-title.rtxt(js-reveal data-delay="300") 
+        span.rtxt__wrap 
+          span.rtxt__mover Я — часть Рунета
+      p.p-small(data-aos="fade" data-aos-delay="300") Про Рунет: конкурс журналистов, образовательная программа, конкурс статей в Википедии про Рунет (люди, компании, технологии, сайты)
+      a(href="me.html" data-aos="fade" data-aos-delay="500").tile__cta
         span Читать подробнее
         i.icon.icon-arrow-white
           
     // tile
-    .tile.tile--1-3.tile--pink.reveal(js-reveal data-direction="rtl" data-type="halflyEnterViewport")
-      h2.h2-title 25 лет .RU
-      p.p-small Краткая история появления и развития отечественного домена .RU
-      a(href="#").tile__cta
+    .tile.tile--1-3.tile--pink.reveal(js-link data-href="25years.html" js-reveal data-direction="rtl" data-type="halflyEnterViewport")
+      h2.h2-title.rtxt(js-reveal data-delay="300") 
+        span.rtxt__wrap 
+          span.rtxt__mover 25 лет .RU
+      p.p-small(data-aos="fade" data-aos-delay="300") Краткая история появления и развития отечественного домена .RU
+      a(href="25years.html" data-aos="fade" data-aos-delay="500").tile__cta
         span Читать подробнее
         i.icon.icon-arrow-white
           
@@ -115,9 +125,9 @@ block content
   
     // tile
     .tile.tile--2-3.tile--lg-last(js-header-color data-menu-color="white")
-      h2.h2-title Подписаться на дайджест юбилея
-      p.p-main Будьте в курсе всех событий юбилея! Обещаем, <br/>что будем писать только по важным поводам :)
-      form(action="/email-form.php" js-validate-subscription).subsc-form
+      h2.h2-title.rtxt(js-reveal js-set-line-breaks data-delay="300") Подписаться на дайджест юбилея
+      p.p-main(data-aos="fade" data-aos-delay="300") Будьте в курсе всех событий юбилея! Обещаем, <br/>что будем писать только по важным поводам :)
+      form(action="/email-form.php" js-validate-subscription data-aos="fade" data-aos-delay="500").subsc-form
         .ui-group
           label(for="email") Эл. почта
           input.ui-input(type="email" name="email" placeholder="ivan.petrov@address.ru")
@@ -133,9 +143,11 @@ block content
           span Вернуться на сайт
         
     // tile
-    .tile.tile--1-3.tile--green.reveal(js-reveal data-direction="ltr" data-type="halflyEnterViewport")
-      h2.h2-title Календарь 25-летия
-      p.p-small Полный список мероприятий 2019 года, приуроченных к юбилею
-      a(href="#").tile__cta
+    .tile.tile--1-3.tile--green.reveal(js-link data-href="calendar.html" js-reveal data-direction="ltr" data-type="halflyEnterViewport")
+      h2.h2-title.rtxt(js-reveal data-delay="300") 
+        span.rtxt__wrap 
+          span.rtxt__mover Календарь 25-летия
+      p.p-small(data-aos="fade" data-aos-delay="300") Полный список мероприятий 2019 года, приуроченных к юбилею
+      a(href="calendar.html" data-aos="fade" data-aos-delay="500").tile__cta
         span Читать подробнее
         i.icon.icon-arrow-white
