@@ -40,7 +40,11 @@ $(document).ready(function(){
   }
   window.browser = browser
 
-  var sliders = [] // collection of all sliders
+  var sliders = {
+    newsScroller: {
+      instance: undefined
+    }
+  } // collection of all sliders
 
   var startWindowScroll = 0
   var closeMarkup = '<button title="%title%" class="mfp-close"><svg class="ico ico-mono-close"><use xlink:href="img/sprite-mono.svg#ico-mono-close"></use></svg></button>'
@@ -78,6 +82,8 @@ $(document).ready(function(){
   function pageReady(fromPjax){
     closeMobileMenu(fromPjax);
     setLineBreaks();
+    initSliders();
+    initSlidersResponsive();
     initPopups();
     getScalerResponsive();
     setScalerResponsive();
@@ -421,6 +427,69 @@ $(document).ready(function(){
   /**********
   * PLUGINS *
   **********/
+
+  //////////
+  // SLIDERS
+  //////////
+  function initSliders(){
+    // no regular slides yet
+  }
+
+  function initSlidersResponsive(){
+    // RESPONSIVE ON/OFF sliders
+    var newsScrollerSwiperSelector = '[js-swiper-news-scroller]'
+
+    // if ( $(newsScrollerSwiperSelector).length > 0 ){
+    //   if ( getWindowWidth() >= sliders.benefits.disableOn ) {
+    //     if ( sliders.newsScroller.instance !== undefined ) {
+    //       sliders.newsScroller.instance.destroy( true, true );
+    //       sliders.newsScroller.instance = undefined
+    //     }
+    //     // return
+    //   } else {
+    //     if ( sliders.newsScroller.instance === undefined ) {
+    //       initNewsScrollerSwiper();
+    //     }
+    //   }
+    // }
+
+    initNewsScrollerSwiper();
+
+    // news scroller swiper
+    function initNewsScrollerSwiper(){
+      sliders.newsScroller.instance = new Swiper(newsScrollerSwiperSelector, {
+        wrapperClass: "swiper-wrapper",
+        slideClass: "year-stack",
+        direction: 'horizontal',
+        loop: false,
+        watchOverflow: true,
+        setWrapperSize: false,
+        spaceBetween: 0,
+        slidesPerView: 'auto',
+        normalizeSlideIndex: true,
+        freeMode: true,
+        scrollbar: {
+          el: '.swiper-scrollbar',
+          draggable: true,
+          dragSize: 36
+        },
+      })
+    }
+  }
+
+// function getProductSwiperInstance(that){
+//   var swiperId = $(that).closest('.swiper-container').data("id")
+//   var swiperInstance
+//   $.each(sliders.productImages, function(i,s){
+//     if ( s.id === swiperId ){
+//       swiperInstance = s.instance
+//     }
+//   })
+//   return swiperInstance
+// }
+
+
+
   //////////
   // MODALS
   //////////
