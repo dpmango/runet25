@@ -71,9 +71,11 @@ img, picture
 /* text reveal
 .rtxt
   &__wrap
-    display: inline-block
+    display: block
     position: relative
     overflow: hidden
+  // TODO - does lines actually needed?
+  // wrap span + span every word in js ???
   &__mover
     display: inline-block
     transform: translate3d(0,100%,0)
@@ -81,8 +83,9 @@ img, picture
     backface-visibility: hidden
     transform-style: preserve-3d
     transition: transform .7s $ease
-    + .rtxt__mover
-      margin-left: .25em
+    // + .rtxt__mover
+      // margin-left: .25em
+
 
   &.is-animated
     .rtxt

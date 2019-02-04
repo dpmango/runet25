@@ -1,0 +1,39 @@
+.fit-sibling-y
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  max-height: 100%
+  display: flex
+  flex-direction: column
+
+.scroller-x
+  // ps object
+  position: relative
+  width: 100%
+  flex: 1 1 auto
+  display: flex
+  flex-direction: column
+  padding-bottom: 100px
+  background: #F2F2F2
+  &__grid
+    flex: 1 1 auto
+    display: flex
+
+
+.year-stack
+  width: 100%
+  flex: 0 0 310px
+  max-width: 310px
+  min-width: 1px
+  display: flex
+  flex-direction: column
+  padding: 50px 20px 30px 40px
+  border-right: 1px solid rgba(black, .1)
+  &__name
+    flex: 0 0 auto
+    margin-bottom: 50px
+  &__scrollable
+    position: relative
+    flex: 1 1 auto
+    padding-right: 20px

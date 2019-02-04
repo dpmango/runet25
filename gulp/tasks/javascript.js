@@ -18,6 +18,7 @@ gulp.task('javascript:vendor', function() {
       path.resolve('bower_components', 'jquery-validation/dist/jquery.validate.min.js'),
       path.resolve('bower_components', 'jquery-mask-plugin/dist/jquery.mask.min.js'),
       path.resolve('bower_components', 'jquery-selectric/public/jquery.selectric.min.js'),
+      path.resolve('node_modules', 'perfect-scrollbar/dist/perfect-scrollbar.min.js'),
       path.resolve('bower_components', 'barba.js/dist/barba.min.js'),
       path.resolve('bower_components', 'jquery-lazy/jquery.lazy.min.js'),
       path.resolve('bower_components', 'jquery-lazy/plugins/jquery.lazy.picture.min.js'),

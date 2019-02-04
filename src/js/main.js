@@ -559,9 +559,15 @@ $(document).ready(function(){
         var ps;
 
         function initPS(){
+          var yDisabled = $(scrollbar).data('y-disabled') == true
+          var xDisabled = $(scrollbar).data('x-disabled') == true
+          var wheelPropagation = $(scrollbar).data('wheel-propagation') == true
+          // console.log(wheelPropagation)
           ps = new PerfectScrollbar(scrollbar, {
+            suppressScrollY: yDisabled,
+            suppressScrollX: xDisabled,
             // wheelSpeed: 2,
-            // wheelPropagation: true,
+            // wheelPropagation: wheelPropagation,
             minScrollbarLength: 20
           });
         }
@@ -701,7 +707,7 @@ $(document).ready(function(){
 
       $('[js-reveal]').each(function(i, el){
         var type = $(el).data('type') || "enterViewport"
-        var delay = $(el).data('delay') || 0
+        var delay = $(el).data('delay') || 1
 
         // onload type
         if ( type === "onload" ){
@@ -1180,7 +1186,7 @@ function wrapByLine(el, content){
   var text_arr = content.split(' ');
 
   for (i = 0; i < text_arr.length; i++) {
-    text_arr[i] = '<span class="rtxt__mover">' + text_arr[i] + ' </span>';
+    text_arr[i] = '<span class="rtxt__mover">' + text_arr[i] + '&nbsp;</span>';
   }
 
   $cont.html(text_arr.join(''));

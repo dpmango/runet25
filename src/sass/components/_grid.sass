@@ -1,0 +1,82 @@
+.grid
+  display: flex
+  flex-wrap: wrap
+
+.col
+  position: relative
+  display: flex
+  flex-direction: column
+  width: 100%
+  min-width: 1px
+  flex: 0 0 auto
+  &--4
+    flex-basis: $col4
+    max-width: $col4
+  &--8
+    flex-basis: $col8
+    max-width: $col8
+
+
+/* card collection
+.card-collection
+  position: relative
+  flex: 1 1 auto
+  max-height: 100%
+  &__scrollarea
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    max-height: 100%
+    overflow-y: scroll
+    display: flex
+    flex-wrap: wrap
+
+.card
+  flex: 0 0 $col4
+  max-width: $col4
+  min-height: 310px
+  display: flex
+  flex-direction: column
+  // eq of 50px
+  // padding: 5.5%
+  transition: background .25s $ease, border .25s $ease
+  &--event
+    // eq of 50px
+    padding: 5.5%
+    background: white
+    border: 1px solid #F2F2F2
+    &:hover
+      border-color: $colorPrimary
+  &--project
+    // eq of 40px
+    padding: 40px
+    background: #37374C
+    color: white
+    border: 1px solid rgba(#F2F2F2, .2)
+    .card__name
+      margin-top: 0
+      margin-bottom: auto
+
+    &:hover
+      border-color: white
+  &__meta
+    padding-bottom: 20px
+    margin-bottom: auto
+
+  &__location
+    font-size: 13px
+    font-weight: 700
+
+  &__date
+    margin-top: .2em
+  &__name
+    margin-top: auto
+
+  &__cta
+    padding-top: 30px
+    transition: transform .25s $ease
+
+  &:hover
+    .card__cta
+      transform: translate3d(8px,0,0)
