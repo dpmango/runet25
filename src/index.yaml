@@ -6,7 +6,7 @@ PageList:
 - file: number25.html
   ready: 50
 - file: 25gdp.html
-  ready: 0
+  ready: 10
 - file: 25years.html
   ready: 10
 - file: calendar.html

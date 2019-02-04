@@ -62,6 +62,54 @@ body.is-transitioning
     flex: 1 0 auto
     display: flex
     flex-direction: column
+  
+  &__main
+    flex: 1 0 auto
+
+.main
+  position: relative
+  overflow: hidden
+  &__hero-title
+    width: $col4
+    height: 100vh
+    &.hero-title
+      position: fixed
+      top: 0
+      left: 0
+  &__content
+    flex: 1 0 auto
+    padding: 80px 50px
+    h2
+      &:first-child
+        margin-top: 0
+    
+    p:last-child
+      margin-bottom: 0
+    &--purple
+      color: $colorWhite
+      background-color: $colorPurple
+  &__hr
+    margin-top: 60px
+    margin-bottom: 60px
+    border-color: rgba($colorWhite, 0.3)
+    border-bottom: 0
+  &__users
+    margin-bottom: 20px
+  &__info
+    padding: 37px 0
+    border-top: 1px solid rgba($colorWhite, 0.3)
+    border-bottom: 1px solid rgba($colorWhite, 0.3)
+
+.info
+  display: flex
+  align-items: center
+
+  svg
+    flex-shrink: 0
+    position: relative
+    top: -2px
+    margin-right: 20px
+    height: 32px
 
 .container
   max-width: 100%
