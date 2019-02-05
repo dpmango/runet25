@@ -68,6 +68,7 @@ body.is-transitioning
 
 .main
   position: relative
+  background-color: $colorLightBg
   overflow: hidden
   &__aside
     flex-basis: $col4
@@ -82,6 +83,9 @@ body.is-transitioning
   &__section
     flex-basis: $col8
     max-width: $col8
+    &:only-child
+      flex-basis: $col12
+      max-width: $col12
   &__content
     flex: 1 0 auto
     padding: 80px 0
@@ -105,6 +109,10 @@ body.is-transitioning
     padding: 37px 0
     border-top: 1px solid rgba($colorWhite, 0.3)
     border-bottom: 1px solid rgba($colorWhite, 0.3)
+  &__group-content
+    margin-bottom: 100px
+    &:last-child
+      margin-bottom: 0
 
 +r($lg)
   .main
@@ -122,8 +130,10 @@ body.is-transitioning
       flex-basis: $col12
       max-width: $col12
     &__content
-      padding-top: 160px
+      padding-top: 60px
       padding-bottom: 60px
+      &--without-header
+        padding-top: 160px
     &__hr
       margin-top: 40px
       margin-bottom: 40px
@@ -132,20 +142,22 @@ body.is-transitioning
 
 +r($md)
   .main
-    &__content
+    &__content--without-header
       padding-top: 150px
+    &__group-content
+      margin-bottom: 50px
 
 +r($sm)
   .main
     &__content
-      .h2-title
-        font-size: 24px
       .h3-title
         font-size: 18px
     &__info
       margin-bottom: 50px
       padding-top: 27px
       padding-bottom: 27px
+    &__group-content
+      margin-bottom: 30px
 
 .info
   display: flex
@@ -160,6 +172,30 @@ body.is-transitioning
     font-size: 18px
     svg
       margin-right: 15px
+
+.group-content
+  align-items: flex-start
+  &__aside
+    margin-top: -7px
+    padding-right: 50px
+
++r($md)
+  .group-content
+    &__aside
+      margin-top: 0
+      margin-bottom: 5px
+      &.col--4
+        flex-basis: $col12
+        max-width: $col12
+    &__section
+      &.col--8
+        flex-basis: $col12
+        max-width: $col12
+
+.img-block
+  margin-bottom: 30px
+  display: block
+  width: 100%
 
 .container
   max-width: 100%
