@@ -6,6 +6,22 @@
     margin-right: 60px
     width: 200px
 
++r($lg)
+  .users
+    &__grid
+      margin-right: -30px
+    &__col
+      margin-right: 30px
+
++r($sm)
+  .users
+    text-align: center
+    &__grid
+      margin-right: 0
+    &__col
+      margin-right: 0
+      width: $col12
+
 .user-item
   display: flex
   flex-direction: column
@@ -23,3 +39,8 @@
     object-fit: cover
   &__name
     font-size: 20px
+
++r($sm)
+  .user-item
+    &__name
+      font-size: 18px
