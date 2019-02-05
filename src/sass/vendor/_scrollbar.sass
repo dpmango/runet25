@@ -122,3 +122,53 @@
 //     &:hover > .ps__thumb-x, &:focus > .ps__thumb-x, &.ps--clicking .ps__thumb-x
 //       background-color: rgba($colorRed, .2)
 //       height: 36px
+
+.ps--black
+  .ps__rail-y
+    background: transparent
+    width: 15px
+    opacity: .5
+    &::after
+      display: inline-block
+      content: ' '
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 50%
+      transform: translateX(-50%)
+      width: 1px
+      background: #D8D8D8
+      border-radius: 10px
+      transition: width .2s $ease
+
+  .ps__thumb-y
+    z-index: 2
+    background-color: #333333
+    border-radius: 0
+    transition: background-color .2s linear, height .2s ease-in-out, width .2s $ease
+    width: 4px
+    right: auto
+    left: 50%
+    transform: translateX(-50%)
+
+  .ps--active-y > .ps__rail-y
+    background-color: white
+  &.ps:hover >
+    .ps__rail-y
+      opacity: 1
+  &.ps--focus >
+    .ps__rail-y
+      opacity: 1
+  &.ps--scrolling-y > .ps__rail-y
+    opacity: 1
+  .ps__rail-y:hover, .ps__rail-y:focus, .ps__rail-y.ps--clicking
+    background-color: transparent
+    opacity: 1
+    &::after
+      width: 6px
+
+  .ps__rail-y
+    &:hover > .ps__thumb-y, &:focus > .ps__thumb-y, &.ps--clicking .ps__thumb-y
+      background-color: #333333
+      // border-radius: 10px
+      width: 8px

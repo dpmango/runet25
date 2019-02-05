@@ -1246,7 +1246,6 @@ function getWindowWidth(){
 
 // JQUERY CUSTOM HELPER FUNCTIONS
 function wrapEachWord(el, content){
-  console.log(el, content.split(' '))
   var text_arr = content.split(' ');
 
   for (i = 0; i < text_arr.length; i++) {
