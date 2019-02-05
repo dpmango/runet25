@@ -424,16 +424,20 @@ $(document).ready(function(){
     })
 
   // converts .rtxt__wrap to multiple .rtxt__mover
-  function setLineBreaks(){
+  function setLineBreaks(isResized){
     var $containers = $('[js-set-line-breaks]');
     if ( $containers.length === 0 ) return
 
     $containers.each(function(i, container){
       var $container = $(container);
-      var containerHtml = $container.html();
-      var containerText = $container.text();
-      $container.data("originText", containerHtml)
-      wrapByLine($container, containerText)
+      var containerText
+      if ( isResized ){
+        containerText = $container.data("originText")
+      } else {
+        containerText = $container.text();
+        $container.data("originText", containerText)
+      }
+      wrapEachWord($container, containerText)
     })
 
   }
@@ -1241,82 +1245,67 @@ function getWindowWidth(){
 
 
 // JQUERY CUSTOM HELPER FUNCTIONS
-// $.fn.lines = function (resized) {
-//   if ( $(this).is('.is-wrapped') === false || resized) { // prevent double wrapping
-//     var buildStr = ""
-//
-//     if ( !resized ){
-//       $(this).addClass('is-wrapped')
-//       // backup content
-//       $(this).attr('data-text-original', $(this).html())
-//
-//       // var content = $(this).html().split("\n");
-//       var content = $(this).text()
-//       wrapByLine($(this), content)
-//     } else {
-//       // assume that's in wrapped onReady
-//       // var content = $(this).attr('data-text-original').split("\n")
-//       var content = $(this).attr('data-text-original')
-//       wrapByLine($(this), content)
-//     }
-//
-//     // $.each(content, function(i, line){
-//     //   buildStr += "<span>" + line + "</span>"
-//     // })
-//     //
-//     // $(this).html(buildStr)
-//   }
-// };
-
-function wrapByLine(el, content){
-  var $cont = el
-
-  // $cont.text()
+function wrapEachWord(el, content){
+  console.log(el, content.split(' '))
   var text_arr = content.split(' ');
 
   for (i = 0; i < text_arr.length; i++) {
-    text_arr[i] = '<span class="rtxt__mover">' + text_arr[i] + '&nbsp;</span>';
+    text_arr[i] = '<span class="rtxt__wrap"><span class="rtxt__mover">' + text_arr[i] + '&nbsp;</span></span>';
   }
 
-  $cont.html(text_arr.join(''));
-
-  $wordSpans = $cont.find('span');
-
-  var lineArray = [],
-      lineIndex = 0,
-      lineStart = true
-
-  $wordSpans.each(function(idx) {
-    var pos = $(this).position();
-    var top = pos.top;
-
-    if (lineStart) {
-      lineArray[lineIndex] = [idx];
-      lineStart = false;
-    } else {
-      var $next = $(this).next();
-
-      if ($next.length) {
-        var isBreak = $next.html().indexOf("\n") !== -1
-        if ($next.position().top > top || isBreak) {
-          lineArray[lineIndex].push(idx);
-          lineIndex++;
-          lineStart = true
-        }
-      } else {
-        lineArray[lineIndex].push(idx);
-      }
-    }
-  });
-
-  for (i = 0; i < lineArray.length; i++) {
-    var start = lineArray[i][0],
-        end = lineArray[i][1] + 1;
-
-    if (!end) {
-      $wordSpans.eq(start).wrap('<span class="rtxt__wrap">')
-    } else {
-      $wordSpans.slice(start, end).wrapAll('<span class="rtxt__wrap">');
-    }
-  }
+  el.html(text_arr.join(''));
 }
+
+
+// function wrapByLine(el, content){
+//   var $cont = el
+//
+//   // $cont.text()
+//   var text_arr = content.split(' ');
+//
+//   for (i = 0; i < text_arr.length; i++) {
+//     text_arr[i] = '<span class="rtxt__mover">' + text_arr[i] + '&nbsp;</span>';
+//   }
+//
+//   $cont.html(text_arr.join(''));
+//
+//   $wordSpans = $cont.find('span');
+//
+//   var lineArray = [],
+//       lineIndex = 0,
+//       lineStart = true
+//
+//   $wordSpans.each(function(idx) {
+//     var pos = $(this).position();
+//     var top = pos.top;
+//
+//     if (lineStart) {
+//       lineArray[lineIndex] = [idx];
+//       lineStart = false;
+//     } else {
+//       var $next = $(this).next();
+//
+//       if ($next.length) {
+//         var isBreak = $next.html().indexOf("\n") !== -1
+//         if ($next.position().top > top || isBreak) {
+//           lineArray[lineIndex].push(idx);
+//           lineIndex++;
+//           lineStart = true
+//         }
+//       } else {
+//         lineArray[lineIndex].push(idx);
+//       }
+//     }
+//   });
+//
+//   for (i = 0; i < lineArray.length; i++) {
+//     var start = lineArray[i][0],
+//         end = lineArray[i][1] + 1;
+//
+//     if (!end) {
+//       $wordSpans.eq(start).wrap('<span class="rtxt__wrap">')
+//     } else {
+//       $wordSpans.slice(start, end).wrapAll('<span class="rtxt__wrap">');
+//     }
+//   }
+// }
