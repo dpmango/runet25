@@ -90,7 +90,7 @@ $(document).ready(function(){
     initPerfectScrollbar();
     initMasks();
     initSelectric();
-    initScrollMonitor();
+    // initScrollMonitor();
     initValidations();
     initTeleport();
   }
@@ -101,11 +101,20 @@ $(document).ready(function(){
     controlHeaderColor();
   }
 
-  // The transition has just finished and the old Container has been removed from the DOM.
-  function pageCompleated(fromPjax){
+  // Overlay transition is about to be finnished
+  function transitionIsAboutToEnd(fromPjax){
+    initScrollMonitor();
     if ( fromPjax ){
       AOS.refreshHard();
       window.onLoadTrigger()
+    }
+  }
+
+  // The transition has just finished and the old Container has been removed from the DOM.
+  function pageCompleated(fromPjax){
+    if ( fromPjax ){
+      // AOS.refreshHard();
+      // window.onLoadTrigger()
     }
   }
 
@@ -118,6 +127,7 @@ $(document).ready(function(){
   // this is a master function which should have all functionality
   pageReady();
   inBetweenTransition();
+  transitionIsAboutToEnd();
   pageCompleated();
 
   // scroll/resize listeners
@@ -256,6 +266,12 @@ $(document).ready(function(){
     scroll.lastForScrollDir = wScroll <= 0 ? 0 : wScroll;
   }
 
+  function getCorrespondingPage(fromPjax){
+    var $page = $('.page');
+    if ( fromPjax ){ $page = $page.last() }
+    return $page
+  }
+
   ////////////////
   // HEADER SCROLL
   ////////////////
@@ -263,8 +279,7 @@ $(document).ready(function(){
     var $header = $('.header')
     var headerWrapperTranslate = 0
     var headerHeight = $header.outerHeight() + headerWrapperTranslate
-    var $page = $('.page');
-    if ( fromPjax ){ $page = $page.last() }
+    var $page = getCorrespondingPage(fromPjax)
     var $colorControlSections = $page.find('[js-header-color]');
     header = {
       container: $header,
@@ -302,7 +317,7 @@ $(document).ready(function(){
     }
   }
 
-  function controlHeaderColor(){
+  function controlHeaderColor(fromPjax){
     // Collect arr of past scroll elements
     var cur = header.colorControlSections.map(function(){
       var elTop = $(this).offset().top - parseInt($(this).css('marginTop'))
@@ -1002,7 +1017,7 @@ $(document).ready(function(){
       $("body").addClass("is-transitioning");
 
       // red moves first to the right
-      TweenLite.fromTo(this.$overlayRed, 0.5,
+      TweenLite.fromTo(this.$overlayRed, 0.45,
         {x: "0%"}, {x: "100%", ease: Power2.easeIn}
       );
 
@@ -1012,7 +1027,6 @@ $(document).ready(function(){
           x: "100%",
           ease: Quart.easeIn,
           onComplete: function() {
-            inBetweenTransition(true)
             _this.$overlayRed.remove();
             deferred.resolve();
           }
@@ -1028,6 +1042,8 @@ $(document).ready(function(){
 
       $(this.oldContainer).hide();
 
+      inBetweenTransition(true)
+
       $el.css({
         visibility: "visible"
       });
@@ -1036,6 +1052,10 @@ $(document).ready(function(){
         scrollTo: {y: 0, autoKill: false},
         ease: easingSwing
       });
+
+      setTimeout(function(){
+        transitionIsAboutToEnd(true)
+      }, 400)
 
       TweenLite.fromTo(
         this.$overlayBlue,

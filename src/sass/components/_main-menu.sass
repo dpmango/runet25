@@ -13,16 +13,6 @@
     background: $colorPrimary
     overflow-y: scroll
     color: white
-    transform: translate3d(100%,0%,0)
-    transition: transform .5s .1s $ease
-    &::before
-      display: block
-      content: ' '
-      position: absolute 0
-      z-index: 1
-      background: $colorRed
-      transform: translate3d(0%,0%,0)
-      transition: transform .6s $ease
   &__content
     position: relative
     z-index: 2
@@ -30,8 +20,6 @@
     display: flex
     flex-direction: column
     align-items: center
-    // opacity: 0
-    // transition: opacity .3s .5s $ease
   &__menu
     flex: 0 0 auto
     min-width: 1px
@@ -79,6 +67,33 @@
     margin-right: auto
     padding-bottom: 65px
 
+
+/* animation part
+.main-menu
+  &__wrapper
+    transform: translate3d(100%,0%,0)
+    transition: transform .5s .1s $ease
+    &::before
+      display: block
+      content: ' '
+      position: absolute 0
+      z-index: 1
+      background: $colorRed
+      transform: translate3d(0%,0%,0)
+      transition: transform .6s $ease
+  &__menu
+    li
+      opacity: 0
+      transform: translate3d(0,20px,0)
+      transition: opacity .3s $ease, transform .2s $ease
+      ul li
+        opacity: 1
+        transform: none
+        transition: none
+  &__socials
+    opacity: 0
+    transition: opacity .3s $ease
+
   &.is-active
     pointer-events: all
     .main-menu
@@ -86,42 +101,24 @@
         transform: translate3d(0,0,0)
         &::before
           transform: translate3d(-100%,0,0)
-      &__content
-        opacity: 1
-
-/* animation part
-.main-menu
-  &__menu
-    li
-      opacity: 0
-      transform: translate3d(0,20px,0)
-      transition: opacity .3s $ease, transform .2s $ease
-      &:nth-child(1)
-        transition-delay: .7s
-      &:nth-child(2)
-        transition-delay: .65s
-      &:nth-child(3)
-        transition-delay: .6s
-      &:nth-child(4)
-        transition-delay: .55s
-      &:nth-child(5)
-        transition-delay: .5s
-      ul li
-        opacity: 1
-        transform: none
-        transition: none
-  &__socials
-    opacity: 0
-    transition: opacity .3s .5s $ease
-
-  &.is-active
-    .main-menu
       &__menu
         li
           opacity: 1
           transform: translate3d(0,0,0)
+          // delay active for "enter animation" only
+          &:nth-child(1)
+            transition-delay: .7s
+          &:nth-child(2)
+            transition-delay: .65s
+          &:nth-child(3)
+            transition-delay: .6s
+          &:nth-child(4)
+            transition-delay: .55s
+          &:nth-child(5)
+            transition-delay: .5s
       &__socials
         opacity: 1
+        transition-delay: .5s
 
 +r($md)
   .main-menu
