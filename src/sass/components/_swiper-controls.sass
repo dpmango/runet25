@@ -1,0 +1,42 @@
+.swiper-container-horizontal
+  & > .swiper-scrollbar
+    bottom: 50px
+    background: transparent
+    border-radius: 0
+    height: 36px
+    &::after
+      display: inline-block
+      content: ' '
+      position: absolute
+      top: 50%
+      left: 0
+      right: 0
+      background: rgba(black, .2)
+      height: 1px
+      border-radius: 4px
+      transform: translateY(-50%)
+      transition: height .25s $ease
+    &:hover
+      &::after
+        height: 5px
+
+.swiper-scrollbar-drag
+  z-index: 2
+  size: 36px !important
+  background: rgba($colorRed, .2)
+  border-radius: 50%
+  cursor: pointer
+  &::after
+    display: inline-block
+    content: ' '
+    position: absolute
+    top: 50%
+    left: 50%
+    background: $colorRed
+    size: 16px
+    border-radius: 50%
+    transform: translate(-50%,-50%)
+    transition: transform .25s $ease
+  &:hover
+    &::after
+      transform: translate(-50%,-50%) scale(1.5)

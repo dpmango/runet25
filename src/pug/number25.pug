@@ -28,7 +28,7 @@ block content
             span.rtxt__mover мероприятий года
               
       // tile
-      .tile.tile--yellow(style="background-color: #EDAFAA")
+      .tile.tile--yellow(style="background-color: #EDAFAA; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:400/v1549348909/runet25/happyBirthday.jpg)")
         .tile__img-cover
           img(js-lazy data-src="img/happyBirthday.jpg" data-srcset='img/happyBirthday@2x.jpg 2x')
     
@@ -84,7 +84,7 @@ block content
         i.icon.icon-arrow-white
           
     // tile
-    .tile.tile--2-3(style="background-color: #C5DDD7")
+    .tile.tile--2-3(style="background-color: #C5DDD7; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:400/v1549348909/runet25/candyFire_1.jpg)")
       .tile__img-cover
         img(js-lazy data-src="img/candyFire_1.jpg" data-srcset='img/candyFire_1@2x.jpg 2x')
   
@@ -93,22 +93,22 @@ block content
   .grid(js-header-color data-menu-color="white")
     .col.col--8
       .fit-sibling-y
-        .scroller-x(js-scrollbar data-y-disabled="true")
-          .scroller-x__grid
+        .scroller-x.swiper-container(js-swiper-news-scroller)
+          .scroller-x__grid.swiper-wrapper
             // year stack
             .year-stack
               .year-stack__name.h4-title 1993
-              .year-stack__scrollable(js-scrollbar data-x-disabled="true" data-wheel-propagation="true")
+              .year-stack__scrollable.ps--black(js-scrollbar data-x-disabled="true" data-wheel-propagation="true")
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%;")
+                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549348909/runet25/newsCard_1.jpg)")
                     img(js-lazy data-src="img/newsCard_1.jpg" data-srcset='img/newsCard_1@2x.jpg 2x')
                   .news-card__date 1 Января
                   .news-card__title.h4-title Появились первые интернет-провайдеры
                   .news-card__description.p-small 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%;")
+                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549348909/runet25/newsCard_4.jpg)")
                     img(js-lazy data-src="img/newsCard_4.jpg" data-srcset='img/newsCard_4@2x.jpg 2x')
                   .news-card__date 23 Марта
                   .news-card__title.h4-title Появились первые интернет-провайдеры
@@ -117,17 +117,17 @@ block content
             // year stack
             .year-stack
               .year-stack__name.h4-title 1994
-              .year-stack__scrollable(js-scrollbar data-x-disabled="true")
+              .year-stack__scrollable.ps--black(js-scrollbar data-x-disabled="true")
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%;")
+                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549348909/runet25/newsCard_2.jpg)")
                     img(js-lazy data-src="img/newsCard_2.jpg" data-srcset='img/newsCard_2@2x.jpg 2x')
                   .news-card__date 5 Января
                   .news-card__title.h4-title Открылось первое агентство интернет-рекламы
                   .news-card__description.p-small Открылось первое в России агентство интернет-рекламы «Tim Promotion», позже преобразованное в Promo.ru.
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%;")
+                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549348909/runet25/newsCard_5.jpg)")
                     img(js-lazy data-src="img/newsCard_5.jpg" data-srcset='img/newsCard_5@2x.jpg 2x')
                   .news-card__date 23 Марта
                   .news-card__title.h4-title Появились первые интернет-провайдеры
@@ -136,26 +136,33 @@ block content
             // year stack
             .year-stack
               .year-stack__name.h4-title 1994
-              .year-stack__scrollable(js-scrollbar data-x-disabled="true")
+              .year-stack__scrollable.ps--black(js-scrollbar data-x-disabled="true")
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%;")
+                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549348909/runet25/newsCard_3.jpg)")
                     img(js-lazy data-src="img/newsCard_3.jpg" data-srcset='img/newsCard_3@2x.jpg 2x')
                   .news-card__date 1 Января
                   .news-card__title.h4-title Создана точка обмена трафиком MSK-IX
                   .news-card__description.p-small По соглашению крупнейших московских провайдеров на площадке междугородней АТС M9 создана точка обмена интернет-трафиком MSK-IX.
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%;")
+                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549348909/runet25/newsCard_6.jpg)")
                     img(js-lazy data-src="img/newsCard_6.jpg" data-srcset='img/newsCard_6@2x.jpg 2x')
                   .news-card__date 23 Марта
                   .news-card__title.h4-title Появились первые интернет-провайдеры
                   .news-card__description.p-small 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
-      
+                // news card
+                a(href="#").news-card
+                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549348909/runet25/newsCard_3.jpg)")
+                    img(js-lazy data-src="img/newsCard_3.jpg" data-srcset='img/newsCard_3@2x.jpg 2x')
+                  .news-card__date 1 Января
+                  .news-card__title.h4-title Создана точка обмена трафиком MSK-IX
+                  .news-card__description.p-small По соглашению крупнейших московских провайдеров на площадке междугородней АТС M9 создана точка обмена интернет-трафиком MSK-IX.
+                  
             // year stack
             .year-stack
               .year-stack__name.h4-title 1995
-              .year-stack__scrollable(js-scrollbar data-x-disabled="true")
+              .year-stack__scrollable.ps--black(js-scrollbar data-x-disabled="true")
                 // news card
                 a(href="#").news-card
                   .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%;")
@@ -170,7 +177,17 @@ block content
                   .news-card__date 23 Марта
                   .news-card__title.h4-title Появились первые интернет-провайдеры
                   .news-card__description.p-small 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
-                      
+            
+            // year stack
+            .year-stack
+              .year-stack__name.h4-title 1996
+              
+            // year stack
+            .year-stack
+              .year-stack__name.h4-title 1997
+              
+          .swiper-scrollbar
+                  
                       
     .col.col--4
       // tile
@@ -181,7 +198,7 @@ block content
         p.p-small(data-aos="fade" data-aos-delay="300") Летопись Рунета за все 25 лет с основными историческими вехами в формате тайм-лайна с ключевыми цифрами и событиями
               
       // tile
-      .tile.tile--yellow(style="background-color: #F5667F")
+      .tile.tile--yellow(style="background-color: #F5667F; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:400/v1549348909/runet25/candyFire_2.jpg)")
         .tile__img-cover
           img(js-lazy data-src="img/candyFire_2.jpg" data-srcset='img/candyFire_2@2x.jpg 2x')
     
@@ -197,9 +214,9 @@ block content
         p.p-small(data-aos="fade" data-aos-delay="300") Список из 25 проектов 2019 года, которые уже запланированы
         
       // tile
-      .tile.tile--yellow(style="background-color: #74B9B3")
+      .tile.tile--yellow(style="background-color: #74B9B3; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:400/v1549348909/runet25/candyFire_3.jpg)")
         .tile__img-cover
-          img(js-lazy data-src="img/candyFire_2.jpg" data-srcset='img/candyFire_2@2x.jpg 2x')
+          img(js-lazy data-src="img/candyFire_3.jpg" data-srcset='img/candyFire_3@2x.jpg 2x')
     
     .col.col--8
       .card-collection
