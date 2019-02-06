@@ -4,9 +4,9 @@ PageList:
 - file: homepage.html
   ready: 100
 - file: number25.html
-  ready: 50
+  ready: 60
 - file: 25gdp.html
-  ready: 10
+  ready: 75
 - file: 25years.html
   ready: 10
 - file: calendar.html
@@ -20,12 +20,12 @@ PageList:
 - file: news.html
   ready: 10
 - file: news-article.html
-  ready: 10
+  ready: 75
 - file: committee.html
   ready: 10
 - file: sponsors.html
-  ready: 10
+  ready: 75
 - file: stages.html
-  ready: 10
+  ready: 75
 - file: ui.html
   ready: 0
