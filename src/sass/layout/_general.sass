@@ -62,6 +62,140 @@ body.is-transitioning
     flex: 1 0 auto
     display: flex
     flex-direction: column
+  
+  &__main
+    flex: 1 0 auto
+
+.main
+  position: relative
+  background-color: $colorLightBg
+  overflow: hidden
+  &__aside
+    flex-basis: $col4
+    max-width: $col4
+  &__hero-title
+    width: $col4
+    height: 100vh
+    &.hero-title
+      position: fixed
+      top: 0
+      left: 0
+  &__section
+    flex-basis: $col8
+    max-width: $col8
+    &:only-child
+      flex-basis: $col12
+      max-width: $col12
+  &__content
+    flex: 1 0 auto
+    padding: 80px 0
+    h2
+      &:first-child
+        margin-top: 0
+    
+    p:last-child
+      margin-bottom: 0
+    &--purple
+      color: $colorWhite
+      background-color: $colorPurple
+  &__hr
+    margin-top: 60px
+    margin-bottom: 60px
+    border-color: rgba($colorWhite, 0.3)
+    border-bottom: 0
+  &__users
+    margin-bottom: 20px
+  &__info
+    padding: 37px 0
+    border-top: 1px solid rgba($colorWhite, 0.3)
+    border-bottom: 1px solid rgba($colorWhite, 0.3)
+  &__group-content
+    margin-bottom: 100px
+    &:last-child
+      margin-bottom: 0
+
++r($lg)
+  .main
+    flex-direction: column
+    &__aside
+      flex-basis: $col12
+      max-width: $col12
+      order: 2
+    &__hero-title
+      width: $col12
+      &.hero-title
+        position: relative
+        height: 500px
+    &__section
+      flex-basis: $col12
+      max-width: $col12
+    &__content
+      padding-top: 60px
+      padding-bottom: 60px
+      &--without-header
+        padding-top: 160px
+    &__hr
+      margin-top: 40px
+      margin-bottom: 40px
+    &__users
+      margin-bottom: 0
+
++r($md)
+  .main
+    &__content--without-header
+      padding-top: 150px
+    &__group-content
+      margin-bottom: 50px
+
++r($sm)
+  .main
+    &__content
+      .h3-title
+        font-size: 18px
+    &__info
+      margin-bottom: 50px
+      padding-top: 27px
+      padding-bottom: 27px
+    &__group-content
+      margin-bottom: 30px
+
+.info
+  display: flex
+  font-size: 25px
+  svg
+    flex-shrink: 0
+    position: relative
+    margin-right: 20px
+
++r($sm)
+  .info
+    font-size: 18px
+    svg
+      margin-right: 15px
+
+.group-content
+  align-items: flex-start
+  &__aside
+    margin-top: -7px
+    padding-right: 50px
+
++r($md)
+  .group-content
+    &__aside
+      margin-top: 0
+      margin-bottom: 5px
+      &.col--4
+        flex-basis: $col12
+        max-width: $col12
+    &__section
+      &.col--8
+        flex-basis: $col12
+        max-width: $col12
+
+.img-block
+  margin-bottom: 30px
+  display: block
+  width: 100%
 
 .container
   max-width: 100%
