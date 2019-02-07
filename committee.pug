@@ -1,0 +1,72 @@
+---
+title: Коммитет
+---
+extends shared/_layout
+block content
+  
+  // HERO TITLE
+  .hero-title(js-header-color data-menu-color="white" data-logo-color="white")
+    .container
+      .hero-title__content
+        h1.h1-title.rtxt(js-reveal data-type="onload")
+          span.rtxt__wrap
+            span.rtxt__mover Оргкомитет
+        
+    .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549087228/runet25/heroTitle_8_blue.jpg)")
+      img(js-lazy data-src='img/backgrounds/heroTitle_8_blue.jpg' data-srcset='img/backgrounds/heroTitle_8_blue@2x.jpg 2x')
+  
+  // MAIN
+  .main.grid.page__main.main--reverse
+    
+    .col.main__aside
+
+      // HERO TITLE
+      .hero-title.main__hero-title(js-header-color data-menu-color="white" data-logo-color="white") 
+        .hero-title__cover
+          img(js-lazy data-src='img/candyFire_6.jpg' data-srcset='img/candyFire_6@2x.jpg 2x')
+      
+    .col.main__section
+
+      // MAIN CONTENT
+      .main__content
+        .container
+
+          // COMMITTEE
+          .cards.main__cards
+            .grid.cards__grid
+
+              // committe-card
+              .col.cards__col
+                .card-preview
+                  .container
+                    .card-preview__photo
+                      img.img-block.card-preview__image(js-lazy src='img/committeeCard_1.jpg' data-srcset='img/committeeCard_1@2x.jpg 2x')
+                    span.h3-title.card-preview__name Плуготаренко Сергей
+                    span.card-preview__post Директор РАЭК
+              
+              // committe-card
+              .col.cards__col
+                .card-preview
+                  .container
+                    .card-preview__photo
+                      img.img-block.card-preview__image(js-lazy src='img/committeeCard_2.jpg' data-srcset='img/committeeCard_2@2x.jpg 2x')
+                    span.h3-title.card-preview__name Плуготаренко Сергей
+                    span.card-preview__post Директор РАЭК
+              
+              // committe-card
+              .col.cards__col
+                .card-preview
+                  .container
+                    .card-preview__photo
+                      img.img-block.card-preview__image(js-lazy src='img/committeeCard_3.jpg' data-srcset='img/committeeCard_3@2x.jpg 2x')
+                    span.h3-title.card-preview__name Плуготаренко Сергей
+                    span.card-preview__post Директор РАЭК
+              
+              // committe-card
+              .col.cards__col
+                .card-preview
+                  .container
+                    .card-preview__photo
+                      img.img-block.card-preview__image(js-lazy src='img/committeeCard_4.jpg' data-srcset='img/committeeCard_4@2x.jpg 2x')
+                    span.h3-title.card-preview__name Плуготаренко Сергей
+                    span.card-preview__post Директор РАЭК

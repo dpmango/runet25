@@ -18,3 +18,27 @@ block content
     .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549087228/runet25/heroTitle_3_red.jpg)")
       img(js-lazy data-src='img/backgrounds/heroTitle_3_red.jpg' data-srcset='img/backgrounds/heroTitle_3_red@2x.jpg 2x')
   
+  // MAIN
+  .main.grid.page__main.main--reverse
+    
+    .col.main__aside
+      .tile.tile--green.reveal(js-reveal data-direction="ltr")
+        h2.h3-title.rtxt(js-reveal data-delay="300") 
+          span.rtxt__wrap 
+            span.rtxt__mover Актуальные новости, пресс-релизы и анонсы
+        
+    .col.main__section
+
+      // MAIN CONTENT
+      .main__content
+        .container
+          
+          // tabs-nav
+          ul.tabs-nav.main__tabs-nav
+            li.active
+              a(href="#" title="Предстоящие") Предстоящие
+            li
+              a(href="#" title="Прошедшие") Прошедшие
+            li
+              a(href="#" title="По месяцам") По месяцам
+                span.months

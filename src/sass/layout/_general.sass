@@ -70,9 +70,20 @@ body.is-transitioning
   position: relative
   background-color: $colorLightBg
   overflow: hidden
+  &--reverse
+    .main__aside
+      order: 2
+      .main__hero-title
+        left: auto
+        right: 0
   &__aside
     flex-basis: $col4
     max-width: $col4
+    h2
+      &:first-child
+        margin-top: 0
+    .tile
+      flex: 1 0 auto
   &__hero-title
     width: $col4
     height: 100vh
@@ -98,6 +109,18 @@ body.is-transitioning
     &--purple
       color: $colorWhite
       background-color: $colorPurple
+  &__tabs-nav
+    margin: 0 -50px 70px
+    padding-left: 50px
+    padding-right: 50px
+    border-bottom: 1px solid $colorBg
+  &__cards
+    margin-left: -50px
+    margin-right: -50px
+    &:first-child
+      margin-top: -80px
+    &:last-child
+      margin-bottom: -80px
   &__hr
     margin-top: 60px
     margin-bottom: 60px

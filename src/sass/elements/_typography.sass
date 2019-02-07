@@ -44,6 +44,10 @@
     font-size: 20px
 
 /* texts
+.p-large
+  font-size: 25px
+  line-height: 1.4
+
 .p-big
   font-size: 20px
   line-height: 1.5
@@ -62,18 +66,24 @@
 
 
 +r($xl)
+  .p-large
+    font-size: 23px
   .p-big
     font-size: 18px
   .p-main
     font-size: 17px
 
 +r($lg)
+  .p-large
+    font-size: 20px
   .p-big
     font-size: 17px
   .p-main
     font-size: 16px
 
 +r($md)
+  .p-large
+    font-size: 14px
   .p-big
     font-size: 16px
   .p-main
@@ -143,3 +153,18 @@ p
     margin-bottom: 15px
     &:last-child
       margin-bottom: 0
+
+.text-columns
+  margin: 25px 0 
+  column-count: 2
+  column-gap: 40px
+  &:first-child
+    margin-top: 0
+  &:last-child
+    margin-bottom: 0
+
++r($md)
+  .text-columns
+    margin-top: 1em
+    margin-bottom: 1em
+    column-count: 1

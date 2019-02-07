@@ -1,0 +1,33 @@
+.cards
+  background-color: $colorWhite
+  &__col
+    width: $col6
+    border: 1px solid $colorBg
+
++r($sm)
+  .committee
+    &__col
+      width: $col12
+
+.card-preview
+  padding: 50px 0
+  background-color: $colorWhite
+  &__photo
+    margin-bottom: 30px
+  &__image
+    margin-bottom: 0
+  &__name
+    margin-bottom: 15px
+    display: block
+
++r($md)
+  .card-preview
+    padding-top: 30px
+    padding-bottom: 30px
+    &__photo
+      margin-bottom: 25px
+    &__name
+      margin-bottom: 7px
+      font-size: 16px
+    &__post
+      font-size: 14px
