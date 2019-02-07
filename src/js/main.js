@@ -40,7 +40,11 @@ $(document).ready(function(){
   }
   window.browser = browser
 
-  var sliders = [] // collection of all sliders
+  var sliders = {
+    newsScroller: {
+      instance: undefined
+    }
+  } // collection of all sliders
 
   var startWindowScroll = 0
   var closeMarkup = '<button title="%title%" class="mfp-close"><svg class="ico ico-mono-close"><use xlink:href="img/sprite-mono.svg#ico-mono-close"></use></svg></button>'
@@ -78,13 +82,15 @@ $(document).ready(function(){
   function pageReady(fromPjax){
     closeMobileMenu(fromPjax);
     setLineBreaks();
+    initSliders();
+    initSlidersResponsive();
     initPopups();
     getScalerResponsive();
     setScalerResponsive();
     initPerfectScrollbar();
     initMasks();
     initSelectric();
-    initScrollMonitor();
+    // initScrollMonitor();
     initValidations();
     initTeleport();
   }
@@ -95,11 +101,20 @@ $(document).ready(function(){
     controlHeaderColor();
   }
 
-  // The transition has just finished and the old Container has been removed from the DOM.
-  function pageCompleated(fromPjax){
+  // Overlay transition is about to be finnished
+  function transitionIsAboutToEnd(fromPjax){
+    initScrollMonitor();
     if ( fromPjax ){
       AOS.refreshHard();
       window.onLoadTrigger()
+    }
+  }
+
+  // The transition has just finished and the old Container has been removed from the DOM.
+  function pageCompleated(fromPjax){
+    if ( fromPjax ){
+      // AOS.refreshHard();
+      // window.onLoadTrigger()
     }
   }
 
@@ -112,6 +127,7 @@ $(document).ready(function(){
   // this is a master function which should have all functionality
   pageReady();
   inBetweenTransition();
+  transitionIsAboutToEnd();
   pageCompleated();
 
   // scroll/resize listeners
@@ -250,6 +266,12 @@ $(document).ready(function(){
     scroll.lastForScrollDir = wScroll <= 0 ? 0 : wScroll;
   }
 
+  function getCorrespondingPage(fromPjax){
+    var $page = $('.page');
+    if ( fromPjax ){ $page = $page.last() }
+    return $page
+  }
+
   ////////////////
   // HEADER SCROLL
   ////////////////
@@ -257,8 +279,7 @@ $(document).ready(function(){
     var $header = $('.header')
     var headerWrapperTranslate = 0
     var headerHeight = $header.outerHeight() + headerWrapperTranslate
-    var $page = $('.page');
-    if ( fromPjax ){ $page = $page.last() }
+    var $page = getCorrespondingPage(fromPjax)
     var $colorControlSections = $page.find('[js-header-color]');
     header = {
       container: $header,
@@ -296,7 +317,7 @@ $(document).ready(function(){
     }
   }
 
-  function controlHeaderColor(){
+  function controlHeaderColor(fromPjax){
     // Collect arr of past scroll elements
     var cur = header.colorControlSections.map(function(){
       var elTop = $(this).offset().top - parseInt($(this).css('marginTop'))
@@ -403,16 +424,20 @@ $(document).ready(function(){
     })
 
   // converts .rtxt__wrap to multiple .rtxt__mover
-  function setLineBreaks(){
+  function setLineBreaks(isResized){
     var $containers = $('[js-set-line-breaks]');
     if ( $containers.length === 0 ) return
 
     $containers.each(function(i, container){
       var $container = $(container);
-      var containerHtml = $container.html();
-      var containerText = $container.text();
-      $container.data("originText", containerHtml)
-      wrapByLine($container, containerText)
+      var containerText
+      if ( isResized ){
+        containerText = $container.data("originText")
+      } else {
+        containerText = $container.text();
+        $container.data("originText", containerText)
+      }
+      wrapEachWord($container, containerText)
     })
 
   }
@@ -421,6 +446,69 @@ $(document).ready(function(){
   /**********
   * PLUGINS *
   **********/
+
+  //////////
+  // SLIDERS
+  //////////
+  function initSliders(){
+    // no regular slides yet
+  }
+
+  function initSlidersResponsive(){
+    // RESPONSIVE ON/OFF sliders
+    var newsScrollerSwiperSelector = '[js-swiper-news-scroller]'
+
+    // if ( $(newsScrollerSwiperSelector).length > 0 ){
+    //   if ( getWindowWidth() >= sliders.benefits.disableOn ) {
+    //     if ( sliders.newsScroller.instance !== undefined ) {
+    //       sliders.newsScroller.instance.destroy( true, true );
+    //       sliders.newsScroller.instance = undefined
+    //     }
+    //     // return
+    //   } else {
+    //     if ( sliders.newsScroller.instance === undefined ) {
+    //       initNewsScrollerSwiper();
+    //     }
+    //   }
+    // }
+
+    initNewsScrollerSwiper();
+
+    // news scroller swiper
+    function initNewsScrollerSwiper(){
+      sliders.newsScroller.instance = new Swiper(newsScrollerSwiperSelector, {
+        wrapperClass: "swiper-wrapper",
+        slideClass: "year-stack",
+        direction: 'horizontal',
+        loop: false,
+        watchOverflow: true,
+        setWrapperSize: false,
+        spaceBetween: 0,
+        slidesPerView: 'auto',
+        normalizeSlideIndex: true,
+        freeMode: true,
+        scrollbar: {
+          el: '.swiper-scrollbar',
+          draggable: true,
+          dragSize: 36
+        },
+      })
+    }
+  }
+
+// function getProductSwiperInstance(that){
+//   var swiperId = $(that).closest('.swiper-container').data("id")
+//   var swiperInstance
+//   $.each(sliders.productImages, function(i,s){
+//     if ( s.id === swiperId ){
+//       swiperInstance = s.instance
+//     }
+//   })
+//   return swiperInstance
+// }
+
+
+
   //////////
   // MODALS
   //////////
@@ -933,7 +1021,7 @@ $(document).ready(function(){
       $("body").addClass("is-transitioning");
 
       // red moves first to the right
-      TweenLite.fromTo(this.$overlayRed, 0.5,
+      TweenLite.fromTo(this.$overlayRed, 0.45,
         {x: "0%"}, {x: "100%", ease: Power2.easeIn}
       );
 
@@ -943,7 +1031,6 @@ $(document).ready(function(){
           x: "100%",
           ease: Quart.easeIn,
           onComplete: function() {
-            inBetweenTransition(true)
             _this.$overlayRed.remove();
             deferred.resolve();
           }
@@ -959,6 +1046,8 @@ $(document).ready(function(){
 
       $(this.oldContainer).hide();
 
+      inBetweenTransition(true)
+
       $el.css({
         visibility: "visible"
       });
@@ -967,6 +1056,10 @@ $(document).ready(function(){
         scrollTo: {y: 0, autoKill: false},
         ease: easingSwing
       });
+
+      setTimeout(function(){
+        transitionIsAboutToEnd(true)
+      }, 400)
 
       TweenLite.fromTo(
         this.$overlayBlue,
@@ -1152,82 +1245,66 @@ function getWindowWidth(){
 
 
 // JQUERY CUSTOM HELPER FUNCTIONS
-// $.fn.lines = function (resized) {
-//   if ( $(this).is('.is-wrapped') === false || resized) { // prevent double wrapping
-//     var buildStr = ""
-//
-//     if ( !resized ){
-//       $(this).addClass('is-wrapped')
-//       // backup content
-//       $(this).attr('data-text-original', $(this).html())
-//
-//       // var content = $(this).html().split("\n");
-//       var content = $(this).text()
-//       wrapByLine($(this), content)
-//     } else {
-//       // assume that's in wrapped onReady
-//       // var content = $(this).attr('data-text-original').split("\n")
-//       var content = $(this).attr('data-text-original')
-//       wrapByLine($(this), content)
-//     }
-//
-//     // $.each(content, function(i, line){
-//     //   buildStr += "<span>" + line + "</span>"
-//     // })
-//     //
-//     // $(this).html(buildStr)
-//   }
-// };
-
-function wrapByLine(el, content){
-  var $cont = el
-
-  // $cont.text()
+function wrapEachWord(el, content){
   var text_arr = content.split(' ');
 
   for (i = 0; i < text_arr.length; i++) {
-    text_arr[i] = '<span class="rtxt__mover">' + text_arr[i] + '&nbsp;</span>';
+    text_arr[i] = '<span class="rtxt__wrap"><span class="rtxt__mover">' + text_arr[i] + '&nbsp;</span></span>';
   }
 
-  $cont.html(text_arr.join(''));
-
-  $wordSpans = $cont.find('span');
-
-  var lineArray = [],
-      lineIndex = 0,
-      lineStart = true
-
-  $wordSpans.each(function(idx) {
-    var pos = $(this).position();
-    var top = pos.top;
-
-    if (lineStart) {
-      lineArray[lineIndex] = [idx];
-      lineStart = false;
-    } else {
-      var $next = $(this).next();
-
-      if ($next.length) {
-        var isBreak = $next.html().indexOf("\n") !== -1
-        if ($next.position().top > top || isBreak) {
-          lineArray[lineIndex].push(idx);
-          lineIndex++;
-          lineStart = true
-        }
-      } else {
-        lineArray[lineIndex].push(idx);
-      }
-    }
-  });
-
-  for (i = 0; i < lineArray.length; i++) {
-    var start = lineArray[i][0],
-        end = lineArray[i][1] + 1;
-
-    if (!end) {
-      $wordSpans.eq(start).wrap('<span class="rtxt__wrap">')
-    } else {
-      $wordSpans.slice(start, end).wrapAll('<span class="rtxt__wrap">');
-    }
-  }
+  el.html(text_arr.join(''));
 }
+
+
+// function wrapByLine(el, content){
+//   var $cont = el
+//
+//   // $cont.text()
+//   var text_arr = content.split(' ');
+//
+//   for (i = 0; i < text_arr.length; i++) {
+//     text_arr[i] = '<span class="rtxt__mover">' + text_arr[i] + '&nbsp;</span>';
+//   }
+//
+//   $cont.html(text_arr.join(''));
+//
+//   $wordSpans = $cont.find('span');
+//
+//   var lineArray = [],
+//       lineIndex = 0,
+//       lineStart = true
+//
+//   $wordSpans.each(function(idx) {
+//     var pos = $(this).position();
+//     var top = pos.top;
+//
+//     if (lineStart) {
+//       lineArray[lineIndex] = [idx];
+//       lineStart = false;
+//     } else {
+//       var $next = $(this).next();
+//
+//       if ($next.length) {
+//         var isBreak = $next.html().indexOf("\n") !== -1
+//         if ($next.position().top > top || isBreak) {
+//           lineArray[lineIndex].push(idx);
+//           lineIndex++;
+//           lineStart = true
+//         }
+//       } else {
+//         lineArray[lineIndex].push(idx);
+//       }
+//     }
+//   });
+//
+//   for (i = 0; i < lineArray.length; i++) {
+//     var start = lineArray[i][0],
+//         end = lineArray[i][1] + 1;
+//
+//     if (!end) {
+//       $wordSpans.eq(start).wrap('<span class="rtxt__wrap">')
+//     } else {
+//       $wordSpans.slice(start, end).wrapAll('<span class="rtxt__wrap">');
+//     }
+//   }
+// }
