@@ -15,65 +15,40 @@ block content
     .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549087228/runet25/heroTitle_6_multi.jpg)")
       img(js-lazy data-src='img/backgrounds/heroTitle_6_multi.jpg' data-srcset='img/backgrounds/heroTitle_6_multi@2x.jpg 2x')
   
-  // MAIN
-  .main.grid.page__main
-    
-    .col.main__aside
-      .tile.tile--green.reveal(js-reveal data-direction="ltr")
-        h2.h3-title.rtxt(js-reveal data-delay="300") 
+  // grid
+  .grid.grid-main.reverse
+    .col.col--4
+      // tile
+      .tile.tile--green.tile--full-v
+        h3.h3-title.rtxt(js-reveal data-delay="300") 
           span.rtxt__wrap 
             span.rtxt__mover Актуальные новости, пресс-релизы и анонсы
-        
-    .col.main__section
 
-      // MAIN CONTENT
-      .main__content
-        .container
+    .col.col--8
+      // tabs-nav
+      .tabs-nav
+        ul
+          li
+            a(href="#" title="Свежие новости") Свежие новости
+          li.active
+            a(href="#" title="Сортировать по месяцам") Сортировать по месяцам
+              span.months
+      
+      // card-collection
+      .card-collection
+        .card-collection__grid
+          mixin newsCard(name, date, img)
+            // card
+            a(href="#").card.card--large.card--event
+              img.img-block(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
+              p.card__name.h4-title.rtxt(js-reveal js-set-line-breaks)= name
+              .card__footer(data-aos="fade" data-aos-delay="300")
+                .card__meta(data-aos="fade" data-aos-delay="300")
+                  .card__date.p-small= date
+                i.icon.icon-arrow-black  
+                
+          +newsCard("Процесс: редизайн логотипа форума Russian Internet Week", "09.01.2019", "newsCard_8")
+          +newsCard("Как оставаться ценным сотрудником, работая вне офиса", "04.12.2018", "newsCard_9")
           
-          // tabs-nav
-          ul.tabs-nav.main__tabs-nav
-            li.active
-              a(href="#" title="Свежие новости") Свежие новости
-            li
-              a(href="#" title="Сортировать по месяцам") Сортировать по месяцам
-                span.months
-          
-          // NEWS
-          .cards.main__cards
-            .grid.cards__grid
-
-              // news-card
-              .col.cards__col
-                .card-preview
-                  .container
-                    .card-preview__photo
-                      img.img-block.card-preview__image(js-lazy src='img/newsCard_1.jpg' data-srcset='img/newsCard_1@2x.jpg 2x')
-                    span.h3-title.card-preview__name Процесс: редизайн логотипа форума Russian Internet Week
-                    span.card-preview__post Директор РАЭК
-              
-              // news-card
-              .col.cards__col
-                .card-preview
-                  .container
-                    .card-preview__photo
-                      img.img-block.card-preview__image(js-lazy src='img/newsCard_2.jpg' data-srcset='img/newsCard_2@2x.jpg 2x')
-                    span.h3-title.card-preview__name Как оставаться ценным сотрудником, работая вне офиса
-                    span.card-preview__post Директор РАЭК
-              
-              // news-card
-              .col.cards__col
-                .card-preview
-                  .container
-                    .card-preview__photo
-                      img.img-block.card-preview__image(js-lazy src='img/newsCard_3.jpg' data-srcset='img/newsCard_3@2x.jpg 2x')
-                    span.h3-title.card-preview__name Правообладатели хотят больше прав в отношении доменных имен
-                    span.card-preview__post Директор РАЭК
-              
-              // news-card
-              .col.cards__col
-                .card-preview
-                  .container
-                    .card-preview__photo
-                      img.img-block.card-preview__image(js-lazy src='img/newsCard_4.jpg' data-srcset='img/newsCard_4@2x.jpg 2x')
-                    span.h3-title.card-preview__name Поклонники инноваций и российского интернета познакомились с ŠKODA Kodiaq на RIW 2018
-                    span.card-preview__post Директор РАЭК
+          +newsCard("Правообладатели хотят больше прав в отношении доменных имен", "23.11.2018", "newsCard_10")
+          +newsCard("Поклонники инноваций и российского интернета познакомились с ŠKODA Kodiaq на RIW 2018", "27.11.2018", "newsCard_11")

@@ -8,24 +8,24 @@ PageList:
 - file: 25gdp.html
   ready: 75
 - file: 25years.html
-  ready: 90
+  ready: 80
 - file: calendar.html
-  ready: 10
+  ready: 75
 - file: me.html
-  ready: 10
+  ready: 75
 - file: about.html
-  ready: 10
+  ready: 75
 - file: timeline.html
   ready: 0
 - file: news.html
-  ready: 10
+  ready: 80
 - file: news-article.html
-  ready: 75
+  ready: 80
 - file: committee.html
-  ready: 90
+  ready: 80
 - file: sponsors.html
-  ready: 75
+  ready: 80
 - file: stages.html
-  ready: 75
+  ready: 80
 - file: ui.html
   ready: 0

@@ -15,43 +15,36 @@ block content
     .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549087228/runet25/heroTitle_9_multi.jpg)")
       img(js-lazy data-src='img/backgrounds/heroTitle_9_multi.jpg' data-srcset='img/backgrounds/heroTitle_9_multi@2x.jpg 2x')
   
-  // MAIN
-  .main.grid.page__main
+  //tile
+  .tile.tile--purple(js-header-color data-menu-color="white" data-logo-color="white")
+    // group-content
+    .grid.group-content.tile__group-content
+      .col.col--4.group-content__aside
+        h2.h2-title Преимущества
+        
+      .col.col--8.group-content__section
+        p.p-main
+          span.f-700 Партнерство:
+          br
+          | Предоставление оборудования, расходных материалов, программного обеспечения для организации соревновательной части чемпионатов «Молодые профессионалы (WorldSkills Russia)»
 
-    .col.main__section
+        p.p-main
+          span.f-700 Спонсорство:
+          br
+          | Предоставление денежных средств для организации и проведения чемпионатов «Молодые профессионалы (WorldSkills Russia)», профильных проектов движения WorldSkills Russia, участия национальной сборной WorldSkills Russia в чемпионатах Европы и мира, развития движения WorldSkils Russia
 
-      // MAIN CONTENT
-      .main__content.main__content--purple
-        .container
+        p.p-main
+          span.f-700 Преимущества:
+          br
+          | Продвижение бренда компании на национальном уровне в рамках национальных чемпионатов среди посетителей мероприятия и участников деловой программы
+          br
+          | Разработка индивидуальных маркетинговых программ (в зависимости от выбранного спонсорского пакета)
+    
+    // group-content
+    .grid.group-content.tile__group-content
+      .col.col--4.group-content__aside
+        h2.h2-title Программы
 
-          // group-content
-          .grid.group-content.main__group-content
-            .col.col--4.group-content__aside
-              h2.h2-title Преимущества
-              
-            .col.col--8.group-content__section
-              p.p-main
-                span.f-700 Партнерство:
-                br
-                | Предоставление оборудования, расходных материалов, программного обеспечения для организации соревновательной части чемпионатов «Молодые профессионалы (WorldSkills Russia)»
-
-              p.p-main
-                span.f-700 Спонсорство:
-                br
-                | Предоставление денежных средств для организации и проведения чемпионатов «Молодые профессионалы (WorldSkills Russia)», профильных проектов движения WorldSkills Russia, участия национальной сборной WorldSkills Russia в чемпионатах Европы и мира, развития движения WorldSkils Russia
-
-              p.p-main
-                span.f-700 Преимущества:
-                br
-                | Продвижение бренда компании на национальном уровне в рамках национальных чемпионатов среди посетителей мероприятия и участников деловой программы
-                br
-                | Разработка индивидуальных маркетинговых программ (в зависимости от выбранного спонсорского пакета)
-          
-          // group-content
-          .grid.group-content.main__group-content
-            .col.col--4.group-content__aside
-              h2.h2-title Программы
-
-            .col.col--8.group-content__section
-              p.p-main
-                span.f-700 Проведение корпоративных чемпионатов
+      .col.col--8.group-content__section
+        p.p-main
+          span.f-700 Проведение корпоративных чемпионатов

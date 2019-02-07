@@ -456,7 +456,8 @@ $(document).ready(function(){
 
   function initSlidersResponsive(){
     // RESPONSIVE ON/OFF sliders
-    var newsScrollerSwiperSelector = '[js-swiper-news-scroller]'
+    var newsScrollerSwiperSelector = '[js-swiper-news-scroller]';
+    var cardsScrollerSwiperSelector = '[js-swiper-cards-scroller]'
 
     // if ( $(newsScrollerSwiperSelector).length > 0 ){
     //   if ( getWindowWidth() >= sliders.benefits.disableOn ) {
@@ -494,7 +495,30 @@ $(document).ready(function(){
         },
       })
     }
+
+    // card scroller swiper
+    function initNewsScrollerSwiper(){
+      sliders.newsScroller.instance = new Swiper(cardsScrollerSwiperSelector, {
+        wrapperClass: "swiper-wrapper",
+        slideClass: "card",
+        direction: 'horizontal',
+        loop: false,
+        watchOverflow: true,
+        setWrapperSize: false,
+        spaceBetween: 0,
+        slidesPerView: 'auto',
+        normalizeSlideIndex: true,
+        freeMode: true,
+        scrollbar: {
+          el: '.swiper-scrollbar',
+          draggable: true,
+          dragSize: 36
+        },
+      })
+    }
   }
+
+
 
 // function getProductSwiperInstance(that){
 //   var swiperId = $(that).closest('.swiper-container').data("id")
@@ -1199,6 +1223,29 @@ $(document).ready(function(){
       },1500)
     }
   }
+
+
+
+  function tileFixedTop() {
+    var tile = $('[js-tile-fixed]'),
+        wrapper = tile.parent();
+  
+    if (tile.length && _window.scrollTop() >= wrapper.offset().top) {
+      if (tile.outerHeight() + tile.offset().top >= wrapper.outerHeight() + wrapper.offset().top) {
+        console.log('stop')
+      } else {
+        tile.css({
+          position: 'fixed',
+          top: 0,
+          width: wrapper.width()
+        });
+      }
+    } else {
+      tile.removeAttr('style');
+    }
+  }
+  
+  _window.on('scroll resize', tileFixedTop);
 
 });
 

@@ -145,14 +145,28 @@ p
     height: 22px
     background: url(../icons/svg-mono/quote.svg) no-repeat
 
-.ol-list
-  list-style-position: inside
-  padding-left: 15px
++r($sm)
+  .blockquote
+    padding-left: 30px
+    &::before
+      width: 22px
+      height: 18px
+      background-size: 100% auto
+
+.main-list
+  padding-left: 20px
   @extend .p-main
   li
     margin-bottom: 15px
     &:last-child
       margin-bottom: 0
+  .main-list
+    margin-top: 15px
+
+ul.main-list
+  list-style-type: disc
+  li
+    display: list-item
 
 .text-columns
   margin: 25px 0 

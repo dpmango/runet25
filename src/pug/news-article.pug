@@ -15,41 +15,34 @@ block content
     .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549087228/runet25/heroTitle_7_multi.jpg)")
       img(js-lazy data-src='img/backgrounds/heroTitle_7_multi.jpg' data-srcset='img/backgrounds/heroTitle_7_multi@2x.jpg 2x')
 
-  // MAIN
-  .main.grid.page__main
+  // tile
+  article.tile.tile--gray(js-header-color data-menu-color="white" data-logo-color="white")
+    // group-content
+    .grid.group-content.tile__group-content
+      .col.col--4.group-content__aside
+        h2.h2-title Секция и дискуссионная панель
+        
+      .col.col--8.group-content__section
+        .text
+          p.p-main В рамках секции, представители Facebook обсудят с российскими средними и малыми компаниями возможности развития российского бизнеса в условиях цифровизации экономики, поделятся лучшими практиками и историями успеха, а также проблемами, с которыми сталкиваются отечественные компании при построении своего бизнеса онлайн.
+          blockquote.blockquote Мы поговорим об экспортном потенциале российских компаний, а также возможных стратегиях и механизмах интеграции российских малых бизнесов в глобальный рынок. Данная дискуссия также позволит участникам встречи обсудить вопросы развития российского среднего и малого бизнеса и их роль в построении цифровой экономики России», – Ульяна Зинина, Head of Public Policy, Facebook.
+          p.p-main В дискуссии примут участие Robert Bednarski, Country Director Facebook Central and Eastern Europe, Mariana Piccinini, SMB Sales Manager Central and East Europe.
+    
+    // group-content
+    .grid.group-content.tile__group-content
+      .col.col--4.group-content__aside
+        h2.h2-title Тренинги и мастер-классы
 
-    .col.main__section
-
-      // MAIN CONTENT
-      .main__content
-        .container
-
-          // group-content
-          .grid.group-content.main__group-content
-            .col.col--4.group-content__aside
-              h2.h2-title Секция и дискуссионная панель
-              
-            .col.col--8.group-content__section
-              .text
-                p.p-main В рамках секции, представители Facebook обсудят с российскими средними и малыми компаниями возможности развития российского бизнеса в условиях цифровизации экономики, поделятся лучшими практиками и историями успеха, а также проблемами, с которыми сталкиваются отечественные компании при построении своего бизнеса онлайн.
-                blockquote.blockquote Мы поговорим об экспортном потенциале российских компаний, а также возможных стратегиях и механизмах интеграции российских малых бизнесов в глобальный рынок. Данная дискуссия также позволит участникам встречи обсудить вопросы развития российского среднего и малого бизнеса и их роль в построении цифровой экономики России», – Ульяна Зинина, Head of Public Policy, Facebook.
-                p.p-main В дискуссии примут участие Robert Bednarski, Country Director Facebook Central and Eastern Europe, Mariana Piccinini, SMB Sales Manager Central and East Europe.
-          
-          // group-content
-          .grid.group-content.main__group-content
-            .col.col--4.group-content__aside
-              h2.h2-title Тренинги и мастер-классы
-
-            .col.col--8.group-content__section
-              .text
-                p.p-main
-                  img.img-block(js-lazy data-src='img/newsCard_7.jpg' data-srcset='img/newsCard_7@2x.jpg 2x')
-                p.p-main Впервые в России Facebook проведет тренинг для всех, кто хочет правильно и эффективно развивать свой бизнес через социальные сети, узнать о глобальных трендах:
-                ol.ol-list
-                  li Темы, которые будут подняты в ходе тренингов:
-                  li Тренды потребительского рынка и особенности видео рекламы
-                  li Как построить бизнес в условиях мобильной экономики и мобильного мира
-                  li Советы и рекомендации от владельцев конкретных успешных российских малых и средних бизнесов по цифровизации
-                  li Как повысить свои продажи с помощью социальных сетей
-                  li В условиях глобального мира и глобальной экономики — как построить глобальный бизнес, как развить свой экспортный потенциал
-                a.btn.btn--link(href='#' title='Подробнее о тренингах') Подробнее о тренингах
+      .col.col--8.group-content__section
+        .text
+          p.p-main
+            img.img-block(js-lazy data-src='img/newsCard_7.jpg' data-srcset='img/newsCard_7@2x.jpg 2x')
+          p.p-main Впервые в России Facebook проведет тренинг для всех, кто хочет правильно и эффективно развивать свой бизнес через социальные сети, узнать о глобальных трендах:
+          ol.main-list
+            li Темы, которые будут подняты в ходе тренингов:
+            li Тренды потребительского рынка и особенности видео рекламы
+            li Как построить бизнес в условиях мобильной экономики и мобильного мира
+            li Советы и рекомендации от владельцев конкретных успешных российских малых и средних бизнесов по цифровизации
+            li Как повысить свои продажи с помощью социальных сетей
+            li В условиях глобального мира и глобальной экономики — как построить глобальный бизнес, как развить свой экспортный потенциал
+          a.btn.btn--link(href='#' title='Подробнее о тренингах') Подробнее о тренингах

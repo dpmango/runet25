@@ -2,6 +2,25 @@
   display: flex
   flex-wrap: wrap
 
++r($lg)
+  .grid-main
+    flex-direction: column
+    & > .col
+      max-width: $col12
+      flex: 0 0 $col12
+      &.col--4
+        min-height: 500px
+        order: 2
+    &.reverse
+      & > .col.col--4
+        order: -1
+        min-height: auto
+        .tile
+          justify-content: center
+    &.not-hero
+      .col--8 > .tile
+        padding-top: 150px
+
 .col
   position: relative
   display: flex
@@ -9,6 +28,7 @@
   width: 100%
   min-width: 1px
   flex: 0 0 auto
+  overflow: hidden
   &--4
     flex-basis: $col4
     max-width: $col4
@@ -38,6 +58,9 @@
     right: 0
     max-height: 100%
     overflow-y: scroll
+    display: flex
+    flex-wrap: wrap
+  &__grid
     display: flex
     flex-wrap: wrap
 
@@ -70,6 +93,9 @@
 
     &:hover
       border-color: white
+  &--large
+    flex: 0 0 $col6
+    max-width: $col6
   &__meta
     padding-bottom: 20px
     margin-bottom: auto
@@ -80,13 +106,38 @@
 
   &__date
     margin-top: .2em
+
   &__name
     margin-top: auto
+    margin-bottom: 0.5em
+    &:first-child
+      margin-top: 0
 
   &__cta
     padding-top: 30px
     transition: transform .25s $ease
+  
+  &__footer
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-top: auto
+    .card__meta
+      padding-bottom: 0
+  .img-block + .card__name
+    margin-top: 0
 
   &:hover
     .card__cta
       transform: translate3d(8px,0,0)
+
++r($lg)
+  .card
+    max-width: $col6
+    flex: 0 0 $col6
+
++r($sm)
+  .card
+    &--large
+      max-width: $col12
+      flex: 0 0 $col12
