@@ -18,3 +18,54 @@ block content
     .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549087228/runet25/heroTitle_3_red.jpg)")
       img(js-lazy data-src='img/backgrounds/heroTitle_3_red.jpg' data-srcset='img/backgrounds/heroTitle_3_red@2x.jpg 2x')
   
+  // grid
+  .grid.grid-main.reverse
+    .col.col--8
+      // tabs-nav
+      .tabs-nav
+        ul
+          li.active
+            a(href="#" title="Предстоящие") Предстоящие
+          li
+            a(href="#" title="Прошедшие") Прошедшие
+          li
+            a(href="#" title="По месяцам") По месяцам
+              span.months
+      
+      // card-collection
+      .card-collection
+        .card-collection__grid
+          mixin eventCard(name, caption, location, date)
+            // card
+            a(href="#").card.card--large.card--event
+              .card__name.h3-title.rtxt(js-reveal js-set-line-breaks)= name
+              if caption
+                p.card__caption= caption
+              .card__footer(data-aos="fade" data-aos-delay="300")
+                .card__meta(data-aos="fade" data-aos-delay="300")
+                  .card__location= location
+                  .card__date.p-big= date
+                i.icon.icon-arrow-black
+                
+          +eventCard("Золотой сайт + Золотое приложение 2018", "Ключевой и старейший конкурс интернет-проектов в Рунете", "Москва", "28 января")
+          +eventCard("Cyber Security Forum 2019", "Международный Форум по кибербезопасности", "Москва", "14 февраля")
+          
+          +eventCard("Digital transformation conference 2019", "Первая в России площадка для обмена опытом и мнениями о состоявшихся проектах применения digital-технологий в области принятия управленческих решений.", "Москва", "Март")
+          +eventCard("Награждение госнаградами метров интернет-индустрии", "", "Москва", "Апрель")
+          
+          +eventCard("RIGF 2019", "Российский форум по управлению интернетом (RIGF) – мероприятие из всемирной серии национальных и региональных инициатив в области управления интернетом.", "Московская область", "17-19 апреля")
+          +eventCard("RIPE NCC Day", "RIPE NCC Day – техническая конференция, проводимая одним из пяти мировых Региональных интернет-регистратур RIPE NCC совместно с локальными партнерами.", "Москва", "Апрель")
+          
+          +eventCard("РИФ 2019", "23-й Российский Интернет Форум – www.rif.ru", "Москва", "Май")
+          +eventCard("ПМЭФ 2019", "Петербургский международный экономический форум – 2019", "Санкт-Перербург", "Май")
+
+          +eventCard("СПИК 2019", "Санкт-Петербургская интернет-конференция", "Санкт-Перербург", "Май")
+          +eventCard("Registrar Day", "Регистраторский день (Registrar Day) – отраслевая конференция, посвященная вопросам развития российского доменного рынка.", "Москва", "Май")
+
+    .col.col--4
+      // tile
+      .tile.tile--purple.tile--full
+        h3.h3-title.rtxt(js-reveal data-delay="300") 
+          span.rtxt__wrap 
+            span.rtxt__mover Предложить мероприятие
+        p.p-small(data-aos="fade" data-aos-delay="300") Вы можете предложить свое мероприятие, для этого нужно заполить форму, нажав на кнопку ниже, предложенные мероприятия отправляются на почту оргкомитета

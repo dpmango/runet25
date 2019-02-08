@@ -4,71 +4,40 @@ title: 25% ВВП
 extends shared/_layout
 block content
 
-  // MAIN
-  .main.grid.page__main
-    
-    .col.main__aside
-
-      // HERO TITLE
-      .hero-title.main__hero-title(js-header-color data-menu-color="white" data-logo-color="white") 
-        .hero-title__cover
+  // grid
+  .grid.grid-main.not-hero(js-header-color data-menu-color="white" data-logo-color="white")
+    .col.col--4
+      // tile
+      .tile.tile--full.tile--fixed(js-tile-fixed)
+        .tile__img-cover
           img(js-lazy data-src='img/candyFire_4.jpg' data-srcset='img/candyFire_4@2x.jpg 2x')
-      
-    .col.main__section
+    
+    .col.col--8
+      // tile
+      .tile.tile--full.tile--purple.reveal(js-reveal data-direction="rtl")
+        h2.h2-title 25% ВВП
+        p.p-main Труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и независимости, оставаясь при этом эффективными и востребованными профессионалами. В тоже время компании все чаще нанимают независимых исполнителей, сокращая затраты на поиск сотрудников и содержание штата.
+        p.p-main В век, когда границы стираются, труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и независимости, оставаясь при этом эффективными и востребованными профессионалами. «Как будет выглядеть работа в ближайшем будущем?» — на этот вопрос постараются ответить HR-специалисты, фрилансеры и предприниматели.
 
-      // MAIN CONTENT
-      .main__content.main__content--without-header.main__content--purple
-        .container
-          h2.h2-title 25% ВВП
-          p.p-main Труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и независимости, оставаясь при этом эффективными и востребованными профессионалами. В тоже время компании все чаще нанимают независимых исполнителей, сокращая затраты на поиск сотрудников и содержание штата.
-          p.p-main В век, когда границы стираются, труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и независимости, оставаясь при этом эффективными и востребованными профессионалами. «Как будет выглядеть работа в ближайшем будущем?» — на этот вопрос постараются ответить HR-специалисты, фрилансеры и предприниматели.
+        hr.tile__hr
 
-          hr.main__hr
-
-          // USERS
-          .users.main__users
-            h3.h3-title.users__title Участники
-
-            .grid.users__grid
-
-              // user-item
-              .col.users__col
-                .user-item
-                  .user-item__avatar
-                    img.user-item__image(js-lazy data-src='img/userItem_1.jpg' data-srcset='img/userItem_1@2x.jpg 2x')
-                  span.user-item__name Михаил Жванецкий
-              
-              // user-item
-              .col.users__col
-                .user-item
-                  .user-item__avatar
-                    img.user-item__image(js-lazy data-src='img/userItem_2.jpg' data-srcset='img/userItem_2@2x.jpg 2x')
-                  span.user-item__name Аркадий Паровозов
-              
-              // user-item
-              .col.users__col
-                .user-item
-                  .user-item__avatar
-                    img.user-item__image(js-lazy data-src='img/userItem_3.jpg' data-srcset='img/userItem_3@2x.jpg 2x')
-                  span.user-item__name Михаил Кшиштовский
-              
-              // user-item
-              .col.users__col
-                .user-item
-                  .user-item__avatar
-                    img.user-item__image(js-lazy data-src='img/userItem_4.jpg' data-srcset='img/userItem_4@2x.jpg 2x')
-                  span.user-item__name Аркадий Паровозов
-              
-              // user-item
-              .col.users__col
-                .user-item
-                  .user-item__avatar
-                    img.user-item__image(js-lazy data-src='img/userItem_5.jpg' data-srcset='img/userItem_5@2x.jpg 2x')
-                  span.user-item__name Марк Цукерберг
+        h3.h3-title Участники
+        .grid.tile__users.tile__users--start
+          mixin userItem(name, img)
+            .col.col--4.user-item
+              .user-item__avatar
+                img.user-item__image(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
+              span.user-item__name Аркадий Паровозов
           
-          .info.main__info
-            +svgMono("map-pin")
-            span.info__text Место проведения: Лондон, Бэйкер стрит 221Б, офис 210
+          +userItem("Михаил Жванецкий", "userItem_1")
+          +userItem("Аркадий Паровозов", "userItem_2")
+          +userItem("Михаил Кшиштовский", "userItem_3")
+          +userItem("Аркадий Паровозов", "userItem_4")
+          +userItem("Марк Цукерберг", "userItem_5")
+        
+        .info.tile__info
+          +svgMono("map-pin")
+          span.info__text Место проведения: Лондон, Бэйкер стрит 221Б, офис 210
 
-          h3.h3-title Ожидаемые итоги мероприятия
-          p.p-main Труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и независимости, оставаясь при этом эффективными и востребованными профессионалами. В тоже время компании все чаще нанимают независимых исполнителей, сокращая затраты на поиск сотрудников и содержание штата.
+        h3.h3-title Ожидаемые итоги мероприятия
+        p.p-main Труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и независимости, оставаясь при этом эффективными и востребованными профессионалами. В тоже время компании все чаще нанимают независимых исполнителей, сокращая затраты на поиск сотрудников и содержание штата.

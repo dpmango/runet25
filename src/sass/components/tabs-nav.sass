@@ -1,0 +1,58 @@
+.tabs-nav
+  padding: 70px 0
+  background-color: #F7F7FA
+  ul
+    display: flex
+    margin: 0
+    padding: 0 50px
+    white-space: nowrap
+    border-bottom: 1px solid #D7D7D7
+    overflow-x: auto
+    li
+      flex-shrink: 0
+      margin-right: 94px
+      font-size: 20px
+      font-weight: 700
+      &:last-child
+        margin-right: 0
+      &.active
+        a
+          color: $colorRed
+          border-bottom-color: $colorRed
+          span
+            color: $colorRed
+            border-color: $colorRed
+            &.months
+              &::before
+                background: svg-load('../icons/svg-mono/calendar.svg', fill=$colorRed)
+      a
+        display: inline-flex
+        align-items: center
+        padding: 7px 0 14px
+        border-bottom: 3px solid transparent
+        span
+          display: inline-flex
+          align-items: center
+          justify-content: center
+          margin: -6px 0 -8px 20px
+          width: 40px
+          height: 40px
+          border: 1px solid rgba(#333, 0.2)
+          border-radius: 50%
+          &.months
+            &::before
+              content: ''
+              display: block
+              width: 14px
+              height: 15px
+              background: svg-load('../icons/svg-mono/calendar.svg', fill=rgba(#333, 0.5))
+
++r($md)
+  .tabs-nav
+    padding-top: 50px
+    padding-bottom: 50px
+    ul
+      padding-left: 30px
+      padding-right: 30px
+      li
+        margin-right: 30px
