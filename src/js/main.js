@@ -475,6 +475,7 @@ $(document).ready(function(){
     // }
 
     initNewsScrollerSwiper();
+    initCardsScrollerSwiper();
 
     // news scroller swiper
     function initNewsScrollerSwiper(){
@@ -498,7 +499,7 @@ $(document).ready(function(){
     }
 
     // card scroller swiper
-    function initNewsScrollerSwiper(){
+    function initCardsScrollerSwiper(){
       sliders.newsScroller.instance = new Swiper(cardsScrollerSwiperSelector, {
         wrapperClass: "swiper-wrapper",
         slideClass: "card",

@@ -12,7 +12,12 @@
       flex: 0 0 $col6
       max-width: $col6
 
-
++r($sm)
+  .grid-horizontal-lg
+    display: block
+    .tile
+      flex-basis: $col12
+      max-width: $col12
 
 +r($lg)
   .grid-main
@@ -59,6 +64,8 @@
     &--8
       flex-basis: $col12
       max-width: $col12
+    &--hide-lg
+      display: none
 
 .fit-sibling-y
   position: absolute
@@ -69,6 +76,11 @@
   display: flex
   flex-direction: column
 
++r($lg)
+  .fit-sibling-y
+    position: relative
+    min-height: 550px
+    max-height: 80vh
 
 /* card collection
 .card-collection
@@ -87,11 +99,6 @@
   &__grid
     display: flex
     flex-wrap: wrap
-
-+r($lg)
-  .card-collection
-    min-height: 550px
-    height: 80vh
 
 .card
   flex: 0 0 $col4
@@ -166,6 +173,7 @@
       .ico, .icon
         transform: translate3d(8px,0,0)
 
+
 +r($xl)
   .card-collection
     .card
@@ -173,12 +181,40 @@
       max-width: $col6
 
 +r($lg)
+  .card-collection
+    min-height: 550px
+    height: 80vh
+
   .card
     max-width: $col6
     flex-basis: $col6
 
 +r($sm)
+  .card-collection
+    min-height: 1px
+    height: auto
+    // prev overwites
+    .card
+      flex-basis: $col12
+      max-width: $col12
+    // makes scrollarea X forced
+    &__scrollarea
+      position: relative
+      overflow-y: auto
+      overflow-x: scroll
+      flex-wrap: nowrap
+      .card
+        flex-basis: 260px
+        max-width: 260px
+
   .card
+    // TODO - any case when it's not $col12 ?
+    flex-basis: $col12
+    max-width: $col12
+    min-height: 270px
+    &--event
+      padding: 50px 30px 40px
+
     &--large
       max-width: $col12
       flex-basis: $col12

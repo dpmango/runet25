@@ -90,10 +90,23 @@
     position: absolute 0
     display: flex
     flex-direction: column
-    img
-      max-width: 100%
+    img, picture
+      width: 100%
       height: 100%
       object-fit: cover
+    &--fit
+      &-rt img, picture
+        object-position: right top
+      &-rc img, picture
+        object-position: right center
+      &-rb img, picture
+        object-position: right bottom
+      &-lt img, picture
+        object-position: left top
+      &-lc img, picture
+        object-position: left center
+      &-lb img, picture
+        object-position: left bottom
   &__users
     justify-content: center
     &--start
@@ -131,7 +144,7 @@
       margin-top: 0
   .p-link
     margin-top: 18px
-  
+
   &--center
     align-items: center
     text-align: center

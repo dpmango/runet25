@@ -4,7 +4,7 @@ PageList:
 - file: homepage.html
   ready: 100
 - file: number25.html
-  ready: 60
+  ready: 80
 - file: 25gdp.html
   ready: 75
 - file: 25years.html
