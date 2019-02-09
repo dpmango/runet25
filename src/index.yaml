@@ -6,26 +6,26 @@ PageList:
 - file: number25.html
   ready: 60
 - file: 25gdp.html
-  ready: 75
+  ready: 90
 - file: 25years.html
-  ready: 80
+  ready: 90
 - file: calendar.html
-  ready: 75
+  ready: 90
 - file: me.html
-  ready: 75
+  ready: 90
 - file: about.html
-  ready: 75
+  ready: 90
 - file: timeline.html
   ready: 0
 - file: news.html
-  ready: 80
+  ready: 90
 - file: news-article.html
-  ready: 80
+  ready: 90
 - file: committee.html
-  ready: 80
+  ready: 90
 - file: sponsors.html
-  ready: 80
+  ready: 90
 - file: stages.html
-  ready: 80
+  ready: 90
 - file: ui.html
   ready: 0

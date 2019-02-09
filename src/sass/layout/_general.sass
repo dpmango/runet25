@@ -154,11 +154,60 @@ body.is-transitioning
   .img-block
     margin-bottom: 25px
 
+.icon-circle
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  width: 40px
+  height: 40px
+  border: 1px solid rgba(#333, 0.2)
+  border-radius: 50%
+  &--months
+    &::before
+      content: ''
+      display: block
+      width: 14px
+      height: 15px
+      background: svg-load('../icons/svg-mono/calendar.svg', fill=rgba(#333, 0.5))
+
+.link
+  position: relative
+  padding-left: 18px
+  display: inline-block
+  cursor: pointer
+  &--prev
+    &::before
+      content: ''
+      position: absolute
+      top: 2px
+      left: 0
+      display: block
+      width: 7px
+      height: 11px
+      background: svg-load('../icons/svg-mono/angle-left.svg') no-repeat
+
++r($lg)
+  .link
+    padding-left: 0
+    padding-right: 18px
+    &--prev
+      &::before
+        top: 4px
+        left: auto
+        right: 0
+        transform: rotate(-90deg)
+
 .history
   padding: 50px 0 50px 50px
   background-color: #F2F2F2
   .swiper-container-horizontal > .swiper-scrollbar
     bottom: 20px
+
++r($md)
+  .history
+    padding-left: 0
+    padding-right: 0
+    padding-bottom: 0
 
 .container
   max-width: 100%

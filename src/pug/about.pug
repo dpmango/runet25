@@ -40,7 +40,7 @@ block content
         i.icon.icon-arrow-white
     
     // tile
-    .tile.tile--2-3
+    .tile.tile--2-3.tile--lg-hide
       .tile__img-cover
         img(js-lazy data-src='img/candyFire_10.jpg' data-srcset='img/candyFire_10@2x.jpg 2x')
     
@@ -75,7 +75,7 @@ block content
         i.icon.icon-arrow-white
   
   // grid (history)
-  .grid
+  .grid.grid-main.reverse
     .col.col--4
       // tile
       .tile.tile--purple.reveal(js-link data-href="news.html" js-reveal data-direction="rtl" data-type="halflyEnterViewport" js-header-color data-menu-color="white" data-logo-color="white")
@@ -128,9 +128,13 @@ block content
                   p.p-small Первый юбилей Рунета масштабно праздновался в России в 2004 году – именно тогда была учреждена Премия Рунета, был реализован  целый ряд мероприятий (пресс-конференции, интервью, исследования) с целью определить и представить общественности все основные достижения российского интернета на тот момент.
                 
             .swiper-scrollbar
+            
+            .swiper-buttons
+              .swiper-button-prev
+              .swiper-button-next
   
   // grid (committees)
-  .grid
+  .grid.grid-main.reverse
     .col.col--4
       // tile
       .tile.tile--green.tile--full-v
