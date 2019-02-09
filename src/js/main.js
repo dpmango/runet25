@@ -104,7 +104,8 @@ $(document).ready(function(){
 
   // Overlay transition is about to be finnished
   function transitionIsAboutToEnd(fromPjax){
-    initScrollMonitor();
+    initScrollMonitor(fromPjax);
+    initAOSRefresher(fromPjax);
     if ( fromPjax ){
       AOS.refreshHard();
       window.onLoadTrigger()
@@ -495,6 +496,7 @@ $(document).ready(function(){
     // }
 
     initNewsScrollerSwiper();
+    initCardsScrollerSwiper();
 
     // news scroller swiper
     function initNewsScrollerSwiper(){
@@ -518,7 +520,7 @@ $(document).ready(function(){
     }
 
     // card scroller swiper
-    function initNewsScrollerSwiper(){
+    function initCardsScrollerSwiper(){
       sliders.newsScroller.instance = new Swiper(cardsScrollerSwiperSelector, {
         wrapperClass: "swiper-wrapper",
         slideClass: "card",
@@ -912,7 +914,17 @@ $(document).ready(function(){
         }
 
         // regular (default) type
-        var elWatcher = scrollMonitor.create( $(el) );
+        var $containerWatcher = $(el).closest('[data-scrollmonitor-container]')
+        var elWatcher
+
+        if ( $containerWatcher.length > 0 ){
+          // this containerMonitor is an instance of the scroll monitor that listens to scroll events on your container.
+          var containerMonitor = scrollMonitor.createContainer($containerWatcher);
+          elWatcher = containerMonitor.create($(el));
+        } else {
+          elWatcher = scrollMonitor.create( $(el) );
+        }
+
         elWatcher.enterViewport(throttle(function() {
           if ( delay ){
             setTimeout(function(){
@@ -924,10 +936,19 @@ $(document).ready(function(){
         }));
 
       });
-
     }
-
   }
+
+  // update states for AOS on overflow scroll containers
+  function initAOSRefresher(fromPjax){
+    var $page = getCorrespondingPage(fromPjax)
+    var $scrollable = $page.find('[js-scrollable-animation-fix]');
+
+    $scrollable.on('scroll', throttle(function(){
+      AOS.refresh()
+    }, 100))
+  }
+
 
   ////////////////
   // FORM VALIDATIONS
@@ -1325,7 +1346,7 @@ $(document).ready(function(){
   function tileFixedTop() {
     var tile = $('[js-tile-fixed]'),
         wrapper = tile.parent();
-  
+
     if (tile.length && _window.scrollTop() >= wrapper.offset().top) {
       if (tile.outerHeight() + tile.offset().top >= wrapper.outerHeight() + wrapper.offset().top) {
         console.log('stop')
@@ -1340,7 +1361,7 @@ $(document).ready(function(){
       tile.removeAttr('style');
     }
   }
-  
+
   _window.on('scroll resize', tileFixedTop);
 
 });
@@ -1388,14 +1409,16 @@ function getWindowWidth(){
 
 
 // JQUERY CUSTOM HELPER FUNCTIONS
-function wrapEachWord(el, content){
+function wrapEachWord($el, content){
   var text_arr = content.split(' ');
 
   for (i = 0; i < text_arr.length; i++) {
     text_arr[i] = '<span class="rtxt__wrap"><span class="rtxt__mover">' + text_arr[i] + '&nbsp;</span></span>';
   }
 
-  el.html(text_arr.join(''));
+  $el.html(text_arr.join(''));
+
+  $el.addClass('is-words-wrapped')
 }
 
 
