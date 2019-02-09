@@ -1312,14 +1312,16 @@ function getWindowWidth(){
 
 
 // JQUERY CUSTOM HELPER FUNCTIONS
-function wrapEachWord(el, content){
+function wrapEachWord($el, content){
   var text_arr = content.split(' ');
 
   for (i = 0; i < text_arr.length; i++) {
     text_arr[i] = '<span class="rtxt__wrap"><span class="rtxt__mover">' + text_arr[i] + '&nbsp;</span></span>';
   }
 
-  el.html(text_arr.join(''));
+  $el.html(text_arr.join(''));
+
+  $el.addClass('is-words-wrapped')
 }
 
 

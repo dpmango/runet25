@@ -19,18 +19,19 @@ block content
   // GRID
   .grid(js-header-color data-logo-color="white")
     .col.col--4
-      // tile link + jc centered
-      a.tile.tile--red.tile--jcc.reveal(href="calendar.html" js-reveal data-direction="ltr")
-        h2.h2-title.rtxt(js-reveal data-delay="300") 
-          span.rtxt__wrap 
-            span.rtxt__mover 25 главных
-          span.rtxt__wrap 
-            span.rtxt__mover мероприятий года
-              
-      // tile
-      .tile.tile--yellow(style="background-color: #EDAFAA; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:400/v1549348909/runet25/happyBirthday.jpg)")
-        .tile__img-cover
-          img(js-lazy data-src="img/happyBirthday.jpg" data-srcset='img/happyBirthday@2x.jpg 2x')
+      .grid-horizontal-lg
+        // tile link + jc centered
+        a.tile.tile--red.tile--jcc.reveal(href="calendar.html" js-reveal data-direction="ltr")
+          h2.h2-title.rtxt(js-reveal data-delay="300") 
+            span.rtxt__wrap 
+              span.rtxt__mover 25 главных
+            span.rtxt__wrap 
+              span.rtxt__mover мероприятий года
+                
+        // tile
+        .tile.tile--yellow(style="background-color: #EDAFAA; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:400/v1549348909/runet25/happyBirthday.jpg)")
+          .tile__img-cover
+            img(js-lazy data-src="img/happyBirthday.jpg" data-srcset='img/happyBirthday@2x.jpg 2x')
     
     .col.col--8
       .card-collection

@@ -3,11 +3,26 @@
   flex-wrap: wrap
 
 +r($lg)
+  .grid-horizontal-lg
+    // for stacker 2+ card
+    // i.e. in .col--4, .col--8 combination
+    display: flex
+    flex-wrap: wrap
+    .tile
+      flex: 0 0 $col6
+      max-width: $col6
+
+
+
++r($lg)
   .grid-main
     flex-direction: column
+    // TODO - ARTEM
+    // предлагаю везде сделать .col на 100% от $lg
+    // нужно посмотреть если появились конфликты
     & > .col
-      max-width: $col12
-      flex: 0 0 $col12
+      // max-width: $col12
+      // flex: 0 0 $col12
       &.col--4
         min-height: 500px
         order: 2
@@ -36,6 +51,15 @@
     flex-basis: $col8
     max-width: $col8
 
++r($lg)
+  .col
+    &--4
+      flex-basis: $col12
+      max-width: $col12
+    &--8
+      flex-basis: $col12
+      max-width: $col12
+
 .fit-sibling-y
   position: absolute
   top: 0
@@ -63,6 +87,11 @@
   &__grid
     display: flex
     flex-wrap: wrap
+
++r($lg)
+  .card-collection
+    min-height: 550px
+    height: 80vh
 
 .card
   flex: 0 0 $col4
@@ -94,7 +123,7 @@
     &:hover
       border-color: white
   &--large
-    flex: 0 0 $col6
+    flex-basis: $col6
     max-width: $col6
   &__meta
     padding-bottom: 20px
@@ -115,8 +144,11 @@
 
   &__cta
     padding-top: 30px
-    transition: transform .25s $ease
-  
+    .ico, .icon
+      will-change: transform
+      backface-visibility: hidden
+      transition: transform .25s $ease
+
   &__footer
     display: flex
     align-items: center
@@ -129,15 +161,27 @@
 
   &:hover
     .card__cta
-      transform: translate3d(8px,0,0)
+      // aos conflict
+      // transform: translate3d(8px,0,0) !important
+      .ico, .icon
+        transform: translate3d(8px,0,0)
+
++r($xl)
+  .card-collection
+    .card
+      flex-basis: $col6
+      max-width: $col6
 
 +r($lg)
   .card
     max-width: $col6
-    flex: 0 0 $col6
+    flex-basis: $col6
 
 +r($sm)
   .card
     &--large
       max-width: $col12
-      flex: 0 0 $col12
+      flex-basis: $col12
+
+    &__location
+      font-size: 12px
