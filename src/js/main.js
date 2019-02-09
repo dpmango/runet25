@@ -103,7 +103,8 @@ $(document).ready(function(){
 
   // Overlay transition is about to be finnished
   function transitionIsAboutToEnd(fromPjax){
-    initScrollMonitor();
+    initScrollMonitor(fromPjax);
+    initAOSRefresher(fromPjax);
     if ( fromPjax ){
       AOS.refreshHard();
       window.onLoadTrigger()
@@ -858,7 +859,17 @@ $(document).ready(function(){
         }
 
         // regular (default) type
-        var elWatcher = scrollMonitor.create( $(el) );
+        var $containerWatcher = $(el).closest('[data-scrollmonitor-container]')
+        var elWatcher
+
+        if ( $containerWatcher.length > 0 ){
+          // this containerMonitor is an instance of the scroll monitor that listens to scroll events on your container.
+          var containerMonitor = scrollMonitor.createContainer($containerWatcher);
+          elWatcher = containerMonitor.create($(el));
+        } else {
+          elWatcher = scrollMonitor.create( $(el) );
+        }
+
         elWatcher.enterViewport(throttle(function() {
           if ( delay ){
             setTimeout(function(){
@@ -870,10 +881,19 @@ $(document).ready(function(){
         }));
 
       });
-
     }
-
   }
+
+  // update states for AOS on overflow scroll containers
+  function initAOSRefresher(fromPjax){
+    var $page = getCorrespondingPage(fromPjax)
+    var $scrollable = $page.find('[js-scrollable-animation-fix]');
+
+    $scrollable.on('scroll', throttle(function(){
+      AOS.refresh()
+    }, 100))
+  }
+
 
   ////////////////
   // FORM VALIDATIONS
@@ -1229,7 +1249,7 @@ $(document).ready(function(){
   function tileFixedTop() {
     var tile = $('[js-tile-fixed]'),
         wrapper = tile.parent();
-  
+
     if (tile.length && _window.scrollTop() >= wrapper.offset().top) {
       if (tile.outerHeight() + tile.offset().top >= wrapper.outerHeight() + wrapper.offset().top) {
         console.log('stop')
@@ -1244,7 +1264,7 @@ $(document).ready(function(){
       tile.removeAttr('style');
     }
   }
-  
+
   _window.on('scroll resize', tileFixedTop);
 
 });

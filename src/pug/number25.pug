@@ -34,7 +34,8 @@ block content
     
     .col.col--8
       .card-collection
-        .card-collection__scrollarea
+        // data-scrollmonitor container is requred for overflow-y: scroll; reveal animations (container elWatcher)
+        .card-collection__scrollarea(js-scrollable-animation-fix data-scrollmonitor-container="true")
           mixin eventCard(name, location, date)
             // card
             a(href="#").card.card--event
@@ -58,17 +59,17 @@ block content
           +eventCard("Название мероприятия", "Свердловская область", "20 мая")
           
           // TODO - scrollmonitor recalc
-          //- +eventCard("Кибер понедельник", "Москва", "28 января")
-          //- +eventCard("Cyber security forum", "Москва", "14 февраля")
-          //- +eventCard("Золотой сайт", "Москва", "Февраль")
-          //- 
-          //- +eventCard("Digital transformation conference", "Москва", "Март")
-          //- +eventCard("MBLT", "Москва", "Апрель")
-          //- +eventCard("Кибер понедельник", "Московская область", "17-19 апреля")
-          //- 
-          //- +eventCard("MBLT", "Москва", "Апрель")
-          //- +eventCard("Золотой сайт", "Москва", "Май")
-          //- +eventCard("Название мероприятия", "Свердловская область", "20 мая")
+          +eventCard("Кибер понедельник", "Москва", "28 января")
+          +eventCard("Cyber security forum", "Москва", "14 февраля")
+          +eventCard("Золотой сайт", "Москва", "Февраль")
+          
+          +eventCard("Digital transformation conference", "Москва", "Март")
+          +eventCard("MBLT", "Москва", "Апрель")
+          +eventCard("Кибер понедельник", "Московская область", "17-19 апреля")
+          
+          +eventCard("MBLT", "Москва", "Апрель")
+          +eventCard("Золотой сайт", "Москва", "Май")
+          +eventCard("Название мероприятия", "Свердловская область", "20 мая")
 
 
   // TILE GRID
