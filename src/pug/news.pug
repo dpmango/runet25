@@ -31,8 +31,9 @@ block content
           li
             a(href="#" title="Свежие новости") Свежие новости
           li.active
-            a(href="#" title="Сортировать по месяцам") Сортировать по месяцам
-              span.months
+            a(href="#" title="По месяцам") По месяцам
+            span.icon-circle.icon-circle--months(js-datepicker-toggle)
+            input(type="text" name="month" data-min-view="months" data-view="months" js-datepicker)
       
       // card-collection
       .card-collection

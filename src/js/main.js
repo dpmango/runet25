@@ -93,6 +93,7 @@ $(document).ready(function(){
     // initScrollMonitor();
     initValidations();
     initTeleport();
+    initDatepicker();
   }
 
   // Overlay transtion is covering the screen and starts to reveal
@@ -397,6 +398,26 @@ $(document).ready(function(){
     blockScroll();
   });
 
+  _document.on('click', '[js-form-events-toggle]', function(){
+    var container = $('[js-form-events]'),
+        form = $('.tile__form-events'),
+        link = $(this);
+
+    if (!container.hasClass('is-active')) {
+      container.addClass('is-active');
+      link.html('Скрыть форму');
+      if (_window.width() <= 992) {
+        form.slideDown(200);
+      }
+    } else {
+      container.removeClass('is-active');
+      link.html('Показать форму');
+      if (_window.width() <= 992) {
+        form.slideUp(200);
+      }
+    }
+  });
+
   function closeMobileMenu(isOnload){
     $('.header').removeClass('is-menu-active');
     changeHamburgerText()
@@ -516,6 +537,18 @@ $(document).ready(function(){
           draggable: true,
           dragSize: 36
         },
+        breakpoints: {
+          575: {
+            slidesPerView: 1,
+            freeMode: false,
+            scrollbar: false,
+            autoHeight: true,
+            navigation: {
+              prevEl: '.swiper-button-prev',
+              nextEl: '.swiper-button-next'
+            }
+          }
+        }
       })
     }
   }
@@ -751,6 +784,27 @@ $(document).ready(function(){
       }
     })
   }
+
+
+
+  ////////////
+  // AIR DATEPICKER PLUGIN
+  ////////////
+
+  function initDatepicker() {
+    var input = $('[js-datepicker]'),
+        datepicker = input.datepicker({
+          showEvent: 'none'
+        }).data('datepicker');
+
+    _document.on('click', '[js-datepicker-toggle]', function(){
+      datepicker.show();
+    });
+  }
+
+
+
+
 
   ////////////
   // UI
@@ -1039,6 +1093,39 @@ $(document).ready(function(){
     // call/init
     $("[js-validate-subscription]").validate(subscriptionValidationObject);
   }
+
+
+  //////////
+  // COMMITTEE
+  //////////
+  _document.on('click', '[js-committee-modal]', function(event) {
+    var id = $(this).attr('href');
+
+    var mfpThanksOptions = $.extend( defaultPopupOptions, {
+      items: {src: id}
+    }, true);
+  
+    $.magnificPopup.open(mfpThanksOptions);
+
+    event.preventDefault();
+    event.stopPropagation();
+  });
+
+
+
+
+
+  //////////
+  // TIMELINE
+  //////////
+  // new Swiper('[js-timeline-slider]', {
+  //   slidesPerView: 'auto',
+  //   direction: 'vertical',
+  //   mousewheel: true
+  // });
+  
+
+
 
   //////////
   // BARBA PJAX

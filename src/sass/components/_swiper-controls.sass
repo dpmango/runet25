@@ -19,6 +19,23 @@
     &:hover
       &::after
         height: 5px
+  
+  & > .swiper-buttons
+    display: flex
+    margin-top: 20px
+    background-color: $colorWhite
+    & > div
+      position: static
+      margin: 0
+      flex: 0 0 $col6
+      max-width: $col6
+      height: 60px
+      outline: 0
+      border: 1px solid #F2F2F2
+    .swiper-button-prev
+      background: $colorWhite svg-load('../icons/svg-mono/prev.svg') center no-repeat
+    .swiper-button-next
+      background: $colorWhite svg-load('../icons/svg-mono/next.svg') center no-repeat
 
 .swiper-scrollbar-drag
   z-index: 2
