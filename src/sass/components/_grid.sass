@@ -19,7 +19,7 @@
           justify-content: center
     &.not-hero
       .col--8 > .tile
-        padding-top: 150px
+        padding-top: 135px
 
 .col
   position: relative
@@ -28,13 +28,18 @@
   width: 100%
   min-width: 1px
   flex: 0 0 auto
-  overflow: hidden
+  // overflow: hidden
   &--4
     flex-basis: $col4
     max-width: $col4
   &--8
     flex-basis: $col8
     max-width: $col8
+
++r($lg)
+  .col
+    &--lg-hide
+      display: none
 
 .fit-sibling-y
   position: absolute
@@ -45,6 +50,9 @@
   display: flex
   flex-direction: column
 
++r($lg)
+  .fit-sibling-y
+    position: relative
 
 /* card collection
 .card-collection
@@ -138,6 +146,8 @@
 
 +r($sm)
   .card
+    max-width: $col12
+    flex: 0 0 $col12
     &--large
       max-width: $col12
       flex: 0 0 $col12

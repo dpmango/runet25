@@ -1,0 +1,34 @@
+.timeline
+  &__list
+    display: flex
+    flex-direction: column
+    margin: 0
+    padding-left: 0
+    max-width: 660px
+  &__item
+    position: relative
+    margin: 35px 0
+    padding: 40px 35px
+    width: 300px
+    background-color: #494966
+    &::after
+      content: ''
+      position: absolute
+      top: 25px
+      width: 16px
+      height: 16px
+      background-color: inherit
+      transform: rotate(45deg)
+    &:nth-child(odd)
+      &::after
+        left: 100%
+        margin-left: -8px
+    &:nth-child(even)
+      margin-left: auto
+      &::after
+        right: 100%
+        margin-right: -8px
+  &__date
+    margin-bottom: 15px
+  &__caption
+    margin-bottom: 0

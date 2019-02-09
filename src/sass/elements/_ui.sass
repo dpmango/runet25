@@ -32,6 +32,20 @@
   &:focus
     border-color: rgba(black, .5)
     outline: none
+  &--light
+    color: $colorWhite
+    background-color: transparent
+    border-color: $colorWhite
+    &:focus
+      border-color: $colorWhite
+    &::-webkit-input-placeholder
+      color: $colorWhite
+    &::-moz-placeholder
+      color: $colorWhite
+    &:-moz-placeholder
+      color: $colorWhite
+    &:-ms-input-placeholder
+      color: $colorWhite
 
 .ui-input textarea
   resize: vertical
