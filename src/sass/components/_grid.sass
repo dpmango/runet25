@@ -2,6 +2,12 @@
   display: flex
   flex-wrap: wrap
 
+.grid-main
+  .card-collection
+    height: auto
+  .col--4:not(.col--visible)
+    overflow: hidden
+
 +r($lg)
   .grid-horizontal-lg
     // for stacker 2+ card
@@ -75,9 +81,11 @@
   max-height: 100%
   display: flex
   flex-direction: column
+  &--relative
+    position: relative
 
 +r($lg)
-  .fit-sibling-y
+  .fit-sibling-y:not(.fit-sibling-y--relative)
     position: relative
     min-height: 550px
     max-height: 80vh
