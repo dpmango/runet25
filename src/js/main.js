@@ -1118,11 +1118,20 @@ $(document).ready(function(){
   //////////
   // TIMELINE
   //////////
-  // new Swiper('[js-timeline-slider]', {
-  //   slidesPerView: 'auto',
-  //   direction: 'vertical',
-  //   mousewheel: true
-  // });
+  var timeline = new Swiper('[js-timeline-slider]', {
+    slidesPerView: 'auto',
+    direction: 'vertical',
+    freeMode: true,
+    resistanceRatio: 0,
+    // freeModeSticky: true,
+    mousewheel: {
+      eventsTarged: document
+    }
+  });
+
+  if (_window.width() <= 768) {
+    timeline.destroy(true, true);
+  }
   
 
 

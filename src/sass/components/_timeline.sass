@@ -1,15 +1,51 @@
 .timeline
+  position: relative
+  height: 100%
+  &__title
+    position: absolute
+    top: 90px
+    right: 0
+    width: 100%
+    max-width: 350px
+  &__container
+    position: relative
+    margin: 0
+    padding-top: 90px
+    padding-bottom: 80px
+    max-width: 660px
+    height: 100%
+    &::before
+      content: ''
+      position: absolute
+      left: 50%
+      top: 0
+      bottom: 0
+      margin-left: -2.5px
+      width: 5px
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='5' height='19'>
+        data:image/svg+xml;charset=utf-8,%3Csvg width='5' height='5' viewBox='0 0 5 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.5 5C3.88071 5 5 3.88071 5 2.5C5 1.11929 3.88071 0 2.5 0C1.11929 0 0 1.11929 0 2.5C0 3.88071 1.11929 5 2.5 5Z' fill='%2300A5FF'/%3E %3C/svg%3E
+      </svg>") repeat-y
+    &::after
+      content: ''
+      position: absolute
+      left: 50%
+      top: 0
+      bottom: 0
+      margin-left: -2.5px
+      width: 5px
+      background: linear-gradient(to bottom, rgba(55,55,76,0.8) 0%,rgba(55,55,76,0.8) 1%,rgba(55,55,76,0) 20%,rgba(55,55,76,0) 80%,rgba(55,55,76,0.8) 100%)
+
   &__list
     display: flex
     flex-direction: column
     margin: 0
     padding-left: 0
-    max-width: 660px
   &__item
     position: relative
-    margin: 35px 0
+    margin: 33px 0 34px
     padding: 40px 35px
     width: 300px
+    height: auto
     background-color: #494966
     &::after
       content: ''
@@ -19,16 +55,106 @@
       height: 16px
       background-color: inherit
       transform: rotate(45deg)
+    &::before
+      content: ''
+      position: absolute
+      top: 25px
+      width: 15px
+      height: 15px
+      background-color: #00A5FF
+      border-radius: 50%
     &:nth-child(odd)
       &::after
         left: 100%
         margin-left: -8px
+      &::before
+        left: 100%
+        margin-left: 23px
+      .timeline__text
+        left: 100%
+        margin-left: 60px
     &:nth-child(even)
       margin-left: auto
       &::after
         right: 100%
         margin-right: -8px
+      &::before
+        right: 100%
+        margin-right: 22px
+      .timeline__text
+        right: 100%
+        margin-right: 59px
+    &:last-child
+      margin-bottom: 0
+    &.is-current
+      &::before
+        background-color: #F2306E
+        box-shadow: 0 0 0 8px rgba(#F2306E, 0.2)
   &__date
     margin-bottom: 15px
   &__caption
     margin-bottom: 0
+  &__text
+    position: absolute
+    top: 35px
+    width: 300px
+
++r($xl)
+  .timeline
+    &__title
+      max-width: 280px
+    &__container
+      max-width: 620px
+    &__item
+      width: 280px
+
++r($lg)
+  .timeline
+    display: flex
+    flex-direction: column
+    .h2-title
+      position: static
+      margin-bottom: 30px
+      max-width: none
+      flex-shrink: 0
+    &__container
+      flex: 1 0 auto
+      padding-top: 50px
+      padding-bottom: 50px
+  
++r($md)
+  .timeline
+    display: block
+    &__container
+      padding-left: 37px
+      max-width: none
+      overflow: visible
+      &::before, &::after
+        left: 5px
+        margin-left: 0
+    &__list
+      height: auto
+    &__item
+      width: auto
+      &:nth-child(odd)
+        &::after
+          left: 0
+        &::before
+          left: auto
+          right: 100%
+          margin-right: 22px
+          margin-left: 0
+      &:nth-child(even)
+        margin-left: 0
+
++r($sm)
+  .timeline
+    &__container
+      padding-top: 20px
+      padding-bottom: 20px
+    &__item
+      padding: 25px
+      .h3-title
+        font-size: 18px
+    &__caption
+      font-size: 14px
