@@ -542,7 +542,7 @@ $(document).ready(function(){
             slidesPerView: 1,
             freeMode: false,
             scrollbar: false,
-            autoHeight: true,
+            // autoHeight: true,
             navigation: {
               prevEl: '.swiper-button-prev',
               nextEl: '.swiper-button-next'
@@ -1345,11 +1345,15 @@ $(document).ready(function(){
 
   function tileFixedTop() {
     var tile = $('[js-tile-fixed]'),
-        wrapper = tile.parent();
+        wrapper = tile.parent(),
+        footer = $('.footer');
 
-    if (tile.length && _window.scrollTop() >= wrapper.offset().top) {
-      if (tile.outerHeight() + tile.offset().top >= wrapper.outerHeight() + wrapper.offset().top) {
-        console.log('stop')
+    if (tile.length && _window.scrollTop() >= wrapper.offset().top && _window.width() > 992) {
+      if (_window.scrollTop() + tile.outerHeight() >= footer.offset().top) {
+        tile.css({
+          top: 'auto',
+          bottom: _window.scrollTop() + _window.height() - footer.offset().top
+        });
       } else {
         tile.css({
           position: 'fixed',
@@ -1362,7 +1366,7 @@ $(document).ready(function(){
     }
   }
 
-  _window.on('scroll resize', tileFixedTop);
+  _window.on('load scroll resize', tileFixedTop);
 
 });
 

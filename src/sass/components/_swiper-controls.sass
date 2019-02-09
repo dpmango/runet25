@@ -21,7 +21,7 @@
         height: 5px
   
   & > .swiper-buttons
-    display: flex
+    display: none
     margin-top: 20px
     background-color: $colorWhite
     & > div
@@ -57,3 +57,8 @@
   &:hover
     &::after
       transform: translate(-50%,-50%) scale(1.5)
+
++r($sm)
+  .swiper-container-horizontal
+    & > .swiper-buttons
+      display: flex
