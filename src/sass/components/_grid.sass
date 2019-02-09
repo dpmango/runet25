@@ -3,11 +3,31 @@
   flex-wrap: wrap
 
 +r($lg)
+  .grid-horizontal-lg
+    // for stacker 2+ card
+    // i.e. in .col--4, .col--8 combination
+    display: flex
+    flex-wrap: wrap
+    .tile
+      flex: 0 0 $col6
+      max-width: $col6
+
++r($sm)
+  .grid-horizontal-lg
+    display: block
+    .tile
+      flex-basis: $col12
+      max-width: $col12
+
++r($lg)
   .grid-main
     flex-direction: column
+    // TODO - ARTEM
+    // предлагаю везде сделать .col на 100% от $lg
+    // нужно посмотреть если появились конфликты
     & > .col
-      max-width: $col12
-      flex: 0 0 $col12
+      // max-width: $col12
+      // flex: 0 0 $col12
       &.col--4
         min-height: 500px
         order: 2
@@ -38,6 +58,12 @@
 
 +r($lg)
   .col
+    &--4
+      flex-basis: $col12
+      max-width: $col12
+    &--8
+      flex-basis: $col12
+      max-width: $col12
     &--lg-hide
       display: none
 
@@ -53,6 +79,8 @@
 +r($lg)
   .fit-sibling-y
     position: relative
+    min-height: 550px
+    max-height: 80vh
 
 /* card collection
 .card-collection
@@ -102,7 +130,7 @@
     &:hover
       border-color: white
   &--large
-    flex: 0 0 $col6
+    flex-basis: $col6
     max-width: $col6
   &__meta
     padding-bottom: 20px
@@ -123,8 +151,11 @@
 
   &__cta
     padding-top: 30px
-    transition: transform .25s $ease
-  
+    .ico, .icon
+      will-change: transform
+      backface-visibility: hidden
+      transition: transform .25s $ease
+
   &__footer
     display: flex
     align-items: center
@@ -137,17 +168,56 @@
 
   &:hover
     .card__cta
-      transform: translate3d(8px,0,0)
+      // aos conflict
+      // transform: translate3d(8px,0,0) !important
+      .ico, .icon
+        transform: translate3d(8px,0,0)
+
+
++r($xl)
+  .card-collection
+    .card
+      flex-basis: $col6
+      max-width: $col6
 
 +r($lg)
+  .card-collection
+    min-height: 550px
+    height: 80vh
+
   .card
     max-width: $col6
-    flex: 0 0 $col6
+    flex-basis: $col6
 
 +r($sm)
+  .card-collection
+    min-height: 1px
+    height: auto
+    // prev overwites
+    .card
+      flex-basis: $col12
+      max-width: $col12
+    // makes scrollarea X forced
+    &__scrollarea
+      position: relative
+      overflow-y: auto
+      overflow-x: scroll
+      flex-wrap: nowrap
+      .card
+        flex-basis: 260px
+        max-width: 260px
+
   .card
+    // TODO - any case when it's not $col12 ?
+    flex-basis: $col12
     max-width: $col12
-    flex: 0 0 $col12
+    min-height: 270px
+    &--event
+      padding: 50px 30px 40px
+
     &--large
       max-width: $col12
-      flex: 0 0 $col12
+      flex-basis: $col12
+
+    &__location
+      font-size: 12px

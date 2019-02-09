@@ -70,13 +70,17 @@ img, picture
 
 /* text reveal
 .rtxt
+  &:not(.is-words-wrapped)
+    // keep wraps inline-block for natural words flow
+    // manual wraps keeps line-breaks
+    display: flex
+    flex-direction: column
+    align-items: flex-start
   &__wrap
     display: inline-block
     position: relative
     overflow: hidden
     vertical-align: top
-  // TODO - does lines actually needed?
-  // wrap span + span every word in js ???
   &__mover
     display: inline-block
     transform: translate3d(0,100%,0)
@@ -84,8 +88,6 @@ img, picture
     backface-visibility: hidden
     transform-style: preserve-3d
     transition: transform .7s $ease
-    // + .rtxt__mover
-      // margin-left: .25em
 
 
   &.is-animated
