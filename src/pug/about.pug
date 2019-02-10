@@ -88,7 +88,7 @@ block content
         .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:600/v1549746979/runet25/candyFire_11.jpg)")
           img(js-lazy data-src='img/candyFire_11.jpg' data-srcset='img/candyFire_11@2x.jpg 2x')
 
-    .col.col--8
+    .col.col--8(js-header-color data-logo-color="white")
       .fit-sibling-y.fit-sibling-y--relative
         .history
           .scroller-x.swiper-container(js-swiper-cards-scroller)
@@ -143,12 +143,12 @@ block content
           span.rtxt__wrap 
             span.rtxt__mover Представители
 
-    .col.col--8
+    .col.col--8(js-header-color data-logo-color="white")
       .card-collection
         .card-collection__grid
           mixin userCard(name, post, img)
             // card
-            a(href="#").card.card--event
+            a(href="#").card.card--event(data-aos="fade-up")
               .scaler.img-block(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/'+ img +'.jpg)')
                 img(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
               p.card__name.h4-title.rtxt(js-reveal js-set-line-breaks)= name

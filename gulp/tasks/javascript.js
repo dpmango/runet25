@@ -24,6 +24,7 @@ gulp.task('javascript:vendor', function() {
       path.resolve('bower_components', 'jquery-lazy/jquery.lazy.min.js'),
       path.resolve('bower_components', 'jquery-lazy/plugins/jquery.lazy.picture.min.js'),
       path.resolve('bower_components', 'air-datepicker/dist/js/datepicker.min.js'),
+      path.resolve('bower_components', 'sticky-kit/jquery.sticky-kit.min.js'),
       // path.resolve('bower_components', 'animejs/anime.min.js'),
       path.resolve('node_modules', 'gsap/src/minified/TweenMax.min.js'),
       path.resolve('node_modules', 'gsap/src/minified/plugins/ScrollToPlugin.min.js'),

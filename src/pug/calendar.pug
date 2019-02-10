@@ -19,7 +19,7 @@ block content
       img(js-lazy data-src='img/backgrounds/heroTitle_3_red.jpg' data-srcset='img/backgrounds/heroTitle_3_red@2x.jpg 2x')
   
   // grid
-  .grid.grid-main.reverse
+  .grid.grid-main.reverse(js-header-color data-menu-color="white")
     .col.col--8
       // tabs-nav
       .tabs-nav
@@ -38,7 +38,7 @@ block content
         .card-collection__grid
           mixin eventCard(name, caption, location, date)
             // card
-            a(href="#").card.card--large.card--event
+            a(href="#").card.card--large.card--event(data-aos="fade-up")
               .card__name.h3-title.rtxt(js-reveal js-set-line-breaks)= name
               if caption
                 p.card__caption= caption

@@ -16,14 +16,14 @@ block content
       img(js-lazy data-src='img/backgrounds/heroTitle_8_blue.jpg' data-srcset='img/backgrounds/heroTitle_8_blue@2x.jpg 2x')
   
   // grid
-  .grid.grid-main
+  .grid.grid-main(js-header-color data-menu-color="white")
     .col.col--8
       // card-collection
       .card-collection
         .card-collection__grid
           mixin newsCard(id, name, post, img)
             // card
-            a(href="#cardCommite-"+id js-popup).card.card--large.card--event
+            a(href="#cardCommite-"+id js-popup).card.card--large.card--event(data-aos="fade-up")
               .scaler.img-block(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/'+ img +'.jpg)')
                 img(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
 

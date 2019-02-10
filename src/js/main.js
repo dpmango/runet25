@@ -495,7 +495,8 @@ $(document).ready(function(){
       container: $parent,
       containerOffsetTop: $parent.offset().top,
       containerWidth: Math.round($parent.outerWidth()),
-      footerOffset: $page.find('.footer').offset().top,
+      // footerOffset: $page.find('.footer').offset().top,
+      footerOffset: $parent.offset().top + $parent.height(),
       windowHeight: _window.height()
     }
     console.log(stickyParams.footerOffset)

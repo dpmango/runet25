@@ -16,10 +16,10 @@ block content
       img(js-lazy data-src='img/backgrounds/heroTitle_6_multi.jpg' data-srcset='img/backgrounds/heroTitle_6_multi@2x.jpg 2x')
   
   // grid
-  .grid.grid-main.reverse
+  .grid.grid-main.reverse(js-header-color data-logo-color="white")
     .col.col--4
       // tile
-      .tile.tile--green.tile--full-v
+      .tile.tile--green.tile--full.tile--fixed(js-tile-fixed)
         h3.h3-title.rtxt(js-reveal data-delay="300") 
           span.rtxt__wrap 
             span.rtxt__mover Актуальные новости, пресс-релизы и анонсы
@@ -40,7 +40,7 @@ block content
         .card-collection__grid
           mixin newsCard(name, date, img)
             // card
-            a(href="#").card.card--large.card--event
+            a(href="#").card.card--large.card--event(data-aos="fade-up")
               .scaler.img-block(data-ar="16:9" style="padding-bottom: "+ (193/321) * 100 +"%;background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/"+ img +".jpg)")
                 img(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
               p.card__name.h4-title.rtxt(js-reveal js-set-line-breaks)= name
