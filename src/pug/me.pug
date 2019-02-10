@@ -12,7 +12,7 @@ block content
           span.rtxt__wrap
             span.rtxt__mover Я – часть Рунета
             
-    .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549087228/runet25/heroTitle_4_blue.jpg)")
+    .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/heroTitle_4_blue.jpg)")
       img(js-lazy data-src='img/backgrounds/heroTitle_4_blue.jpg' data-srcset='img/backgrounds/heroTitle_4_blue@2x.jpg 2x')
   
   // grid
@@ -20,7 +20,7 @@ block content
     .col.col--4.col--lg-hide
       // tile
       .tile.tile--full.tile--fixed(js-tile-fixed)
-        .tile__img-cover
+        .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/candyFire_9.jpg)")
           img(js-lazy data-src='img/candyFire_9.jpg' data-srcset='img/candyFire_9@2x.jpg 2x')
 
     .col.col--8
@@ -63,10 +63,11 @@ block content
           h2.h2-title Оргкомитет
           .grid.tile__users
             mixin userItem(name, img)
-              .col.col--4.user-item
-                .user-item__avatar
-                  img.user-item__image(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
-                span.user-item__name Аркадий Паровозов
+              .col.col--4.user-card
+                .user-card__avatar
+                  .scaler(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/'+ img +'.jpg)')
+                    img.user-card__image(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
+                span.user-card__name Аркадий Паровозов
             
             +userItem("Михаил Жванецкий", "userItem_1")
             +userItem("Аркадий Паровозов", "userItem_2")
@@ -125,5 +126,5 @@ block content
         
     // tile
     .tile.tile--1-3.tile--lg-full
-      .tile__img-cover
+      .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/candyFire_8.jpg)")
         img(js-lazy data-src='img/candyFire_8.jpg' data-srcset='img/candyFire_8@2x.jpg 2x')

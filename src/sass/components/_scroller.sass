@@ -6,7 +6,7 @@
   display: flex
   flex-direction: column
   padding-bottom: 100px
-  background: #F2F2F2
+  background: $colorLightBg
   &__grid
     flex: 1 1 auto
     display: flex
@@ -23,17 +23,16 @@
     padding-bottom: 80px
 
 +r($sm)
-  .history
-    .scroller-x
-      padding-bottom: 0
-      .swiper-scrollbar
-        display: none
-      
-      &__grid
-        .card--large
-          flex: 0 0 100%
-          max-width: 100%
-          margin-right: 0
+  .scroller-x
+    padding-bottom: 0
+    .swiper-scrollbar
+      display: none
+
+    &__grid
+      .card--large
+        flex: 0 0 100%
+        max-width: 100%
+        margin-right: 0
 
 .year-stack
   width: 100%
@@ -53,3 +52,22 @@
     position: relative
     flex: 1 1 auto
     padding-right: 27px
+
++r($md)
+  .year-stack
+    &__name
+      margin-bottom: 35px
+
+
++r($sm)
+  .year-stack
+    flex-basis: $col12
+    max-width: $col12
+    min-height: 550px
+    height: 80vh
+    padding: 40px 13px 0px 40px
+    border-right: 0
+    // swiper controls merge margin
+    margin-bottom: -20px
+    &__name
+      margin-bottom: 25px

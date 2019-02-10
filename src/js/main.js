@@ -43,6 +43,13 @@ $(document).ready(function(){
   var sliders = {
     newsScroller: {
       instance: undefined
+    },
+    cardsScroller: {
+      instance: undefined
+    },
+    timeline: {
+      instance: undefined,
+      disableLessThan: 768
     }
   } // collection of all sliders
 
@@ -68,6 +75,15 @@ $(document).ready(function(){
       }
     }
   }
+  var stickyParams = {
+    object: undefined,
+    objectHeight: undefined,
+    container: undefined,
+    containerOffsetTop: undefined,
+    containerWidth: undefined,
+    footerOffset: undefined,
+    windowHeight: undefined
+  }
 
   ////////////
   // LIST OF FUNCTIONS
@@ -82,7 +98,6 @@ $(document).ready(function(){
   function pageReady(fromPjax){
     closeMobileMenu(fromPjax);
     setLineBreaks();
-    initSliders();
     initSlidersResponsive();
     initPopups();
     getScalerResponsive();
@@ -90,7 +105,6 @@ $(document).ready(function(){
     initPerfectScrollbar();
     initMasks();
     initSelectric();
-    // initScrollMonitor();
     initValidations();
     initTeleport();
     initDatepicker();
@@ -98,6 +112,7 @@ $(document).ready(function(){
 
   // Overlay transtion is covering the screen and starts to reveal
   function inBetweenTransition(fromPjax){
+    getStickyParams(fromPjax);
     getHeaderParams(fromPjax);
     controlHeaderColor();
   }
@@ -136,9 +151,11 @@ $(document).ready(function(){
   _window.on('scroll', getWindowScroll);
   _window.on('scroll', scrollHeader);
   _window.on('scroll', controlHeaderColor);
+  _window.on('scroll', scrollSticky);
   _window.on('resize', debounce(getHeaderParams, 100))
   _window.on('resize', debounce(setScalerResponsive, 100))
   _window.on('resize', debounce(setLineBreaks, 100))
+  _window.on('resize', debounce(getStickyParams, 100))
   _window.on('resize', debounce(setBreakpoint, 200))
 
 
@@ -406,13 +423,13 @@ $(document).ready(function(){
     if (!container.hasClass('is-active')) {
       container.addClass('is-active');
       link.html('Скрыть форму');
-      if (_window.width() <= 992) {
+      if (getWindowWidth() <= 992) {
         form.slideDown(200);
       }
     } else {
       container.removeClass('is-active');
       link.html('Показать форму');
-      if (_window.width() <= 992) {
+      if (getWindowWidth() <= 992) {
         form.slideUp(200);
       }
     }
@@ -461,7 +478,52 @@ $(document).ready(function(){
       }
       wrapEachWord($container, containerText)
     })
+  }
 
+  //////////
+  // STICKY TILE
+  //////////
+  function getStickyParams(fromPjax){
+    var $page = getCorrespondingPage(fromPjax);
+    var $obj = $page.find('[js-tile-fixed]').first(); // TODO - any case when there are multiple items on page?
+    if ($obj.length === 0) return
+    var $parent = $obj.parent();
+
+    stickyParams = {
+      object: $obj,
+      objectHeight: $obj.outerHeight(),
+      container: $parent,
+      containerOffsetTop: $parent.offset().top,
+      containerWidth: Math.round($parent.outerWidth()),
+      footerOffset: $page.find('.footer').offset().top,
+      windowHeight: _window.height()
+    }
+    console.log(stickyParams.footerOffset)
+    scrollSticky();
+  }
+
+  function scrollSticky() {
+    if ( !stickyParams.object ) return
+
+    var tile = stickyParams.object
+        wrapper = stickyParams.container
+
+    if (scroll.y >= stickyParams.containerOffsetTop && getWindowWidth() > 992) {
+      if (scroll.y + stickyParams.objectHeight >= stickyParams.footerOffset) {
+        tile.css({
+          top: 'auto',
+          bottom: Math.round(scroll.y + stickyParams.windowHeight - stickyParams.footerOffset)
+        });
+      } else {
+        tile.css({
+          position: 'fixed',
+          top: 0,
+          width: stickyParams.containerWidth
+        });
+      }
+    } else {
+      tile.removeAttr('style');
+    }
   }
 
 
@@ -479,24 +541,27 @@ $(document).ready(function(){
   function initSlidersResponsive(){
     // RESPONSIVE ON/OFF sliders
     var newsScrollerSwiperSelector = '[js-swiper-news-scroller]';
-    var cardsScrollerSwiperSelector = '[js-swiper-cards-scroller]'
-
-    // if ( $(newsScrollerSwiperSelector).length > 0 ){
-    //   if ( getWindowWidth() >= sliders.benefits.disableOn ) {
-    //     if ( sliders.newsScroller.instance !== undefined ) {
-    //       sliders.newsScroller.instance.destroy( true, true );
-    //       sliders.newsScroller.instance = undefined
-    //     }
-    //     // return
-    //   } else {
-    //     if ( sliders.newsScroller.instance === undefined ) {
-    //       initNewsScrollerSwiper();
-    //     }
-    //   }
-    // }
+    var cardsScrollerSwiperSelector = '[js-swiper-cards-scroller]';
+    var timelineSwiperSelector = '[js-timeline-slider]'
 
     initNewsScrollerSwiper();
     initCardsScrollerSwiper();
+
+    if ( $(timelineSwiperSelector).length > 0 ){
+      if ( getWindowWidth() <= sliders.timeline.disableLessThan ) {
+        if ( sliders.timeline.instance !== undefined ) {
+          sliders.timeline.instance.destroy( true, true );
+          sliders.timeline.instance = undefined
+        }
+        // return
+      } else {
+        if ( sliders.timeline.instance === undefined ) {
+          initTimelineSwiper();
+        }
+      }
+    }
+
+    // INIT options
 
     // news scroller swiper
     function initNewsScrollerSwiper(){
@@ -516,12 +581,24 @@ $(document).ready(function(){
           draggable: true,
           dragSize: 36
         },
+        breakpoints: {
+          575: {
+            slidesPerView: 1,
+            freeMode: false,
+            scrollbar: false,
+            // autoHeight: true,
+            navigation: {
+              prevEl: '.swiper-button-prev',
+              nextEl: '.swiper-button-next'
+            }
+          }
+        }
       })
     }
 
     // card scroller swiper
     function initCardsScrollerSwiper(){
-      sliders.newsScroller.instance = new Swiper(cardsScrollerSwiperSelector, {
+      sliders.cardsScroller.instance = new Swiper(cardsScrollerSwiperSelector, {
         wrapperClass: "swiper-wrapper",
         slideClass: "card",
         direction: 'horizontal',
@@ -551,6 +628,21 @@ $(document).ready(function(){
         }
       })
     }
+
+    // TIMELINE
+    function initTimelineSwiper(){
+      sliders.timeline.instance = new Swiper(timelineSwiperSelector, {
+        slidesPerView: 'auto',
+        direction: 'vertical',
+        freeMode: true,
+        resistanceRatio: 0,
+        // freeModeSticky: true,
+        mousewheel: {
+          eventsTarged: document
+        }
+      });
+    }
+
   }
 
 
@@ -621,6 +713,7 @@ $(document).ready(function(){
         animateLazy(element)
       },
       onFinishedAll: function(){
+        getStickyParams();
         ieFixPictures()
       }
     });
@@ -785,25 +878,20 @@ $(document).ready(function(){
     })
   }
 
-
-
   ////////////
   // AIR DATEPICKER PLUGIN
   ////////////
-
   function initDatepicker() {
     var input = $('[js-datepicker]'),
         datepicker = input.datepicker({
           showEvent: 'none'
         }).data('datepicker');
 
+    // TODO - multiple click listeners ?
     _document.on('click', '[js-datepicker-toggle]', function(){
       datepicker.show();
     });
   }
-
-
-
 
 
   ////////////
@@ -926,11 +1014,9 @@ $(document).ready(function(){
         }
 
         elWatcher.enterViewport(throttle(function() {
-          if ( delay ){
-            setTimeout(function(){
-              $(el).addClass(animatedClass);
-            }, parseInt(delay))
-          }
+          setTimeout(function(){
+            $(el).addClass(animatedClass);
+          }, parseInt(delay))
         }, 100, {
           'leading': true
         }));
@@ -1095,46 +1181,6 @@ $(document).ready(function(){
   }
 
 
-  //////////
-  // COMMITTEE
-  //////////
-  _document.on('click', '[js-committee-modal]', function(event) {
-    var id = $(this).attr('href');
-
-    var mfpThanksOptions = $.extend( defaultPopupOptions, {
-      items: {src: id}
-    }, true);
-  
-    $.magnificPopup.open(mfpThanksOptions);
-
-    event.preventDefault();
-    event.stopPropagation();
-  });
-
-
-
-
-
-  //////////
-  // TIMELINE
-  //////////
-  var timeline = new Swiper('[js-timeline-slider]', {
-    slidesPerView: 'auto',
-    direction: 'vertical',
-    freeMode: true,
-    resistanceRatio: 0,
-    // freeModeSticky: true,
-    mousewheel: {
-      eventsTarged: document
-    }
-  });
-
-  if (_window.width() <= 768) {
-    timeline.destroy(true, true);
-  }
-  
-
-
 
   //////////
   // BARBA PJAX
@@ -1224,75 +1270,9 @@ $(document).ready(function(){
     }
   });
 
-  // var FadeTransition = Barba.BaseTransition.extend({
-  //   start: function() {
-  //     Promise
-  //       .all([this.newContainerLoading, this.fadeOut()])
-  //       .then(this.fadeIn.bind(this));
-  //   },
-  //
-  //   fadeOut: function() {
-  //     var _this = this;
-  //     var $oldPage = $(this.oldContainer)
-  //     var $newPage = $(this.newContainer);
-  //     var deferred = Barba.Utils.deferred();
-  //
-  //     TweenLite.to($oldPage, .5, {
-  //       opacity: 0,
-  //       ease: Power1.easeIn,
-  //       onComplete: function() {
-  //         deferred.resolve();
-  //       }
-  //     });
-  //
-  //     return deferred.promise
-  //   },
-  //
-  //   fadeIn: function() {
-  //     var _this = this;
-  //     var $oldPage = $(this.oldContainer)
-  //     var $newPage = $(this.newContainer);
-  //
-  //     $(this.oldContainer).hide();
-  //
-  //     $newPage.css({
-  //       visibility : 'visible',
-  //       opacity : 0
-  //     });
-  //
-  //     TweenLite.to(window, .15, {
-  //       scrollTo: {y: 0, autoKill: false},
-  //       ease: easingSwing
-  //     });
-  //
-  //     TweenLite.to($newPage, .5, {
-  //       opacity: 1,
-  //       ease: Power1.easeOut,
-  //       onComplete: function() {
-  //         triggerBody()
-  //         _this.done();
-  //       }
-  //     });
-  //
-  //   }
-  // });
-
   // set barba transition
   Barba.Pjax.getTransition = function() {
     return OverlayTransition;
-    // if ( transitionInitElement ){
-    //   if ( transitionInitElement.attr('data-transition') ){
-    //     var transition = transitionInitElement.data('transition');
-    //     // console.log(transition)
-    //     // if ( transition === "project" ){
-    //     //   return ProjectTransition
-    //     // }
-    //   }
-    //   return FadeTransition;
-    // } else {
-    //   // first visit + back button (history is blank)
-    //   window.location.href = Barba.HistoryManager.history[1].url
-    // }
   };
 
   Barba.Prefetch.init();
@@ -1340,34 +1320,6 @@ $(document).ready(function(){
       },1500)
     }
   }
-
-
-
-  function tileFixedTop() {
-    var tile = $('[js-tile-fixed]'),
-        wrapper = tile.parent(),
-        footer = $('.footer');
-
-    if (tile.length && _window.scrollTop() >= wrapper.offset().top && _window.width() > 992) {
-      if (_window.scrollTop() + tile.outerHeight() >= footer.offset().top) {
-        tile.css({
-          top: 'auto',
-          bottom: _window.scrollTop() + _window.height() - footer.offset().top
-        });
-      } else {
-        tile.css({
-          position: 'fixed',
-          top: 0,
-          width: wrapper.width()
-        });
-      }
-    } else {
-      tile.removeAttr('style');
-    }
-  }
-
-  _window.on('load scroll resize', tileFixedTop);
-
 });
 
 
@@ -1411,7 +1363,6 @@ function getWindowWidth(){
   return window.innerWidth
 }
 
-
 // JQUERY CUSTOM HELPER FUNCTIONS
 function wrapEachWord($el, content){
   var text_arr = content.split(' ');
@@ -1424,57 +1375,3 @@ function wrapEachWord($el, content){
 
   $el.addClass('is-words-wrapped')
 }
-
-
-// function wrapByLine(el, content){
-//   var $cont = el
-//
-//   // $cont.text()
-//   var text_arr = content.split(' ');
-//
-//   for (i = 0; i < text_arr.length; i++) {
-//     text_arr[i] = '<span class="rtxt__mover">' + text_arr[i] + '&nbsp;</span>';
-//   }
-//
-//   $cont.html(text_arr.join(''));
-//
-//   $wordSpans = $cont.find('span');
-//
-//   var lineArray = [],
-//       lineIndex = 0,
-//       lineStart = true
-//
-//   $wordSpans.each(function(idx) {
-//     var pos = $(this).position();
-//     var top = pos.top;
-//
-//     if (lineStart) {
-//       lineArray[lineIndex] = [idx];
-//       lineStart = false;
-//     } else {
-//       var $next = $(this).next();
-//
-//       if ($next.length) {
-//         var isBreak = $next.html().indexOf("\n") !== -1
-//         if ($next.position().top > top || isBreak) {
-//           lineArray[lineIndex].push(idx);
-//           lineIndex++;
-//           lineStart = true
-//         }
-//       } else {
-//         lineArray[lineIndex].push(idx);
-//       }
-//     }
-//   });
-//
-//   for (i = 0; i < lineArray.length; i++) {
-//     var start = lineArray[i][0],
-//         end = lineArray[i][1] + 1;
-//
-//     if (!end) {
-//       $wordSpans.eq(start).wrap('<span class="rtxt__wrap">')
-//     } else {
-//       $wordSpans.slice(start, end).wrapAll('<span class="rtxt__wrap">');
-//     }
-//   }
-// }

@@ -85,10 +85,8 @@
     position: relative
 
 +r($lg)
-  .fit-sibling-y:not(.fit-sibling-y--relative)
+  .fit-sibling-y
     position: relative
-    min-height: 550px
-    max-height: 80vh
 
 /* card collection
 .card-collection
@@ -122,7 +120,7 @@
     // eq of 50px
     padding: 5.5%
     background: white
-    border: 1px solid #F2F2F2
+    border: 1px solid $colorLightBg
     &:hover
       border-color: $colorPrimary
   &--project
@@ -130,7 +128,7 @@
     padding: 40px
     background: #37374C
     color: white
-    border: 1px solid rgba(#F2F2F2, .2)
+    border: 1px solid rgba($colorLightBg, .2)
     .card__name
       margin-top: 0
       margin-bottom: auto

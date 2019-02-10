@@ -12,7 +12,7 @@ block content
           span.rtxt__wrap
             span.rtxt__mover Новости 25-летия
         
-    .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549087228/runet25/heroTitle_6_multi.jpg)")
+    .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/heroTitle_6_multi.jpg)")
       img(js-lazy data-src='img/backgrounds/heroTitle_6_multi.jpg' data-srcset='img/backgrounds/heroTitle_6_multi@2x.jpg 2x')
   
   // grid
@@ -41,7 +41,8 @@ block content
           mixin newsCard(name, date, img)
             // card
             a(href="#").card.card--large.card--event
-              img.img-block(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
+              .scaler.img-block(data-ar="16:9" style="padding-bottom: "+ (193/321) * 100 +"%;background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/"+ img +".jpg)")
+                img(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
               p.card__name.h4-title.rtxt(js-reveal js-set-line-breaks)= name
               .card__footer(data-aos="fade" data-aos-delay="300")
                 .card__meta(data-aos="fade" data-aos-delay="300")
