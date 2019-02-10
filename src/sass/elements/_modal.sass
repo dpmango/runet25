@@ -10,6 +10,10 @@ html.mfp-helper
     height: 100%
     -webkit-transform: translateZ(0)
 
+.mfp-content
+  padding-top: 25px
+  padding-bottom: 25px
+
 .mfp-thanks
   position: relative
   max-width: 500px
@@ -27,20 +31,22 @@ html.mfp-helper
   .btn
     margin-top: 20px
 
-.mfp-committee
+.mfp-card
   position: relative
   margin: auto
   padding: 55px 60px
   max-width: 700px
   background: white
   text-align: left
+  &--xl
+    max-width: 1000px
   .card__date
     margin-bottom: 20px
     color: rgba(#333, 0.5)
     font-weight: 700
 
 +r($md)
-  .mfp-committee
+  .mfp-card
     padding: 40px 30px 30px
 
 +r($sm)

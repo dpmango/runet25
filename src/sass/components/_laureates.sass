@@ -1,0 +1,28 @@
+.laureates
+  width: 100%
+  text-align: center
+
+  &__grid
+    justify-content: space-around
+  
+  &__item
+    padding-left: 20px
+    padding-right: 20px
+
+  .h2-title
+    margin-bottom: 40px
+
++r($md)
+  .laureates
+    padding-top: 30px
+    padding-bottom: 30px
+
++r($sm)
+  .laureates
+    &__grid
+      flex-direction: column
+      justify-content: center
+    &__item
+      margin-bottom: 40px
+      &:last-child
+        margin-bottom: 0

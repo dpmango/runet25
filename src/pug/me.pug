@@ -59,41 +59,44 @@ block content
         // tile
         .tile.tile--full.tile--center.tile--dark
           h2.h2-title Оргкомитет
-          .grid.tile__users
-            mixin userItem(name, img)
-              .col.col--4.user-card
-                .user-card__avatar
-                  .scaler(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/'+ img +'.jpg)')
-                    img.user-card__image(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
-                span.user-card__name Аркадий Паровозов
-            
-            +userItem("Михаил Жванецкий", "userItem_1")
-            +userItem("Аркадий Паровозов", "userItem_2")
-            +userItem("Михаил Кшиштовский", "userItem_3")
-            +userItem("Аркадий Паровозов", "userItem_4")
-            +userItem("Марк Цукерберг", "userItem_5")
+          .users
+            .users__wrapper
+              .grid.users__grid
+                mixin userItem(name, img)
+                  .user-card.users__col
+                    .user-card__avatar
+                      .scaler(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/'+ img +'.jpg)')
+                        img.user-card__image(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
+                    span.user-card__name Аркадий Паровозов
+                
+                +userItem("Михаил Жванецкий", "userItem_1")
+                +userItem("Аркадий Паровозов", "userItem_2")
+                +userItem("Михаил Кшиштовский", "userItem_3")
+                +userItem("Аркадий Паровозов", "userItem_4")
+                +userItem("Марк Цукерберг", "userItem_5")
         
         // tile
-        .tile.tile--full.tile--center.tile--green
-          h2.h2-title Лауреаты
-          .grid.tile__laureates
-            .col.col--4
-              div
-                img(js-lazy data-src='img/wreath_gold.png' data-srcset='img/wreath_gold@2x.png 2x')
-              p.p-big Вконтакте
-            
-            .col.col--4
-              div
-                img(js-lazy data-src='img/wreath_silver.png' data-srcset='img/wreath_silver@2x.png 2x')
-              p.p-big ASOS
-            
-            .col.col--4
-              div
-                img(js-lazy data-src='img/wreath_bronze.png' data-srcset='img/wreath_bronze@2x.png 2x')
-              p.p-big Яндекс
+        .tile.tile--full.tile--vauto.tile--green
+          .laureates
+            h2.h2-title Лауреаты
+            .grid.grid--offset.laureates__grid
+              .laureates__item
+                div
+                  img(js-lazy data-src='img/wreath_gold.png' data-srcset='img/wreath_gold@2x.png 2x')
+                p.p-big Вконтакте
+              
+              .laureates__item
+                div
+                  img(js-lazy data-src='img/wreath_silver.png' data-srcset='img/wreath_silver@2x.png 2x')
+                p.p-big ASOS
+              
+              .laureates__item
+                div
+                  img(js-lazy data-src='img/wreath_bronze.png' data-srcset='img/wreath_bronze@2x.png 2x')
+                p.p-big Яндекс
   
   // grid
-  .grid
+  .grid(js-header-color data-menu-color="white")
     // tile
     .tile.tile--2-3.tile--white.tile--lg-last(js-header-color data-menu-color="white")
       .tile__grid
@@ -101,13 +104,13 @@ block content
           h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Остались вопросы?
           p.p-small(data-aos="fade" data-aos-delay="300") Задайте их, а мы оперативно ответим. <br>Вопросы отправляются на специальную почту оргкомитета конкурсов.
         .tile__col
-          form(action="/email-form.php" js-validate-subscription data-aos="fade" data-aos-delay="500").quest-form
+          form.multi-form(action="/email-form.php" js-validate-feedback data-aos="fade" data-aos-delay="500")
             .ui-group
               label(for="name") ФИО
-              input.ui-input(type="text" name="name" placeholder="ivan.petrov@address.ru")
+              input.ui-input(type="text" name="name" placeholder="")
             .ui-group
               label(for="title") Организация / Проект
-              input.ui-input(type="text" name="title" placeholder="")
+              input.ui-input(type="text" name="project" placeholder="")
             .ui-group
               label(for="text") Текст вопроса
               textarea.ui-input(name="text" placeholder="")
@@ -116,9 +119,9 @@ block content
                 span Отправить вопрос
       
       // modal
-      .mfp-dialog.mfp-thanks.mfp-hide#subsc-thanks
+      .mfp-dialog.mfp-thanks.mfp-hide#feedback-thanks
         .h2-title Спасибо за вопрос!
-        p.p-small(js-subsc-thanks-message) В ближайшее время с вами свяжутся наши специалисты
+        p.p-small(js-feedback-thanks-message) В ближайшее время с вами свяжутся наши специалисты
         a(href="#" js-close-mfp).btn.btn-primary
           span Вернуться на сайт
         

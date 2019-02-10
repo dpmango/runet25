@@ -28,18 +28,21 @@
   &--fixed
     position: absolute
     top: 0
-    height: 100vh
-    // max-height: 100vh
+    height: 100%
+    max-height: 100vh
     will-change: top, bottom
     backface-visibility: hidden
     overflow: hidden
   &--timeline
+    margin-bottom: -1px
     padding-left: 120px
     height: 100vh
-    overflow-y: auto
+    overflow: hidden
   &--form
     max-width: 200%
     width: 200%
+    overflow-y: auto
+    overflow-x: hidden
     transition: transform 0.2s 0.05s ease-in-out
     &.is-active
       transform: translate3d(-50%, 0, 0)
@@ -47,6 +50,12 @@
         transform: translate3d(0, 0, 0)
       [js-form-events-toggle]::before
         transform: scale(-1, 1)
+  &--sm
+    min-height: 320px
+  &--py-lg
+    padding-top: 120px
+  &--pb-lg
+    padding-bottom: 80px
 
   // elements
   &__grid
@@ -126,14 +135,6 @@
         object-position: left center
       &-lb img, picture
         object-position: left bottom
-  &__users
-    justify-content: center
-    .h3-title
-      width: 100%
-    &--start
-      justify-content: flex-start
-    .user-card
-      margin-bottom: 60px
   &__laureates
     width: 100%
     .p-big
@@ -145,8 +146,6 @@
     width: 100%
     border-top: 1px solid rgba($colorWhite, 0.3)
     border-bottom: 0
-  &__users
-    margin-bottom: 20px
   &__info
     margin-bottom: 40px
     padding: 37px 0
@@ -161,10 +160,8 @@
   &__form-events
     transform: translate3d(100%, 0, 0)
     transition: transform 0.2s 0.2s ease-in-out
-
   .h2-title
     margin-top: 0
-    margin-bottom: .4em
   .h3-title
     &:first-child
       margin-top: 0
@@ -223,6 +220,9 @@
     background-color: #FFF
   &--gray
     background-color: $colorLightBg
+  &--black
+    color: $colorWhite
+    background-color: #333
 
   // position modifiers
   &--jcc
@@ -242,8 +242,13 @@
 
 +r($xl)
   .tile
-    padding: 60px 40px 35px
+    padding-top: 60px
+    padding-bottom: 35px
     min-height: 350px
+    &--sm
+      min-height: 320px
+    &--py-lg
+      padding-top: 120px
 
 +r($lg)
   .tile
@@ -268,11 +273,14 @@
     &--timeline
       padding-top: 160px
     &--form
+      position: relative
       padding-top: 45px
       padding-bottom: 45px
       width: 100%
       max-width: 100%
       min-height: auto
+      max-height: none
+      overflow: visible
       &.is-active
         transform: translate3d(0, 0, 0)
         [js-form-events-toggle]::before
@@ -296,7 +304,12 @@
     padding: 40px 30px 25px
     &--timeline
       padding-top: 120px
-      height: auto
+    &--py-lg
+      padding-bottom: 70px
+    &--pb-lg
+      padding-bottom: 50px
+    &--vauto
+      min-height: auto
     &__cta
       font-size: 14px
     &__group-content
@@ -320,15 +333,6 @@
     &__col
       flex-basis: 100%
       max-width: 100%
-    &__users
-      margin-bottom: 0
-      .h3-title
-        text-align: center
-      .col--4
-        flex-basis: $col12
-        max-width: $col12
-      .user-card
-        margin-bottom: 40px
     &__info
       margin-bottom: 10px
       padding-top: 25px
@@ -340,3 +344,11 @@
         margin-bottom: 40px
         &:last-child
           margin-bottom: 20px
+
+.tile
+  &--auto
+    min-height: auto
+
+.is-ie
+  .tile--timeline
+    flex: none

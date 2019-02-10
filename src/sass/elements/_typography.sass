@@ -145,11 +145,12 @@ p
   margin-left: 0
   margin-right: 0
   padding-left: 46px
+  min-height: 40px
   @extend .p-main
   &::before
     content: ''
     position: absolute
-    top: 7px
+    top: 3px
     left: 0
     width: 30px
     height: 22px
@@ -172,6 +173,11 @@ p
       margin-bottom: 0
   .main-list
     margin-top: 15px
+  &--clean
+    padding-left: 0
+    li
+      margin-bottom: 0
+      list-style: none
 
 ul.main-list
   list-style-type: disc
@@ -183,17 +189,24 @@ ul.main-list
     padding-left: 0
     list-style-position: inside
 
-.text-columns
-  margin: 25px 0
-  column-count: 2
-  column-gap: 40px
-  &:first-child
-    margin-top: 0
-  &:last-child
-    margin-bottom: 0
-
 +r($md)
   .text-columns
     margin-top: 1em
     margin-bottom: 1em
     column-count: 1
+
+.content
+  p
+    @extend .p-main
+  h1
+    @extend .h1-title
+  h2
+    @extend .h2-title
+  h3
+    @extend .h3-title
+  h4
+    @extend .h4-title
+  h5
+    font-size: 16px
+  h6
+    font-size: 14px

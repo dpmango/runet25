@@ -49,7 +49,7 @@ $(document).ready(function(){
     },
     timeline: {
       instance: undefined,
-      disableLessThan: 768
+      disableLessThan: 576
     }
   } // collection of all sliders
 
@@ -435,6 +435,10 @@ $(document).ready(function(){
     }
   });
 
+  _document.on('click', '[js-tabs-nav] a', function() {
+    $(this).parent().addClass('active').siblings().removeClass('active');
+  });
+
   function closeMobileMenu(isOnload){
     $('.header').removeClass('is-menu-active');
     changeHamburgerText()
@@ -494,7 +498,7 @@ $(document).ready(function(){
       objectHeight: $obj.outerHeight(),
       container: $parent,
       containerOffsetTop: $parent.offset().top,
-      containerWidth: Math.round($parent.outerWidth()),
+      containerWidth: Math.round($obj.outerWidth()),
       footerOffset: $page.find('.footer').offset().top,
       windowHeight: _window.height()
     }
@@ -542,10 +546,12 @@ $(document).ready(function(){
     // RESPONSIVE ON/OFF sliders
     var newsScrollerSwiperSelector = '[js-swiper-news-scroller]';
     var cardsScrollerSwiperSelector = '[js-swiper-cards-scroller]';
-    var timelineSwiperSelector = '[js-timeline-slider]'
+    var timelineSwiperSelector = '[js-timeline-slider]';
+    var tabsNavSwiperSelector = '[js-tabs-nav-slider]';
 
     initNewsScrollerSwiper();
     initCardsScrollerSwiper();
+    iniTabsNavSwiper();
 
     if ( $(timelineSwiperSelector).length > 0 ){
       if ( getWindowWidth() <= sliders.timeline.disableLessThan ) {
@@ -627,6 +633,19 @@ $(document).ready(function(){
           }
         }
       })
+    }
+
+    // news scroller swiper
+    function iniTabsNavSwiper(){
+      sliders.newsScroller.instance = new Swiper(tabsNavSwiperSelector, {
+        loop: false,
+        watchOverflow: true,
+        setWrapperSize: false,
+        spaceBetween: 0,
+        slidesPerView: 'auto',
+        normalizeSlideIndex: true,
+        freeMode: true,
+      });
     }
 
     // TIMELINE
@@ -886,7 +905,8 @@ $(document).ready(function(){
   function initDatepicker() {
     var input = $('[js-datepicker]'),
         datepicker = input.datepicker({
-          showEvent: 'none'
+          showEvent: 'none',
+          autoClose: true
         }).data('datepicker');
 
     // TODO - multiple click listeners ?
@@ -1046,7 +1066,7 @@ $(document).ready(function(){
   // https://jqueryvalidation.org
   function initValidations(){
     // globals
-    var subscriptionValidation
+    var subscriptionValidation, feedbackValidation;
 
     // GENERIC FUNCTIONS
     var validateErrorPlacement = function(error, element) {
@@ -1187,6 +1207,160 @@ $(document).ready(function(){
 
     // prevent default submiting form through enter keypress
     _document.on("keyup", "[js-validate-subscription]", function(e){
+      if (e.keyCode == 13) {
+        e.preventDefault()
+      }
+    })
+
+
+    var feedbackValidationObject = {
+      errorPlacement: validateErrorPlacement,
+      highlight: validateHighlight,
+      unhighlight: validateUnhighlight,
+      submitHandler: function(form) {
+        var $form = $(form)
+        $form.addClass('is-loading');
+
+        // $.ajax({
+        //   type: "POST",
+        //   url: $(form).attr('action'),
+        //   data: $(form).serialize(),
+        //   success: function(response) {
+        //     $(form).removeClass('is-loading');
+        //     var data = $.parseJSON(response);
+        //     if (data.status == 'success') {
+        //       // do something I can't test
+        //     } else {
+        //         $(form).find('[data-error]').html(data.message).show();
+        //     }
+        //   }
+        // });
+
+        // open modal
+        var mfpThanksOptions = $.extend( defaultPopupOptions, {
+          items: {src: '#feedback-thanks'}
+        }, true);
+        $.magnificPopup.open(mfpThanksOptions);
+
+        $form.removeClass('is-loading');
+        $form.find('input, textarea').val('');
+        feedbackValidation.resetForm();
+      },
+      rules: {
+        name: {
+          required: true
+        },
+        project: {
+          required: true
+        },
+        text: {
+          required: true
+        }
+      },
+      messages: {
+        name: {
+          required: "Заполните это поле"
+        },
+        project: {
+          required: "Заполните это поле"
+        },
+        text: {
+          required: "Заполните это поле"
+        }
+      }
+    }
+
+    // call/init
+    feedbackValidation = $("[js-validate-feedback]").validate(feedbackValidationObject);
+
+    // prevent default submiting form through enter keypress
+    _document.on("keyup", "[js-validate-feedback]", function(e){
+      if (e.keyCode == 13) {
+        e.preventDefault()
+      }
+    });
+
+
+    var eventValidationObject = {
+      errorPlacement: validateErrorPlacement,
+      highlight: validateHighlight,
+      unhighlight: validateUnhighlight,
+      submitHandler: function(form) {
+        var $form = $(form)
+        $form.addClass('is-loading');
+
+        // $.ajax({
+        //   type: "POST",
+        //   url: $(form).attr('action'),
+        //   data: $(form).serialize(),
+        //   success: function(response) {
+        //     $(form).removeClass('is-loading');
+        //     var data = $.parseJSON(response);
+        //     if (data.status == 'success') {
+        //       // do something I can't test
+        //     } else {
+        //         $(form).find('[data-error]').html(data.message).show();
+        //     }
+        //   }
+        // });
+
+        // open modal
+        var mfpThanksOptions = $.extend( defaultPopupOptions, {
+          items: {src: '#event-thanks'}
+        }, true);
+        $.magnificPopup.open(mfpThanksOptions);
+
+        $form.removeClass('is-loading');
+        $form.find('input, textarea').val('');
+        eventValidation.resetForm();
+      },
+      rules: {
+        name: {
+          required: true
+        },
+        title: {
+          required: true
+        },
+        terms: {
+          required: true
+        },
+        initiators: {
+          required: true
+        },
+        description: {
+          required: true
+        },
+        essence: {
+          required: true
+        }
+      },
+      messages: {
+        name: {
+          required: "Заполните это поле"
+        },
+        title: {
+          required: "Заполните это поле"
+        },
+        terms: {
+          required: "Заполните это поле"
+        },
+        initiators: {
+          required: "Заполните это поле"
+        },
+        description: {
+          required: "Заполните это поле"
+        },
+        essence: {
+          required: "Заполните это поле"
+        }
+      }
+    }
+
+    // call/init
+    eventValidation = $("[js-validate-event]").validate(eventValidationObject);
+
+    // prevent default submiting form through enter keypress
+    _document.on("keyup", "[js-validate-event]", function(e){
       if (e.keyCode == 13) {
         e.preventDefault()
       }

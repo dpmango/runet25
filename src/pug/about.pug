@@ -86,7 +86,7 @@ block content
         .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:600/v1549746979/runet25/candyFire_11.jpg)")
           img(js-lazy data-src='img/candyFire_11.jpg' data-srcset='img/candyFire_11@2x.jpg 2x')
 
-    .col.col--8
+    .col.col--8(js-header-color data-logo-color="white")
       .fit-sibling-y.fit-sibling-y--relative
         .history
           .scroller-x.swiper-container(js-swiper-cards-scroller)
@@ -146,7 +146,7 @@ block content
         .card-collection__grid
           mixin userCard(name, post, img)
             // card
-            a(href="#").card.card--event
+            a(href="#cardCommittee" js-popup).card.card--event
               .scaler.img-block(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/'+ img +'.jpg)')
                 img(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
               p.card__name.h4-title.rtxt(js-reveal js-wrap-words)= name
@@ -159,3 +159,29 @@ block content
           +userCard("Плуготаренко Сергей", "Директор РАЭК", "committeeCard_4")
           +userCard("Гребенников Сергей", "Директор РОЦИТ", "committeeCard_1")
           +userCard("Дёмкина Екатерина", "Руководитель пресс-службы РАЭК", "committeeCard_1")
+        
+        // modal
+        .mfp-dialog.mfp-card.mfp-hide(id="cardCommittee")
+          p.p-main.card__date День рождения 8 апреля
+          img.img-block(js-lazy data-src='img/committeeCard_1.jpg' data-srcset='img/committeeCard_1@2x.jpg 2x')
+          p.card__name.h2-title= name
+          p.p-main Общественный деятель, эксперт российской интернет-отрасли. Директор Российской ассоциации электронных коммуникаций, член правления Регионального общественного центра интернет-технологий. Входит в состав Общественного совета и IT-совета при Минкомсвязи России.
+
+  //tile
+  .tile.tile--auto.tile--black(js-header-color data-menu-color="white" data-logo-color="white")
+    // group-content
+    .grid.group-content.tile__group-content
+      .col.col--4.group-content__aside
+        h2.h2-title Контакты для связи
+        
+      .col.col--8.group-content__section
+        .tile__grid
+          .tile__col
+            a.p-main.contact-str(href="tel:+74959505651")
+              i.icon.icon-phone
+              | +7 (495) 950-56-51
+          
+          .tile__col
+            a.p-main.contact-str(href="mailto:info@raec.ru")
+              i.icon.icon-envelope
+              | info@raec.ru

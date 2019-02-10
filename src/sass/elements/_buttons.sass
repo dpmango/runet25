@@ -48,10 +48,14 @@ button
         transform: translate3d(0,0,0)
   
   &--link
+    position: relative
     padding: 7px 0
     font-size: 18px
     border-bottom: 1px solid rgba($colorRed, 0.5)
-
+    transition: all 0.2s ease-in-out
+    &:hover
+      color: $colorPurple
+      border-bottom-color: $colorPurple
 +r($md)
   .btn
     &-primary

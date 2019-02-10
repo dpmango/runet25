@@ -14,29 +14,31 @@ block content
     
     .col.col--8
       // tile
-      .tile.tile--full.tile--purple.reveal(js-reveal data-direction="ltr")
-        h2.h2-title.rtxt(js-reveal js-wrap-words) 25% ВВП
-        p.p-main(data-aos="fade") Труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и независимости, оставаясь при этом эффективными и востребованными профессионалами. В тоже время компании все чаще нанимают независимых исполнителей, сокращая затраты на поиск сотрудников и содержание штата.
-        p.p-main(data-aos="fade") В век, когда границы стираются, труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и независимости, оставаясь при этом эффективными и востребованными профессионалами. «Как будет выглядеть работа в ближайшем будущем?» — на этот вопрос постараются ответить HR-специалисты, фрилансеры и предприниматели.
+      .tile.tile--py-lg.tile--full.tile--purple.reveal(js-reveal data-direction="ltr")
+        .tile__text
+          h2.h2-title.mb-1.rtxt(js-reveal js-wrap-words) 25% ВВП
+          p.p-main(data-aos="fade") Труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и независимости, оставаясь при этом эффективными и востребованными профессионалами. В тоже время компании все чаще нанимают независимых исполнителей, сокращая затраты на поиск сотрудников и содержание штата.
+          p.p-main(data-aos="fade") В век, когда границы стираются, труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и независимости, оставаясь при этом эффективными и востребованными профессионалами. «Как будет выглядеть работа в ближайшем будущем?» — на этот вопрос постараются ответить HR-специалисты, фрилансеры и предприниматели.
 
         hr.tile__hr(data-aos="fade")
 
-        .grid.tile__users.tile__users--start
-          h3.h3-title.rtxt(js-reveal js-wrap-words) Участники
+        .users
+          h3.h3-title.mb-2.rtxt(js-reveal js-wrap-words) Участники
+          .users__wrapper
+            .grid.users__grid.users__grid--start
+              mixin userItem(name, img)
+                .user-card.users__col(data-aos="fade")
+                  .user-card__avatar
+                    .scaler(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/'+ img +'.jpg)')
+                      img(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
+                  span.user-card__name Аркадий Паровозов
+              
+              +userItem("Михаил Жванецкий", "userItem_1")
+              +userItem("Аркадий Паровозов", "userItem_2")
+              +userItem("Михаил Кшиштовский", "userItem_3")
+              +userItem("Аркадий Паровозов", "userItem_4")
+              +userItem("Марк Цукерберг", "userItem_5")
           
-          mixin userItem(name, img)
-            .col.col--4.user-card(data-aos="fade")
-              .user-card__avatar
-                .scaler(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/'+ img +'.jpg)')
-                  img(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
-              span.user-card__name Аркадий Паровозов
-          
-          +userItem("Михаил Жванецкий", "userItem_1")
-          +userItem("Аркадий Паровозов", "userItem_2")
-          +userItem("Михаил Кшиштовский", "userItem_3")
-          +userItem("Аркадий Паровозов", "userItem_4")
-          +userItem("Марк Цукерберг", "userItem_5")
-        
         .info.tile__info(data-aos="fade")
           +svgMono("map-pin")
           span.info__text Место проведения: Лондон, Бэйкер стрит 221Б, офис 210
