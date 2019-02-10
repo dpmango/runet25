@@ -8,9 +8,7 @@ block content
   .hero-title(js-header-color data-menu-color="white" data-logo-color="white")
     .container
       .hero-title__content
-        h1.h1-title.rtxt(js-reveal data-type="onload")
-          span.rtxt__wrap
-            span.rtxt__mover Оргкомитет
+        h1.h1-title.rtxt(js-reveal js-wrap-words data-type="onload") Оргкомитет
         
     .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/heroTitle_8_blue.jpg)")
       img(js-lazy data-src='img/backgrounds/heroTitle_8_blue.jpg' data-srcset='img/backgrounds/heroTitle_8_blue@2x.jpg 2x')
@@ -27,8 +25,8 @@ block content
               .scaler.img-block(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/'+ img +'.jpg)')
                 img(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
 
-              p.card__name.h4-title.rtxt(js-reveal js-set-line-breaks)= name
-              span.card__post.p-small.rtxt(js-reveal js-set-line-breaks)= post
+              p.card__name.h4-title.rtxt(js-reveal js-wrap-words)= name
+              span.card__post.p-small.rtxt(js-reveal js-wrap-words)= post
 
               // modal
               .mfp-dialog.mfp-committee.mfp-hide(id="cardCommite-"+id)

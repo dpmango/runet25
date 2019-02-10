@@ -39,7 +39,7 @@ block content
           mixin eventCard(name, caption, location, date)
             // card
             a(href="#").card.card--large.card--event
-              .card__name.h3-title.rtxt(js-reveal js-set-line-breaks)= name
+              .card__name.h3-title.rtxt(js-reveal js-wrap-words)= name
               if caption
                 p.card__caption= caption
               .card__footer(data-aos="fade" data-aos-delay="300")

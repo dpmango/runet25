@@ -8,9 +8,7 @@ block content
   .hero-title(js-header-color data-menu-color="white" data-logo-color="white")
     .container
       .hero-title__content
-        h1.h1-title.rtxt(js-reveal data-type="onload")
-          span.rtxt__wrap
-            span.rtxt__mover Число 25
+        h1.h1-title.rtxt(js-reveal js-wrap-words data-type="onload") Число 25
         p.p-big(data-aos="fade" data-aos-delay="300") Перечень мероприятий, персон, проектов и&nbsp;другого, связанного с&nbsp;числом&nbsp;25
     
     .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/heroTitle_1_pink.jpg)")
@@ -43,7 +41,7 @@ block content
               .card__meta(data-aos="fade" data-aos-delay="300")
                 .card__location= location
                 .card__date.p-big= date
-              .card__name.h3-title.rtxt(js-reveal js-set-line-breaks)= name
+              .card__name.h3-title.rtxt(js-reveal js-wrap-words)= name
               .card__cta(data-aos="fade" data-aos-delay="600")
                 i.icon.icon-arrow-black
                   
@@ -242,7 +240,7 @@ block content
           mixin projectCard(name)
             // card
             a(href="#").card.card--project
-              .card__name.h3-title.rtxt(js-reveal js-set-line-breaks)= name
+              .card__name.h3-title.rtxt(js-reveal js-wrap-words)= name
               .card__cta(data-aos="fade" data-aos-delay="300")
                 i.icon.icon-arrow-white
           

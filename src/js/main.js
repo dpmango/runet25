@@ -97,7 +97,7 @@ $(document).ready(function(){
   // The new container has been loaded and injected in the wrapper.
   function pageReady(fromPjax){
     closeMobileMenu(fromPjax);
-    setLineBreaks();
+    setLineBreaks(fromPjax);
     initSlidersResponsive();
     initPopups();
     getScalerResponsive();
@@ -154,7 +154,7 @@ $(document).ready(function(){
   _window.on('scroll', scrollSticky);
   _window.on('resize', debounce(getHeaderParams, 100))
   _window.on('resize', debounce(setScalerResponsive, 100))
-  _window.on('resize', debounce(setLineBreaks, 100))
+  // _window.on('resize', debounce(setLineBreaks, 100))
   _window.on('resize', debounce(getStickyParams, 100))
   _window.on('resize', debounce(setBreakpoint, 200))
 
@@ -463,14 +463,14 @@ $(document).ready(function(){
     })
 
   // converts .rtxt__wrap to multiple .rtxt__mover
-  function setLineBreaks(isResized){
-    var $containers = $('[js-set-line-breaks]');
+  function setLineBreaks(fromPjax){
+    var $containers = $('[js-wrap-words]');
     if ( $containers.length === 0 ) return
 
     $containers.each(function(i, container){
       var $container = $(container);
       var containerText
-      if ( isResized ){
+      if ( fromPjax ){
         containerText = $container.data("originText")
       } else {
         containerText = $container.text();
@@ -848,8 +848,8 @@ $(document).ready(function(){
       var self = $(val)
       var objHtml = $(val).html();
       var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
-      var conditionMedia = $(val).data('teleport-condition').substring(1);
-      var conditionPosition = parseInt($(val).data('teleport-condition').substring(0, 1));
+      var conditionMedia = parseInt($(val).data('teleport-condition').substring(1));
+      var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
 
       if (target && objHtml && conditionPosition) {
 
@@ -857,7 +857,7 @@ $(document).ready(function(){
           var condition;
 
           if (conditionPosition === "<") {
-            console.log(conditionPosition, conditionMedia, getWindowWidth() < (conditionMedia + 1))
+
             condition = getWindowWidth() < (conditionMedia + 1);
           } else if (conditionPosition === ">") {
             condition = getWindowWidth() > conditionMedia;
@@ -1045,6 +1045,9 @@ $(document).ready(function(){
   // jQuery validate plugin
   // https://jqueryvalidation.org
   function initValidations(){
+    // globals
+    var subscriptionValidation
+
     // GENERIC FUNCTIONS
     var validateErrorPlacement = function(error, element) {
       error.addClass('ui-input__validation');
@@ -1163,6 +1166,7 @@ $(document).ready(function(){
 
         $form.removeClass('is-loading');
         $email.val("") // clear prev value
+        subscriptionValidation.resetForm();
       },
       rules: {
         email: {
@@ -1179,7 +1183,14 @@ $(document).ready(function(){
     }
 
     // call/init
-    $("[js-validate-subscription]").validate(subscriptionValidationObject);
+    subscriptionValidation = $("[js-validate-subscription]").validate(subscriptionValidationObject);
+
+    // prevent default submiting form through enter keypress
+    _document.on("keyup", "[js-validate-subscription]", function(e){
+      if (e.keyCode == 13) {
+        e.preventDefault()
+      }
+    })
   }
 
 
