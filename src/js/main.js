@@ -724,11 +724,12 @@ $(document).ready(function(){
     if ( window.browser.isIe ){
       // ie pollyfils
       picturefill();
-      window.fitie.init()
+      objectFitImages();
+      // window.fitie.init()
     }
   }
 
-  window.ieFixPictures = ieFixPictures()
+  window.ieFixPictures = ieFixPictures
 
 
   ///////////////
@@ -848,7 +849,7 @@ $(document).ready(function(){
       var objHtml = $(val).html();
       var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
       var conditionMedia = $(val).data('teleport-condition').substring(1);
-      var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
+      var conditionPosition = parseInt($(val).data('teleport-condition').substring(0, 1));
 
       if (target && objHtml && conditionPosition) {
 
@@ -856,6 +857,7 @@ $(document).ready(function(){
           var condition;
 
           if (conditionPosition === "<") {
+            console.log(conditionPosition, conditionMedia, getWindowWidth() < (conditionMedia + 1))
             condition = getWindowWidth() < (conditionMedia + 1);
           } else if (conditionPosition === ">") {
             condition = getWindowWidth() > conditionMedia;

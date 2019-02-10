@@ -13,6 +13,7 @@ var animations   = require('postcss-animation');
 var respType     = require('postcss-responsive-type');
 var focus        = require('postcss-focus');
 var easings      = require('postcss-easings');
+var objfit       = require('postcss-object-fit-images')
 var cssnano      = require('cssnano');
 var plumber      = require('gulp-plumber');
 var config       = require('../config');
@@ -41,6 +42,7 @@ var processors = [
     // cascade: false
   }),
   sorting(),
+  objfit(),
   pseudoel(),
   flexbugs()
 ];
