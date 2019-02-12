@@ -155,7 +155,7 @@ $(document).ready(function(){
   _window.on('scroll', scrollSticky);
   _window.on('resize', debounce(getHeaderParams, 100))
   _window.on('resize', debounce(setScalerResponsive, 100))
-  // _window.on('resize', debounce(setLineBreaks, 100))
+  _window.on('resize', debounce(initSlidersResponsive, 100))
   _window.on('resize', debounce(getStickyParams, 100))
   _window.on('resize', debounce(monitorStickyResize, 100))
   _window.on('resize', debounce(setBreakpoint, 200))
@@ -606,6 +606,7 @@ $(document).ready(function(){
     if ( $(timelineSwiperSelector).length > 0 ){
       if ( getWindowWidth() <= sliders.timeline.disableLessThan ) {
         if ( sliders.timeline.instance !== undefined ) {
+          console.log('dest')
           sliders.timeline.instance.destroy( true, true );
           sliders.timeline.instance = undefined
         }
@@ -707,7 +708,8 @@ $(document).ready(function(){
         resistanceRatio: 0,
         // freeModeSticky: true,
         mousewheel: {
-          eventsTarged: document
+          eventsTarged: 'container',
+          releaseOnEdges: true
         }
       });
     }
