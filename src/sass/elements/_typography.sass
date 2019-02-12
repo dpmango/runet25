@@ -135,10 +135,13 @@ p
 .f-900
   font-weight: 900
 
+// strong
+//   font-weight: 700
 
 .c-red
   color: $colorRed
-
+.c-gray
+  color: $fontColor50
 
 .blockquote
   position: relative
@@ -154,7 +157,7 @@ p
     left: 0
     width: 30px
     height: 22px
-    background: url(../icons/svg-mono/quote.svg) no-repeat
+    background: svg-load("../icons/svg-inline/quote.svg") no-repeat
 
 +r($sm)
   .blockquote
@@ -195,18 +198,19 @@ ul.main-list
     margin-bottom: 1em
     column-count: 1
 
+// default styles for WYSIWYG
 .content
-  p
+  p:not(.p-main)
     @extend .p-main
-  h1
+  h1:not(.h1-title)
     @extend .h1-title
-  h2
+  h2:not(.h2-title)
     @extend .h2-title
-  h3
+  h3:not(.h3-title)
     @extend .h3-title
-  h4
+  h4:not(.h4-title)
     @extend .h4-title
-  h5
+  h5:not(.h5-title)
     font-size: 16px
-  h6
+  h6:not(.h6-title)
     font-size: 14px
