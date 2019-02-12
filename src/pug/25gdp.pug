@@ -3,22 +3,25 @@ title: 25% ВВП
 ---
 extends shared/_layout
 block content
-
+  
+  // header always visible modifier
+  div(js-header-sticky)
+  
   // grid
   .grid.grid-main.not-hero(js-header-color data-menu-color="white" data-logo-color="white")
     .col.col--4
       // tile
-      .tile.tile--full.tile--fixed(js-tile-fixed)
+      .tile.tile--full.tile--fixed(js-sticky data-disable-on="992")
         .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:600/v1549746979/runet25/candyFire_4.jpg)")
           img(js-lazy data-src='img/candyFire_4.jpg' data-srcset='img/candyFire_4@2x.jpg 2x')
     
     .col.col--8
       // tile
-      .tile.tile--py-lg.tile--full.tile--purple.reveal(js-reveal data-direction="ltr")
+      .tile.tile--pt-lg.tile--full.tile--purple.reveal(js-reveal data-direction="ltr")
         .tile__text
           h2.h2-title.mb-1.rtxt(js-reveal js-wrap-words) 25% ВВП
-          p.p-main(data-aos="fade") Труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и независимости, оставаясь при этом эффективными и востребованными профессионалами. В тоже время компании все чаще нанимают независимых исполнителей, сокращая затраты на поиск сотрудников и содержание штата.
-          p.p-main(data-aos="fade") В век, когда границы стираются, труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и независимости, оставаясь при этом эффективными и востребованными профессионалами. «Как будет выглядеть работа в ближайшем будущем?» — на этот вопрос постараются ответить HR-специалисты, фрилансеры и предприниматели.
+          p.p-main(data-aos="fade") Труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и&nbsp;независимости, оставаясь при этом эффективными и&nbsp;востребованными профессионалами. В&nbsp;тоже время компании все чаще нанимают независимых исполнителей, сокращая затраты на&nbsp;поиск сотрудников и&nbsp;содержание штата.
+          p.p-main(data-aos="fade") В&nbsp;век, когда границы стираются, труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и&nbsp;независимости, оставаясь при этом эффективными и&nbsp;востребованными профессионалами. &laquo;Как будет выглядеть работа в&nbsp;ближайшем будущем?&raquo;&nbsp;&mdash; на&nbsp;этот вопрос постараются ответить HR-специалисты, фрилансеры и&nbsp;предприниматели.
 
         hr.tile__hr(data-aos="fade")
 
@@ -29,7 +32,7 @@ block content
               mixin userItem(name, img)
                 .user-card.users__col(data-aos="fade")
                   .user-card__avatar
-                    .scaler(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/'+ img +'.jpg)')
+                    .scaler(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:300/v1549746979/runet25/'+ img +'.jpg)')
                       img(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
                   span.user-card__name Аркадий Паровозов
               
@@ -41,7 +44,7 @@ block content
           
         .info.tile__info(data-aos="fade")
           +svgMono("map-pin")
-          span.info__text Место проведения: Лондон, Бэйкер стрит 221Б, офис 210
+          span.info__text Место проведения: Лондон, Бэйкер&nbsp;стрит&nbsp;221Б, офис&nbsp;210
 
         h3.h3-title.rtxt(js-reveal js-wrap-words) Ожидаемые итоги мероприятия
-        p.p-main(data-aos="fade") Труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и независимости, оставаясь при этом эффективными и востребованными профессионалами. В тоже время компании все чаще нанимают независимых исполнителей, сокращая затраты на поиск сотрудников и содержание штата.
+        p.p-main(data-aos="fade") Труд как экономическая категория, приобретает новый смысл. Все больше людей стремятся иметь больше свободы и&nbsp;независимости, оставаясь при этом эффективными и&nbsp;востребованными профессионалами. В&nbsp;тоже время компании все чаще нанимают независимых исполнителей, сокращая затраты на&nbsp;поиск сотрудников и&nbsp;содержание штата.

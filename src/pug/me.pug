@@ -18,16 +18,14 @@ block content
     .col.col--4.col--lg-hide
       // tile
       .tile.tile--full.tile--fixed(js-tile-fixed)
-        .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/candyFire_9.jpg)")
+        .tile__img-cover.tile__img-cover--fit-ct(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/candyFire_9.jpg)")
           img(js-lazy data-src='img/candyFire_9.jpg' data-srcset='img/candyFire_9@2x.jpg 2x')
 
     .col.col--8
       .grid
         // tile
         .tile.tile--full.tile--red.reveal(js-reveal data-direction="ltr")
-          h2.h2-title.rtxt(js-reveal data-delay="300") 
-            span.rtxt__wrap 
-              span.rtxt__mover Положения конкурсов
+          h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Положения конкурсов
           p.p-main(data-aos="fade" data-aos-delay="300") Ежегодный Всероссийский конкурс для поддержки лучших интернет-ресурсов, которые способствуют позитивному мышлению, вдохновению, творчеству, вере в безграничность человеческих сил и возможностей. В 2018 году конкурс проводится в 8-й раз.
           p.p-main(data-aos="fade" data-aos-delay="300") К участию в конкурсе приглашаются российские интернет-ресурсы, стремящиеся вовлечь детскую и молодежную аудиторию Рунета в активную жизнь как в Сети, так и за ее пределами. И решающие тем самым актуальные социальные задачи
         
@@ -107,13 +105,14 @@ block content
           form.multi-form(action="/email-form.php" js-validate-feedback data-aos="fade" data-aos-delay="500")
             .ui-group
               label(for="name") ФИО
-              input.ui-input(type="text" name="name" placeholder="")
+              input.ui-input(type="text" name="name" placeholder="ivan.petrov@address.ru")
             .ui-group
               label(for="title") Организация / Проект
               input.ui-input(type="text" name="project" placeholder="")
             .ui-group
               label(for="text") Текст вопроса
-              textarea.ui-input(name="text" placeholder="")
+              // data-min-rows is required for autoexpand module
+              textarea.ui-input(name="text" placeholder="" rows="3" data-min-rows="3")
             .ui-group
               button(type="submit").btn.btn-primary
                 span Отправить вопрос

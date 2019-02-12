@@ -113,6 +113,7 @@ $(document).ready(function(){
   // Overlay transtion is covering the screen and starts to reveal
   function inBetweenTransition(fromPjax){
     getStickyParams(fromPjax);
+    initStickyKit(fromPjax);
     getHeaderParams(fromPjax);
     controlHeaderColor();
   }
@@ -156,6 +157,7 @@ $(document).ready(function(){
   _window.on('resize', debounce(setScalerResponsive, 100))
   // _window.on('resize', debounce(setLineBreaks, 100))
   _window.on('resize', debounce(getStickyParams, 100))
+  _window.on('resize', debounce(monitorStickyResize, 100))
   _window.on('resize', debounce(setBreakpoint, 200))
 
 
@@ -300,10 +302,19 @@ $(document).ready(function(){
     var headerHeight = $header.outerHeight() + headerWrapperTranslate
     var $page = getCorrespondingPage(fromPjax)
     var $colorControlSections = $page.find('[js-header-color]');
+    var isHeaderSticky = $page.find('[js-header-sticky]').length > 0
+
+    if ( isHeaderSticky ){
+      $header.addClass('is-sticky')
+    } else {
+      $header.removeClass('is-sticky')
+    }
+
     header = {
       container: $header,
       bottomPoint: headerHeight,
-      colorControlSections: $colorControlSections
+      colorControlSections: $colorControlSections,
+      isHeaderSticky: isHeaderSticky
     }
   }
 
@@ -311,6 +322,8 @@ $(document).ready(function(){
     if ( header.container !== undefined ){
       var fixedClass = 'is-fixed';
       var visibleClass = 'is-fixed-visible';
+
+      if ( header.isHeaderSticky ) return
 
       if ( scroll.blocked ) return
 
@@ -498,11 +511,10 @@ $(document).ready(function(){
       objectHeight: $obj.outerHeight(),
       container: $parent,
       containerOffsetTop: $parent.offset().top,
-      containerWidth: Math.round($obj.outerWidth()),
+      containerWidth: $obj.outerWidth(),
       footerOffset: $page.find('.footer').offset().top,
       windowHeight: _window.height()
     }
-    console.log(stickyParams.footerOffset)
     scrollSticky();
   }
 
@@ -528,6 +540,43 @@ $(document).ready(function(){
     } else {
       tile.removeAttr('style');
     }
+  }
+
+  //////////
+  // STICKY KIT
+  //////////
+  function initStickyKit(fromPjax){
+    var $page = getCorrespondingPage(fromPjax);
+    var $sticky = $page.find('[js-sticky]');
+    if ($sticky.length === 0) return
+
+    $sticky.each(function(i, sticky){
+      enableSticky(sticky)
+    })
+  }
+
+  function enableSticky(sticky){
+    var bp = $(sticky).data('disable-on');
+    if ( bp && ( getWindowWidth() > parseInt(bp) ) ){
+      // http://leafo.net/sticky-kit/
+      $(sticky).stick_in_parent({
+        inner_scrolling: true
+      })
+    }
+  }
+
+  function monitorStickyResize(){
+    var $sticky = $('[js-sticky]');
+    if ($sticky.length === 0) return
+
+    $sticky.each(function(i, sticky){
+      var bp = $(sticky).data('disable-on');
+      if ( bp && ( getWindowWidth() <= parseInt(bp) ) ){
+        $(sticky).trigger("sticky_kit:detach");
+      } else {
+        enableSticky(sticky)
+      }
+    })
   }
 
 
@@ -821,13 +870,13 @@ $(document).ready(function(){
         function initPS(){
           var yDisabled = $(scrollbar).data('y-disabled') == true
           var xDisabled = $(scrollbar).data('x-disabled') == true
-          var wheelPropagation = $(scrollbar).data('wheel-propagation') == true
+          var wheelPropagation = $(scrollbar).data('wheel-propagation') !== undefined ? $(scrollbar).data('wheel-propagation') : true
           // console.log(wheelPropagation)
           ps = new PerfectScrollbar(scrollbar, {
             suppressScrollY: yDisabled,
             suppressScrollX: xDisabled,
             // wheelSpeed: 2,
-            // wheelPropagation: wheelPropagation,
+            wheelPropagation: wheelPropagation,
             minScrollbarLength: 20
           });
         }

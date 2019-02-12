@@ -34,7 +34,7 @@ block content
     .col.col--8
       .card-collection
         // data-scrollmonitor container is requred for overflow-y: scroll; reveal animations (container elWatcher)
-        .card-collection__scrollarea(js-scrollbar js-scrollable-animation-fix data-scrollmonitor-container="true")
+        .card-collection__scrollarea(js-scrollbar js-scrollable-animation-fix data-scrollmonitor-container)
           mixin eventCard(name, location, date)
             // card
             a(href="#cardEventModal" js-popup).card.card--event
@@ -56,8 +56,7 @@ block content
           +eventCard("MBLT", "Москва", "Апрель")
           +eventCard("Золотой сайт", "Москва", "Май")
           +eventCard("Название мероприятия", "Свердловская область", "20 мая")
-          
-          // TODO - scrollmonitor recalc
+
           +eventCard("Кибер понедельник", "Москва", "28 января")
           +eventCard("Cyber security forum", "Москва", "14 февраля")
           +eventCard("Золотой сайт", "Москва", "Февраль")
@@ -97,9 +96,7 @@ block content
   .grid(js-header-color data-menu-color="white" data-logo-color="white")
     // tile
     .tile.tile--1-3.tile--purple.reveal(js-link data-href="25gdp.html" js-reveal data-direction="ltr" data-type="halflyEnterViewport")
-      h2.h2-title.rtxt(js-reveal data-delay="300") 
-        span.rtxt__wrap 
-          span.rtxt__mover 25% ВВП
+      h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") 25% ВВП
       p.p-small(data-aos="fade" data-aos-delay="300") Цели форсайт сессии, участники, место проведения, ожидаемые итоги мероприятия.
       a(href="25gdp.html" data-aos="fade" data-aos-delay="500").tile__cta
         span Читать подробнее
@@ -131,85 +128,85 @@ block content
             // year stack
             .year-stack
               .year-stack__name.h4-title 1993
-              .year-stack__scrollable.ps--black(js-scrollbar data-x-disabled="true" data-wheel-propagation="true")
+              .year-stack__scrollable.ps--black(js-scrollbar data-x-disabled="true" data-wheel-propagation="false" js-scrollable-animation-fix data-scrollmonitor-container)
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549746979/runet25/newsCard_1.jpg)")
+                  .news-card__image.scaler(data-aos="fade" style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549746979/runet25/newsCard_1.jpg)")
                     img(js-lazy data-src="img/newsCard_1.jpg" data-srcset='img/newsCard_1@2x.jpg 2x')
-                  .news-card__date 1 Января
-                  .news-card__title.h4-title Появились первые интернет-провайдеры
-                  .news-card__description.p-small 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
+                  .news-card__date(data-aos="fade") 1 Января
+                  .news-card__title.h4-title.rtxt(js-reveal js-wrap-words) Появились первые интернет-провайдеры
+                  .news-card__description.p-small(data-aos="fade") 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549746979/runet25/newsCard_4.jpg)")
+                  .news-card__image.scaler(data-aos="fade" style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549746979/runet25/newsCard_4.jpg)")
                     img(js-lazy data-src="img/newsCard_4.jpg" data-srcset='img/newsCard_4@2x.jpg 2x')
-                  .news-card__date 23 Марта
-                  .news-card__title.h4-title Появились первые интернет-провайдеры
-                  .news-card__description.p-small 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
+                  .news-card__date(data-aos="fade") 23 Марта
+                  .news-card__title.h4-title.rtxt(js-reveal js-wrap-words) Появились первые интернет-провайдеры
+                  .news-card__description.p-small(data-aos="fade") 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
                   
             // year stack
             .year-stack
               .year-stack__name.h4-title 1994
-              .year-stack__scrollable.ps--black(js-scrollbar data-x-disabled="true")
+              .year-stack__scrollable.ps--black(js-scrollbar data-x-disabled="true" data-wheel-propagation="false" js-scrollable-animation-fix data-scrollmonitor-container)
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549746979/runet25/newsCard_2.jpg)")
+                  .news-card__image.scaler(data-aos="fade" style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549746979/runet25/newsCard_2.jpg)")
                     img(js-lazy data-src="img/newsCard_2.jpg" data-srcset='img/newsCard_2@2x.jpg 2x')
-                  .news-card__date 5 Января
-                  .news-card__title.h4-title Открылось первое агентство интернет-рекламы
-                  .news-card__description.p-small Открылось первое в России агентство интернет-рекламы «Tim Promotion», позже преобразованное в Promo.ru.
+                  .news-card__date(data-aos="fade") 5 Января
+                  .news-card__title.h4-title.rtxt(js-reveal js-wrap-words) Открылось первое агентство интернет-рекламы
+                  .news-card__description.p-small(data-aos="fade") Открылось первое в России агентство интернет-рекламы «Tim Promotion», позже преобразованное в Promo.ru.
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549746979/runet25/newsCard_5.jpg)")
+                  .news-card__image.scaler(data-aos="fade" style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549746979/runet25/newsCard_5.jpg)")
                     img(js-lazy data-src="img/newsCard_5.jpg" data-srcset='img/newsCard_5@2x.jpg 2x')
-                  .news-card__date 23 Марта
-                  .news-card__title.h4-title Появились первые интернет-провайдеры
-                  .news-card__description.p-small 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
+                  .news-card__date(data-aos="fade") 23 Марта
+                  .news-card__title.h4-title.rtxt(js-reveal js-wrap-words) Появились первые интернет-провайдеры
+                  .news-card__description.p-small(data-aos="fade") 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
                             
             // year stack
             .year-stack
               .year-stack__name.h4-title 1994
-              .year-stack__scrollable.ps--black(js-scrollbar data-x-disabled="true")
+              .year-stack__scrollable.ps--black(js-scrollbar data-x-disabled="true" data-wheel-propagation="false" js-scrollable-animation-fix data-scrollmonitor-container)
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549746979/runet25/newsCard_3.jpg)")
+                  .news-card__image.scaler(data-aos="fade" style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549746979/runet25/newsCard_3.jpg)")
                     img(js-lazy data-src="img/newsCard_3.jpg" data-srcset='img/newsCard_3@2x.jpg 2x')
-                  .news-card__date 1 Января
-                  .news-card__title.h4-title Создана точка обмена трафиком MSK-IX
-                  .news-card__description.p-small По соглашению крупнейших московских провайдеров на площадке междугородней АТС M9 создана точка обмена интернет-трафиком MSK-IX.
+                  .news-card__date(data-aos="fade") 1 Января
+                  .news-card__title.h4-title.rtxt(js-reveal js-wrap-words) Создана точка обмена трафиком MSK-IX
+                  .news-card__description.p-small(data-aos="fade") По соглашению крупнейших московских провайдеров на площадке междугородней АТС M9 создана точка обмена интернет-трафиком MSK-IX.
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549746979/runet25/newsCard_6.jpg)")
+                  .news-card__image.scaler(data-aos="fade" style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549746979/runet25/newsCard_6.jpg)")
                     img(js-lazy data-src="img/newsCard_6.jpg" data-srcset='img/newsCard_6@2x.jpg 2x')
-                  .news-card__date 23 Марта
-                  .news-card__title.h4-title Появились первые интернет-провайдеры
-                  .news-card__description.p-small 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
+                  .news-card__date(data-aos="fade") 23 Марта
+                  .news-card__title.h4-title.rtxt(js-reveal js-wrap-words) Появились первые интернет-провайдеры
+                  .news-card__description.p-small(data-aos="fade") 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549746979/runet25/newsCard_3.jpg)")
+                  .news-card__image.scaler(data-aos="fade" style="padding-bottom: "+ (160/230)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1549746979/runet25/newsCard_3.jpg)")
                     img(js-lazy data-src="img/newsCard_3.jpg" data-srcset='img/newsCard_3@2x.jpg 2x')
-                  .news-card__date 1 Января
-                  .news-card__title.h4-title Создана точка обмена трафиком MSK-IX
-                  .news-card__description.p-small По соглашению крупнейших московских провайдеров на площадке междугородней АТС M9 создана точка обмена интернет-трафиком MSK-IX.
+                  .news-card__date(data-aos="fade") 1 Января
+                  .news-card__title.h4-title.rtxt(js-reveal js-wrap-words) Создана точка обмена трафиком MSK-IX
+                  .news-card__description.p-small(data-aos="fade") По соглашению крупнейших московских провайдеров на площадке междугородней АТС M9 создана точка обмена интернет-трафиком MSK-IX.
                   
             // year stack
             .year-stack
               .year-stack__name.h4-title 1995
-              .year-stack__scrollable.ps--black(js-scrollbar data-x-disabled="true")
+              .year-stack__scrollable.ps--black(js-scrollbar data-x-disabled="true" data-wheel-propagation="false" js-scrollable-animation-fix data-scrollmonitor-container)
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%;")
+                  .news-card__image.scaler(data-aos="fade" style="padding-bottom: "+ (160/230)*100 +"%;")
                     img(js-lazy data-src="img/newsCard_1.jpg" data-srcset='img/newsCard_1@2x.jpg 2x')
-                  .news-card__date 1 Января
-                  .news-card__title.h4-title Появились первые интернет-провайдеры
-                  .news-card__description.p-small 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
+                  .news-card__date(data-aos="fade") 1 Января
+                  .news-card__title.h4-title.rtxt(js-reveal js-wrap-words) Появились первые интернет-провайдеры
+                  .news-card__description.p-small(data-aos="fade") 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
                 // news card
                 a(href="#").news-card
-                  .news-card__image.scaler(style="padding-bottom: "+ (160/230)*100 +"%;")
+                  .news-card__image.scaler(data-aos="fade" style="padding-bottom: "+ (160/230)*100 +"%;")
                     img(js-lazy data-src="img/newsCard_4.jpg" data-srcset='img/newsCard_4@2x.jpg 2x')
-                  .news-card__date 23 Марта
-                  .news-card__title.h4-title Появились первые интернет-провайдеры
-                  .news-card__description.p-small 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
+                  .news-card__date(data-aos="fade") 23 Марта
+                  .news-card__title.h4-title.rtxt(js-reveal js-wrap-words) Появились первые интернет-провайдеры
+                  .news-card__description.p-small(data-aos="fade") 1992—1993 годы — зарождается российский рынок интернет-провайдеров, начинается массовое использование протокола TCP/IP.
             
             // year stack
             .year-stack
@@ -230,9 +227,7 @@ block content
     .col.col--4.col--lg-hide
       // tile
       .tile.tile--orange.reveal(js-link data-href="25gdp.html" js-reveal data-direction="ltr" data-type="halflyEnterViewport")
-        h2.h2-title.rtxt(js-reveal data-delay="300") 
-          span.rtxt__wrap 
-            span.rtxt__mover 25 лет
+        h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") 25 лет
         p.p-small(data-aos="fade" data-aos-delay="300") Летопись Рунета за все 25 лет с основными историческими вехами в формате тайм-лайна с ключевыми цифрами и событиями
               
       // tile
@@ -246,9 +241,7 @@ block content
     .col.col--4
       // tile link + jc centered
       a.tile.tile--green.reveal(href="calendar.html" js-reveal data-direction="ltr")
-        h2.h2-title.rtxt(js-reveal data-delay="300") 
-          span.rtxt__wrap 
-            span.rtxt__mover 25 проектов
+        h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") 25 проектов
         p.p-small(data-aos="fade" data-aos-delay="300") Список из 25 проектов 2019 года, которые уже запланированы
         
       // tile
@@ -258,11 +251,11 @@ block content
     
     .col.col--8
       .card-collection
-        .card-collection__scrollarea(js-scrollbar js-scrollable-animation-fix data-scrollmonitor-container="true")
+        .card-collection__scrollarea(js-scrollbar js-scrollable-animation-fix data-scrollmonitor-container)
           mixin projectCard(name)
             // card
             a(href="#").card.card--project
-              .card__name.h3-title.rtxt(js-reveal js-wrap-words)= name
+              .card__name.h4-title.rtxt(js-reveal js-wrap-words)= name
               .card__cta(data-aos="fade" data-aos-delay="300")
                 i.icon.icon-arrow-white
           
@@ -283,14 +276,14 @@ block content
     // group-content
     .grid.group-content.tile__group-content
       .col.col--4.group-content__aside
-        h2.h2-title 25 персон
+        h2.h2-title(data-aos="fade") 25 персон
         
       .col.col--8.group-content__section
         .tile__grid
           .tile__col
-            p.p-big Оргкомитет собирает данные о заслугах Рунета. 
+            p.p-big(data-aos="fade") Оргкомитет собирает данные о заслугах Рунета. 
           
           .tile__col
-            p.p-big.mb-1-5 Если вы считаете, что вы / ваш коллега заслуживаете быть в списках — переходите в список «Я - часть рунета»
-            a.btn.btn-primary(href="#" title="Перейти в список")
+            p.p-big.mb-1-5(data-aos="fade") Если вы считаете, что вы / ваш коллега заслуживаете быть в списках — переходите в список «Я - часть рунета»
+            a.btn.btn-primary(data-aos="fade" href="#" title="Перейти в список")
               span Перейти в список

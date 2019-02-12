@@ -78,25 +78,26 @@ block content
           
           .tile__col
             form.tile__form-events.multi-form(action="/email-form.php" js-validate-event)
-              .ui-group
+              .ui-group.ui-group--smaller
                 label(for="name") Рунет-id / ФИО / Организация / Контакты
-                input.ui-input.ui-input--light(type="text" name="name")
-              .ui-group
+                input.ui-input(type="text" name="name" placeholder="ivan.petrov@do")
+              .ui-group.ui-group--smaller
                 label(for="title") Название предлагаемого мероприятия
-                input.ui-input.ui-input--light(type="text" name="title")
-              .ui-group
+                input.ui-input(type="text" name="title")
+              .ui-group.ui-group--smaller
                 label(for="terms") Срок / этапы реализации
-                input.ui-input.ui-input--light(type="text" name="terms")
-              .ui-group
+                input.ui-input(type="text" name="terms")
+              .ui-group.ui-group--smaller
                 label(for="initiators") Организаторы / инициаторы мероприятия
-                input.ui-input.ui-input--light(type="text" name="initiators")
-              .ui-group
+                input.ui-input(type="text" name="initiators")
+              .ui-group.ui-group--smaller
                 label(for="description") Описание концепции / формата мероприятия 
-                input.ui-input.ui-input--light(type="text" name="description")
-              .ui-group
+                input.ui-input(type="text" name="description")
+              .ui-group.ui-group--smaller
                 label(for="essence") Суть предложения Оргкомитету Юбилея по интеграции мероприятия
-                input.ui-input.ui-input--light(type="text" name="essence")
-              .ui-group
+                // min rows is required for autoexpand module
+                textarea.ui-input(type="text" name="essence" rows="1" data-min-rows="1")
+              .ui-group.ui-group--smaller
                 button(type="submit").btn.btn-primary
                   span Отправить предложение
             

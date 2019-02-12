@@ -43,6 +43,9 @@
     width: 200%
     overflow-y: auto
     overflow-x: hidden
+    will-change: transform
+    backface-visibility: hidden
+    transform-style: preserve-3d
     transition: transform 0.2s 0.05s ease-in-out
     &.is-active
       transform: translate3d(-50%, 0, 0)
@@ -52,7 +55,7 @@
         transform: scale(-1, 1)
   &--sm
     min-height: 320px
-  &--py-lg
+  &--pt-lg
     padding-top: 120px
   &--pb-lg
     padding-bottom: 80px
@@ -123,6 +126,8 @@
       height: 100%
       object-fit: cover
     &--fit
+      &-ct img, picture
+        object-position: center top
       &-rt img, picture
         object-position: right top
       &-rc img, picture
@@ -144,13 +149,13 @@
     margin-top: 50px
     margin-bottom: 50px
     width: 100%
-    border-top: 1px solid rgba($colorWhite, 0.3)
+    border-top: 1px solid rgba(white, 0.3)
     border-bottom: 0
   &__info
     margin-bottom: 40px
     padding: 37px 0
-    border-top: 1px solid rgba($colorWhite, 0.3)
-    border-bottom: 1px solid rgba($colorWhite, 0.3)
+    border-top: 1px solid rgba(white, 0.3)
+    border-bottom: 1px solid rgba(white, 0.3)
   &__group-content
     margin-bottom: 100px
     &:last-child
@@ -162,6 +167,7 @@
     transition: transform 0.2s 0.2s ease-in-out
   .h2-title
     margin-top: 0
+    margin-bottom: .5em
   .h3-title
     &:first-child
       margin-top: 0
@@ -197,7 +203,7 @@
     &::after
       background-color: #F2306E
     .p-link
-      color: $colorWhite
+      color: white
   &--pink
     background-color: #F2306E
     color: white
@@ -221,7 +227,7 @@
   &--gray
     background-color: $colorLightBg
   &--black
-    color: $colorWhite
+    color: white
     background-color: #333
 
   // position modifiers
@@ -247,7 +253,7 @@
     min-height: 350px
     &--sm
       min-height: 320px
-    &--py-lg
+    &--pt-lg
       padding-top: 120px
 
 +r($lg)
@@ -278,7 +284,7 @@
       padding-bottom: 45px
       width: 100%
       max-width: 100%
-      min-height: auto
+      min-height: 1px
       max-height: none
       overflow: visible
       &.is-active
@@ -304,12 +310,12 @@
     padding: 40px 30px 25px
     &--timeline
       padding-top: 120px
-    &--py-lg
+    &--pt-lg
       padding-bottom: 70px
     &--pb-lg
       padding-bottom: 50px
     &--vauto
-      min-height: auto
+      min-height: 1px
     &__cta
       font-size: 14px
     &__group-content
@@ -347,8 +353,12 @@
 
 .tile
   &--auto
-    min-height: auto
+    min-height: 1px
 
 .is-ie
   .tile--timeline
     flex: none
+
+  .tile--jcc
+    // https://stackoverflow.com/questions/19371626/flexbox-not-centering-vertically-in-ie
+    height: 100px
