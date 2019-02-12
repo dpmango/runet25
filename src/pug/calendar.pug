@@ -22,28 +22,29 @@ block content
   .grid.grid-main.reverse(js-header-color data-menu-color="white")
     .col.col--8
       // tabs-nav
-      .tabs-nav
-        ul
-          li.active
-            a(href="#" title="Предстоящие") Предстоящие
-          li
-            a(href="#" title="Прошедшие") Прошедшие
-          li
-            a(href="#" title="По месяцам") По месяцам
-            span.icon-circle.icon-circle--months(js-datepicker-toggle)
-            input(type="text" name="month" data-min-view="months" data-view="months" js-datepicker)
+      .tabs-nav(js-tabs-nav data-aos="fade")
+        .tabs-nav__slider.swiper-container(js-tabs-nav-slider)
+          ul.swiper-wrapper
+            li.swiper-slide.active
+              a(href="#" title="Предстоящие") Предстоящие
+            li.swiper-slide
+              a(href="#" title="Прошедшие") Прошедшие
+            li.swiper-slide
+              a(href="#" title="По месяцам" js-datepicker-toggle) По месяцам
+                span.icon-circle.icon-circle--months
+                input(type="text" name="month" data-min-view="months" data-view="months" js-datepicker)
       
       // card-collection
       .card-collection
         .card-collection__grid
           mixin eventCard(name, caption, location, date)
             // card
-            a(href="#").card.card--large.card--event(data-aos="fade-up")
-              .card__name.h3-title.rtxt(js-reveal js-set-line-breaks)= name
+            a(href="#").card.card--large.card--event
+              .card__name.h3-title.rtxt(js-reveal js-wrap-words)= name
               if caption
-                p.card__caption= caption
+                p.card__caption(data-aos="fade" data-aos-delay="300")= caption
               .card__footer(data-aos="fade" data-aos-delay="300")
-                .card__meta(data-aos="fade" data-aos-delay="300")
+                .card__meta
                   .card__location= location
                   .card__date.p-big= date
                 i.icon.icon-arrow-black
@@ -65,43 +66,42 @@ block content
 
     .col.col--4.col.col--visible
       // tile
-      .tile.tile--form.tile--purple.tile--full(js-form-events)
+      .tile.tile--form.tile--purple.tile--fixed(js-form-events js-tile-fixed data-use-self-width)
         .tile__grid
           .tile__col
             .tile__form-text
-              h3.h3-title.rtxt(js-reveal data-delay="300") 
-                span.rtxt__wrap 
-                  span.rtxt__mover Предложить мероприятие
-              p.p-small(data-aos="fade" data-aos-delay="300") Вы можете предложить свое мероприятие, для этого нужно заполить форму, нажав на кнопку ниже, предложенные мероприятия отправляются на почту оргкомитета
-              span.p-link.link.link--prev(js-form-events-toggle) Показать форму
+              h3.h3-title.rtxt(js-reveal js-wrap-words data-delay="300") Предложить мероприятие
+              p.p-small(data-aos="fade" data-aos-delay="600") Вы можете предложить свое мероприятие, для этого нужно заполить форму, нажав на кнопку ниже, предложенные мероприятия отправляются на почту оргкомитета
+              span.p-link.link.link--prev(js-form-events-toggle data-aos="fade" data-aos-delay="800") Показать форму
           
           .tile__col
-            form.tile__form-events(action="/email-form.php" js-validate-subscription)
-              .ui-group
+            form.tile__form-events.multi-form(action="/email-form.php" js-validate-event)
+              .ui-group.ui-group--smaller
                 label(for="name") Рунет-id / ФИО / Организация / Контакты
-                input.ui-input.ui-input--light(type="text" name="name")
-              .ui-group
+                input.ui-input(type="text" name="name" placeholder="ivan.petrov@do")
+              .ui-group.ui-group--smaller
                 label(for="title") Название предлагаемого мероприятия
-                input.ui-input.ui-input--light(type="text" name="title")
-              .ui-group
+                input.ui-input(type="text" name="title")
+              .ui-group.ui-group--smaller
                 label(for="terms") Срок / этапы реализации
-                input.ui-input.ui-input--light(type="text" name="terms")
-              .ui-group
+                input.ui-input(type="text" name="terms")
+              .ui-group.ui-group--smaller
                 label(for="initiators") Организаторы / инициаторы мероприятия
-                input.ui-input.ui-input--light(type="text" name="initiators")
-              .ui-group
+                input.ui-input(type="text" name="initiators")
+              .ui-group.ui-group--smaller
                 label(for="description") Описание концепции / формата мероприятия 
-                input.ui-input.ui-input--light(type="text" name="description")
-              .ui-group
+                input.ui-input(type="text" name="description")
+              .ui-group.ui-group--smaller
                 label(for="essence") Суть предложения Оргкомитету Юбилея по интеграции мероприятия
-                input.ui-input.ui-input--light(type="text" name="essence")
-              .ui-group
+                // min rows is required for autoexpand module
+                textarea.ui-input(type="text" name="essence" rows="1" data-min-rows="1")
+              .ui-group.ui-group--smaller
                 button(type="submit").btn.btn-primary
                   span Отправить предложение
             
             // modal
-            .mfp-dialog.mfp-thanks.mfp-thanks--lg.mfp-hide#subsc-thanks
+            .mfp-dialog.mfp-thanks.mfp-thanks--lg.mfp-hide#event-thanks
               .h2-title Спасибо за предложение!
-              p.p-small(js-subsc-thanks-message) В ближайшее время с вами свяжутся наши специалисты
+              p.p-small(js-event-thanks-message) В ближайшее время с вами свяжутся наши специалисты
               a(href="#" js-close-mfp).btn.btn-primary
                 span Вернуться на сайт

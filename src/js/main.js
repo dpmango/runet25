@@ -49,7 +49,7 @@ $(document).ready(function(){
     },
     timeline: {
       instance: undefined,
-      disableLessThan: 768
+      disableLessThan: 576
     }
   } // collection of all sliders
 
@@ -97,7 +97,7 @@ $(document).ready(function(){
   // The new container has been loaded and injected in the wrapper.
   function pageReady(fromPjax){
     closeMobileMenu(fromPjax);
-    setLineBreaks();
+    setLineBreaks(fromPjax);
     initSlidersResponsive();
     initPopups();
     getScalerResponsive();
@@ -113,6 +113,7 @@ $(document).ready(function(){
   // Overlay transtion is covering the screen and starts to reveal
   function inBetweenTransition(fromPjax){
     getStickyParams(fromPjax);
+    initStickyKit(fromPjax);
     getHeaderParams(fromPjax);
     controlHeaderColor();
   }
@@ -154,8 +155,9 @@ $(document).ready(function(){
   _window.on('scroll', scrollSticky);
   _window.on('resize', debounce(getHeaderParams, 100))
   _window.on('resize', debounce(setScalerResponsive, 100))
-  _window.on('resize', debounce(setLineBreaks, 100))
+  _window.on('resize', debounce(initSlidersResponsive, 100))
   _window.on('resize', debounce(getStickyParams, 100))
+  _window.on('resize', debounce(monitorStickyResize, 100))
   _window.on('resize', debounce(setBreakpoint, 200))
 
 
@@ -300,10 +302,19 @@ $(document).ready(function(){
     var headerHeight = $header.outerHeight() + headerWrapperTranslate
     var $page = getCorrespondingPage(fromPjax)
     var $colorControlSections = $page.find('[js-header-color]');
+    var isHeaderSticky = $page.find('[js-header-sticky]').length > 0
+
+    if ( isHeaderSticky ){
+      $header.addClass('is-sticky')
+    } else {
+      $header.removeClass('is-sticky')
+    }
+
     header = {
       container: $header,
       bottomPoint: headerHeight,
-      colorControlSections: $colorControlSections
+      colorControlSections: $colorControlSections,
+      isHeaderSticky: isHeaderSticky
     }
   }
 
@@ -311,6 +322,8 @@ $(document).ready(function(){
     if ( header.container !== undefined ){
       var fixedClass = 'is-fixed';
       var visibleClass = 'is-fixed-visible';
+
+      if ( header.isHeaderSticky ) return
 
       if ( scroll.blocked ) return
 
@@ -435,6 +448,10 @@ $(document).ready(function(){
     }
   });
 
+  _document.on('click', '[js-tabs-nav] a', function() {
+    $(this).parent().addClass('active').siblings().removeClass('active');
+  });
+
   function closeMobileMenu(isOnload){
     $('.header').removeClass('is-menu-active');
     changeHamburgerText()
@@ -463,14 +480,14 @@ $(document).ready(function(){
     })
 
   // converts .rtxt__wrap to multiple .rtxt__mover
-  function setLineBreaks(isResized){
-    var $containers = $('[js-set-line-breaks]');
+  function setLineBreaks(fromPjax){
+    var $containers = $('[js-wrap-words]');
     if ( $containers.length === 0 ) return
 
     $containers.each(function(i, container){
       var $container = $(container);
       var containerText
-      if ( isResized ){
+      if ( fromPjax ){
         containerText = $container.data("originText")
       } else {
         containerText = $container.text();
@@ -488,18 +505,17 @@ $(document).ready(function(){
     var $obj = $page.find('[js-tile-fixed]').first(); // TODO - any case when there are multiple items on page?
     if ($obj.length === 0) return
     var $parent = $obj.parent();
-
+    var useSelfWidth = $obj.data("use-self-width") !== undefined
+    console.log(useSelfWidth)
     stickyParams = {
       object: $obj,
       objectHeight: $obj.outerHeight(),
       container: $parent,
       containerOffsetTop: $parent.offset().top,
-      containerWidth: Math.round($parent.outerWidth()),
-      // footerOffset: $page.find('.footer').offset().top,
-      footerOffset: $parent.offset().top + $parent.height(),
+      containerWidth: useSelfWidth ? $obj.outerWidth() : $parent.outerWidth(),
+      footerOffset: $page.find('.footer').offset().top,
       windowHeight: _window.height()
     }
-    console.log(stickyParams.footerOffset)
     scrollSticky();
   }
 
@@ -527,6 +543,43 @@ $(document).ready(function(){
     }
   }
 
+  //////////
+  // STICKY KIT
+  //////////
+  function initStickyKit(fromPjax){
+    var $page = getCorrespondingPage(fromPjax);
+    var $sticky = $page.find('[js-sticky]');
+    if ($sticky.length === 0) return
+
+    $sticky.each(function(i, sticky){
+      enableSticky(sticky)
+    })
+  }
+
+  function enableSticky(sticky){
+    var bp = $(sticky).data('disable-on');
+    if ( bp && ( getWindowWidth() > parseInt(bp) ) ){
+      // http://leafo.net/sticky-kit/
+      $(sticky).stick_in_parent({
+        inner_scrolling: true
+      })
+    }
+  }
+
+  function monitorStickyResize(){
+    var $sticky = $('[js-sticky]');
+    if ($sticky.length === 0) return
+
+    $sticky.each(function(i, sticky){
+      var bp = $(sticky).data('disable-on');
+      if ( bp && ( getWindowWidth() <= parseInt(bp) ) ){
+        $(sticky).trigger("sticky_kit:detach");
+      } else {
+        enableSticky(sticky)
+      }
+    })
+  }
+
 
   /**********
   * PLUGINS *
@@ -543,14 +596,17 @@ $(document).ready(function(){
     // RESPONSIVE ON/OFF sliders
     var newsScrollerSwiperSelector = '[js-swiper-news-scroller]';
     var cardsScrollerSwiperSelector = '[js-swiper-cards-scroller]';
-    var timelineSwiperSelector = '[js-timeline-slider]'
+    var timelineSwiperSelector = '[js-timeline-slider]';
+    var tabsNavSwiperSelector = '[js-tabs-nav-slider]';
 
     initNewsScrollerSwiper();
     initCardsScrollerSwiper();
+    iniTabsNavSwiper();
 
     if ( $(timelineSwiperSelector).length > 0 ){
       if ( getWindowWidth() <= sliders.timeline.disableLessThan ) {
         if ( sliders.timeline.instance !== undefined ) {
+          console.log('dest')
           sliders.timeline.instance.destroy( true, true );
           sliders.timeline.instance = undefined
         }
@@ -630,6 +686,19 @@ $(document).ready(function(){
       })
     }
 
+    // news scroller swiper
+    function iniTabsNavSwiper(){
+      sliders.newsScroller.instance = new Swiper(tabsNavSwiperSelector, {
+        loop: false,
+        watchOverflow: true,
+        setWrapperSize: false,
+        spaceBetween: 0,
+        slidesPerView: 'auto',
+        normalizeSlideIndex: true,
+        freeMode: true,
+      });
+    }
+
     // TIMELINE
     function initTimelineSwiper(){
       sliders.timeline.instance = new Swiper(timelineSwiperSelector, {
@@ -639,7 +708,8 @@ $(document).ready(function(){
         resistanceRatio: 0,
         // freeModeSticky: true,
         mousewheel: {
-          eventsTarged: document
+          eventsTarged: 'container',
+          releaseOnEdges: true
         }
       });
     }
@@ -725,11 +795,12 @@ $(document).ready(function(){
     if ( window.browser.isIe ){
       // ie pollyfils
       picturefill();
-      window.fitie.init()
+      objectFitImages();
+      // window.fitie.init()
     }
   }
 
-  window.ieFixPictures = ieFixPictures()
+  window.ieFixPictures = ieFixPictures
 
 
   ///////////////
@@ -802,13 +873,13 @@ $(document).ready(function(){
         function initPS(){
           var yDisabled = $(scrollbar).data('y-disabled') == true
           var xDisabled = $(scrollbar).data('x-disabled') == true
-          var wheelPropagation = $(scrollbar).data('wheel-propagation') == true
+          var wheelPropagation = $(scrollbar).data('wheel-propagation') !== undefined ? $(scrollbar).data('wheel-propagation') : true
           // console.log(wheelPropagation)
           ps = new PerfectScrollbar(scrollbar, {
             suppressScrollY: yDisabled,
             suppressScrollX: xDisabled,
             // wheelSpeed: 2,
-            // wheelPropagation: wheelPropagation,
+            wheelPropagation: wheelPropagation,
             minScrollbarLength: 20
           });
         }
@@ -848,7 +919,7 @@ $(document).ready(function(){
       var self = $(val)
       var objHtml = $(val).html();
       var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
-      var conditionMedia = $(val).data('teleport-condition').substring(1);
+      var conditionMedia = parseInt($(val).data('teleport-condition').substring(1));
       var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
 
       if (target && objHtml && conditionPosition) {
@@ -857,6 +928,7 @@ $(document).ready(function(){
           var condition;
 
           if (conditionPosition === "<") {
+
             condition = getWindowWidth() < (conditionMedia + 1);
           } else if (conditionPosition === ">") {
             condition = getWindowWidth() > conditionMedia;
@@ -885,7 +957,8 @@ $(document).ready(function(){
   function initDatepicker() {
     var input = $('[js-datepicker]'),
         datepicker = input.datepicker({
-          showEvent: 'none'
+          showEvent: 'none',
+          autoClose: true
         }).data('datepicker');
 
     // TODO - multiple click listeners ?
@@ -1044,6 +1117,9 @@ $(document).ready(function(){
   // jQuery validate plugin
   // https://jqueryvalidation.org
   function initValidations(){
+    // globals
+    var subscriptionValidation, feedbackValidation;
+
     // GENERIC FUNCTIONS
     var validateErrorPlacement = function(error, element) {
       error.addClass('ui-input__validation');
@@ -1162,6 +1238,7 @@ $(document).ready(function(){
 
         $form.removeClass('is-loading');
         $email.val("") // clear prev value
+        subscriptionValidation.resetForm();
       },
       rules: {
         email: {
@@ -1178,7 +1255,168 @@ $(document).ready(function(){
     }
 
     // call/init
-    $("[js-validate-subscription]").validate(subscriptionValidationObject);
+    subscriptionValidation = $("[js-validate-subscription]").validate(subscriptionValidationObject);
+
+    // prevent default submiting form through enter keypress
+    _document.on("keyup", "[js-validate-subscription] input", function(e){
+      if (e.keyCode == 13) {
+        e.preventDefault()
+      }
+    })
+
+
+    var feedbackValidationObject = {
+      errorPlacement: validateErrorPlacement,
+      highlight: validateHighlight,
+      unhighlight: validateUnhighlight,
+      submitHandler: function(form) {
+        var $form = $(form)
+        $form.addClass('is-loading');
+
+        // $.ajax({
+        //   type: "POST",
+        //   url: $(form).attr('action'),
+        //   data: $(form).serialize(),
+        //   success: function(response) {
+        //     $(form).removeClass('is-loading');
+        //     var data = $.parseJSON(response);
+        //     if (data.status == 'success') {
+        //       // do something I can't test
+        //     } else {
+        //         $(form).find('[data-error]').html(data.message).show();
+        //     }
+        //   }
+        // });
+
+        // open modal
+        var mfpThanksOptions = $.extend( defaultPopupOptions, {
+          items: {src: '#feedback-thanks'}
+        }, true);
+        $.magnificPopup.open(mfpThanksOptions);
+
+        $form.removeClass('is-loading');
+        $form.find('input, textarea').val('');
+        feedbackValidation.resetForm();
+      },
+      rules: {
+        name: {
+          required: true
+        },
+        project: {
+          required: true
+        },
+        text: {
+          required: true
+        }
+      },
+      messages: {
+        name: {
+          required: "Заполните это поле"
+        },
+        project: {
+          required: "Заполните это поле"
+        },
+        text: {
+          required: "Заполните это поле"
+        }
+      }
+    }
+
+    // call/init
+    feedbackValidation = $("[js-validate-feedback]").validate(feedbackValidationObject);
+
+    // prevent default submiting form through enter keypress
+    _document.on("keyup", "[js-validate-feedback] input", function(e){
+      if (e.keyCode == 13) {
+        e.preventDefault()
+      }
+    });
+
+
+    var eventValidationObject = {
+      errorPlacement: validateErrorPlacement,
+      highlight: validateHighlight,
+      unhighlight: validateUnhighlight,
+      submitHandler: function(form) {
+        var $form = $(form)
+        $form.addClass('is-loading');
+
+        // $.ajax({
+        //   type: "POST",
+        //   url: $(form).attr('action'),
+        //   data: $(form).serialize(),
+        //   success: function(response) {
+        //     $(form).removeClass('is-loading');
+        //     var data = $.parseJSON(response);
+        //     if (data.status == 'success') {
+        //       // do something I can't test
+        //     } else {
+        //         $(form).find('[data-error]').html(data.message).show();
+        //     }
+        //   }
+        // });
+
+        // open modal
+        var mfpThanksOptions = $.extend( defaultPopupOptions, {
+          items: {src: '#event-thanks'}
+        }, true);
+        $.magnificPopup.open(mfpThanksOptions);
+
+        $form.removeClass('is-loading');
+        $form.find('input, textarea').val('');
+        eventValidation.resetForm();
+      },
+      rules: {
+        name: {
+          required: true
+        },
+        title: {
+          required: true
+        },
+        terms: {
+          required: true
+        },
+        initiators: {
+          required: true
+        },
+        description: {
+          required: true
+        },
+        essence: {
+          required: true
+        }
+      },
+      messages: {
+        name: {
+          required: "Заполните это поле"
+        },
+        title: {
+          required: "Заполните это поле"
+        },
+        terms: {
+          required: "Заполните это поле"
+        },
+        initiators: {
+          required: "Заполните это поле"
+        },
+        description: {
+          required: "Заполните это поле"
+        },
+        essence: {
+          required: "Заполните это поле"
+        }
+      }
+    }
+
+    // call/init
+    eventValidation = $("[js-validate-event]").validate(eventValidationObject);
+
+    // prevent default submiting form through enter keypress
+    _document.on("keyup", "[js-validate-event] input", function(e){
+      if (e.keyCode == 13) {
+        e.preventDefault()
+      }
+    })
   }
 
 

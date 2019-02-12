@@ -16,7 +16,7 @@ PageList:
 - file: about.html
   ready: 100
 - file: timeline.html
-  ready: 80
+  ready: 100
 - file: news.html
   ready: 100
 - file: news-article.html

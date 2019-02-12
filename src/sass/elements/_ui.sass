@@ -23,7 +23,7 @@
   font-weight: 500
   border: 1px solid $borderColor
   border-radius: 0px
-  padding: 19px 25px 18px 25px
+  padding: 18px 25px 17px 25px
   transition: .25s $ease
   &.has-error
     border-color: $colorRed
@@ -33,22 +33,36 @@
     border-color: rgba(black, .5)
     outline: none
   &--light
-    color: $colorWhite
+    padding-top: 13px
+    padding-bottom: 12px
+    color: white
     background-color: transparent
-    border-color: $colorWhite
+    border-color: white
     &:focus
-      border-color: $colorWhite
-    &::-webkit-input-placeholder
-      color: $colorWhite
-    &::-moz-placeholder
-      color: $colorWhite
-    &:-moz-placeholder
-      color: $colorWhite
-    &:-ms-input-placeholder
-      color: $colorWhite
+      border-color: #F2306E
+    &::placeholder
+      color: rgba(white, .5)
 
-.ui-input textarea
+textarea.ui-input
   resize: vertical
+
+// group modifiers
+.ui-group
+  &--smaller
+    label:not(.ui-input__validation)
+      font-size: 13px
+      line-height: 1.53
+    .ui-input
+      padding-top: 13px
+      padding-bottom: 12px
+      color: white
+      background-color: transparent
+      border-color: white
+      &:focus
+        border-color: #F2306E
+      &::placeholder
+        color: white
+
 
 .ui-input__validation
   font-size: 12px

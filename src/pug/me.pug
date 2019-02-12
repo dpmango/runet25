@@ -8,9 +8,7 @@ block content
   .hero-title(js-header-color data-menu-color="white" data-logo-color="white")
     .container
       .hero-title__content
-        h1.h1-title.rtxt(js-reveal data-type="onload")
-          span.rtxt__wrap
-            span.rtxt__mover Я – часть Рунета
+        h1.h1-title.rtxt(js-reveal js-wrap-words data-type="onload") Я – часть Рунета
             
     .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/heroTitle_4_blue.jpg)")
       img(js-lazy data-src='img/backgrounds/heroTitle_4_blue.jpg' data-srcset='img/backgrounds/heroTitle_4_blue@2x.jpg 2x')
@@ -20,31 +18,29 @@ block content
     .col.col--4.col--lg-hide
       // tile
       .tile.tile--full.tile--fixed(js-tile-fixed)
-        .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/candyFire_9.jpg)")
+        .tile__img-cover.tile__img-cover--fit-ct(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/candyFire_9.jpg)")
           img(js-lazy data-src='img/candyFire_9.jpg' data-srcset='img/candyFire_9@2x.jpg 2x')
 
     .col.col--8
       .grid
         // tile
         .tile.tile--full.tile--red.reveal(js-reveal data-direction="ltr")
-          h2.h2-title.rtxt(js-reveal data-delay="300") 
-            span.rtxt__wrap 
-              span.rtxt__mover Положения конкурсов
+          h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Положения конкурсов
           p.p-main(data-aos="fade" data-aos-delay="300") Ежегодный Всероссийский конкурс для поддержки лучших интернет-ресурсов, которые способствуют позитивному мышлению, вдохновению, творчеству, вере в безграничность человеческих сил и возможностей. В 2018 году конкурс проводится в 8-й раз.
           p.p-main(data-aos="fade" data-aos-delay="300") К участию в конкурсе приглашаются российские интернет-ресурсы, стремящиеся вовлечь детскую и молодежную аудиторию Рунета в активную жизнь как в Сети, так и за ее пределами. И решающие тем самым актуальные социальные задачи
         
         // tile
         .tile.tile--full.tile--purple.reveal(js-reveal data-direction="rtl")
           .tile__text
-            h3.h3-title Правила участия (условия и ограничения)
-            h4.h4-title Этапы проведения конкурса
-            ol.main-list.p-small
+            h3.h3-title.rtxt(js-reveal js-wrap-words data-delay="300") Правила участия (условия и ограничения)
+            h4.h4-title(data-aos="fade") Этапы проведения конкурса
+            ol.main-list.p-small(data-aos="fade")
               li Регистрация участников и прием заявок — до 1 декабря 2018 года
               li Отбор финалистов конкурса (формирование шорт-листа) экспертной комиссией — до 10 декабря 2018 года
               li Определение победителей на основе общественного и экспертного голосования — декабрь 2018 года
               li Награждение победителей конкурса «Позитивный контент — 2018» — декабрь 2018 года
           
-          .tile__text
+          .tile__text(data-aos="fade")
             h4.h4-title Условия участия в конкурсе
             p.p-small К участию в конкурсе допускаются региональные, муниципальные, частные, коммерческие и некоммерческие проекты. Проект может иметь свободный доступ для всех желающих или быть направленным на взаимодействие с ограниченной аудиторией (по какому-либо признаку - территория, возраст, принадлежность к организации или учреждению и т.п.)
             ol.main-list.p-small
@@ -59,72 +55,76 @@ block content
               li Отправить заявку на конкурс может владелец проекта или его доверенное лицо, физическое или юридическое.
         
         // tile
-        .tile.tile--full.tile--center.tile--dark
-          h2.h2-title Оргкомитет
-          .grid.tile__users
-            mixin userItem(name, img)
-              .col.col--4.user-card
-                .user-card__avatar
-                  .scaler(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/'+ img +'.jpg)')
-                    img.user-card__image(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
-                span.user-card__name Аркадий Паровозов
-            
-            +userItem("Михаил Жванецкий", "userItem_1")
-            +userItem("Аркадий Паровозов", "userItem_2")
-            +userItem("Михаил Кшиштовский", "userItem_3")
-            +userItem("Аркадий Паровозов", "userItem_4")
-            +userItem("Марк Цукерберг", "userItem_5")
+        .tile.tile--full.tile--center.tile--dark.reveal(js-reveal data-direction="ltr")
+          h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Оргкомитет
+          .users
+            .users__wrapper
+              .grid.users__grid
+                mixin userItem(name, img)
+                  .user-card.users__col(data-aos="fade")
+                    .user-card__avatar
+                      .scaler(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/'+ img +'.jpg)')
+                        img.user-card__image(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
+                    span.user-card__name Аркадий Паровозов
+                
+                +userItem("Михаил Жванецкий", "userItem_1")
+                +userItem("Аркадий Паровозов", "userItem_2")
+                +userItem("Михаил Кшиштовский", "userItem_3")
+                +userItem("Аркадий Паровозов", "userItem_4")
+                +userItem("Марк Цукерберг", "userItem_5")
         
         // tile
-        .tile.tile--full.tile--center.tile--green
-          h2.h2-title Лауреаты
-          .grid.tile__laureates
-            .col.col--4
-              div
-                img(js-lazy data-src='img/wreath_gold.png' data-srcset='img/wreath_gold@2x.png 2x')
-              p.p-big Вконтакте
-            
-            .col.col--4
-              div
-                img(js-lazy data-src='img/wreath_silver.png' data-srcset='img/wreath_silver@2x.png 2x')
-              p.p-big ASOS
-            
-            .col.col--4
-              div
-                img(js-lazy data-src='img/wreath_bronze.png' data-srcset='img/wreath_bronze@2x.png 2x')
-              p.p-big Яндекс
+        .tile.tile--full.tile--vauto.tile--green.reveal(js-reveal data-direction="rtl")
+          .laureates
+            h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Лауреаты
+            .grid.grid--offset.laureates__grid
+              .laureates__item(data-aos="fade")
+                div
+                  img(js-lazy data-src='img/wreath_gold.png' data-srcset='img/wreath_gold@2x.png 2x')
+                p.p-big Вконтакте
+              
+              .laureates__item(data-aos="fade")
+                div
+                  img(js-lazy data-src='img/wreath_silver.png' data-srcset='img/wreath_silver@2x.png 2x')
+                p.p-big ASOS
+              
+              .laureates__item(data-aos="fade")
+                div
+                  img(js-lazy data-src='img/wreath_bronze.png' data-srcset='img/wreath_bronze@2x.png 2x')
+                p.p-big Яндекс
   
   // grid
-  .grid
+  .grid(js-header-color data-menu-color="white")
     // tile
     .tile.tile--2-3.tile--white.tile--lg-last(js-header-color data-menu-color="white")
       .tile__grid
         .tile__col
-          h2.h2-title.rtxt(js-reveal js-set-line-breaks data-delay="300") Остались вопросы?
+          h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Остались вопросы?
           p.p-small(data-aos="fade" data-aos-delay="300") Задайте их, а мы оперативно ответим. <br>Вопросы отправляются на специальную почту оргкомитета конкурсов.
         .tile__col
-          form(action="/email-form.php" js-validate-subscription data-aos="fade" data-aos-delay="500").quest-form
+          form.multi-form(action="/email-form.php" js-validate-feedback data-aos="fade" data-aos-delay="500")
             .ui-group
               label(for="name") ФИО
-              input.ui-input(type="text" name="name" placeholder="ivan.petrov@address.ru")
+              input.ui-input(type="text" name="name" placeholder="Иван Петрович Иванов")
             .ui-group
               label(for="title") Организация / Проект
-              input.ui-input(type="text" name="title" placeholder="")
+              input.ui-input(type="text" name="project" placeholder="")
             .ui-group
               label(for="text") Текст вопроса
-              textarea.ui-input(name="text" placeholder="")
+              // data-min-rows is required for autoexpand module
+              textarea.ui-input(name="text" placeholder="" rows="1" data-min-rows="1")
             .ui-group
               button(type="submit").btn.btn-primary
                 span Отправить вопрос
       
       // modal
-      .mfp-dialog.mfp-thanks.mfp-hide#subsc-thanks
+      .mfp-dialog.mfp-thanks.mfp-hide#feedback-thanks
         .h2-title Спасибо за вопрос!
-        p.p-small(js-subsc-thanks-message) В ближайшее время с вами свяжутся наши специалисты
+        p.p-small(js-feedback-thanks-message) В ближайшее время с вами свяжутся наши специалисты
         a(href="#" js-close-mfp).btn.btn-primary
           span Вернуться на сайт
         
     // tile
     .tile.tile--1-3.tile--lg-full
-      .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/candyFire_8.jpg)")
+      .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:600/v1549746979/runet25/candyFire_8.jpg)")
         img(js-lazy data-src='img/candyFire_8.jpg' data-srcset='img/candyFire_8@2x.jpg 2x')

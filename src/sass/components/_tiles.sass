@@ -34,12 +34,18 @@
     backface-visibility: hidden
     overflow: hidden
   &--timeline
+    margin-bottom: -1px
     padding-left: 120px
     height: 100vh
-    overflow-y: auto
+    overflow: hidden
   &--form
     max-width: 200%
     width: 200%
+    overflow-y: auto
+    overflow-x: hidden
+    will-change: transform
+    backface-visibility: hidden
+    transform-style: preserve-3d
     transition: transform 0.2s 0.05s ease-in-out
     &.is-active
       transform: translate3d(-50%, 0, 0)
@@ -47,6 +53,12 @@
         transform: translate3d(0, 0, 0)
       [js-form-events-toggle]::before
         transform: scale(-1, 1)
+  &--sm
+    min-height: 320px
+  &--pt-lg
+    padding-top: 120px
+  &--pb-lg
+    padding-bottom: 80px
 
   // elements
   &__grid
@@ -114,6 +126,8 @@
       height: 100%
       object-fit: cover
     &--fit
+      &-ct img, picture
+        object-position: center top
       &-rt img, picture
         object-position: right top
       &-rc img, picture
@@ -126,14 +140,6 @@
         object-position: left center
       &-lb img, picture
         object-position: left bottom
-  &__users
-    justify-content: center
-    .h3-title
-      width: 100%
-    &--start
-      justify-content: flex-start
-    .user-card
-      margin-bottom: 60px
   &__laureates
     width: 100%
     .p-big
@@ -143,15 +149,15 @@
     margin-top: 50px
     margin-bottom: 50px
     width: 100%
-    border-top: 1px solid rgba($colorWhite, 0.3)
+    border-top: 1px solid rgba(white, 0.3)
     border-bottom: 0
-  &__users
-    margin-bottom: 20px
+  &__text
+    max-width: 1200px
   &__info
     margin-bottom: 40px
     padding: 37px 0
-    border-top: 1px solid rgba($colorWhite, 0.3)
-    border-bottom: 1px solid rgba($colorWhite, 0.3)
+    border-top: 1px solid rgba(white, 0.3)
+    border-bottom: 1px solid rgba(white, 0.3)
   &__group-content
     margin-bottom: 100px
     &:last-child
@@ -160,11 +166,11 @@
     padding-right: 35px
   &__form-events
     transform: translate3d(100%, 0, 0)
+    padding-bottom: 50px
     transition: transform 0.2s 0.2s ease-in-out
-
   .h2-title
     margin-top: 0
-    margin-bottom: .4em
+    margin-bottom: .5em
   .h3-title
     &:first-child
       margin-top: 0
@@ -200,7 +206,7 @@
     &::after
       background-color: #F2306E
     .p-link
-      color: $colorWhite
+      color: white
   &--pink
     background-color: #F2306E
     color: white
@@ -219,10 +225,21 @@
   &--dark
     background-color: #37374C
     color: white
+    &::after
+      background-color: #FF7400
   &--white
     background-color: #FFF
+    &::after
+      background-color: #00A5FF
   &--gray
     background-color: $colorLightBg
+    &::after
+      background-color: $colorRed
+  &--black
+    color: white
+    background-color: #333
+    &::after
+      background-color: #FF7400
 
   // position modifiers
   &--jcc
@@ -242,8 +259,13 @@
 
 +r($xl)
   .tile
-    padding: 60px 40px 35px
+    padding-top: 60px
+    padding-bottom: 35px
     min-height: 350px
+    &--sm
+      min-height: 320px
+    &--pt-lg
+      padding-top: 120px
 
 +r($lg)
   .tile
@@ -268,11 +290,14 @@
     &--timeline
       padding-top: 160px
     &--form
+      position: relative
       padding-top: 45px
       padding-bottom: 45px
       width: 100%
       max-width: 100%
-      min-height: auto
+      min-height: 1px
+      max-height: none
+      overflow: visible
       &.is-active
         transform: translate3d(0, 0, 0)
         [js-form-events-toggle]::before
@@ -284,6 +309,7 @@
       padding-right: 0
     &__form-events
       margin-top: 50px
+      padding-bottom: 0
       display: none
       transform: translate3d(0, 0, 0)
     &__col
@@ -296,7 +322,12 @@
     padding: 40px 30px 25px
     &--timeline
       padding-top: 120px
-      height: auto
+    &--pt-lg
+      padding-bottom: 70px
+    &--pb-lg
+      padding-bottom: 50px
+    &--vauto
+      min-height: 1px
     &__cta
       font-size: 14px
     &__group-content
@@ -314,21 +345,13 @@
     &--1-3
       flex-basis: $col12
       max-width: $col12
-
+    &--timeline
+      height: 100%
     &__grid
       flex-wrap: wrap
     &__col
       flex-basis: 100%
       max-width: 100%
-    &__users
-      margin-bottom: 0
-      .h3-title
-        text-align: center
-      .col--4
-        flex-basis: $col12
-        max-width: $col12
-      .user-card
-        margin-bottom: 40px
     &__info
       margin-bottom: 10px
       padding-top: 25px
@@ -340,3 +363,15 @@
         margin-bottom: 40px
         &:last-child
           margin-bottom: 20px
+
+.tile
+  &--auto
+    min-height: 1px
+
+.is-ie
+  .tile--timeline
+    flex: none
+
+  .tile--jcc
+    // https://stackoverflow.com/questions/19371626/flexbox-not-centering-vertically-in-ie
+    height: 100px

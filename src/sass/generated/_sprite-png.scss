@@ -1,38 +1,47 @@
 $sprite: (
 	arrow-black: (
 		offset-x: 0px,
-		offset-y: -80px,
+		offset-y: -44px,
 		width: 33px,
 		height: 13px,
-		total-width: 300px,
-		total-height: 93px,
+		total-width: 80px,
+		total-height: 80px,
 		image: '../img/sprite.png'
 	),
 	arrow-white: (
 		offset-x: -43px,
-		offset-y: -80px,
+		offset-y: -44px,
 		width: 33px,
 		height: 13px,
-		total-width: 300px,
-		total-height: 93px,
+		total-width: 80px,
+		total-height: 80px,
+		image: '../img/sprite.png'
+	),
+	envelope: (
+		offset-x: -45px,
+		offset-y: 0px,
+		width: 35px,
+		height: 29px,
+		total-width: 80px,
+		total-height: 80px,
 		image: '../img/sprite.png'
 	),
 	footer-menu-arrow: (
-		offset-x: -86px,
-		offset-y: -80px,
+		offset-x: 0px,
+		offset-y: -67px,
 		width: 8px,
 		height: 13px,
-		total-width: 300px,
-		total-height: 93px,
+		total-width: 80px,
+		total-height: 80px,
 		image: '../img/sprite.png'
 	),
-	logo: (
+	phone: (
 		offset-x: 0px,
 		offset-y: 0px,
-		width: 300px,
-		height: 70px,
-		total-width: 300px,
-		total-height: 93px,
+		width: 35px,
+		height: 34px,
+		total-width: 80px,
+		total-height: 80px,
 		image: '../img/sprite.png'
 	),
 );
@@ -97,9 +106,12 @@ $sprite: (
 	.icon-arrow-white {
 		@include sprite(arrow-white)
 	}
+	.icon-envelope {
+		@include sprite(envelope)
+	}
 	.icon-footer-menu-arrow {
 		@include sprite(footer-menu-arrow)
 	}
-	.icon-logo {
-		@include sprite(logo)
+	.icon-phone {
+		@include sprite(phone)
 	}

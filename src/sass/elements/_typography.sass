@@ -120,6 +120,7 @@ p
   &:hover
     color: $colorPrimary
 
+
 .f-500
   font-weight: 500
 
@@ -135,25 +136,42 @@ p
 .f-900
   font-weight: 900
 
+// strong
+//   font-weight: 700
 
 .c-red
   color: $colorRed
+.c-gray
+  color: $fontColor50
 
 
+/* hr
+hr
+  margin: 30px 0
+  border-top: 1px solid #D8D8D8
+  border-bottom: 0
+
++r($sm)
+  hr
+    margin: 25px 0
+
+
+/* blockquote
 .blockquote
   position: relative
   margin-left: 0
   margin-right: 0
   padding-left: 46px
+  min-height: 40px
   @extend .p-main
   &::before
     content: ''
     position: absolute
-    top: 7px
+    top: 3px
     left: 0
     width: 30px
     height: 22px
-    background: url(../icons/svg-mono/quote.svg) no-repeat
+    background: svg-load("../icons/svg-inline/quote.svg") no-repeat
 
 +r($sm)
   .blockquote
@@ -163,6 +181,8 @@ p
       height: 18px
       background-size: 100% auto
 
+
+/* lists
 .main-list
   padding-left: 20px
   @extend .p-main
@@ -172,6 +192,11 @@ p
       margin-bottom: 0
   .main-list
     margin-top: 15px
+  &--clean
+    padding-left: 0
+    li
+      margin-bottom: 0
+      list-style: none
 
 ul.main-list
   list-style-type: disc
@@ -183,17 +208,34 @@ ul.main-list
     padding-left: 0
     list-style-position: inside
 
-.text-columns
-  margin: 25px 0
-  column-count: 2
-  column-gap: 40px
-  &:first-child
-    margin-top: 0
-  &:last-child
-    margin-bottom: 0
-
 +r($md)
   .text-columns
     margin-top: 1em
     margin-bottom: 1em
     column-count: 1
+
+/* default styles for WYSIWYG
+.WYSIWYG-content
+  p:not(.p-main)
+    @extend .p-main
+  h1:not(.h1-title)
+    @extend .h1-title
+  h2:not(.h2-title)
+    @extend .h2-title
+  h3:not(.h3-title)
+    @extend .h3-title
+  h4:not(.h4-title)
+    @extend .h4-title
+  h5:not(.h5-title)
+    font-size: 16px
+  h6:not(.h6-title)
+    font-size: 14px
+  blockquote:not(.blockquote)
+    @extend .blockquote
+  img, video, iframe
+    max-width: 100%
+  ol:not(.main-list)
+    @extend .main-list
+  ul:not(.main-list)
+    @extend .main-list
+    @extend ul.main-list

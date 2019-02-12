@@ -70,6 +70,9 @@ img, picture
 
 /* text reveal
 .rtxt
+  flex: 0 0 auto
+  width: 100%
+  min-width: 1px
   &:not(.is-words-wrapped)
     // keep wraps inline-block for natural words flow
     // manual wraps keeps line-breaks
@@ -77,6 +80,8 @@ img, picture
     flex-direction: column
     align-items: flex-start
   &__wrap
+    flex: 0 0 auto
+    min-width: 1px
     display: inline-block
     position: relative
     overflow: hidden

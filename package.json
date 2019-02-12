@@ -63,6 +63,7 @@
     "postcss-flexbugs-fixes": "^3.0.0",
     "postcss-focus": "^3.0.0",
     "postcss-inline-svg": "^3.0.0",
+    "postcss-object-fit-images": "^1.1.2",
     "postcss-pseudoelements": "^5.0.0",
     "postcss-responsive-type": "^1.0.0",
     "postcss-short": "^4.1.0",

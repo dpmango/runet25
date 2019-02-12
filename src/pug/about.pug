@@ -8,9 +8,7 @@ block content
   .hero-title(js-header-color data-menu-color="white" data-logo-color="white")
     .container
       .hero-title__content
-        h1.h1-title.rtxt(js-reveal data-type="onload")
-          span.rtxt__wrap
-            span.rtxt__mover О проекте
+        h1.h1-title.rtxt(js-reveal js-wrap-words data-type="onload") О проекте
 
     .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/heroTitle_5_multi.jpg)")
       img(js-lazy data-src='img/backgrounds/heroTitle_5_multi.jpg' data-srcset='img/backgrounds/heroTitle_5_multi@2x.jpg 2x')
@@ -21,9 +19,7 @@ block content
     .tile.tile--full.tile--pink
       .tile__grid
         .tile__col.tile__col--1-3
-          h2.h2-title.rtxt(js-reveal data-delay="300") 
-            span.rtxt__wrap 
-              span.rtxt__mover Предпосылки празднования юбилея на государственном уровне
+          h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Предпосылки празднования юбилея на государственном уровне
         .tile__col.tile__col--1-3
           p.p-main(data-aos="fade" data-aos-delay="300") В 2019 году домену .RU исполнится 25 лет. Датой рождения Российского Интернета считается 7 апреля 1994 года — в этот день международный сетевой информационный центр InterNIC официально делегировал национальный домен .RU для Российской Федерации.
           p.p-main(data-aos="fade" data-aos-delay="300") Отрасль достигла зрелости. Интернет перестал быть индустрией, став средой и неотъемлемой частью повседневной жизни. Сформированные опытом нормы поведения и законы ориентированы на офлайн. Новая реальность требует собственных правил и подходов.
@@ -31,11 +27,9 @@ block content
           p.p-main(data-aos="fade" data-aos-delay="300") Государство становится неотъемлемым участником цифровой среды, с одной стороны, являясь гарантом прав и свобод граждан, с другой – обеспечивая развитие отрасли, создавая условия для бизнеса, формируя приток кадров.
 
     // tile
-    .tile.tile--1-3.tile--dark.reveal(js-link data-href="number25.html" js-reveal data-direction="rtl" data-type="halflyEnterViewport" js-header-color data-menu-color="white" data-logo-color="white")
-      h2.h2-title.rtxt(js-reveal data-delay="300") 
-        span.rtxt__wrap 
-          span.rtxt__mover Таймлайн ключевых этапов проведения юбилея
-      a(href="number25.html" data-aos="fade" data-aos-delay="500").tile__cta
+    .tile.tile--1-3.tile--dark.reveal(js-link data-href="timeline.html" js-reveal data-direction="rtl" data-type="halflyEnterViewport")
+      h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Таймлайн ключевых этапов проведения юбилея
+      a(href="timeline.html" data-aos="fade" data-aos-delay="500").tile__cta
         span Читать подробнее
         i.icon.icon-arrow-white
     
@@ -45,30 +39,24 @@ block content
         img(js-lazy data-src='img/candyFire_10.jpg' data-srcset='img/candyFire_10@2x.jpg 2x')
     
     // tile
-    .tile.tile--1-3.tile--blue.reveal(js-link data-href="news.html" js-reveal data-direction="rtl" data-type="halflyEnterViewport" js-header-color data-menu-color="white" data-logo-color="white")
-      h2.h2-title.rtxt(js-reveal data-delay="300") 
-        span.rtxt__wrap 
-          span.rtxt__mover Новости 25-летия
+    .tile.tile--1-3.tile--blue.reveal(js-link data-href="news.html" js-reveal data-direction="ltr" data-type="halflyEnterViewport")
+      h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Новости 25-летия
       p.p-small Читайте актуальные новости, пресс-релизы и анонсы
       a(href="news.html" data-aos="fade" data-aos-delay="500").tile__cta
         span Читать новости
         i.icon.icon-arrow-white
     
     // tile
-    .tile.tile--1-3.tile--orange.reveal(js-link data-href="committee.html" js-reveal data-direction="rtl" data-type="halflyEnterViewport" js-header-color data-menu-color="white" data-logo-color="white")
-      h2.h2-title.rtxt(js-reveal data-delay="300") 
-        span.rtxt__wrap 
-          span.rtxt__mover Оргкомитет
+    .tile.tile--1-3.tile--orange.reveal(js-link data-href="committee.html" js-reveal data-direction="rtl" data-type="halflyEnterViewport")
+      h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Оргкомитет
       p.p-small Перечень личностей, являющихся организаторами и партнерами
       a(href="committee.html" data-aos="fade" data-aos-delay="500").tile__cta
         span Смотреть подробнее
         i.icon.icon-arrow-white
     
     // tile
-    .tile.tile--1-3.tile--green.reveal(js-link data-href="sponsors.html" js-reveal data-direction="rtl" data-type="halflyEnterViewport" js-header-color data-menu-color="white" data-logo-color="white")
-      h2.h2-title.rtxt(js-reveal data-delay="300") 
-        span.rtxt__wrap 
-          span.rtxt__mover Спонсорам
+    .tile.tile--1-3.tile--green.reveal(js-link data-href="sponsors.html" js-reveal data-direction="ltr" data-type="halflyEnterViewport")
+      h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Спонсорам
       p.p-small Мы предлагаем различные варианты спонсорских возможностей, которые позволят вам заявить о вашей компании
       a(href="sponsors.html" data-aos="fade" data-aos-delay="500").tile__cta
         span Узнать больше
@@ -78,12 +66,11 @@ block content
   .grid.grid-main.reverse
     .col.col--4
       // tile
-      .tile.tile--purple.reveal(js-link data-href="news.html" js-reveal data-direction="rtl" data-type="halflyEnterViewport" js-header-color data-menu-color="white" data-logo-color="white")
-        h2.h2-title.rtxt(js-reveal data-delay="300") 
-          span.rtxt__wrap 
-            span.rtxt__mover История проекта и опыт проведения предыдущих юбилеев
+      .tile.tile--purple.reveal(js-link data-href="news.html" js-reveal data-direction="rtl" data-type="halflyEnterViewport")
+        h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") История проекта и опыт проведения предыдущих юбилеев
       
       // tile
+      // TODO !
       .tile.tile--full
         .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:600/v1549746979/runet25/candyFire_11.jpg)")
           img(js-lazy data-src='img/candyFire_11.jpg' data-srcset='img/candyFire_11@2x.jpg 2x')
@@ -97,35 +84,33 @@ block content
               .card.card--event.card--large
                 .card__text
                   img(js-lazy data-src='img/logoRu.png' data-srcset='img/logoRu@2x.png 2x')
-                  h3.h4-title 2004 год: Рунету – 10 лет
-                  p.p-small Первый юбилей Рунета масштабно праздновался в России в 2004 году – именно тогда была учреждена Премия Рунета, был реализован  целый ряд мероприятий (пресс-конференции, интервью, исследования) с целью определить и представить общественности все основные достижения российского интернета на тот момент.
-                  p.p-small В том же 2004 году впервые прошло праздничное юбилейное “10 RUЛЕТ-show” (26 ноября 2004 года) – на котором была учреждена и вручена первая Премия Рунета 2004. Соорганизаторами проекта выступили RU-CENTER, РОЦИТ, ArtStyle Media, Мобил Телеком. Поддержку Премии Рунета с первого года проведения проекта оказало Федеральное агентство по печати и массовым коммуникациям.
+                  h4.h4-title.rtxt(js-reveal js-wrap-words) 2004 год: Рунету – 10 лет
+                  p.p-small(data-aos="fade" data-aos-delay="300") Первый юбилей Рунета масштабно праздновался в России в 2004 году – именно тогда была учреждена Премия Рунета, был реализован  целый ряд мероприятий (пресс-конференции, интервью, исследования) с целью определить и представить общественности все основные достижения российского интернета на тот момент.
+                  p.p-small(data-aos="fade" data-aos-delay="300") В том же 2004 году впервые прошло праздничное юбилейное “10 RUЛЕТ-show” (26 ноября 2004 года) – на котором была учреждена и вручена первая Премия Рунета 2004. Соорганизаторами проекта выступили RU-CENTER, РОЦИТ, ArtStyle Media, Мобил Телеком. Поддержку Премии Рунета с первого года проведения проекта оказало Федеральное агентство по печати и массовым коммуникациям.
                   br
+                  p.p-small(data-aos="fade" data-aos-delay="300") В том же году был создан портал www.10RU.ru, посвященный 10-летию Рунета, на котором помимо прочего был запущен раздел “История Рунета”: http://10ru.ru/history/  (позднее все материалы были агрегированы на сайте www.PremiaRuneta.ru)
+              
+              // card
+              .card.card--event.card--large
+                .card__text
+                  img(js-lazy data-src='img/logoRu15.png' data-srcset='img/logoRu15@2x.png 2x')
+                  h4.h4-title.rtxt(js-reveal js-wrap-words) 2009 год: Рунету – 15 лет
+                  p.p-small(data-aos="fade" data-aos-delay="300") 7 апреля 2009 года в Москве состоялось юбилейное торжественное заседание, посвященное празднованию Дня Рождения домена .RU – http://15.cctld.ru Организатором проекта выступил Координационный центр национального домена, соорганизаторами – РОЦИТ, ФРИ. Поддержку оказало Министерство связи и массовых коммуникаций Российской Федерации. В ходе торжественного заседания 7 апреля 2009 года министром И.О.Щёголевым были вручены почетные грамоты – заслуженным деятелям отрасли, чей вклад был отмечен как значительный по итогам 15 лет развития Рунета.
+              // card
+              .card.card--event.card--large
+                .card__text
+                  img(js-lazy data-src='img/logoRu.png' data-srcset='img/logoRu@2x.png 2x')
+                  h4.h4-title.rtxt(js-reveal js-wrap-words) 2004 год: Рунету – 10 лет
+                  p.p-small(data-aos="fade" data-aos-delay="300") Первый юбилей Рунета масштабно праздновался в России в 2004 году – именно тогда была учреждена Премия Рунета, был реализован  целый ряд мероприятий (пресс-конференции, интервью, исследования) с целью определить и представить общественности все основные достижения российского интернета на тот момент.
+                  p.p-small(data-aos="fade" data-aos-delay="300") В том же 2004 году впервые прошло праздничное юбилейное “10 RUЛЕТ-show” (26 ноября 2004 года) – на котором была учреждена и вручена первая Премия Рунета 2004. Соорганизаторами проекта выступили RU-CENTER, РОЦИТ, ArtStyle Media, Мобил Телеком. Поддержку Премии Рунета с первого года проведения проекта оказало Федеральное агентство по печати и массовым коммуникациям.
                   br
-                  p.p-small В том же году был создан портал www.10RU.ru, посвященный 10-летию Рунета, на котором помимо прочего был запущен раздел “История Рунета”: http://10ru.ru/history/  (позднее все материалы были агрегированы на сайте www.PremiaRuneta.ru)
+                  p.p-small(data-aos="fade" data-aos-delay="300") В том же году был создан портал www.10RU.ru, посвященный 10-летию Рунета, на котором помимо прочего был запущен раздел “История Рунета”: http://10ru.ru/history/  (позднее все материалы были агрегированы на сайте www.PremiaRuneta.ru)
               
               // card
               .card.card--event.card--large
                 .card__text
                   img(js-lazy data-src='img/logoRu.png' data-srcset='img/logoRu@2x.png 2x')
-                  p.p-small Первый юбилей Рунета масштабно праздновался в России в 2004 году – именно тогда была учреждена Премия Рунета, был реализован  целый ряд мероприятий (пресс-конференции, интервью, исследования) с целью определить и представить общественности все основные достижения российского интернета на тот момент.
-              
-              // card
-              .card.card--event.card--large
-                .card__text
-                  img(js-lazy data-src='img/logoRu.png' data-srcset='img/logoRu@2x.png 2x')
-                  h3.h4-title 2004 год: Рунету – 10 лет
-                  p.p-small Первый юбилей Рунета масштабно праздновался в России в 2004 году – именно тогда была учреждена Премия Рунета, был реализован  целый ряд мероприятий (пресс-конференции, интервью, исследования) с целью определить и представить общественности все основные достижения российского интернета на тот момент.
-                  p.p-small В том же 2004 году впервые прошло праздничное юбилейное “10 RUЛЕТ-show” (26 ноября 2004 года) – на котором была учреждена и вручена первая Премия Рунета 2004. Соорганизаторами проекта выступили RU-CENTER, РОЦИТ, ArtStyle Media, Мобил Телеком. Поддержку Премии Рунета с первого года проведения проекта оказало Федеральное агентство по печати и массовым коммуникациям.
-                  br
-                  br
-                  p.p-small В том же году был создан портал www.10RU.ru, посвященный 10-летию Рунета, на котором помимо прочего был запущен раздел “История Рунета”: http://10ru.ru/history/  (позднее все материалы были агрегированы на сайте www.PremiaRuneta.ru)
-              
-              // card
-              .card.card--event.card--large
-                .card__text
-                  img(js-lazy data-src='img/logoRu.png' data-srcset='img/logoRu@2x.png 2x')
-                  p.p-small Первый юбилей Рунета масштабно праздновался в России в 2004 году – именно тогда была учреждена Премия Рунета, был реализован  целый ряд мероприятий (пресс-конференции, интервью, исследования) с целью определить и представить общественности все основные достижения российского интернета на тот момент.
+                  p.p-small.mt-1(data-aos="fade" data-aos-delay="300") Первый юбилей Рунета масштабно праздновался в России в 2004 году – именно тогда была учреждена Премия Рунета, был реализован  целый ряд мероприятий (пресс-конференции, интервью, исследования) с целью определить и представить общественности все основные достижения российского интернета на тот момент.
                 
             .swiper-scrollbar
             .swiper-buttons
@@ -139,25 +124,49 @@ block content
     .col.col--4
       // tile
       .tile.tile--green.tile--full-v
-        h2.h2-title.rtxt(js-reveal data-delay="300") 
-          span.rtxt__wrap 
-            span.rtxt__mover Представители
+        h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Представители
 
     .col.col--8(js-header-color data-logo-color="white")
       .card-collection
         .card-collection__grid
           mixin userCard(name, post, img)
             // card
-            a(href="#").card.card--event(data-aos="fade-up")
-              .scaler.img-block(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/'+ img +'.jpg)')
+            a(href="#cardCommittee" js-popup).card.card--event
+              .scaler.img-block(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549969925/runet25/'+ img +'.jpg)')
                 img(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
-              p.card__name.h4-title.rtxt(js-reveal js-set-line-breaks)= name
-              span.card__post.p-small.rtxt(js-reveal js-set-line-breaks)= post
-            
+              p.card__name.h4-title.rtxt(js-reveal js-wrap-words)= name
+              span.card__post.p-small.rtxt(js-reveal js-wrap-words)= post
+
           +userCard("Плуготаренко Сергей", "Директор РАЭК", "committeeCard_1")
           +userCard("Гребенников Сергей", "Директор РОЦИТ", "committeeCard_2")
           +userCard("Дёмкина Екатерина", "Руководитель пресс-службы РАЭК", "committeeCard_3")
 
           +userCard("Плуготаренко Сергей", "Директор РАЭК", "committeeCard_4")
-          +userCard("Гребенников Сергей", "Директор РОЦИТ", "committeeCard_1")
-          +userCard("Дёмкина Екатерина", "Руководитель пресс-службы РАЭК", "committeeCard_1")
+          +userCard("Борзов Максим", "Генеральный директор RUIVENTS", "committeeCard_5")
+          +userCard("Измайлов Алексей", "Руководитель отдела маркетинга РАЭК", "committeeCard_6")
+        
+        // modal
+        .mfp-dialog.mfp-card.mfp-hide(id="cardCommittee")
+          p.p-main.card__date День рождения 8 апреля
+          img.img-block(js-lazy data-src='img/committeeCard_1.jpg' data-srcset='img/committeeCard_1@2x.jpg 2x')
+          p.card__name.h2-title= name
+          p.p-main Общественный деятель, эксперт российской интернет-отрасли. Директор Российской ассоциации электронных коммуникаций, член правления Регионального общественного центра интернет-технологий. Входит в состав Общественного совета и IT-совета при Минкомсвязи России.
+
+  //tile
+  .tile.tile--auto.tile--black(js-header-color data-menu-color="white" data-logo-color="white")
+    // group-content
+    .grid.group-content.tile__group-content
+      .col.col--4.group-content__aside
+        h2.h2-title(data-aos="fade") Контакты для связи
+        
+      .col.col--8.group-content__section
+        .tile__grid
+          .tile__col(data-aos="fade")
+            a.p-main.contact-str(href="tel:+74959505651")
+              i.icon.icon-phone
+              | +7 (495) 950-56-51
+          
+          .tile__col(data-aos="fade")
+            a.p-main.contact-str(href="mailto:info@raec.ru")
+              i.icon.icon-envelope
+              | info@raec.ru
