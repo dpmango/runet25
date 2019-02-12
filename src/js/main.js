@@ -1255,7 +1255,7 @@ $(document).ready(function(){
     subscriptionValidation = $("[js-validate-subscription]").validate(subscriptionValidationObject);
 
     // prevent default submiting form through enter keypress
-    _document.on("keyup", "[js-validate-subscription]", function(e){
+    _document.on("keyup", "[js-validate-subscription] input", function(e){
       if (e.keyCode == 13) {
         e.preventDefault()
       }
@@ -1323,7 +1323,7 @@ $(document).ready(function(){
     feedbackValidation = $("[js-validate-feedback]").validate(feedbackValidationObject);
 
     // prevent default submiting form through enter keypress
-    _document.on("keyup", "[js-validate-feedback]", function(e){
+    _document.on("keyup", "[js-validate-feedback] input", function(e){
       if (e.keyCode == 13) {
         e.preventDefault()
       }
@@ -1409,7 +1409,7 @@ $(document).ready(function(){
     eventValidation = $("[js-validate-event]").validate(eventValidationObject);
 
     // prevent default submiting form through enter keypress
-    _document.on("keyup", "[js-validate-event]", function(e){
+    _document.on("keyup", "[js-validate-event] input", function(e){
       if (e.keyCode == 13) {
         e.preventDefault()
       }
