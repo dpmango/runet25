@@ -120,6 +120,7 @@ p
   &:hover
     color: $colorPrimary
 
+
 .f-500
   font-weight: 500
 
@@ -143,6 +144,19 @@ p
 .c-gray
   color: $fontColor50
 
+
+/* hr
+hr
+  margin: 30px 0
+  border-top: 1px solid #D8D8D8
+  border-bottom: 0
+
++r($sm)
+  hr
+    margin: 25px 0
+
+
+/* blockquote
 .blockquote
   position: relative
   margin-left: 0
@@ -167,6 +181,8 @@ p
       height: 18px
       background-size: 100% auto
 
+
+/* lists
 .main-list
   padding-left: 20px
   @extend .p-main
@@ -198,8 +214,8 @@ ul.main-list
     margin-bottom: 1em
     column-count: 1
 
-// default styles for WYSIWYG
-.content
+/* default styles for WYSIWYG
+.WYSIWYG-content
   p:not(.p-main)
     @extend .p-main
   h1:not(.h1-title)
@@ -214,3 +230,12 @@ ul.main-list
     font-size: 16px
   h6:not(.h6-title)
     font-size: 14px
+  blockquote:not(.blockquote)
+    @extend .blockquote
+  img, video, iframe
+    max-width: 100%
+  ol:not(.main-list)
+    @extend .main-list
+  ul:not(.main-list)
+    @extend .main-list
+    @extend ul.main-list

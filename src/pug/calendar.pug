@@ -22,7 +22,7 @@ block content
   .grid.grid-main.reverse(js-header-color data-menu-color="white")
     .col.col--8
       // tabs-nav
-      .tabs-nav(js-tabs-nav)
+      .tabs-nav(js-tabs-nav data-aos="fade")
         .tabs-nav__slider.swiper-container(js-tabs-nav-slider)
           ul.swiper-wrapper
             li.swiper-slide.active
@@ -39,12 +39,12 @@ block content
         .card-collection__grid
           mixin eventCard(name, caption, location, date)
             // card
-            a(href="#").card.card--large.card--event(data-aos="fade")
+            a(href="#").card.card--large.card--event
               .card__name.h3-title.rtxt(js-reveal js-wrap-words)= name
               if caption
-                p.card__caption= caption
+                p.card__caption(data-aos="fade" data-aos-delay="300")= caption
               .card__footer(data-aos="fade" data-aos-delay="300")
-                .card__meta(data-aos="fade" data-aos-delay="300")
+                .card__meta
                   .card__location= location
                   .card__date.p-big= date
                 i.icon.icon-arrow-black
@@ -66,15 +66,13 @@ block content
 
     .col.col--4.col.col--visible
       // tile
-      .tile.tile--form.tile--purple.tile--fixed(js-form-events js-tile-fixed)
+      .tile.tile--form.tile--purple.tile--fixed(js-form-events js-tile-fixed data-use-self-width)
         .tile__grid
           .tile__col
             .tile__form-text
-              h3.h3-title.rtxt(js-reveal data-delay="300") 
-                span.rtxt__wrap 
-                  span.rtxt__mover Предложить мероприятие
-              p.p-small(data-aos="fade" data-aos-delay="300") Вы можете предложить свое мероприятие, для этого нужно заполить форму, нажав на кнопку ниже, предложенные мероприятия отправляются на почту оргкомитета
-              span.p-link.link.link--prev(js-form-events-toggle) Показать форму
+              h3.h3-title.rtxt(js-reveal js-wrap-words data-delay="300") Предложить мероприятие
+              p.p-small(data-aos="fade" data-aos-delay="600") Вы можете предложить свое мероприятие, для этого нужно заполить форму, нажав на кнопку ниже, предложенные мероприятия отправляются на почту оргкомитета
+              span.p-link.link.link--prev(js-form-events-toggle data-aos="fade" data-aos-delay="800") Показать форму
           
           .tile__col
             form.tile__form-events.multi-form(action="/email-form.php" js-validate-event)

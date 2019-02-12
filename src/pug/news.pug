@@ -22,7 +22,7 @@ block content
 
     .col.col--8
       // tabs-nav
-      .tabs-nav(js-tabs-nav)
+      .tabs-nav(js-tabs-nav data-aos="fade")
         .tabs-nav__slider.swiper-container(js-tabs-nav-slider)
           ul.swiper-wrapper
             li.swiper-slide
@@ -37,12 +37,12 @@ block content
         .card-collection__grid
           mixin newsCard(name, date, img)
             // card
-            a(href="#").card.card--large.card--event(data-aos="fade-up")
+            a(href="#").card.card--large.card--event
               .scaler.img-block(data-ar="16:9" style="padding-bottom: "+ (193/321) * 100 +"%;background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/"+ img +".jpg)")
                 img(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
               p.card__name.h3-title.rtxt(js-reveal js-wrap-words)= name
               .card__footer(data-aos="fade" data-aos-delay="300")
-                .card__meta(data-aos="fade" data-aos-delay="300")
+                .card__meta
                   .card__date.c-gray.p-small= date
                 i.icon.icon-arrow-black  
                 

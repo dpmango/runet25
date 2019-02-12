@@ -505,13 +505,14 @@ $(document).ready(function(){
     var $obj = $page.find('[js-tile-fixed]').first(); // TODO - any case when there are multiple items on page?
     if ($obj.length === 0) return
     var $parent = $obj.parent();
-
+    var useSelfWidth = $obj.data("use-self-width") !== undefined
+    console.log(useSelfWidth)
     stickyParams = {
       object: $obj,
       objectHeight: $obj.outerHeight(),
       container: $parent,
       containerOffsetTop: $parent.offset().top,
-      containerWidth: $obj.outerWidth(),
+      containerWidth: useSelfWidth ? $obj.outerWidth() : $parent.outerWidth(),
       footerOffset: $page.find('.footer').offset().top,
       windowHeight: _window.height()
     }

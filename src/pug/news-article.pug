@@ -15,13 +15,16 @@ block content
 
   // tile
   article.tile.tile--gray.tile--pb-lg(js-header-color)
+    // FEATURE - add .WYSIWYG-content to article
+    // this will extend p(p-main), h1-h6, blockquote and img tags
+    
     // group-content
     .grid.group-content.tile__group-content
       .col.col--4.group-content__aside
-        h2.h2-title Секция и дискуссионная панель
+        h2.h2-title.rtxt(js-reveal js-wrap-words) Секция и дискуссионная панель
         
       .col.col--8.group-content__section
-        .text
+        .text(data-aos="fade")
           p.p-main В рамках секции, представители Facebook обсудят с российскими средними и малыми компаниями возможности развития российского бизнеса в условиях цифровизации экономики, поделятся лучшими практиками и историями успеха, а также проблемами, с которыми сталкиваются отечественные компании при построении своего бизнеса онлайн.
           blockquote.blockquote Мы поговорим об экспортном потенциале российских компаний, а также возможных стратегиях и механизмах интеграции российских малых бизнесов в глобальный рынок. Данная дискуссия также позволит участникам встречи обсудить вопросы развития российского среднего и малого бизнеса и их роль в построении цифровой экономики России», – Ульяна Зинина, Head of Public Policy, Facebook.
           p.p-main В дискуссии примут участие Robert Bednarski, Country Director Facebook Central and Eastern Europe, Mariana Piccinini, SMB Sales Manager Central and East Europe.
@@ -29,12 +32,13 @@ block content
     // group-content
     .grid.group-content.tile__group-content
       .col.col--4.group-content__aside
-        h2.h2-title Тренинги и мастер-классы
+        h2.h2-title.rtxt(js-reveal js-wrap-words) Тренинги и мастер-классы
 
       .col.col--8.group-content__section
-        .text
+        .text(data-aos="fade")
           p.p-main.img-block
-            .scaler.img-block(data-ar="16:9" style="padding-bottom: "+ (369/776) * 100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:600/v1549746979/runet25/newsCard_7.jpg)")
+            // scaler ar is height/width ratio of actual image - i.e. padding-bottom: "+ (369/776) * 100 +"% or data-ar for regular 16:9, etc (_media.sass file)
+            .scaler.img-block(style="padding-bottom: "+ (369/776) * 100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:600/v1549746979/runet25/newsCard_7.jpg)")
               img(js-lazy data-src='img/newsCard_7.jpg' data-srcset='img/newsCard_7@2x.jpg 2x')
           p.p-main Впервые в России Facebook проведет тренинг для всех, кто хочет правильно и эффективно развивать свой бизнес через социальные сети, узнать о глобальных трендах:
           ol.main-list

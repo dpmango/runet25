@@ -32,15 +32,15 @@ block content
         // tile
         .tile.tile--full.tile--purple.reveal(js-reveal data-direction="rtl")
           .tile__text
-            h3.h3-title Правила участия (условия и ограничения)
-            h4.h4-title Этапы проведения конкурса
-            ol.main-list.p-small
+            h3.h3-title.rtxt(js-reveal js-wrap-words data-delay="300") Правила участия (условия и ограничения)
+            h4.h4-title(data-aos="fade") Этапы проведения конкурса
+            ol.main-list.p-small(data-aos="fade")
               li Регистрация участников и прием заявок — до 1 декабря 2018 года
               li Отбор финалистов конкурса (формирование шорт-листа) экспертной комиссией — до 10 декабря 2018 года
               li Определение победителей на основе общественного и экспертного голосования — декабрь 2018 года
               li Награждение победителей конкурса «Позитивный контент — 2018» — декабрь 2018 года
           
-          .tile__text
+          .tile__text(data-aos="fade")
             h4.h4-title Условия участия в конкурсе
             p.p-small К участию в конкурсе допускаются региональные, муниципальные, частные, коммерческие и некоммерческие проекты. Проект может иметь свободный доступ для всех желающих или быть направленным на взаимодействие с ограниченной аудиторией (по какому-либо признаку - территория, возраст, принадлежность к организации или учреждению и т.п.)
             ol.main-list.p-small
@@ -55,13 +55,13 @@ block content
               li Отправить заявку на конкурс может владелец проекта или его доверенное лицо, физическое или юридическое.
         
         // tile
-        .tile.tile--full.tile--center.tile--dark
-          h2.h2-title Оргкомитет
+        .tile.tile--full.tile--center.tile--dark.reveal(js-reveal data-direction="ltr")
+          h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Оргкомитет
           .users
             .users__wrapper
               .grid.users__grid
                 mixin userItem(name, img)
-                  .user-card.users__col
+                  .user-card.users__col(data-aos="fade")
                     .user-card__avatar
                       .scaler(data-ar="1:1" style='background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/'+ img +'.jpg)')
                         img.user-card__image(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
@@ -74,21 +74,21 @@ block content
                 +userItem("Марк Цукерберг", "userItem_5")
         
         // tile
-        .tile.tile--full.tile--vauto.tile--green
+        .tile.tile--full.tile--vauto.tile--green.reveal(js-reveal data-direction="rtl")
           .laureates
-            h2.h2-title Лауреаты
+            h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Лауреаты
             .grid.grid--offset.laureates__grid
-              .laureates__item
+              .laureates__item(data-aos="fade")
                 div
                   img(js-lazy data-src='img/wreath_gold.png' data-srcset='img/wreath_gold@2x.png 2x')
                 p.p-big Вконтакте
               
-              .laureates__item
+              .laureates__item(data-aos="fade")
                 div
                   img(js-lazy data-src='img/wreath_silver.png' data-srcset='img/wreath_silver@2x.png 2x')
                 p.p-big ASOS
               
-              .laureates__item
+              .laureates__item(data-aos="fade")
                 div
                   img(js-lazy data-src='img/wreath_bronze.png' data-srcset='img/wreath_bronze@2x.png 2x')
                 p.p-big Яндекс
@@ -105,14 +105,14 @@ block content
           form.multi-form(action="/email-form.php" js-validate-feedback data-aos="fade" data-aos-delay="500")
             .ui-group
               label(for="name") ФИО
-              input.ui-input(type="text" name="name" placeholder="ivan.petrov@address.ru")
+              input.ui-input(type="text" name="name" placeholder="Иван Петрович Иванов")
             .ui-group
               label(for="title") Организация / Проект
               input.ui-input(type="text" name="project" placeholder="")
             .ui-group
               label(for="text") Текст вопроса
               // data-min-rows is required for autoexpand module
-              textarea.ui-input(name="text" placeholder="" rows="3" data-min-rows="3")
+              textarea.ui-input(name="text" placeholder="" rows="1" data-min-rows="1")
             .ui-group
               button(type="submit").btn.btn-primary
                 span Отправить вопрос
@@ -126,5 +126,5 @@ block content
         
     // tile
     .tile.tile--1-3.tile--lg-full
-      .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/candyFire_8.jpg)")
+      .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:600/v1549746979/runet25/candyFire_8.jpg)")
         img(js-lazy data-src='img/candyFire_8.jpg' data-srcset='img/candyFire_8@2x.jpg 2x')

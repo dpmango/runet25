@@ -151,6 +151,8 @@
     width: 100%
     border-top: 1px solid rgba(white, 0.3)
     border-bottom: 0
+  &__text
+    max-width: 1200px
   &__info
     margin-bottom: 40px
     padding: 37px 0
@@ -164,6 +166,7 @@
     padding-right: 35px
   &__form-events
     transform: translate3d(100%, 0, 0)
+    padding-bottom: 50px
     transition: transform 0.2s 0.2s ease-in-out
   .h2-title
     margin-top: 0
@@ -222,13 +225,21 @@
   &--dark
     background-color: #37374C
     color: white
+    &::after
+      background-color: #FF7400
   &--white
     background-color: #FFF
+    &::after
+      background-color: #00A5FF
   &--gray
     background-color: $colorLightBg
+    &::after
+      background-color: $colorRed
   &--black
     color: white
     background-color: #333
+    &::after
+      background-color: #FF7400
 
   // position modifiers
   &--jcc
@@ -298,6 +309,7 @@
       padding-right: 0
     &__form-events
       margin-top: 50px
+      padding-bottom: 0
       display: none
       transform: translate3d(0, 0, 0)
     &__col

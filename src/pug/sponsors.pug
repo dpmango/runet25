@@ -4,6 +4,9 @@ title: Спонсоры
 extends shared/_layout
 block content
   
+  // header always visible modifier
+  div(js-header-sticky)
+  
   // HERO TITLE
   .hero-title(js-header-color data-menu-color="white" data-logo-color="white")
     .container
@@ -14,13 +17,13 @@ block content
       img(js-lazy data-src='img/backgrounds/heroTitle_9_multi.jpg' data-srcset='img/backgrounds/heroTitle_9_multi@2x.jpg 2x')
   
   //tile
-  .tile.tile--purple.tile--pb-lg(js-header-color data-menu-color="white" data-logo-color="white")
+  .tile.tile--purple.tile--pb-lg
     // group-content
     .grid.group-content.tile__group-content
       .col.col--4.group-content__aside
-        h2.h2-title Преимущества
+        h2.h2-title.rtxt(js-reveal js-wrap-words) Преимущества
         
-      .col.col--8.group-content__section
+      .col.col--8.group-content__section(data-aos="fade")
         p.p-main
           strong Партнерство:
           br
@@ -41,9 +44,9 @@ block content
     // group-content
     .grid.group-content.tile__group-content
       .col.col--4.group-content__aside
-        h2.h2-title Программы
+        h2.h2-title.rtxt(js-reveal js-wrap-words) Программы
 
-      .col.col--8.group-content__section
+      .col.col--8.group-content__section(data-aos="fade")
         p.p-main
           strong Проведение корпоративных чемпионатов
           br
