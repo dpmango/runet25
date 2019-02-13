@@ -97,7 +97,7 @@ $(document).ready(function(){
   // The new container has been loaded and injected in the wrapper.
   function pageReady(fromPjax){
     closeMobileMenu(fromPjax);
-    setLineBreaks(fromPjax);
+    setLineBreaks();
     initSlidersResponsive();
     initPopups();
     getScalerResponsive();
@@ -107,7 +107,7 @@ $(document).ready(function(){
     initSelectric();
     initValidations();
     initTeleport();
-    initDatepicker();
+    initDatepicker(fromPjax);
   }
 
   // Overlay transtion is covering the screen and starts to reveal
@@ -480,14 +480,14 @@ $(document).ready(function(){
     })
 
   // converts .rtxt__wrap to multiple .rtxt__mover
-  function setLineBreaks(fromPjax){
+  function setLineBreaks(){
     var $containers = $('[js-wrap-words]');
     if ( $containers.length === 0 ) return
 
     $containers.each(function(i, container){
       var $container = $(container);
       var containerText
-      if ( fromPjax ){
+      if ( $container.data("originText") !== undefined ){
         containerText = $container.data("originText")
       } else {
         containerText = $container.text();
@@ -506,7 +506,6 @@ $(document).ready(function(){
     if ($obj.length === 0) return
     var $parent = $obj.parent();
     var useSelfWidth = $obj.data("use-self-width") !== undefined
-    console.log(useSelfWidth)
     stickyParams = {
       object: $obj,
       objectHeight: $obj.outerHeight(),
@@ -954,14 +953,17 @@ $(document).ready(function(){
   ////////////
   // AIR DATEPICKER PLUGIN
   ////////////
-  function initDatepicker() {
-    var input = $('[js-datepicker]'),
-        datepicker = input.datepicker({
-          showEvent: 'none',
-          autoClose: true
-        }).data('datepicker');
+  function initDatepicker(fromPjax) {
+    var $page = getCorrespondingPage(fromPjax)
+    var $input = $page.find('[js-datepicker]')
 
-    // TODO - multiple click listeners ?
+    if ( $input.length === 0 ) return
+
+    var datepicker = $input.datepicker({
+      showEvent: 'none',
+      autoClose: true
+    }).data('datepicker');
+
     _document.on('click', '[js-datepicker-toggle]', function(){
       datepicker.show();
     });
