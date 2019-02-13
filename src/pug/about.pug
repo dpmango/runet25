@@ -34,10 +34,20 @@ block content
         i.icon.icon-arrow-white
     
     // tile
-    .tile.tile--2-3.tile--lg-hide
+    .tile.tile--2-3.tile--lg-hide.tile--sm-show
       .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:600/v1549746979/runet25/candyFire_10.jpg)")
-        img(js-lazy data-src='img/candyFire_10.jpg' data-srcset='img/candyFire_10@2x.jpg 2x')
-    
+        //- img(js-lazy data-src='img/candyFire_10.jpg' data-srcset='img/candyFire_10@2x.jpg 2x')
+        picture(
+          js-lazy
+          alt=""
+          data-src='img/candyFire_10.jpg')
+            data-src(
+            media="(min-width: 577px)" 
+            srcset='img/candyFire_10.jpg 1x, img/candyFire_10@2x.jpg 2x')
+            data-src(
+            media="(min-width: 0px)" 
+            srcset='img/candyFire_10_mobile.jpg 1x, img/candyFire_10_mobile@2x.jpg 2x')
+              
     // tile
     .tile.tile--1-3.tile--blue.reveal(js-link data-href="news.html" js-reveal data-direction="ltr" data-type="halflyEnterViewport")
       h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Новости 25-летия

@@ -130,6 +130,9 @@
 +r($lg)
   .fit-sibling-y
     position: relative
+    &:not(.fit-sibling-y--relative)
+      height: 1px
+      min-height: 700px
 
 /* card collection
 .card-collection
@@ -247,7 +250,7 @@
 +r($sm)
   .card-collection
     min-height: 1px
-    height: auto
+    height: auto !important
     // prev overwites
     .card
       flex-basis: $col12
