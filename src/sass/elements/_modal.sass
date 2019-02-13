@@ -10,6 +10,10 @@ html.mfp-helper
     height: 100%
     -webkit-transform: translateZ(0)
 
+.mfp-content
+  padding-top: 25px
+  padding-bottom: 25px
+
 .mfp-thanks
   position: relative
   max-width: 500px
@@ -17,10 +21,41 @@ html.mfp-helper
   text-align: left
   padding: 55px 60px
   margin: auto
+  &--lg
+    max-width: 550px
   .h2-title
     margin-bottom: .5em
+  p strong
+    // keep email break on new line
+    display: inline-block
   .btn
     margin-top: 20px
+
+.mfp-card
+  position: relative
+  margin: auto
+  padding: 55px 60px
+  max-width: 700px
+  background: white
+  text-align: left
+  &--xl
+    max-width: 1000px
+  .card__date
+    margin-bottom: 20px
+    color: rgba(#333, 0.5)
+    font-weight: 700
+
++r($md)
+  .mfp-card
+    padding: 40px 30px 30px
+
++r($sm)
+  .mfp-thanks
+    padding: 40px 30px 40px
+    .btn
+      display: block
+      width: 100%
+
 
 // Fade-zoom animation for first dialog
 .popup-buble
@@ -85,4 +120,5 @@ button.mfp-close
   opacity: 1
   transition: color .25s $ease
   .ico
+    pointer-events: none
     font-size: 16px

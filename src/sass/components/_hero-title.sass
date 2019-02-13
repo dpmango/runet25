@@ -26,6 +26,8 @@
       width: 100%
       height: 100%
       object-fit: cover
+  & + .grid-main
+    flex: 1 0 auto
 
 
 +r($xl)
@@ -51,3 +53,7 @@
     &__content
       max-width: 300px
       min-height: 320px
+
+.is-ie
+  .hero-title__content
+    height: 100px

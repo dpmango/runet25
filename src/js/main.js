@@ -40,7 +40,18 @@ $(document).ready(function(){
   }
   window.browser = browser
 
-  var sliders = [] // collection of all sliders
+  var sliders = {
+    newsScroller: {
+      instance: undefined
+    },
+    cardsScroller: {
+      instance: undefined
+    },
+    timeline: {
+      instance: undefined,
+      disableLessThan: 576
+    }
+  } // collection of all sliders
 
   var startWindowScroll = 0
   var closeMarkup = '<button title="%title%" class="mfp-close"><svg class="ico ico-mono-close"><use xlink:href="img/sprite-mono.svg#ico-mono-close"></use></svg></button>'
@@ -64,6 +75,15 @@ $(document).ready(function(){
       }
     }
   }
+  var stickyParams = {
+    object: undefined,
+    objectHeight: undefined,
+    container: undefined,
+    containerOffsetTop: undefined,
+    containerWidth: undefined,
+    footerOffset: undefined,
+    windowHeight: undefined
+  }
 
   ////////////
   // LIST OF FUNCTIONS
@@ -77,29 +97,42 @@ $(document).ready(function(){
   // The new container has been loaded and injected in the wrapper.
   function pageReady(fromPjax){
     closeMobileMenu(fromPjax);
-    setLineBreaks();
+    setLineBreaks(fromPjax);
+    initSlidersResponsive();
     initPopups();
     getScalerResponsive();
     setScalerResponsive();
     initPerfectScrollbar();
     initMasks();
     initSelectric();
-    initScrollMonitor();
     initValidations();
     initTeleport();
+    initDatepicker();
   }
 
   // Overlay transtion is covering the screen and starts to reveal
   function inBetweenTransition(fromPjax){
+    getStickyParams(fromPjax);
+    initStickyKit(fromPjax);
     getHeaderParams(fromPjax);
     controlHeaderColor();
+  }
+
+  // Overlay transition is about to be finnished
+  function transitionIsAboutToEnd(fromPjax){
+    initScrollMonitor(fromPjax);
+    initAOSRefresher(fromPjax);
+    if ( fromPjax ){
+      AOS.refreshHard();
+      window.onLoadTrigger()
+    }
   }
 
   // The transition has just finished and the old Container has been removed from the DOM.
   function pageCompleated(fromPjax){
     if ( fromPjax ){
-      AOS.refreshHard();
-      window.onLoadTrigger()
+      // AOS.refreshHard();
+      // window.onLoadTrigger()
     }
   }
 
@@ -112,15 +145,19 @@ $(document).ready(function(){
   // this is a master function which should have all functionality
   pageReady();
   inBetweenTransition();
+  transitionIsAboutToEnd();
   pageCompleated();
 
   // scroll/resize listeners
   _window.on('scroll', getWindowScroll);
   _window.on('scroll', scrollHeader);
   _window.on('scroll', controlHeaderColor);
+  _window.on('scroll', scrollSticky);
   _window.on('resize', debounce(getHeaderParams, 100))
   _window.on('resize', debounce(setScalerResponsive, 100))
-  _window.on('resize', debounce(setLineBreaks, 100))
+  _window.on('resize', debounce(initSlidersResponsive, 100))
+  _window.on('resize', debounce(getStickyParams, 100))
+  _window.on('resize', debounce(monitorStickyResize, 100))
   _window.on('resize', debounce(setBreakpoint, 200))
 
 
@@ -257,6 +294,12 @@ $(document).ready(function(){
     scroll.lastForScrollDir = wScroll <= 0 ? 0 : wScroll;
   }
 
+  function getCorrespondingPage(fromPjax){
+    var $page = $('.page');
+    if ( fromPjax ){ $page = $page.last() }
+    return $page
+  }
+
   ////////////////
   // HEADER SCROLL
   ////////////////
@@ -264,13 +307,21 @@ $(document).ready(function(){
     var $header = $('.header')
     var headerWrapperTranslate = 0
     var headerHeight = $header.outerHeight() + headerWrapperTranslate
-    var $page = $('.page');
-    if ( fromPjax ){ $page = $page.last() }
+    var $page = getCorrespondingPage(fromPjax)
     var $colorControlSections = $page.find('[js-header-color]');
+    var isHeaderSticky = $page.find('[js-header-sticky]').length > 0
+
+    if ( isHeaderSticky ){
+      $header.addClass('is-sticky')
+    } else {
+      $header.removeClass('is-sticky')
+    }
+
     header = {
       container: $header,
       bottomPoint: headerHeight,
-      colorControlSections: $colorControlSections
+      colorControlSections: $colorControlSections,
+      isHeaderSticky: isHeaderSticky
     }
   }
 
@@ -278,6 +329,8 @@ $(document).ready(function(){
     if ( header.container !== undefined ){
       var fixedClass = 'is-fixed';
       var visibleClass = 'is-fixed-visible';
+
+      if ( header.isHeaderSticky ) return
 
       if ( scroll.blocked ) return
 
@@ -303,7 +356,7 @@ $(document).ready(function(){
     }
   }
 
-  function controlHeaderColor(){
+  function controlHeaderColor(fromPjax){
     // Collect arr of past scroll elements
     var cur = header.colorControlSections.map(function(){
       var elTop = $(this).offset().top - parseInt($(this).css('marginTop'))
@@ -382,6 +435,30 @@ $(document).ready(function(){
     blockScroll();
   });
 
+  _document.on('click', '[js-form-events-toggle]', function(){
+    var container = $('[js-form-events]'),
+        form = $('.tile__form-events'),
+        link = $(this);
+
+    if (!container.hasClass('is-active')) {
+      container.addClass('is-active');
+      link.html('Скрыть форму');
+      if (getWindowWidth() <= 992) {
+        form.slideDown(200);
+      }
+    } else {
+      container.removeClass('is-active');
+      link.html('Показать форму');
+      if (getWindowWidth() <= 992) {
+        form.slideUp(200);
+      }
+    }
+  });
+
+  _document.on('click', '[js-tabs-nav] a', function() {
+    $(this).parent().addClass('active').siblings().removeClass('active');
+  });
+
   function closeMobileMenu(isOnload){
     $('.header').removeClass('is-menu-active');
     changeHamburgerText()
@@ -410,24 +487,257 @@ $(document).ready(function(){
     })
 
   // converts .rtxt__wrap to multiple .rtxt__mover
-  function setLineBreaks(){
-    var $containers = $('[js-set-line-breaks]');
+  function setLineBreaks(fromPjax){
+    var $containers = $('[js-wrap-words]');
     if ( $containers.length === 0 ) return
 
     $containers.each(function(i, container){
       var $container = $(container);
-      var containerHtml = $container.html();
-      var containerText = $container.text();
-      $container.data("originText", containerHtml)
-      wrapByLine($container, containerText)
+      var containerText
+      if ( fromPjax ){
+        containerText = $container.data("originText")
+      } else {
+        containerText = $container.text();
+        $container.data("originText", containerText)
+      }
+      wrapEachWord($container, containerText)
     })
+  }
 
+  //////////
+  // STICKY TILE
+  //////////
+  function getStickyParams(fromPjax){
+    var $page = getCorrespondingPage(fromPjax);
+    var $obj = $page.find('[js-tile-fixed]').first(); // TODO - any case when there are multiple items on page?
+    if ($obj.length === 0) return
+    var $parent = $obj.parent();
+    var useSelfWidth = $obj.data("use-self-width") !== undefined
+    console.log(useSelfWidth)
+    stickyParams = {
+      object: $obj,
+      objectHeight: $obj.outerHeight(),
+      container: $parent,
+      containerOffsetTop: $parent.offset().top,
+      containerWidth: useSelfWidth ? $obj.outerWidth() : $parent.outerWidth(),
+      footerOffset: $page.find('.footer').offset().top,
+      windowHeight: _window.height()
+    }
+    scrollSticky();
+  }
+
+  function scrollSticky() {
+    if ( !stickyParams.object ) return
+
+    var tile = stickyParams.object
+        wrapper = stickyParams.container
+
+    if (scroll.y >= stickyParams.containerOffsetTop && getWindowWidth() > 992) {
+      if (scroll.y + stickyParams.objectHeight >= stickyParams.footerOffset) {
+        tile.css({
+          top: 'auto',
+          bottom: Math.round(scroll.y + stickyParams.windowHeight - stickyParams.footerOffset)
+        });
+      } else {
+        tile.css({
+          position: 'fixed',
+          top: 0,
+          width: stickyParams.containerWidth
+        });
+      }
+    } else {
+      tile.removeAttr('style');
+    }
+  }
+
+  //////////
+  // STICKY KIT
+  //////////
+  function initStickyKit(fromPjax){
+    var $page = getCorrespondingPage(fromPjax);
+    var $sticky = $page.find('[js-sticky]');
+    if ($sticky.length === 0) return
+
+    $sticky.each(function(i, sticky){
+      enableSticky(sticky)
+    })
+  }
+
+  function enableSticky(sticky){
+    var bp = $(sticky).data('disable-on');
+    if ( bp && ( getWindowWidth() > parseInt(bp) ) ){
+      // http://leafo.net/sticky-kit/
+      $(sticky).stick_in_parent({
+        inner_scrolling: true
+      })
+    }
+  }
+
+  function monitorStickyResize(){
+    var $sticky = $('[js-sticky]');
+    if ($sticky.length === 0) return
+
+    $sticky.each(function(i, sticky){
+      var bp = $(sticky).data('disable-on');
+      if ( bp && ( getWindowWidth() <= parseInt(bp) ) ){
+        $(sticky).trigger("sticky_kit:detach");
+      } else {
+        enableSticky(sticky)
+      }
+    })
   }
 
 
   /**********
   * PLUGINS *
   **********/
+
+  //////////
+  // SLIDERS
+  //////////
+  function initSliders(){
+    // no regular slides yet
+  }
+
+  function initSlidersResponsive(){
+    // RESPONSIVE ON/OFF sliders
+    var newsScrollerSwiperSelector = '[js-swiper-news-scroller]';
+    var cardsScrollerSwiperSelector = '[js-swiper-cards-scroller]';
+    var timelineSwiperSelector = '[js-timeline-slider]';
+    var tabsNavSwiperSelector = '[js-tabs-nav-slider]';
+
+    initNewsScrollerSwiper();
+    initCardsScrollerSwiper();
+    iniTabsNavSwiper();
+
+    if ( $(timelineSwiperSelector).length > 0 ){
+      if ( getWindowWidth() <= sliders.timeline.disableLessThan ) {
+        if ( sliders.timeline.instance !== undefined ) {
+          console.log('dest')
+          sliders.timeline.instance.destroy( true, true );
+          sliders.timeline.instance = undefined
+        }
+        // return
+      } else {
+        if ( sliders.timeline.instance === undefined ) {
+          initTimelineSwiper();
+        }
+      }
+    }
+
+    // INIT options
+
+    // news scroller swiper
+    function initNewsScrollerSwiper(){
+      sliders.newsScroller.instance = new Swiper(newsScrollerSwiperSelector, {
+        wrapperClass: "swiper-wrapper",
+        slideClass: "year-stack",
+        direction: 'horizontal',
+        loop: false,
+        watchOverflow: true,
+        setWrapperSize: false,
+        spaceBetween: 0,
+        slidesPerView: 'auto',
+        normalizeSlideIndex: true,
+        freeMode: true,
+        scrollbar: {
+          el: '.swiper-scrollbar',
+          draggable: true,
+          dragSize: 36
+        },
+        breakpoints: {
+          575: {
+            slidesPerView: 1,
+            freeMode: false,
+            scrollbar: false,
+            // autoHeight: true,
+            navigation: {
+              prevEl: '.swiper-button-prev',
+              nextEl: '.swiper-button-next'
+            }
+          }
+        }
+      })
+    }
+
+    // card scroller swiper
+    function initCardsScrollerSwiper(){
+      sliders.cardsScroller.instance = new Swiper(cardsScrollerSwiperSelector, {
+        wrapperClass: "swiper-wrapper",
+        slideClass: "card",
+        direction: 'horizontal',
+        loop: false,
+        watchOverflow: true,
+        setWrapperSize: false,
+        spaceBetween: 0,
+        slidesPerView: 'auto',
+        normalizeSlideIndex: true,
+        freeMode: true,
+        scrollbar: {
+          el: '.swiper-scrollbar',
+          draggable: true,
+          dragSize: 36
+        },
+        breakpoints: {
+          575: {
+            slidesPerView: 1,
+            freeMode: false,
+            scrollbar: false,
+            // autoHeight: true,
+            navigation: {
+              prevEl: '.swiper-button-prev',
+              nextEl: '.swiper-button-next'
+            }
+          }
+        }
+      })
+    }
+
+    // news scroller swiper
+    function iniTabsNavSwiper(){
+      sliders.newsScroller.instance = new Swiper(tabsNavSwiperSelector, {
+        loop: false,
+        watchOverflow: true,
+        setWrapperSize: false,
+        spaceBetween: 0,
+        slidesPerView: 'auto',
+        normalizeSlideIndex: true,
+        freeMode: true,
+      });
+    }
+
+    // TIMELINE
+    function initTimelineSwiper(){
+      sliders.timeline.instance = new Swiper(timelineSwiperSelector, {
+        slidesPerView: 'auto',
+        direction: 'vertical',
+        freeMode: true,
+        resistanceRatio: 0,
+        // freeModeSticky: true,
+        mousewheel: {
+          eventsTarged: 'container',
+          releaseOnEdges: true
+        }
+      });
+    }
+
+  }
+
+
+
+// function getProductSwiperInstance(that){
+//   var swiperId = $(that).closest('.swiper-container').data("id")
+//   var swiperInstance
+//   $.each(sliders.productImages, function(i,s){
+//     if ( s.id === swiperId ){
+//       swiperInstance = s.instance
+//     }
+//   })
+//   return swiperInstance
+// }
+
+
+
   //////////
   // MODALS
   //////////
@@ -481,6 +791,7 @@ $(document).ready(function(){
         animateLazy(element)
       },
       onFinishedAll: function(){
+        getStickyParams();
         ieFixPictures()
       }
     });
@@ -491,11 +802,12 @@ $(document).ready(function(){
     if ( window.browser.isIe ){
       // ie pollyfils
       picturefill();
-      window.fitie.init()
+      objectFitImages();
+      // window.fitie.init()
     }
   }
 
-  window.ieFixPictures = ieFixPictures()
+  window.ieFixPictures = ieFixPictures
 
 
   ///////////////
@@ -566,9 +878,15 @@ $(document).ready(function(){
         var ps;
 
         function initPS(){
+          var yDisabled = $(scrollbar).data('y-disabled') == true
+          var xDisabled = $(scrollbar).data('x-disabled') == true
+          var wheelPropagation = $(scrollbar).data('wheel-propagation') !== undefined ? $(scrollbar).data('wheel-propagation') : true
+          // console.log(wheelPropagation)
           ps = new PerfectScrollbar(scrollbar, {
+            suppressScrollY: yDisabled,
+            suppressScrollX: xDisabled,
             // wheelSpeed: 2,
-            // wheelPropagation: true,
+            wheelPropagation: wheelPropagation,
             minScrollbarLength: 20
           });
         }
@@ -608,7 +926,7 @@ $(document).ready(function(){
       var self = $(val)
       var objHtml = $(val).html();
       var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
-      var conditionMedia = $(val).data('teleport-condition').substring(1);
+      var conditionMedia = parseInt($(val).data('teleport-condition').substring(1));
       var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
 
       if (target && objHtml && conditionPosition) {
@@ -617,6 +935,7 @@ $(document).ready(function(){
           var condition;
 
           if (conditionPosition === "<") {
+
             condition = getWindowWidth() < (conditionMedia + 1);
           } else if (conditionPosition === ">") {
             condition = getWindowWidth() > conditionMedia;
@@ -638,6 +957,23 @@ $(document).ready(function(){
       }
     })
   }
+
+  ////////////
+  // AIR DATEPICKER PLUGIN
+  ////////////
+  function initDatepicker() {
+    var input = $('[js-datepicker]'),
+        datepicker = input.datepicker({
+          showEvent: 'none',
+          autoClose: true
+        }).data('datepicker');
+
+    // TODO - multiple click listeners ?
+    _document.on('click', '[js-datepicker-toggle]', function(){
+      datepicker.show();
+    });
+  }
+
 
   ////////////
   // UI
@@ -708,7 +1044,7 @@ $(document).ready(function(){
 
       $('[js-reveal]').each(function(i, el){
         var type = $(el).data('type') || "enterViewport"
-        var delay = $(el).data('delay') || 0
+        var delay = $(el).data('delay') || 1
 
         // onload type
         if ( type === "onload" ){
@@ -747,22 +1083,39 @@ $(document).ready(function(){
         }
 
         // regular (default) type
-        var elWatcher = scrollMonitor.create( $(el) );
+        var $containerWatcher = $(el).closest('[data-scrollmonitor-container]')
+        var elWatcher
+
+        if ( $containerWatcher.length > 0 ){
+          // this containerMonitor is an instance of the scroll monitor that listens to scroll events on your container.
+          var containerMonitor = scrollMonitor.createContainer($containerWatcher);
+          elWatcher = containerMonitor.create($(el));
+        } else {
+          elWatcher = scrollMonitor.create( $(el) );
+        }
+
         elWatcher.enterViewport(throttle(function() {
-          if ( delay ){
-            setTimeout(function(){
-              $(el).addClass(animatedClass);
-            }, parseInt(delay))
-          }
+          setTimeout(function(){
+            $(el).addClass(animatedClass);
+          }, parseInt(delay))
         }, 100, {
           'leading': true
         }));
 
       });
-
     }
-
   }
+
+  // update states for AOS on overflow scroll containers
+  function initAOSRefresher(fromPjax){
+    var $page = getCorrespondingPage(fromPjax)
+    var $scrollable = $page.find('[js-scrollable-animation-fix]');
+
+    $scrollable.on('scroll', throttle(function(){
+      AOS.refresh()
+    }, 100))
+  }
+
 
   ////////////////
   // FORM VALIDATIONS
@@ -771,6 +1124,9 @@ $(document).ready(function(){
   // jQuery validate plugin
   // https://jqueryvalidation.org
   function initValidations(){
+    // globals
+    var subscriptionValidation, feedbackValidation;
+
     // GENERIC FUNCTIONS
     var validateErrorPlacement = function(error, element) {
       error.addClass('ui-input__validation');
@@ -889,6 +1245,7 @@ $(document).ready(function(){
 
         $form.removeClass('is-loading');
         $email.val("") // clear prev value
+        subscriptionValidation.resetForm();
       },
       rules: {
         email: {
@@ -905,8 +1262,171 @@ $(document).ready(function(){
     }
 
     // call/init
-    $("[js-validate-subscription]").validate(subscriptionValidationObject);
+    subscriptionValidation = $("[js-validate-subscription]").validate(subscriptionValidationObject);
+
+    // prevent default submiting form through enter keypress
+    _document.on("keyup", "[js-validate-subscription] input", function(e){
+      if (e.keyCode == 13) {
+        e.preventDefault()
+      }
+    })
+
+
+    var feedbackValidationObject = {
+      errorPlacement: validateErrorPlacement,
+      highlight: validateHighlight,
+      unhighlight: validateUnhighlight,
+      submitHandler: function(form) {
+        var $form = $(form)
+        $form.addClass('is-loading');
+
+        // $.ajax({
+        //   type: "POST",
+        //   url: $(form).attr('action'),
+        //   data: $(form).serialize(),
+        //   success: function(response) {
+        //     $(form).removeClass('is-loading');
+        //     var data = $.parseJSON(response);
+        //     if (data.status == 'success') {
+        //       // do something I can't test
+        //     } else {
+        //         $(form).find('[data-error]').html(data.message).show();
+        //     }
+        //   }
+        // });
+
+        // open modal
+        var mfpThanksOptions = $.extend( defaultPopupOptions, {
+          items: {src: '#feedback-thanks'}
+        }, true);
+        $.magnificPopup.open(mfpThanksOptions);
+
+        $form.removeClass('is-loading');
+        $form.find('input, textarea').val('');
+        feedbackValidation.resetForm();
+      },
+      rules: {
+        name: {
+          required: true
+        },
+        project: {
+          required: true
+        },
+        text: {
+          required: true
+        }
+      },
+      messages: {
+        name: {
+          required: "Заполните это поле"
+        },
+        project: {
+          required: "Заполните это поле"
+        },
+        text: {
+          required: "Заполните это поле"
+        }
+      }
+    }
+
+    // call/init
+    feedbackValidation = $("[js-validate-feedback]").validate(feedbackValidationObject);
+
+    // prevent default submiting form through enter keypress
+    _document.on("keyup", "[js-validate-feedback] input", function(e){
+      if (e.keyCode == 13) {
+        e.preventDefault()
+      }
+    });
+
+
+    var eventValidationObject = {
+      errorPlacement: validateErrorPlacement,
+      highlight: validateHighlight,
+      unhighlight: validateUnhighlight,
+      submitHandler: function(form) {
+        var $form = $(form)
+        $form.addClass('is-loading');
+
+        // $.ajax({
+        //   type: "POST",
+        //   url: $(form).attr('action'),
+        //   data: $(form).serialize(),
+        //   success: function(response) {
+        //     $(form).removeClass('is-loading');
+        //     var data = $.parseJSON(response);
+        //     if (data.status == 'success') {
+        //       // do something I can't test
+        //     } else {
+        //         $(form).find('[data-error]').html(data.message).show();
+        //     }
+        //   }
+        // });
+
+        // open modal
+        var mfpThanksOptions = $.extend( defaultPopupOptions, {
+          items: {src: '#event-thanks'}
+        }, true);
+        $.magnificPopup.open(mfpThanksOptions);
+
+        $form.removeClass('is-loading');
+        $form.find('input, textarea').val('');
+        eventValidation.resetForm();
+      },
+      rules: {
+        name: {
+          required: true
+        },
+        title: {
+          required: true
+        },
+        terms: {
+          required: true
+        },
+        initiators: {
+          required: true
+        },
+        description: {
+          required: true
+        },
+        essence: {
+          required: true
+        }
+      },
+      messages: {
+        name: {
+          required: "Заполните это поле"
+        },
+        title: {
+          required: "Заполните это поле"
+        },
+        terms: {
+          required: "Заполните это поле"
+        },
+        initiators: {
+          required: "Заполните это поле"
+        },
+        description: {
+          required: "Заполните это поле"
+        },
+        essence: {
+          required: "Заполните это поле"
+        }
+      }
+    }
+
+    // call/init
+    eventValidation = $("[js-validate-event]").validate(eventValidationObject);
+
+    // prevent default submiting form through enter keypress
+    _document.on("keyup", "[js-validate-event] input", function(e){
+      if (e.keyCode == 13) {
+        e.preventDefault()
+      }
+    })
   }
+
+
 
   //////////
   // BARBA PJAX
@@ -934,7 +1454,7 @@ $(document).ready(function(){
       $("body").addClass("is-transitioning");
 
       // red moves first to the right
-      TweenLite.fromTo(this.$overlayRed, 0.5,
+      TweenLite.fromTo(this.$overlayRed, 0.45,
         {x: "0%"}, {x: "100%", ease: Power2.easeIn}
       );
 
@@ -944,7 +1464,6 @@ $(document).ready(function(){
           x: "100%",
           ease: Quart.easeIn,
           onComplete: function() {
-            inBetweenTransition(true)
             _this.$overlayRed.remove();
             deferred.resolve();
           }
@@ -960,6 +1479,8 @@ $(document).ready(function(){
 
       $(this.oldContainer).hide();
 
+      inBetweenTransition(true)
+
       $el.css({
         visibility: "visible"
       });
@@ -968,6 +1489,10 @@ $(document).ready(function(){
         scrollTo: {y: 0, autoKill: false},
         ease: easingSwing
       });
+
+      setTimeout(function(){
+        transitionIsAboutToEnd(true)
+      }, 400)
 
       TweenLite.fromTo(
         this.$overlayBlue,
@@ -991,75 +1516,9 @@ $(document).ready(function(){
     }
   });
 
-  // var FadeTransition = Barba.BaseTransition.extend({
-  //   start: function() {
-  //     Promise
-  //       .all([this.newContainerLoading, this.fadeOut()])
-  //       .then(this.fadeIn.bind(this));
-  //   },
-  //
-  //   fadeOut: function() {
-  //     var _this = this;
-  //     var $oldPage = $(this.oldContainer)
-  //     var $newPage = $(this.newContainer);
-  //     var deferred = Barba.Utils.deferred();
-  //
-  //     TweenLite.to($oldPage, .5, {
-  //       opacity: 0,
-  //       ease: Power1.easeIn,
-  //       onComplete: function() {
-  //         deferred.resolve();
-  //       }
-  //     });
-  //
-  //     return deferred.promise
-  //   },
-  //
-  //   fadeIn: function() {
-  //     var _this = this;
-  //     var $oldPage = $(this.oldContainer)
-  //     var $newPage = $(this.newContainer);
-  //
-  //     $(this.oldContainer).hide();
-  //
-  //     $newPage.css({
-  //       visibility : 'visible',
-  //       opacity : 0
-  //     });
-  //
-  //     TweenLite.to(window, .15, {
-  //       scrollTo: {y: 0, autoKill: false},
-  //       ease: easingSwing
-  //     });
-  //
-  //     TweenLite.to($newPage, .5, {
-  //       opacity: 1,
-  //       ease: Power1.easeOut,
-  //       onComplete: function() {
-  //         triggerBody()
-  //         _this.done();
-  //       }
-  //     });
-  //
-  //   }
-  // });
-
   // set barba transition
   Barba.Pjax.getTransition = function() {
     return OverlayTransition;
-    // if ( transitionInitElement ){
-    //   if ( transitionInitElement.attr('data-transition') ){
-    //     var transition = transitionInitElement.data('transition');
-    //     // console.log(transition)
-    //     // if ( transition === "project" ){
-    //     //   return ProjectTransition
-    //     // }
-    //   }
-    //   return FadeTransition;
-    // } else {
-    //   // first visit + back button (history is blank)
-    //   window.location.href = Barba.HistoryManager.history[1].url
-    // }
   };
 
   // Barba.Prefetch.init();
@@ -1107,7 +1566,6 @@ $(document).ready(function(){
       },1500)
     }
   }
-
 });
 
 
@@ -1151,84 +1609,15 @@ function getWindowWidth(){
   return window.innerWidth
 }
 
-
 // JQUERY CUSTOM HELPER FUNCTIONS
-// $.fn.lines = function (resized) {
-//   if ( $(this).is('.is-wrapped') === false || resized) { // prevent double wrapping
-//     var buildStr = ""
-//
-//     if ( !resized ){
-//       $(this).addClass('is-wrapped')
-//       // backup content
-//       $(this).attr('data-text-original', $(this).html())
-//
-//       // var content = $(this).html().split("\n");
-//       var content = $(this).text()
-//       wrapByLine($(this), content)
-//     } else {
-//       // assume that's in wrapped onReady
-//       // var content = $(this).attr('data-text-original').split("\n")
-//       var content = $(this).attr('data-text-original')
-//       wrapByLine($(this), content)
-//     }
-//
-//     // $.each(content, function(i, line){
-//     //   buildStr += "<span>" + line + "</span>"
-//     // })
-//     //
-//     // $(this).html(buildStr)
-//   }
-// };
-
-function wrapByLine(el, content){
-  var $cont = el
-
-  // $cont.text()
+function wrapEachWord($el, content){
   var text_arr = content.split(' ');
 
   for (i = 0; i < text_arr.length; i++) {
-    text_arr[i] = '<span class="rtxt__mover">' + text_arr[i] + ' </span>';
+    text_arr[i] = '<span class="rtxt__wrap"><span class="rtxt__mover">' + text_arr[i] + '&nbsp;</span></span>';
   }
 
-  $cont.html(text_arr.join(''));
+  $el.html(text_arr.join(''));
 
-  $wordSpans = $cont.find('span');
-
-  var lineArray = [],
-      lineIndex = 0,
-      lineStart = true
-
-  $wordSpans.each(function(idx) {
-    var pos = $(this).position();
-    var top = pos.top;
-
-    if (lineStart) {
-      lineArray[lineIndex] = [idx];
-      lineStart = false;
-    } else {
-      var $next = $(this).next();
-
-      if ($next.length) {
-        var isBreak = $next.html().indexOf("\n") !== -1
-        if ($next.position().top > top || isBreak) {
-          lineArray[lineIndex].push(idx);
-          lineIndex++;
-          lineStart = true
-        }
-      } else {
-        lineArray[lineIndex].push(idx);
-      }
-    }
-  });
-
-  for (i = 0; i < lineArray.length; i++) {
-    var start = lineArray[i][0],
-        end = lineArray[i][1] + 1;
-
-    if (!end) {
-      $wordSpans.eq(start).wrap('<span class="rtxt__wrap">')
-    } else {
-      $wordSpans.slice(start, end).wrapAll('<span class="rtxt__wrap">');
-    }
-  }
+  $el.addClass('is-words-wrapped')
 }

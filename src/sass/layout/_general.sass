@@ -30,6 +30,11 @@ body, html
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
 
+// html
+//   height: 100%
+// body.is-ie
+//   // height: 100%
+//   min-height: 100vh
 
 body.is-transitioning
   pointer-events: none
@@ -42,6 +47,7 @@ body.is-transitioning
 ::selection
   color: white
   background: $colorPrimary
+
 
 .body-lock
   height: 100%
@@ -62,6 +68,13 @@ body.is-transitioning
     flex: 1 0 auto
     display: flex
     flex-direction: column
+    overflow: hidden
+  &__main
+    flex: 1 0 auto
+
+.is-ie
+  .page
+    height: 100%
 
 .container
   max-width: 100%

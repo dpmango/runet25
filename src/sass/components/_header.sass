@@ -8,12 +8,14 @@
   will-change: transform
   backface-visibility: hidden
   transform-style: preserve-3d
+  pointer-events: none
   &__wrapper
     display: flex
     align-items: center
     // transform: translate3d(0,40px,0)
     padding-top: 30px
-
+  &__logo, &__menu
+    pointer-events: all
   &__logo
     flex: 0 0 auto
     font-size: 0
@@ -94,6 +96,10 @@
   &.is-transitioning
     transition: transform .25s $ease
     transform: translate3d(0,-100%,0) !important
+
+  &.is-sticky
+    position: fixed
+    transform: translate3d(0,0,0) !important
 
   &.is-menu-active
     .header

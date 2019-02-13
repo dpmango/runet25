@@ -8,10 +8,46 @@ block content
   .hero-title(js-header-color data-menu-color="white" data-logo-color="white")
     .container
       .hero-title__content
-        h1.h1-title.rtxt(js-reveal data-type="onload")
-          span.rtxt__wrap
-            span.rtxt__mover Новости 25-летия
+        h1.h1-title.rtxt(js-reveal js-wrap-words data-type="onload") Новости 25-летия
         
-    .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549087228/runet25/heroTitle_6_multi.jpg)")
+    .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/heroTitle_6_multi.jpg)")
       img(js-lazy data-src='img/backgrounds/heroTitle_6_multi.jpg' data-srcset='img/backgrounds/heroTitle_6_multi@2x.jpg 2x')
   
+  // grid
+  .grid.grid-main.reverse(js-header-color data-logo-color="white")
+    .col.col--4
+      // tile
+      .tile.tile--green.tile--fixed(js-tile-fixed)
+        h3.h3-title.rtxt(js-reveal js-wrap-words data-delay="300") Актуальные новости, пресс-релизы и анонсы
+
+    .col.col--8
+      // tabs-nav
+      .tabs-nav(js-tabs-nav data-aos="fade")
+        .tabs-nav__slider.swiper-container(js-tabs-nav-slider)
+          ul.swiper-wrapper
+            li.swiper-slide
+              a(href="#" title="Свежие новости") Свежие новости
+            li.swiper-slide.active
+              a(href="#" title="По месяцам" js-datepicker-toggle) Сортировать по месяцам
+                span.icon-circle.icon-circle--months
+                input(type="text" name="month" data-min-view="months" data-view="months" js-datepicker)
+
+      // card-collection
+      .card-collection
+        .card-collection__grid
+          mixin newsCard(name, date, img)
+            // card
+            a(js-link href="news-article.html").card.card--large.card--event(data-aos="fade-up")
+              .scaler.img-block(data-ar="16:9" style="padding-bottom: "+ (193/321) * 100 +"%;background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/"+ img +".jpg)")
+                img(js-lazy data-src='img/'+ img +'.jpg' data-srcset='img/'+ img +'@2x.jpg 2x')
+              p.card__name.h3-title.rtxt(js-reveal js-wrap-words)= name
+              .card__footer(data-aos="fade" data-aos-delay="300")
+                .card__meta
+                  .card__date.c-gray.p-small= date
+                i.icon.icon-arrow-black  
+                
+          +newsCard("Процесс: редизайн логотипа форума Russian Internet Week", "09.01.2019", "newsCard_8")
+          +newsCard("Как оставаться ценным сотрудником, работая вне офиса", "04.12.2018", "newsCard_9")
+          
+          +newsCard("Правообладатели хотят больше прав в отношении доменных имен", "23.11.2018", "newsCard_10")
+          +newsCard("Поклонники инноваций и российского интернета познакомились с ŠKODA Kodiaq на RIW 2018", "27.11.2018", "newsCard_11")

@@ -1,0 +1,27 @@
+.news-card
+  display: block
+  margin-bottom: 60px
+  &:last-child
+    margin-bottom: 0
+  &__image
+    margin-bottom: 20px
+  &__date
+    font-size: 13px
+    font-weight: 700
+  &__title
+    margin: .5em 0
+    transition: color .25s $ease
+  &__description
+
+  &:hover
+    .news-card
+      &__title
+        color: $colorPrimary
+
++r($sm)
+  .news-card
+    &__date
+      font-size: 12px
+    // &:last-child
+    //   .news-card__description
+    //     margin-bottom: 40px

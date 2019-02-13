@@ -1,0 +1,147 @@
+
++r($lg)
+  .main
+    flex-direction: column
+    &__aside
+      flex-basis: $col12
+      max-width: $col12
+      order: 2
+    &__hero-title
+      width: $col12
+      &.hero-title
+        position: relative
+        height: 500px
+    &__section
+      flex-basis: $col12
+      max-width: $col12
+    &__content
+      padding-top: 60px
+      padding-bottom: 60px
+      &--without-header
+        padding-top: 160px
+    &__hr
+      margin-top: 40px
+      margin-bottom: 40px
+    &__users
+      margin-bottom: 0
+
++r($md)
+  .main
+    &__content--without-header
+      padding-top: 150px
+
++r($sm)
+  .main
+    &__content
+      .h3-title
+        font-size: 18px
+    &__info
+      margin-bottom: 50px
+      padding-top: 27px
+      padding-bottom: 27px
+    &__group-content
+      margin-bottom: 30px
+
+.info
+  display: flex
+  font-size: 25px
+  line-height: 1.38
+  svg
+    flex-shrink: 0
+    position: relative
+    top: 3px
+    margin-right: 20px
+
++r($lg)
+  .info
+    font-size: 22px
+
++r($sm)
+  .info
+    font-size: 18px
+    svg
+      margin-right: 15px
+
+.group-content
+  align-items: flex-start
+  &__aside
+    margin-top: -7px
+    padding-right: 50px
+  &__section
+    p:last-child
+      margin-bottom: 0
+
++r($md)
+  .group-content
+    &__aside
+      margin-top: 0
+      margin-bottom: 5px
+      &.col--4
+        flex-basis: $col12
+        max-width: $col12
+    &__section
+      &.col--8
+        flex-basis: $col12
+        max-width: $col12
+
+
+.img-block
+  margin-bottom: 30px
+  display: block
+  width: 100%
+  &:last-child
+    margin-bottom: 0
+
++r($sm)
+  .img-block
+    margin-bottom: 25px
+
+/* link
+.link
+  position: relative
+  padding-left: 18px
+  display: inline-block
+  cursor: pointer
+  &--prev
+    &::before
+      content: ''
+      position: absolute
+      top: 2px
+      left: 0
+      display: block
+      width: 7px
+      height: 11px
+      transition: transform .25s $ease
+      background: svg-load('../icons/svg-mono/angle-left.svg') no-repeat
+
++r($lg)
+  .link
+    padding-left: 0
+    padding-right: 18px
+    &--prev
+      &::before
+        top: 4px
+        left: auto
+        right: 0
+        transform: rotate(-90deg)
+
+// keep articles readable
+.text
+  max-width: 900px
+
+
+/* margins
+.mt-1
+  margin-top: 1em
+
+.mt-3
+  margin-top: 3em
+
+.mb-1
+  margin-bottom: 1em
+
+.mb-1-5
+  margin-bottom: 1.5em
+
+.mb-2
+  margin-bottom: 2em

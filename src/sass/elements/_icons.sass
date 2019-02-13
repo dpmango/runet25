@@ -19,3 +19,20 @@
 // reset for empty icons
 .ico
   fill: currentColor
+
+// custom icon
+.icon-circle
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  width: 40px
+  height: 40px
+  border: 1px solid rgba(#333, 0.2)
+  border-radius: 50%
+  &--months
+    &::before
+      content: ''
+      display: block
+      width: 14px
+      height: 15px
+      background: svg-load('../icons/svg-mono/calendar.svg', fill=rgba(#333, 0.5))

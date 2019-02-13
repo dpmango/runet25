@@ -1,0 +1,281 @@
+.grid
+  display: flex
+  flex-wrap: wrap
+  &--offset
+    margin-left: -20px
+    margin-right: -20px
+    .col
+      padding-left: 20px
+      padding-right: 20px
+
++r($md)
+  .grid--offset
+    margin-left: -10px
+    margin-right: -10px
+    .col
+      padding-left: 10px
+      padding-right: 10px
+
+.grid-main
+  flex: 1 0 auto
+  overflow: hidden
+  .card-collection
+    height: auto
+  .col--4:not(.col--visible)
+    overflow: hidden
+  .col--8
+    .tile
+      flex: 1 0 auto
+
++r($lg)
+  .grid-horizontal-lg
+    // for stacker 2+ card
+    // i.e. in .col--4, .col--8 combination
+    display: flex
+    flex-wrap: wrap
+    .tile
+      flex: 0 0 $col6
+      max-width: $col6
+
++r($sm)
+  .grid-horizontal-lg
+    display: block
+    .tile
+      flex-basis: $col12
+      max-width: $col12
+
++r($lg)
+  .grid-main
+    flex-direction: column
+    & > .col.col--4
+      max-height: 80vh
+      // height: 700px
+      order: 2
+      &.col--visible
+        height: auto
+        max-height: none
+    &.reverse
+      & > .col.col--4
+        order: -1
+        min-height: 1px
+        .tile
+          justify-content: center
+    &.not-hero
+      .col--8 > .tile
+        padding-top: 140px
+    &:not(.reverse)
+      & > .col.col--4
+        height: 700px
+
++r($md)
+  .grid-main:not(.reverse)
+    & > .col.col--4
+      height: 600px
+
++r($md)
+  .grid-main:not(.reverse)
+    & > .col.col--4
+      height: 500px
+
+.col
+  position: relative
+  display: flex
+  flex-direction: column
+  width: 100%
+  min-width: 1px
+  flex: 0 0 auto
+  // overflow: hidden
+  &--4
+    flex-basis: $col4
+    max-width: $col4
+  &--6
+    flex-basis: $col6
+    max-width: $col6
+  &--8
+    flex-basis: $col8
+    max-width: $col8
+
++r($lg)
+  .col
+    &--4
+      flex-basis: $col12
+      max-width: $col12
+    &--8
+      flex-basis: $col12
+      max-width: $col12
+    &--lg-hide
+      display: none
+
++r($sm)
+  .col
+    &--sm-12
+      flex-basis: $col12
+      max-width: $col12
+      margin-bottom: 20px
+      &:last-child
+        margin-bottom: 0
+
+.fit-sibling-y
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  max-height: 100%
+  height: 100%
+  display: flex
+  flex-direction: column
+  &--relative
+    position: relative
+
++r($lg)
+  .fit-sibling-y
+    position: relative
+    &:not(.fit-sibling-y--relative)
+      height: 1px
+      min-height: 700px
+
+/* card collection
+.card-collection
+  position: relative
+  flex: 1 1 auto
+  max-height: 100%
+  &__scrollarea
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    max-height: 100%
+    overflow-y: scroll
+    display: flex
+    flex-wrap: wrap
+  &__grid
+    display: flex
+    flex-wrap: wrap
+
+.card
+  flex: 0 0 $col4
+  max-width: $col4
+  min-height: 310px
+  min-width: 1px
+  display: flex
+  flex-direction: column
+  // eq of 50px
+  // padding: 5.5%
+  transition: background .25s $ease, border .25s $ease
+  &--event
+    // eq of 50px
+    padding: 5.5%
+    background: white
+    border: 1px solid $colorLightBg
+    &:hover
+      border-color: $colorPrimary
+  &--project
+    // eq of 40px
+    padding: 40px
+    background: #37374C
+    color: white
+    border: 1px solid rgba($colorLightBg, .2)
+    .card__name
+      margin-top: 0
+      margin-bottom: auto
+
+    &:hover
+      border-color: white
+  &--large
+    flex-basis: $col6
+    max-width: $col6
+  &__meta
+    padding-bottom: 20px
+    margin-bottom: auto
+
+  &__location
+    font-size: 13px
+    font-weight: 700
+
+  &__date
+    margin-top: .2em
+
+  &__name
+    margin-top: auto
+    margin-bottom: 0.5em
+    &:first-child
+      margin-top: 0
+
+  &__cta
+    padding-top: 30px
+    .ico, .icon
+      will-change: transform
+      backface-visibility: hidden
+      transition: transform .25s $ease
+
+  &__footer
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-top: auto
+    .card__meta
+      padding-bottom: 0
+  .img-block + .card__name
+    margin-top: 0
+
+  &:hover
+    .card__cta
+      // aos conflict
+      // transform: translate3d(8px,0,0) !important
+      .ico, .icon
+        transform: translate3d(8px,0,0)
+
+
++rmin($wide)
+  .card
+    &--large
+      flex-basis: $col4
+      max-width: $col4
+
++r($xl)
+  .card-collection
+    .card
+      flex-basis: $col6
+      max-width: $col6
+
++r($lg)
+  .card-collection
+    min-height: 550px
+    height: 80vh
+
+  .card
+    max-width: $col6
+    flex-basis: $col6
+
++r($sm)
+  .card-collection
+    min-height: 1px
+    height: auto !important
+    // prev overwites
+    .card
+      flex-basis: $col12
+      max-width: $col12
+    // makes scrollarea X forced
+    &__scrollarea
+      position: relative
+      overflow-y: auto
+      overflow-x: scroll
+      flex-wrap: nowrap
+      .card
+        flex-basis: 260px
+        max-width: 260px
+
+  .card
+    // TODO - any case when it's not $col12 ?
+    flex-basis: $col12
+    max-width: $col12
+    min-height: 270px
+    &--event
+      padding: 50px 30px 40px
+
+    &--large
+      max-width: $col12
+      flex-basis: $col12
+
+    &__location
+      font-size: 12px

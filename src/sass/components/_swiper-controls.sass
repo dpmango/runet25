@@ -1,0 +1,81 @@
+.swiper-container-horizontal
+  & > .swiper-scrollbar
+    bottom: 50px
+    background: transparent
+    border-radius: 0
+    height: 36px
+    &::after
+      display: inline-block
+      content: ' '
+      position: absolute
+      top: 50%
+      left: 0
+      right: 0
+      background: rgba(black, .2)
+      height: 1px
+      border-radius: 4px
+      transform: translateY(-50%)
+      transition: height .25s $ease
+    &:hover
+      &::after
+        height: 5px
+
+  & > .swiper-buttons
+    display: none
+    margin-top: 20px
+    background-color: white
+    .swiper-button-prev, .swiper-button-next
+      position: relative auto
+      margin: 0
+      flex: 0 0 $col6
+      max-width: $col6
+      height: 60px
+      outline: 0
+      border: 1px solid $colorLightBg
+      color: $fontColor
+      background: white
+      font-size: 0
+      &.swiper-button-disabled
+        opacity: 1
+        cursor: not-allowed
+        color: $fontColor50
+      .ico
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%,-50%)
+        transform-origin: right center
+        font-size: 14px
+        // will-change: transform
+        // backface-visibility: hidden
+        // transform-style: preserve-3d
+        transition: .25s $ease
+      &:hover
+        .ico
+          font-size: 18px
+
+.swiper-scrollbar-drag
+  z-index: 2
+  size: 36px !important
+  background: rgba($colorRed, .2)
+  border-radius: 50%
+  cursor: pointer
+  &::after
+    display: inline-block
+    content: ' '
+    position: absolute
+    top: 50%
+    left: 50%
+    background: $colorRed
+    size: 16px
+    border-radius: 50%
+    transform: translate(-50%,-50%)
+    transition: transform .25s $ease
+  &:hover
+    &::after
+      transform: translate(-50%,-50%) scale(1.5)
+
++r($sm)
+  .swiper-container-horizontal
+    & > .swiper-buttons
+      display: flex

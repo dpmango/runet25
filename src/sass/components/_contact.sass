@@ -1,0 +1,32 @@
+
+.contact-str
+  display: inline-flex
+  align-items: center
+  white-space: nowrap
+  transition: color 0.25s ease-in-out;
+  &:hover
+    color: rgba(255, 255, 255, 0.7)
+  .ico
+    margin-right: 17px
+    &-mono-phone
+      font-size: 34px
+    &-mono-envelope
+      font-size: 29px
+
++r($md)
+  .contact-str
+    .ico
+      &-mono-phone
+        font-size: 28px
+      &-mono-envelope
+        font-size: 26px
+
++r($sm)
+  .contact-str
+    height: 44px
+    .ico
+      margin-right: 10px
+      &-mono-phone
+        font-size: 24px
+      &-mono-envelope
+        font-size: 22px

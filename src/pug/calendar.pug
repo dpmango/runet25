@@ -15,6 +15,115 @@ block content
             span.rtxt__mover 25-летия
         p.p-big(data-aos="fade" data-aos-delay="300") Перечень событий, посвященных юбилею Рунета
         
-    .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549087228/runet25/heroTitle_3_red.jpg)")
+    .hero-title__cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1549746979/runet25/heroTitle_3_red.jpg)")
       img(js-lazy data-src='img/backgrounds/heroTitle_3_red.jpg' data-srcset='img/backgrounds/heroTitle_3_red@2x.jpg 2x')
   
+  // grid
+  .grid.grid-main.reverse(js-header-color data-menu-color="white")
+    .col.col--8
+      // tabs-nav
+      .tabs-nav(js-tabs-nav data-aos="fade")
+        .tabs-nav__slider.swiper-container(js-tabs-nav-slider)
+          ul.swiper-wrapper
+            li.swiper-slide.active
+              a(href="#" title="Предстоящие") Предстоящие
+            li.swiper-slide
+              a(href="#" title="Прошедшие") Прошедшие
+            li.swiper-slide
+              a(href="#" title="По месяцам" js-datepicker-toggle) По месяцам
+                span.icon-circle.icon-circle--months
+                input(type="text" name="month" data-min-view="months" data-view="months" js-datepicker)
+      
+      // card-collection
+      .card-collection
+        .card-collection__grid
+          mixin eventCard(name, caption, location, date)
+            // card
+            a(href="#cardEventModal" js-popup).card.card--large.card--event
+              .card__name.h3-title.rtxt(js-reveal js-wrap-words)= name
+              if caption
+                p.card__caption(data-aos="fade" data-aos-delay="300")= caption
+              .card__footer(data-aos="fade" data-aos-delay="300")
+                .card__meta
+                  .card__location= location
+                  .card__date.p-big= date
+                i.icon.icon-arrow-black
+                
+          +eventCard("Золотой сайт + Золотое приложение 2018", "Ключевой и старейший конкурс интернет-проектов в Рунете", "Москва", "28 января")
+          +eventCard("Cyber Security Forum 2019", "Международный Форум по кибербезопасности", "Москва", "14 февраля")
+          
+          +eventCard("Digital transformation conference 2019", "Первая в России площадка для обмена опытом и мнениями о состоявшихся проектах применения digital-технологий в области принятия управленческих решений.", "Москва", "Март")
+          +eventCard("Награждение госнаградами метров интернет-индустрии", "", "Москва", "Апрель")
+          
+          +eventCard("RIGF 2019", "Российский форум по управлению интернетом (RIGF) – мероприятие из всемирной серии национальных и региональных инициатив в области управления интернетом.", "Московская область", "17-19 апреля")
+          +eventCard("RIPE NCC Day", "RIPE NCC Day – техническая конференция, проводимая одним из пяти мировых Региональных интернет-регистратур RIPE NCC совместно с локальными партнерами.", "Москва", "Апрель")
+          
+          +eventCard("РИФ 2019", "23-й Российский Интернет Форум – www.rif.ru", "Москва", "Май")
+          +eventCard("ПМЭФ 2019", "Петербургский международный экономический форум – 2019", "Санкт-Перербург", "Май")
+
+          +eventCard("СПИК 2019", "Санкт-Петербургская интернет-конференция", "Санкт-Перербург", "Май")
+          +eventCard("Registrar Day", "Регистраторский день (Registrar Day) – отраслевая конференция, посвященная вопросам развития российского доменного рынка.", "Москва", "Май")
+
+          // modal card--event
+          .mfp-dialog.mfp-card.mfp-card--xl.mfp-hide(id="cardEventModal")
+            p.p-main.f-700 1 января
+            img.img-block(js-lazy data-src='img/newsCard_12.jpg' data-srcset='img/newsCard_12@2x.jpg 2x')
+            p.card__name.h2-title Появились первые интернет-провайдеры
+            p.p-main 1992—1993 годы — зарождается российский рынок интернет-провайдеров, первые участники — Demos Plus, Techno, GlasNet, SovAm Teleport, EUnet/Relcom, X-Atom, FREEnet. Начинается массовое использование протокола TCP/IP. Организуется несколько «выделенных» каналов на Запад, в том числе оптический и спутниковый (через Эстонию, Финляндию и Америку).
+            hr
+            ul.main-list.main-list--clean
+              li Demos Plus
+              li EUnet/Relcom
+              li FREEnet
+              li GlasNet
+              li SovAm Teleport
+              li Techno
+              li X-Atom
+            hr
+            .grid.grid--offset.mt-3
+              .col.col--6.col--sm-12
+                img.img-block(js-lazy data-src='img/newsCard_2.jpg' data-srcset='img/newsCard_2@2x.jpg 2x')
+              .col.col--6.col--sm-12
+                img.img-block(js-lazy data-src='img/newsCard_4.jpg' data-srcset='img/newsCard_4@2x.jpg 2x')
+
+    .col.col--4.col.col--visible
+      // tile
+      .tile.tile--form.tile--purple.tile--fixed(js-form-events js-tile-fixed data-use-self-width)
+        .tile__grid
+          .tile__col
+            .tile__form-text
+              h3.h3-title.rtxt(js-reveal js-wrap-words data-delay="300") Предложить мероприятие
+              p.p-small(data-aos="fade" data-aos-delay="600") Вы можете предложить свое мероприятие, для этого нужно заполить форму, нажав на кнопку ниже, предложенные мероприятия отправляются на почту оргкомитета
+              span.p-link.link.link--prev(js-form-events-toggle data-aos="fade" data-aos-delay="800") Показать форму
+          
+          .tile__col
+            form.tile__form-events.multi-form(action="/email-form.php" js-validate-event)
+              .ui-group.ui-group--smaller
+                label(for="name") Рунет-id / ФИО / Организация / Контакты
+                input.ui-input(type="text" name="name" placeholder="ivan.petrov@do")
+              .ui-group.ui-group--smaller
+                label(for="title") Название предлагаемого мероприятия
+                input.ui-input(type="text" name="title")
+              .ui-group.ui-group--smaller
+                label(for="terms") Срок / этапы реализации
+                input.ui-input(type="text" name="terms")
+              .ui-group.ui-group--smaller
+                label(for="initiators") Организаторы / инициаторы мероприятия
+                input.ui-input(type="text" name="initiators")
+              .ui-group.ui-group--smaller
+                label(for="description") Описание концепции / формата мероприятия 
+                input.ui-input(type="text" name="description")
+              .ui-group.ui-group--smaller
+                label(for="essence") Суть предложения Оргкомитету Юбилея по интеграции мероприятия
+                // min rows is required for autoexpand module
+                textarea.ui-input(type="text" name="essence" rows="1" data-min-rows="1")
+              .ui-group.ui-group--smaller
+                button(type="submit").btn.btn-primary
+                  span Отправить предложение
+            
+            // modal
+            .mfp-dialog.mfp-thanks.mfp-thanks--lg.mfp-hide#event-thanks
+              .h2-title Спасибо за предложение!
+              p.p-small(js-event-thanks-message) В ближайшее время с вами свяжутся наши специалисты
+              a(href="#" js-close-mfp).btn.btn-primary
+                span Вернуться на сайт

@@ -1,0 +1,71 @@
+.scroller-x
+  // ps object
+  position: relative
+  width: 100%
+  flex: 1 1 auto
+  display: flex
+  flex-direction: column
+  padding-bottom: 100px
+  background: $colorLightBg
+  &__grid
+    flex: 1 1 auto
+    display: flex
+
+    .card--large
+      flex: 0 0 700px
+      max-width: 700px
+      margin-right: 50px
+
++r($xl)
+  .scroller-x
+    padding-bottom: 80px
+
++r($sm)
+  .scroller-x
+    padding-bottom: 0
+    .swiper-scrollbar
+      display: none
+
+    &__grid
+      .card--large
+        flex: 0 0 100%
+        max-width: 100%
+        margin-right: 0
+
+.year-stack
+  width: 100%
+  flex: 0 0 310px
+  max-width: 310px
+  min-width: 1px
+  display: flex
+  flex-direction: column
+  padding: 50px 13px 30px 40px
+  border-right: 1px solid rgba(black, .1)
+  &:last-child
+    border-right: 0
+  &__name
+    flex: 0 0 auto
+    margin-bottom: 50px
+  &__scrollable
+    position: relative
+    flex: 1 1 auto
+    padding-right: 27px
+
++r($md)
+  .year-stack
+    &__name
+      margin-bottom: 35px
+
+
++r($sm)
+  .year-stack
+    flex-basis: $col12
+    max-width: $col12
+    min-height: 550px
+    height: 80vh
+    padding: 40px 13px 0px 40px
+    border-right: 0
+    // swiper controls merge margin
+    margin-bottom: -20px
+    &__name
+      margin-bottom: 25px

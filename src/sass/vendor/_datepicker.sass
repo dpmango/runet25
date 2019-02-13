@@ -11,10 +11,10 @@
 .-selected-
   &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
     color: #fff
-    background: $colorGreen
+    background: $colorRed
   &.-focus-
     &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
-      background: $colorGreen
+      background: $colorRed
 
 .-in-range-
   &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
@@ -50,16 +50,18 @@
   -webkit-justify-content: center
   -ms-flex-pack: center
   justify-content: center
-  height: 32px
+  width: 25%
+  height: 23%
+  padding-bottom: 2px
   z-index: 1
   &.-focus-
     background: #f0f0f0
   &.-current-
-    color: $colorGreen
+    color: $colorRed
     &.-focus-
       color: #4a4a4a
     &.-in-range-
-      color: $colorGreen
+      color: $colorRed
   &.-in-range-
     background: rgba(92, 196, 239, 0.1)
     color: #4a4a4a
@@ -88,12 +90,12 @@
   &.-selected-
     color: #fff
     border: none
-    background: $colorGreen
+    background: $colorRed
     &.-current-
       color: #fff
-      background: $colorGreen
+      background: $colorRed
     &.-focus-
-      background: $colorGreen
+      background: $colorRed
   &:empty
     cursor: default
 
@@ -107,7 +109,7 @@
   margin: 8px 0 3px
 
 .datepicker--day-name
-  color: $black50
+  // color: $black50
   display: -webkit-flex
   display: -ms-flexbox
   display: flex
@@ -131,15 +133,15 @@
   height: 170px
 
 .datepicker--cell-month
-  width: 33.33%
-  height: 25%
+  width: 25%
+  height: 23%
+  padding-bottom: 2px
 
 .datepicker--years, .datepicker--cells-years
   height: 170px
 
 .datepicker--cell-year
   width: 25%
-  height: 33.33%
 
 .datepicker--cell-day.-other-month-, .datepicker--cell-year.-other-decade-
   color: #dedede
@@ -154,10 +156,10 @@
 .-selected-
   &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
     color: #fff
-    background: $colorGreen
+    background: $colorRed
   &.-focus-
     &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
-      background: $colorGreen
+      background: $colorRed
 
 .-in-range-
   &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
@@ -181,15 +183,18 @@
     display: none
 
 .datepicker
+  margin-top: 20px
   background: #fff
-  border: 1px solid #dbdbdb
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15)
+  border: 0
+  box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.1);
   border-radius: 4px
   box-sizing: content-box
   font-family: Tahoma, sans-serif
-  font-size: 14px
-  color: #4a4a4a
-  width: 250px
+  font-size: 18px
+  color: #333
+  font-weight: 700
+  width: 360px
+  white-space: nowrap
   position: absolute
   left: -100000px
   opacity: 0
@@ -216,7 +221,7 @@
     transition: opacity 0.3s ease, left 0s 0s, -webkit-transform 0.3s ease
     transition: opacity 0.3s ease, transform 0.3s ease, left 0s 0s
     transition: opacity 0.3s ease, transform 0.3s ease, left 0s 0s, -webkit-transform 0.3s ease
-
+  &.sele
 .datepicker-inline
   .datepicker
     border-color: #d7d7d7
@@ -232,7 +237,9 @@
 
 .datepicker--content
   box-sizing: content-box
-  padding: 4px
+  padding: 4px 15px 20px
+  color: $colorRed
+  font-weight: 500
 
 .-only-timepicker- .datepicker--content
   display: none
@@ -244,6 +251,7 @@
   border-right: 1px solid #dbdbdb
   width: 10px
   height: 10px
+  display: none
   z-index: -1
 
 .-top-left- .datepicker--pointer, .-top-center- .datepicker--pointer, .-top-right- .datepicker--pointer
@@ -302,10 +310,10 @@
 .-selected-
   &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
     color: #fff
-    background: $colorGreen
+    background: $colorRed
   &.-focus-
     &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
-      background: $colorGreen
+      background: $colorRed
 
 .-in-range-
   &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
@@ -327,9 +335,9 @@
   -webkit-justify-content: space-between
   -ms-flex-pack: justify
   justify-content: space-between
-  border-bottom: 1px solid #efefef
-  min-height: 32px
-  padding: 4px
+  border-bottom: 0
+  min-height: 50px
+  padding: 20px 28px
 
 .-only-timepicker- .datepicker--nav
   display: none
@@ -345,6 +353,7 @@
   -webkit-justify-content: center
   -ms-flex-pack: center
   justify-content: center
+  transition: 0.25s ease-in-out
 
 .datepicker--nav-action
   display: -webkit-flex
@@ -357,12 +366,14 @@
   -webkit-justify-content: center
   -ms-flex-pack: center
   justify-content: center
-  width: 32px
+  width: 40px
   border-radius: 4px
   -webkit-user-select: none
   -moz-user-select: none
   -ms-user-select: none
   user-select: none
+  border-radius: 50%
+  transition: 0.25s ease-in-out
   &:hover
     background: #f0f0f0
   &.-disabled-
@@ -372,12 +383,13 @@
     height: 32px
   path
     fill: none
-    stroke: #9c9c9c
+    stroke: #424E66
     stroke-width: 2px
+    transition: 0.25s ease-in-out
 
 .datepicker--nav-title
-  border-radius: 4px
-  padding: 0 8px
+  border-radius: 19px
+  padding: 9px 20px
   i
     font-style: normal
     color: #9c9c9c
@@ -396,7 +408,7 @@
   border-top: 1px solid #efefef
 
 .datepicker--button
-  color: $colorGreen
+  color: $colorRed
   cursor: pointer
   border-radius: 4px
   -webkit-flex: 1
@@ -416,6 +428,14 @@
     color: #4a4a4a
     background: #f0f0f0
 
+.datepicker--cell
+  font-weight: 700
+  border-radius: 19px
+  transition: 0.25s ease-in-out
+
+.datepicker--cell.-selected-
+  background-color: $colorRed
+
 .datepicker--cell-day.-other-month-, .datepicker--cell-year.-other-decade-
   color: #dedede
 
@@ -429,10 +449,10 @@
 .-selected-
   &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
     color: #fff
-    background: $colorGreen
+    background: $colorRed
   &.-focus-
     &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
-      background: $colorGreen
+      background: $colorRed
 
 .-in-range-
   &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
@@ -559,8 +579,8 @@
     &:focus
       outline: none
       &::-webkit-slider-thumb, &::-moz-range-thumb, &::-ms-thumb
-        background: $colorGreen
-        border-color: $colorGreen
+        background: $colorRed
+        border-color: $colorRed
     &::-webkit-slider-thumb, &::-moz-range-thumb, &::-ms-thumb
       box-sizing: border-box
       height: 12px
@@ -622,10 +642,10 @@
 .-selected-
   &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
     color: #fff
-    background: $colorGreen
+    background: $colorRed
   &.-focus-
     &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
-      background: $colorGreen
+      background: $colorRed
 
 .-in-range-
   &.datepicker--cell-day.-other-month-, &.datepicker--cell-year.-other-decade-
@@ -638,3 +658,18 @@
 .datepicker--cell-day.-other-month-:empty, .datepicker--cell-year.-other-decade-:empty
   background: none
   border: none
+
+[js-datepicker]
+  position: absolute
+  left: 0
+  width: 100%
+  opacity: 0
+  visibility: hidden
+
++r($sm)
+  .datepickers-container
+    width: 100%
+  .datepicker
+    left: 20px !important
+    right: 20px !important
+    width: 300px

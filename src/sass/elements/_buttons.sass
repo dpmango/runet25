@@ -24,7 +24,7 @@ button
     background: $colorRed
     font-size: 15px
     font-weight: 500
-    padding: 20px 40px
+    padding: 19px 40px
     color: white
     transition: .25s $ease
     transform-origin: center bottom
@@ -47,8 +47,22 @@ button
       &::before
         transform: translate3d(0,0,0)
 
+  &--link
+    position: relative
+    padding: 7px 0
+    font-size: 18px
+    border-bottom: 1px solid rgba($colorRed, 0.5)
+    transition: all 0.2s ease-in-out
+    &:hover
+      color: $colorPurple
+      border-bottom-color: $colorPurple
 +r($md)
   .btn
     &-primary
       font-size: 14px
       padding: 17px 25px
+
++r($sm)
+  .btn-100-mobile
+    display: block
+    width: 100%

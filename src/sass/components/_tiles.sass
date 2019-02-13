@@ -1,0 +1,394 @@
+/* single tile
+.tile
+  position: relative
+  z-index: 1
+  width: 100%
+  padding: 80px 50px 50px
+  min-width: 1px
+  min-height: 400px
+  display: flex
+  flex-direction: column
+  background: #F7F7FA
+  // use for preloader bg cover
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center center
+  // size modifiers
+  &--full
+    flex: 1 1 100%
+    max-width: 100%
+    max-height: 100%
+  &--full-v
+    height: 100%
+  &--2-3
+    flex: 0 0 $col8
+    max-width: $col8
+  &--1-3
+    flex: 0 0 $col4
+    max-width: $col4
+  &--fixed
+    position: absolute
+    top: 0
+    height: 100%
+    max-height: 100vh
+    will-change: top, bottom
+    backface-visibility: hidden
+    overflow: hidden
+  &--timeline
+    margin-bottom: -1px
+    padding-left: 120px
+    height: 100vh
+    overflow: hidden
+  &--form
+    max-width: 200%
+    width: 200%
+    overflow-y: auto
+    overflow-x: hidden
+    will-change: transform
+    backface-visibility: hidden
+    transform-style: preserve-3d
+    transition: transform 0.2s 0.05s ease-in-out
+    &.is-active
+      transform: translate3d(-50%, 0, 0)
+      .tile__form-events
+        transform: translate3d(0, 0, 0)
+      [js-form-events-toggle]::before
+        transform: scale(-1, 1)
+  &--sm
+    min-height: 320px
+  &--pt-lg
+    padding-top: 120px
+  &--pb-lg
+    padding-bottom: 80px
+
+  // elements
+  &__grid
+    display: flex
+    flex-wrap: wrap
+    margin-left: -10px
+    margin-right: -10px
+  &__col
+    flex: 0 0 50%
+    padding-left: 10px
+    padding-right: 10px
+    max-width: 50%
+    min-width: 1px
+
+    &--1-3
+      flex: 0 0 $col4
+      max-width: $col4
+
+  &__links
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    margin-bottom: 10px
+    a
+      display: inline-block
+      padding: 8px 0
+      backface-visibility: hidden
+      transition: color .25s $ease, opacity .25s $ease
+      &:hover
+        opacity: .7
+  &__cta
+    display: flex
+    align-items: center
+    margin-top: auto
+    font-size: 15px
+    padding: 40px 0 10px 0
+    span
+      display: inline-block
+      transition: color .25s $ease
+    .icon
+      flex: 0 0 auto
+      margin-left: auto
+      transition: transform .25s $ease
+    &:hover
+      span
+        color: rgba(white, .7)
+      .icon
+        transform: translate3d(5px,0,0)
+  &[js-link]
+    &:hover
+      .tile__cta
+        span
+          color: rgba(white, .7)
+        .icon
+          transform: translate3d(5px,0,0)
+  &__img-cover
+    position: absolute 0
+    display: flex
+    flex-direction: column
+    background-position: center center
+    background-repeat: no-repeat
+    background-size: cover
+    img, picture
+      width: 100%
+      height: 100%
+      object-fit: cover
+    &--fit
+      &-ct img, picture
+        object-position: center top
+      &-rt img, picture
+        object-position: right top
+      &-rc img, picture
+        object-position: right center
+      &-rb img, picture
+        object-position: right bottom
+      &-lt img, picture
+        object-position: left top
+      &-lc img, picture
+        object-position: left center
+      &-lb img, picture
+        object-position: left bottom
+  &__laureates
+    width: 100%
+    .p-big
+      margin-bottom: 0
+      margin-top: 10px
+  &__hr
+    margin: 50px -50px 50px 0
+    border-top: 1px solid rgba(white, 0.3)
+    border-bottom: 0
+  &__text
+    max-width: 1200px
+  &__info
+    position: relative
+    margin-bottom: 40px
+    margin-right: -50px
+    padding: 37px 50px 37px 0
+    &::before, &::after
+      content: ''
+      position: absolute
+      left: 0
+      width: 100%
+      border-top: 1px solid rgba(white, 0.3)
+    &::before
+      top: 0
+    &::after
+      bottom: 0
+
+  &__group-content
+    margin-bottom: 100px
+    &:last-child
+      margin-bottom: 0
+  &__form-text
+    padding-right: 35px
+  &__form-events
+    transform: translate3d(100%, 0, 0)
+    padding-bottom: 50px
+    transition: transform 0.2s 0.2s ease-in-out
+  .h2-title
+    margin-top: 0
+    margin-bottom: .5em
+  .h3-title
+    &:first-child
+      margin-top: 0
+  .p-link
+    margin-top: 18px
+
+  &--center
+    align-items: center
+    text-align: center
+    .h2-title
+      margin-bottom: 2.5rem
+
+  // colors modifiers
+  &--red
+    background-color: $colorRed
+    color: white
+    &::after
+      // reveal styles
+      background-color: #FDDE50
+  &--blue
+    background-color: #00A5FF
+    color: white
+    &::after
+      background-color: $colorRed
+  &--orange
+    background-color: #FF7400
+    color: white
+    &::after
+      background-color: #3EED78
+  &--purple
+    background-color: #7E00FF
+    color: white
+    &::after
+      background-color: #F2306E
+    .p-link
+      color: white
+  &--pink
+    background-color: #F2306E
+    color: white
+    &::after
+      background-color: #00A5FF
+  &--yellow
+    background-color: #FDDE50
+    // color: white
+    &::after
+      background-color: #7E00FF
+  &--green
+    background-color: #3EED78
+    color: white
+    &::after
+      background-color: #FF7400
+  &--dark
+    background-color: #37374C
+    color: white
+    &::after
+      background-color: #FF7400
+  &--white
+    background-color: #FFF
+    &::after
+      background-color: #00A5FF
+  &--gray
+    flex: 1 0 auto
+    background-color: $colorLightBg
+    &::after
+      background-color: $colorRed
+  &--black
+    color: white
+    background-color: #333
+    &::after
+      background-color: #FF7400
+
+  // position modifiers
+  &--jcc
+    justify-content: center
+
++rmin(1920)
+  .tile
+    &--2-3
+      flex-basis: $col6
+      max-width: $col6
+    &--1-3
+      flex-basis: $col3
+      max-width: $col3
+    &--1-3-lg
+      flex-basis: $col3
+      max-width: $col3
+
++r($xl)
+  .tile
+    padding-top: 60px
+    padding-bottom: 35px
+    min-height: 350px
+    &--sm
+      min-height: 320px
+    &--pt-lg
+      padding-top: 120px
+
++r($lg)
+  .tile
+    &--2-3
+      flex-basis: $col12
+      max-width: $col12
+    &--1-3
+      flex-basis: $col6
+      max-width: $col6
+    &--1-3-lg
+      flex-basis: $col6
+      max-width: $col6
+    &--lg-full
+      flex: 0 0 $col12
+      max-width: $col12
+    &--lg-hide
+      display: none
+    &--lg-last
+      order: 99
+    &--fixed
+      height: 100%
+      max-height: 100%
+    &--timeline
+      padding-top: 160px
+    &--form
+      position: relative
+      padding-top: 45px
+      padding-bottom: 45px
+      width: 100%
+      max-width: 100%
+      min-height: 1px
+      max-height: none
+      overflow: visible
+      &.is-active
+        transform: translate3d(0, 0, 0)
+        [js-form-events-toggle]::before
+          transform: rotate(90deg)
+      .tile__col
+        flex: 0 0 100%
+        max-width: 100%
+    &__form-text
+      padding-right: 0
+    &__form-events
+      margin-top: 50px
+      padding-bottom: 0
+      display: none
+      transform: translate3d(0, 0, 0)
+    &__col
+      &--1-3
+        flex-basis: $col12
+        max-width: $col12
+
++r($md)
+  .tile
+    padding: 40px 30px 25px
+    &--timeline
+      padding-top: 120px
+    &--pt-lg
+      padding-bottom: 70px
+    &--pb-lg
+      padding-bottom: 50px
+    &--vauto
+      min-height: 1px
+    &__cta
+      font-size: 14px
+    &__group-content
+      margin-bottom: 35px
+    &__hr
+      margin-top: 35px
+      margin-bottom: 35px
+      margin-right: -30px
+    &__info
+      margin-right: -30px
+
++r($sm)
+  .tile
+    min-height: 300px
+    &--2-3
+      flex-basis: $col12
+      max-width: $col12
+    &--1-3
+      flex-basis: $col12
+      max-width: $col12
+    &--timeline
+      height: 100%
+    &--sm-show
+      display: flex
+    &__grid
+      flex-wrap: wrap
+    &__col
+      flex-basis: 100%
+      max-width: 100%
+    &__info
+      margin-bottom: 10px
+      padding-top: 25px
+      padding-bottom: 25px
+    &__laureates
+      .col--4
+        flex-basis: $col12
+        max-width: $col12
+        margin-bottom: 40px
+        &:last-child
+          margin-bottom: 20px
+
+.tile
+  &--auto
+    min-height: 1px
+
+.is-ie
+  .tile--timeline
+    flex: none
+
+  .tile--jcc
+    // https://stackoverflow.com/questions/19371626/flexbox-not-centering-vertically-in-ie
+    height: 100px

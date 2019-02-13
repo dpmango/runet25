@@ -1,0 +1,62 @@
+.tabs-nav
+  padding: 70px 0
+  background-color: #F7F7FA
+  &__slider
+    padding-left: 50px
+    padding-right: 50px
+    width: 100%
+    border-bottom: 1px solid #D7D7D7
+  ul
+    align-items: flex-end
+    margin: 0
+    padding: 5px 0 0
+    white-space: nowrap
+    
+    li
+      flex-shrink: 0
+      position: relative
+      margin-right: 94px
+      width: auto
+      font-size: 20px
+      font-weight: 700
+      &:last-child
+        margin-right: 0
+      &.active
+        a
+          color: $colorRed
+          border-bottom-color: $colorRed
+          .icon-circle
+            color: $colorRed
+            border-color: $colorRed
+            &--months
+              &::before
+                background: svg-load('../icons/svg-mono/calendar.svg', fill=$colorRed)
+      a
+        display: inline-flex
+        align-items: center
+        padding: 7px 0 14px
+        border-bottom: 3px solid transparent
+        transition: 0.25s
+        &:hover
+          color: $colorRed
+          .icon-circle
+            border-color: $colorRed
+            &::before
+              background: svg-load('../icons/svg-mono/calendar.svg', fill=$colorRed)
+
+        .icon-circle
+          margin: -8px 0 -6px 20px
+          cursor: pointer
+          transition: 0.25s
+            
+
++r($md)
+  .tabs-nav
+    padding-top: 50px
+    padding-bottom: 50px
+    &__slider
+      padding-left: 30px
+      padding-right: 30px
+    ul
+      li
+        margin-right: 30px
