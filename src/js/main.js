@@ -249,20 +249,13 @@ $(document).ready(function(){
     })
     // prevent going the same link (if barba is connected)
     .on('click', 'a, [js-link]', function(e){
-      // temporary block all links
       var href = $(this).data('href') || $(this).attr('href');
-      if ( href.indexOf("http") === -1 ){
+      var path = window.location.pathname
+
+      if ( href === path.slice(1, path.length) ){
         e.preventDefault();
         e.stopPropagation();
       }
-
-      // var href = $(this).data('href') || $(this).attr('href');
-      // var path = window.location.pathname
-      //
-      // if ( href === path.slice(1, path.length) ){
-      //   e.preventDefault();
-      //   e.stopPropagation();
-      // }
     })
     // scroll to section
     .on('click', '[js-scroll-to]', function() { // section scroll
@@ -1521,8 +1514,8 @@ $(document).ready(function(){
     return OverlayTransition;
   };
 
-  // Barba.Prefetch.init();
-  // Barba.Pjax.start();
+  Barba.Prefetch.init();
+  Barba.Pjax.start();
 
   // initialized transition
   Barba.Dispatcher.on('linkClicked', function(el) {
