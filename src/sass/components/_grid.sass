@@ -47,19 +47,13 @@
 +r($lg)
   .grid-main
     flex-direction: column
-    // TODO - ARTEM
-    // предлагаю везде сделать .col на 100% от $lg
-    // нужно посмотреть если появились конфликты
-    & > .col
-      // max-width: $col12
-      // flex: 0 0 $col12
-      &.col--4
-        max-height: 80vh
-        height: 300px
-        order: 2
-        &.col--visible
-          height: auto
-          max-height: none
+    & > .col.col--4
+      max-height: 80vh
+      // height: 700px
+      order: 2
+      &.col--visible
+        height: auto
+        max-height: none
     &.reverse
       & > .col.col--4
         order: -1
@@ -69,6 +63,19 @@
     &.not-hero
       .col--8 > .tile
         padding-top: 140px
+    &:not(.reverse)
+      & > .col.col--4
+        height: 700px
+
++r($md)
+  .grid-main:not(.reverse)
+    & > .col.col--4
+      height: 600px
+
++r($md)
+  .grid-main:not(.reverse)
+    & > .col.col--4
+      height: 500px
 
 .col
   position: relative
