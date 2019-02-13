@@ -17,6 +17,8 @@
       padding-right: 10px
 
 .grid-main
+  flex: 1 0 auto
+  overflow: hidden
   .card-collection
     height: auto
   .col--4:not(.col--visible)
@@ -213,6 +215,12 @@
       .ico, .icon
         transform: translate3d(8px,0,0)
 
+
++rmin($wide)
+  .card
+    &--large
+      flex-basis: $col4
+      max-width: $col4
 
 +r($xl)
   .card-collection

@@ -126,7 +126,7 @@ block content
       .tile.tile--green.tile--full-v
         h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Представители
 
-    .col.col--8
+    .col.col--8(js-header-color data-logo-color="white")
       .card-collection
         .card-collection__grid
           mixin userCard(name, post, img)
@@ -163,10 +163,10 @@ block content
         .tile__grid
           .tile__col(data-aos="fade")
             a.p-main.contact-str(href="tel:+74959505651")
-              i.icon.icon-phone
+              +svgMono("phone")
               | +7 (495) 950-56-51
           
           .tile__col(data-aos="fade")
             a.p-main.contact-str(href="mailto:info@raec.ru")
-              i.icon.icon-envelope
+              +svgMono("envelope")
               | info@raec.ru
