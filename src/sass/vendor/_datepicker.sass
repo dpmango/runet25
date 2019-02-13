@@ -191,8 +191,9 @@
   box-sizing: content-box
   font-family: Tahoma, sans-serif
   font-size: 18px
-  color: #4a4a4a
-  max-width: 360px
+  color: #333
+  font-weight: 700
+  width: 360px
   white-space: nowrap
   position: absolute
   left: -100000px
@@ -352,6 +353,7 @@
   -webkit-justify-content: center
   -ms-flex-pack: center
   justify-content: center
+  transition: 0.25s ease-in-out
 
 .datepicker--nav-action
   display: -webkit-flex
@@ -371,6 +373,7 @@
   -ms-user-select: none
   user-select: none
   border-radius: 50%
+  transition: 0.25s ease-in-out
   &:hover
     background: #f0f0f0
   &.-disabled-
@@ -380,8 +383,9 @@
     height: 32px
   path
     fill: none
-    stroke: #9c9c9c
+    stroke: #424E66
     stroke-width: 2px
+    transition: 0.25s ease-in-out
 
 .datepicker--nav-title
   border-radius: 19px
@@ -425,7 +429,9 @@
     background: #f0f0f0
 
 .datepicker--cell
+  font-weight: 700
   border-radius: 19px
+  transition: 0.25s ease-in-out
 
 .datepicker--cell.-selected-
   background-color: $colorRed

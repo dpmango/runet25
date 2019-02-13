@@ -39,13 +39,16 @@
         transition: 0.25s
         &:hover
           color: $colorRed
+          .icon-circle
+            border-color: $colorRed
+            &::before
+              background: svg-load('../icons/svg-mono/calendar.svg', fill=$colorRed)
 
         .icon-circle
           margin: -8px 0 -6px 20px
           cursor: pointer
           transition: 0.25s
-          &:hover
-            border-color: $colorRed
+            
 
 +r($md)
   .tabs-nav
