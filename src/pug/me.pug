@@ -25,9 +25,10 @@ block content
       .grid
         // tile
         .tile.tile--full.tile--red.reveal(js-reveal data-direction="ltr")
-          h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Положения конкурсов
-          p.p-main(data-aos="fade" data-aos-delay="300") Ежегодный Всероссийский конкурс для поддержки лучших интернет-ресурсов, которые способствуют позитивному мышлению, вдохновению, творчеству, вере в безграничность человеческих сил и возможностей. В 2018 году конкурс проводится в 8-й раз.
-          p.p-main(data-aos="fade" data-aos-delay="300") К участию в конкурсе приглашаются российские интернет-ресурсы, стремящиеся вовлечь детскую и молодежную аудиторию Рунета в активную жизнь как в Сети, так и за ее пределами. И решающие тем самым актуальные социальные задачи
+          .tile__text
+            h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Положения конкурсов
+            p.p-main(data-aos="fade" data-aos-delay="300") Ежегодный Всероссийский конкурс для поддержки лучших интернет-ресурсов, которые способствуют позитивному мышлению, вдохновению, творчеству, вере в безграничность человеческих сил и возможностей. В 2018 году конкурс проводится в 8-й раз.
+            p.p-main(data-aos="fade" data-aos-delay="300") К участию в конкурсе приглашаются российские интернет-ресурсы, стремящиеся вовлечь детскую и молодежную аудиторию Рунета в активную жизнь как в Сети, так и за ее пределами. И решающие тем самым актуальные социальные задачи
         
         // tile
         .tile.tile--full.tile--purple.reveal(js-reveal data-direction="rtl")
@@ -96,7 +97,7 @@ block content
   // grid
   .grid(js-header-color data-menu-color="white")
     // tile
-    .tile.tile--2-3.tile--white.tile--lg-last(js-header-color data-menu-color="white")
+    .tile.tile--2-3.tile--2-3-hd.tile--white.tile--lg-last(js-header-color data-menu-color="white")
       .tile__grid
         .tile__col
           h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") Остались вопросы?
@@ -125,6 +126,6 @@ block content
           span Вернуться на сайт
         
     // tile
-    .tile.tile--1-3.tile--lg-full
+    .tile.tile--1-3.tile--1-3-hd.tile--lg-full
       .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:600/v1549746979/runet25/candyFire_8.jpg)")
         img(js-lazy data-src='img/candyFire_8.jpg' data-srcset='img/candyFire_8@2x.jpg 2x')
