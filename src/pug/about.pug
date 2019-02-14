@@ -75,15 +75,15 @@ block content
   // grid (history)
   .grid.grid-main.reverse
     .col.col--4
-      // tile
-      .tile.tile--purple.reveal(js-link data-href="news.html" js-reveal data-direction="rtl" data-type="halflyEnterViewport")
-        h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") История проекта и опыт проведения предыдущих юбилеев
-      
-      // tile
-      // TODO !
-      .tile.tile--full
-        .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:600/v1549746979/runet25/candyFire_11.jpg)")
-          img(js-lazy data-src='img/candyFire_11.jpg' data-srcset='img/candyFire_11@2x.jpg 2x')
+      .grid-horizontal-lg
+        // tile
+        .tile.tile--purple.reveal(js-link data-href="news.html" js-reveal data-direction="rtl" data-type="halflyEnterViewport")
+          h2.h2-title.rtxt(js-reveal js-wrap-words data-delay="300") История проекта и опыт проведения предыдущих юбилеев
+        
+        // tile
+        .tile.tile--full
+          .tile__img-cover(style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_128,c_fill,e_blur:600/v1549746979/runet25/candyFire_11.jpg)")
+            img(js-lazy data-src='img/candyFire_11.jpg' data-srcset='img/candyFire_11@2x.jpg 2x')
 
     .col.col--8(js-header-color data-logo-color="white")
       .fit-sibling-y.fit-sibling-y--relative

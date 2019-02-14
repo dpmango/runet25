@@ -33,6 +33,8 @@
         margin-right: 0
 
 .year-stack
+  position: relative
+  z-index: 1
   width: 100%
   flex: 0 0 310px
   max-width: 310px
@@ -41,6 +43,8 @@
   flex-direction: column
   padding: 50px 13px 30px 40px
   border-right: 1px solid rgba(black, .1)
+  // ie partial fix
+  backface-visibility: hidden
   &:last-child
     border-right: 0
   &__name

@@ -27,11 +27,17 @@
     .tile
       flex: 1 0 auto
 
+.grid-horizontal-lg
+  flex: 1 1 auto
+  display: flex
+  flex-direction: column
+
 +r($lg)
   .grid-horizontal-lg
     // for stacker 2+ card
     // i.e. in .col--4, .col--8 combination
     display: flex
+    flex-direction: row
     flex-wrap: wrap
     .tile
       flex: 0 0 $col6
@@ -66,6 +72,9 @@
     &:not(.reverse)
       & > .col.col--4
         height: 700px
+
+  .is-ie .grid-main
+    flex-direction: row
 
 +r($md)
   .grid-main:not(.reverse)
@@ -126,6 +135,7 @@
   flex-direction: column
   &--relative
     position: relative
+
 
 +r($lg)
   .fit-sibling-y
