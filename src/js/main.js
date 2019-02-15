@@ -210,11 +210,11 @@ $(document).ready(function(){
     svg4everybody();
 
     // Viewport units buggyfill
-    window.viewportUnitsBuggyfill.init({
-      force: false,
-      refreshDebounceWait: 150,
-      appendToBody: true
-    });
+    // window.viewportUnitsBuggyfill.init({
+    //   force: false,
+    //   refreshDebounceWait: 150,
+    //   appendToBody: true
+    // });
 
     if ( browser.isIe ){
       $('body').addClass('is-ie');
